@@ -36,3 +36,5 @@ htmlcov/
 *.bak
 *.bak.*
 *~
+
+/artifacts/numeric_environment_report.json

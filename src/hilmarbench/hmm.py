@@ -94,9 +94,23 @@ def walk_forward_hmm_exposure(
     except ImportError as exc:
         raise RuntimeError("hmmlearn is required for the HMM benchmark.") from exc
 
-    returns = pd.to_numeric(asset_return, errors="coerce").astype(float)
+    returns = pd.to_numeric(
+        asset_return,
+        errors="coerce",
+    ).astype("float64")
 
-    log_return = np.log1p(returns.clip(lower=-0.999999))
+    clipped_returns = returns.clip(
+        lower=-0.999999,
+    )
+
+    log_return = pd.Series(
+        np.log1p(
+            clipped_returns.to_numpy(dtype=float),
+        ),
+        index=returns.index,
+        dtype="float64",
+        name="log_return",
+    )
 
     trailing_volatility = log_return.rolling(
         volatility_window,
@@ -180,16 +194,43 @@ def walk_forward_hmm_exposure(
             block_start = block_end
             continue
 
+        raw_covariances = best_model.covars_
+
+        if raw_covariances is None:
+            failure_count += 1
+            block_start = block_end
+            continue
+
+        initial_probability = np.asarray(
+            best_model.startprob_,
+            dtype=float,
+        )
+
+        transition_matrix = np.asarray(
+            best_model.transmat_,
+            dtype=float,
+        )
+
+        means = np.asarray(
+            best_model.means_,
+            dtype=float,
+        )
+
+        covariances = np.asarray(
+            raw_covariances,
+            dtype=float,
+        )
+
         last_training_probability, _ = _filter_sequence(
             training_scaled,
-            initial_probability=best_model.startprob_,
-            transition_matrix=best_model.transmat_,
-            means=best_model.means_,
-            covariances=best_model.covars_,
+            initial_probability=initial_probability,
+            transition_matrix=transition_matrix,
+            means=means,
+            covariances=covariances,
             transition_before_first=False,
         )
 
-        state_order = np.argsort(best_model.means_[:, 0])
+        state_order = np.argsort(means[:, 0])
 
         state_exposure = np.zeros(3, dtype=float)
         state_exposure[state_order[0]] = 0.0
@@ -199,9 +240,9 @@ def walk_forward_hmm_exposure(
         _, probabilities = _filter_sequence(
             evaluation_scaled,
             initial_probability=last_training_probability,
-            transition_matrix=best_model.transmat_,
-            means=best_model.means_,
-            covariances=best_model.covars_,
+            transition_matrix=transition_matrix,
+            means=means,
+            covariances=covariances,
             transition_before_first=True,
         )
 
