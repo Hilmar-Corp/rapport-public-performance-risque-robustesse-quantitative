@@ -1,0 +1,18 @@
+HilmarCorp Benchmark Suite
+Copyright 2026 HilmarCorp
+
+Except for the controlled performance artifacts identified below, the
+software source code, tests and technical documentation in this repository
+are licensed under the Apache License, Version 2.0.
+
+Files contained in artifacts/latest are published for transparency,
+inspection and reproducibility verification. They are not licensed under
+Apache-2.0 and remain © HilmarCorp, all rights reserved, unless a file
+expressly states otherwise.
+
+Nostra AI model logic, features, parameters, probabilities, positions,
+returns, equity time series, turnover, transaction costs and private research
+artifacts are not included in this repository.
+
+Apache-2.0 does not grant permission to use HilmarCorp names, logos or
+trademarks.

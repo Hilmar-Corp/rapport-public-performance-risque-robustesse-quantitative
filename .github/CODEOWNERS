@@ -1,0 +1,8 @@
+# Public benchmark repository ownership
+* @Hilmar-Corp
+
+/.github/ @Hilmar-Corp
+/src/ @Hilmar-Corp
+/tests/ @Hilmar-Corp
+/tools/ @Hilmar-Corp
+/artifacts/ @Hilmar-Corp

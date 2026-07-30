@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: HilmarCorp Benchmark Suite
+message: Please cite this software using the metadata in this file.
+type: software
+authors:
+  - family-names: Hilmarcher
+    given-names: Clovis
+organization: HilmarCorp
+version: 0.2.0
+date-released: 2026-07-30
+license: Apache-2.0

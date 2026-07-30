@@ -1,0 +1,87 @@
+name: Quantitative quality controls
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python-version: "3.11"
+          - os: ubuntu-latest
+            python-version: "3.12"
+          - os: ubuntu-latest
+            python-version: "3.13"
+          - os: macos-latest
+            python-version: "3.13"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Configure Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install -e ".[dev,hmm]"
+
+      - name: Lint
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+
+      - name: Test and coverage
+        env:
+          PYTHONPATH: src
+        run: python -m pytest
+
+      - name: Audit publication surface
+        env:
+          PYTHONPATH: src
+        run: |
+          python tools/audit_public_repository.py
+          python tools/audit_public_release.py             --root artifacts/latest             --release
+          python tools/audit_public_release.py             --root artifacts/releases/v0.2.0             --release
+          python tools/finalize_publication_architecture.py             audit-release             --root artifacts/latest
+          python tools/finalize_publication_architecture.py             audit-release             --root artifacts/releases/v0.2.0
+
+  reproduction:
+    name: Reference release reproduction
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Configure Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install exact controlled environment
+        run: |
+          python -m pip install             -c requirements/constraints-py313.txt             -e ".[dev,hmm]"
+
+      - name: Reproduce public release
+        env:
+          PYTHONPATH: src
+        run: |
+          python tools/reproduce_reference_release.py             --release-dir artifacts/latest

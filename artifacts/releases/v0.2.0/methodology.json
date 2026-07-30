@@ -1,0 +1,45 @@
+{
+  "evaluation": {
+    "annualization_factor": 365.0,
+    "asset": "BTC",
+    "cagr_formula": "final_equity ** (365 / observations) - 1",
+    "date_end": "2026-06-02 00:00:00+00:00",
+    "date_start": "2020-05-14 00:00:00+00:00",
+    "dynamic_signal_lag_days": 1,
+    "evidence_scope": "historical_research_reconstruction",
+    "frequency": "daily",
+    "includes_post_cutoff_observations": false,
+    "initial_position": 0.0,
+    "research_cutoff_date": "2026-06-02",
+    "transaction_cost_bps": 25.0,
+    "turnover_mode": "raw"
+  },
+  "limitations": [
+    "Nostra model logic, features, parameters and execution trace remain proprietary.",
+    "This release does not constitute independent external validation.",
+    "Observations after 2026-06-02, including shadow and true-live periods, are excluded from this historical research release."
+  ],
+  "nostra": {
+    "daily_equity_in_github": false,
+    "daily_positions_public": false,
+    "daily_returns_public": false,
+    "governed_exposure_maximum": 1.0,
+    "governed_exposure_minimum": -0.1,
+    "model_code_in_github": false,
+    "status": "artifact-verified",
+    "turnover_public": false,
+    "website_daily_equity": true,
+    "website_minimum_delay_days": 14
+  },
+  "public_baselines": {
+    "daily_curves_in_github": true,
+    "exposure_maximum": 1.0,
+    "exposure_minimum": 0.0,
+    "status": "code-reproducible"
+  },
+  "publication_architecture": {
+    "github": "Evaluation code, public baseline curves, aggregate metrics and cryptographic commitment.",
+    "website": "Delayed daily equity curves from a separately generated artifact."
+  },
+  "schema_version": 2
+}

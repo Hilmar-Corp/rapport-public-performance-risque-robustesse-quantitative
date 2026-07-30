@@ -1,0 +1,6 @@
+{
+  "algorithm": "SHA-256",
+  "disclosure": "The committed evaluation artifact is retained privately.",
+  "private_evaluation_artifact_sha256": "193290ff3085d2ac564563064cc9f6e78303445c992dc7affce1fe0e742298fd",
+  "schema_version": 1
+}
