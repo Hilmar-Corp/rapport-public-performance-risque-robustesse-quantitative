@@ -1,0 +1,203 @@
+
+name: Release provenance
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    name: Attested institutional release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout complete repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Configure Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Validate versions
+        run: |
+          python - <<'PYTHON'
+          from pathlib import Path
+          import os
+          import re
+
+          tag = os.environ["GITHUB_REF_NAME"]
+          expected = tag.removeprefix("v")
+
+          sources = {
+              "pyproject": (
+                  Path("pyproject.toml")
+                  .read_text(encoding="utf-8")
+              ),
+              "package": (
+                  Path("src/hilmarbench/__init__.py")
+                  .read_text(encoding="utf-8")
+              ),
+              "citation": (
+                  Path("CITATION.cff")
+                  .read_text(encoding="utf-8")
+              ),
+          }
+
+          values = {
+              "pyproject": re.search(
+                  r'^version = "([^"]+)"',
+                  sources["pyproject"],
+                  flags=re.MULTILINE,
+              ).group(1),
+              "package": re.search(
+                  r'^__version__ = "([^"]+)"',
+                  sources["package"],
+                  flags=re.MULTILINE,
+              ).group(1),
+              "citation": re.search(
+                  r'^version: (.+)$',
+                  sources["citation"],
+                  flags=re.MULTILINE,
+              ).group(1).strip(),
+          }
+
+          for source, value in values.items():
+              if value != expected:
+                  raise SystemExit(
+                      f"{source}: {value} != {expected}"
+                  )
+
+          release = Path("artifacts/releases") / tag
+
+          if not release.is_dir():
+              raise SystemExit(
+                  f"Versioned release missing: {release}"
+              )
+
+          print("VERSION CONSISTENCY PASSED")
+          PYTHON
+
+      - name: Install exact environment
+        run: |
+          python -m pip install             --no-build-isolation             -c requirements/constraints-py313.txt             -e ".[dev,hmm]"
+
+      - name: Execute institutional controls
+        env:
+          PYTHONPATH: src
+          TZ: UTC
+          PYTHONHASHSEED: "0"
+          OMP_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+          NUMEXPR_NUM_THREADS: "1"
+        run: |
+          bash scripts/reproduce_in_oci.sh
+
+      - name: Build canonical OCI image
+        run: |
+          docker build             --platform linux/amd64             --tag hilmarbench-release:${{ github.sha }}             .
+
+          docker run             --platform linux/amd64             --rm             hilmarbench-release:${{ github.sha }}
+
+      - name: Authenticate to GHCR
+        run: |
+          echo "${{ github.token }}"             | docker login ghcr.io                 --username "${{ github.actor }}"                 --password-stdin
+
+      - name: Push canonical OCI image
+        id: image
+        run: |
+          image_ref="ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_REF_NAME}"
+
+          docker tag             "hilmarbench-release:${GITHUB_SHA}"             "$image_ref"
+
+          docker push "$image_ref"
+          docker pull "$image_ref"
+
+          repo_digest="$(
+            docker image inspect               "$image_ref"               --format '{{index .RepoDigests 0}}'
+          )"
+
+          image_digest="${repo_digest#*@}"
+
+          echo "image_ref=$image_ref" >> "$GITHUB_OUTPUT"
+          echo "image_digest=$image_digest" >> "$GITHUB_OUTPUT"
+
+          mkdir -p build
+
+          printf '%s@%s
+'             "$image_ref"             "$image_digest"             > build/oci-image-digest.txt
+
+      - name: Generate SBOMs and provenance
+        run: |
+          source_date_epoch="$(
+            git show               -s               --format=%ct               "${GITHUB_SHA}"
+          )"
+
+          export SOURCE_DATE_EPOCH="$source_date_epoch"
+
+          mkdir -p build/sbom
+          mkdir -p build/release-assets
+
+          python tools/generate_python_sboms.py             --source-version "${GITHUB_REF_NAME}"             --cyclonedx-output build/sbom/cyclonedx.json             --spdx-output build/sbom/spdx.json
+
+          python tools/build_provenance_manifest.py             --release-dir "artifacts/releases/${GITHUB_REF_NAME}"             --output build/provenance-manifest.json             --source-commit "${GITHUB_SHA}"             --source-tag "${GITHUB_REF_NAME}"             --workflow-run "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"             --base-image "$(cat docker/python-base-image.txt)"             --image-reference "${{ steps.image.outputs.image_ref }}"             --image-digest "${{ steps.image.outputs.image_digest }}"             --constraints requirements/constraints-py313.txt             --cyclonedx build/sbom/cyclonedx.json             --spdx build/sbom/spdx.json
+
+          cp             artifacts/releases/${GITHUB_REF_NAME}/*             build/release-assets/
+
+          cp             requirements/constraints-py313.txt             build/release-assets/
+
+          cp             build/sbom/cyclonedx.json             build/release-assets/
+
+          cp             build/sbom/spdx.json             build/release-assets/
+
+          cp             build/provenance-manifest.json             build/release-assets/
+
+          cp             build/oci-image-digest.txt             build/release-assets/
+
+          (
+            cd build/release-assets || exit 1
+
+            find .               -maxdepth 1               -type f               ! -name RELEASE_SHA256SUMS               -print0               | sort -z               | xargs -0 sha256sum               > RELEASE_SHA256SUMS
+          )
+
+          tar             --sort=name             --mtime="@${SOURCE_DATE_EPOCH}"             --owner=0             --group=0             --numeric-owner             -czf build/release-evidence.tar.gz             -C build             release-assets
+
+      - name: Attest OCI image provenance
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        with:
+          subject-name: ${{ steps.image.outputs.image_ref }}
+          subject-digest: ${{ steps.image.outputs.image_digest }}
+          push-to-registry: true
+
+      - name: Attest evidence archive
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        with:
+          subject-path: build/release-evidence.tar.gz
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          notes_file="docs/releases/${tag}.md"
+
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create               "$tag"               --title "Institutional quantitative evidence release — $tag"               --notes-file "$notes_file"
+          fi
+
+          for asset in build/release-assets/*; do
+            gh release upload               "$tag"               "$asset"               --clobber
+          done
+
+          gh release upload             "$tag"             build/release-evidence.tar.gz             --clobber

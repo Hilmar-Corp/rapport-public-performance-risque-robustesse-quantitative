@@ -6,6 +6,6 @@ authors:
   - family-names: Hilmarcher
     given-names: Clovis
 organization: HilmarCorp
-version: 0.2.0
-date-released: 2026-07-30
+version: 0.2.1
+date-released: 2026-07-31
 license: Apache-2.0

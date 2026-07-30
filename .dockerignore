@@ -1,0 +1,15 @@
+
+.git
+.venv
+.pytest_cache
+.ruff_cache
+.hypothesis
+__pycache__
+*.pyc
+.coverage
+coverage.xml
+htmlcov
+build
+dist
+mutants
+artifacts/numeric_environment_report.json

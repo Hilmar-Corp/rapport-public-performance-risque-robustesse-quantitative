@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hilmarcorp-benchmark-suite"
-version = "0.2.0"
+version = "0.2.1"
 description = "Transparent benchmark and backtesting utilities for daily allocation strategies."
 readme = "README.md"
 license = { text = "Apache-2.0" }

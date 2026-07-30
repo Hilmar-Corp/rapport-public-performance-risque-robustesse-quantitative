@@ -1,6 +1,6 @@
 PYTHON ?= python3
 RELEASE ?= artifacts/latest
-VERSIONED_RELEASE ?= artifacts/releases/v0.2.0
+VERSIONED_RELEASE ?= artifacts/releases/v0.2.1
 CONSTRAINTS ?= requirements/constraints-py313.txt
 
 .PHONY: install format lint test audit reproduce security institutional-check

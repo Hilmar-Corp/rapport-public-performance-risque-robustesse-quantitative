@@ -21,6 +21,7 @@ TEXT_SUFFIXES = {
     ".txt",
     ".yaml",
     ".yml",
+    ".sh",
 }
 
 IGNORED_DIRECTORIES = {

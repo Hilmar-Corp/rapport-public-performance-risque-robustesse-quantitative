@@ -16,6 +16,8 @@ ALLOWED_CSV_PATHS = {
     Path("artifacts/latest/benchmark_metrics.csv"),
     Path("artifacts/releases/v0.2.0/baseline_daily_curves.csv"),
     Path("artifacts/releases/v0.2.0/benchmark_metrics.csv"),
+    Path("artifacts/releases/v0.2.1/baseline_daily_curves.csv"),
+    Path("artifacts/releases/v0.2.1/benchmark_metrics.csv"),
 }
 
 FORBIDDEN_REPOSITORY_NAME_PATTERNS = (

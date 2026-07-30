@@ -86,3 +86,19 @@ Le code source du logiciel, les tests et la documentation technique sont placés
 Les fichiers de performance contrôlés situés dans `artifacts/latest` ne sont pas placés sous licence Apache-2.0. Ils restent © HilmarCorp, tous droits réservés, et sont publiés uniquement à des fins d’inspection et de vérification.
 
 La logique du modèle Nostra AI et sa trace privée d’exécution ne sont pas incluses dans ce dépôt. Voir `NOTICE` et `artifacts/LICENSE.md`.
+
+
+## Reproduction OCI institutionnelle
+
+L’environnement canonique peut être construit et exécuté dans une image OCI
+référencée par digest :
+
+~~~text
+docker build --platform linux/amd64 -t hilmarbench-reproduction .
+docker run --platform linux/amd64 --rm hilmarbench-reproduction
+~~~
+
+Chaque tag produit également une image GHCR, des SBOM CycloneDX et SPDX, un
+manifeste de provenance et des attestations GitHub OIDC.
+
+Voir `docs/RELEASE_EVIDENCE.md`.
