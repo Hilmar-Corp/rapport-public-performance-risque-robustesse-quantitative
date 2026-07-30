@@ -27,7 +27,6 @@ dev = [
     "pytest-cov>=5",
     "ruff>=0.9",
     "pytest-benchmark>=5.2,<6",
-    "mutmut>=3.5,<4",
     "pyright>=1.1.390,<2",
     "scipy-stubs",
     "pandas-stubs",
@@ -110,7 +109,3 @@ reportMissingTypeStubs = false
 reportUnknownMemberType = "none"
 reportUnknownVariableType = "none"
 reportUnknownArgumentType = "none"
-
-[tool.mutmut]
-source_paths = ["src/hilmarbench"]
-pytest_add_cli_args_test_selection = ["tests/"]
