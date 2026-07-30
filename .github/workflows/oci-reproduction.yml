@@ -1,0 +1,31 @@
+
+name: Hermetic OCI reproduction
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  oci-reproduction:
+    name: Hermetic OCI reproduction
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Build canonical OCI image
+        run: |
+          docker build             --platform linux/amd64             --tag hilmarbench-reproduction:${{ github.sha }}             .
+
+      - name: Execute institutional controls in OCI
+        run: |
+          docker run             --platform linux/amd64             --rm             hilmarbench-reproduction:${{ github.sha }}

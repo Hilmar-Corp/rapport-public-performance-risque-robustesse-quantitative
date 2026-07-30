@@ -59,8 +59,10 @@ jobs:
           python tools/audit_public_repository.py
           python tools/audit_public_release.py             --root artifacts/latest             --release
           python tools/audit_public_release.py             --root artifacts/releases/v0.2.0             --release
+          python tools/audit_public_release.py             --root artifacts/releases/v0.2.1             --release
           python tools/finalize_publication_architecture.py             audit-release             --root artifacts/latest
           python tools/finalize_publication_architecture.py             audit-release             --root artifacts/releases/v0.2.0
+          python tools/finalize_publication_architecture.py             audit-release             --root artifacts/releases/v0.2.1
 
   reproduction:
     name: Reference release reproduction

@@ -1,0 +1,35 @@
+
+name: Repository resilience
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "41 3 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-restore:
+    name: Repository backup and restore
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout complete repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Create repository backup
+        run: |
+          scripts/backup_repository.sh             build/repository-backup
+
+      - name: Restore and verify repository backup
+        run: |
+          scripts/verify_repository_backup.sh             build/repository-backup
