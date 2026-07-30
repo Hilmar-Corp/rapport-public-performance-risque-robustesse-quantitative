@@ -8,6 +8,24 @@ import numpy as np
 import pandas as pd
 
 
+def _as_float_series(
+    values: pd.Series,
+    *,
+    fill_value: float | None = None,
+) -> pd.Series:
+    """Return a numeric float64 series while preserving the original index."""
+
+    numeric = pd.to_numeric(
+        values,
+        errors="coerce",
+    ).astype("float64")
+
+    if fill_value is not None:
+        numeric = numeric.fillna(fill_value)
+
+    return numeric
+
+
 def prices_from_returns(
     asset_return: pd.Series,
     *,
@@ -15,10 +33,21 @@ def prices_from_returns(
 ) -> pd.Series:
     """Construct a normalized price index."""
 
-    returns = pd.to_numeric(asset_return, errors="coerce").fillna(0.0)
-    price = initial_price * (1.0 + returns).cumprod()
-    price.name = "price"
+    if not math.isfinite(initial_price):
+        raise ValueError("initial_price must be finite.")
 
+    if initial_price <= 0.0:
+        raise ValueError("initial_price must be positive.")
+
+    returns = _as_float_series(
+        asset_return,
+        fill_value=0.0,
+    )
+
+    gross_return = 1.0 + returns
+    price = initial_price * gross_return.cumprod()
+
+    price.name = "price"
     return price
 
 
@@ -29,10 +58,13 @@ def fixed_exposure(
 ) -> pd.Series:
     """Generate a constant allocation."""
 
+    if not math.isfinite(exposure):
+        raise ValueError("exposure must be finite.")
+
     return pd.Series(
         float(exposure),
         index=index,
-        dtype=float,
+        dtype="float64",
         name=f"fixed_{exposure:g}",
     )
 
@@ -47,17 +79,14 @@ def momentum_exposure(
     if lookback <= 0:
         raise ValueError("lookback must be positive.")
 
-    price_series = pd.to_numeric(price, errors="coerce")
-    trailing_return = price_series / price_series.shift(lookback) - 1.0
+    price_series = _as_float_series(price)
+    lagged_price = price_series.shift(lookback)
+    trailing_return = price_series / lagged_price - 1.0
 
-    exposure = pd.Series(
-        np.where(trailing_return > 0.0, 1.0, 0.0),
-        index=price_series.index,
-        dtype=float,
-        name=f"momentum_{lookback}",
-    )
+    exposure = trailing_return.gt(0.0).astype("float64")
+    exposure = exposure.mask(trailing_return.isna())
+    exposure.name = f"momentum_{lookback}"
 
-    exposure[trailing_return.isna()] = np.nan
     return exposure
 
 
@@ -75,7 +104,7 @@ def moving_average_exposure(
     if fast_window >= slow_window:
         raise ValueError("fast_window must be lower than slow_window.")
 
-    price_series = pd.to_numeric(price, errors="coerce")
+    price_series = _as_float_series(price)
 
     fast = price_series.rolling(
         fast_window,
@@ -87,14 +116,10 @@ def moving_average_exposure(
         min_periods=slow_window,
     ).mean()
 
-    exposure = pd.Series(
-        np.where(fast > slow, 1.0, 0.0),
-        index=price_series.index,
-        dtype=float,
-        name=f"ma_{fast_window}_{slow_window}",
-    )
+    exposure = fast.gt(slow).astype("float64")
+    exposure = exposure.mask(slow.isna())
+    exposure.name = f"ma_{fast_window}_{slow_window}"
 
-    exposure[slow.isna()] = np.nan
     return exposure
 
 
@@ -112,17 +137,42 @@ def volatility_target_exposure(
     if window <= 1:
         raise ValueError("window must exceed one observation.")
 
-    if target_annualized_volatility <= 0:
+    if not math.isfinite(target_annualized_volatility):
+        raise ValueError("target_annualized_volatility must be finite.")
+
+    if target_annualized_volatility <= 0.0:
         raise ValueError("target_annualized_volatility must be positive.")
 
-    returns = pd.to_numeric(asset_return, errors="coerce")
+    if not math.isfinite(periods_per_year):
+        raise ValueError("periods_per_year must be finite.")
 
-    realized_volatility = returns.rolling(window, min_periods=window).std(ddof=1) * math.sqrt(
-        periods_per_year
-    )
+    if periods_per_year <= 0.0:
+        raise ValueError("periods_per_year must be positive.")
+
+    if not math.isfinite(minimum_exposure):
+        raise ValueError("minimum_exposure must be finite.")
+
+    if not math.isfinite(maximum_exposure):
+        raise ValueError("maximum_exposure must be finite.")
+
+    if minimum_exposure > maximum_exposure:
+        raise ValueError("minimum_exposure must not exceed maximum_exposure.")
+
+    returns = _as_float_series(asset_return)
+
+    rolling_std = returns.rolling(
+        window,
+        min_periods=window,
+    ).std(ddof=1)
+
+    realized_volatility = rolling_std * math.sqrt(periods_per_year)
 
     exposure = target_annualized_volatility / realized_volatility
-    exposure = exposure.replace([np.inf, -np.inf], np.nan)
+
+    exposure = exposure.replace(
+        [np.inf, -np.inf],
+        np.nan,
+    )
 
     exposure = exposure.clip(
         lower=minimum_exposure,
