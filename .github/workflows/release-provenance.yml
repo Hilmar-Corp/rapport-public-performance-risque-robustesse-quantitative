@@ -133,6 +133,14 @@ jobs:
           print("VERSION CONSISTENCY PASSED")
           PYTHON
 
+      - name: Bootstrap controlled build backend
+        run: |
+          python -m pip install \
+            --upgrade \
+            "pip==26.2" \
+            "setuptools==83.0.0" \
+            "wheel==0.47.0"
+
       - name: Install exact controlled environment
         run: |
           python -m pip install \
