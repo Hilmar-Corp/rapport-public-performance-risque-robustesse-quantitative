@@ -42,6 +42,11 @@
       "size_bytes": 8282
     },
     {
+      "path": "historical_reverse_stress.json",
+      "sha256": "679ef9da38ccaacab70b83594e460093d5c26fe975488d2a30403cae1ca5cbf5",
+      "size_bytes": 7859
+    },
+    {
       "path": "market_regimes.json",
       "sha256": "9edf14197bafae5de1375f329886d85f1f8418051b2825f36763ca5a83588b12",
       "size_bytes": 5425

@@ -44,7 +44,7 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 def test_quantitative_control_matrix_contract() -> None:
     rows = read_csv(MATRIX)
 
-    assert len(rows) == 25
+    assert len(rows) == 26
     assert set(rows[0]) == MATRIX_FIELDS
 
     control_ids = [row["control_id"] for row in rows]
@@ -73,7 +73,7 @@ def test_quantitative_control_matrix_contract() -> None:
 def test_quantitative_evidence_commitments_contract() -> None:
     rows = read_csv(COMMITMENTS)
 
-    assert len(rows) == 25
+    assert len(rows) == 26
     assert set(rows[0]) == COMMITMENT_FIELDS
     for row in rows:
         public_count = int(row["public_evidence_items"])

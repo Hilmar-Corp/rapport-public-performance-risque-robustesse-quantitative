@@ -7,7 +7,7 @@ import json
 import math
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, TypeGuard
+from typing import Any, TypeGuard, cast
 
 SCHEMA_VERSION = 2
 EXPORT_SCHEMA_VERSION = 1
@@ -19,6 +19,7 @@ REQUIRED_SECTIONS = (
     "execution_cost_delay",
     "placebo_test",
     "tail_risk",
+    "historical_reverse_stress",
     "var_es_backtesting",
     "historical_block_monte_carlo",
     "data_resilience",
@@ -75,6 +76,7 @@ PAYLOAD_FILENAMES = {
     "execution_cost_delay": "execution_cost_delay.json",
     "placebo_test": "placebo_test.json",
     "tail_risk": "tail_risk.json",
+    "historical_reverse_stress": "historical_reverse_stress.json",
     "var_es_backtesting": "var_es_backtesting.json",
     "historical_block_monte_carlo": "historical_block_monte_carlo.json",
     "data_resilience": "data_resilience.json",
@@ -120,6 +122,224 @@ def _sha256_file(path: Path) -> str:
             digest.update(block)
 
     return digest.hexdigest()
+
+
+def _validate_historical_reverse_stress(
+    section: Any,
+) -> list[str]:
+    """Validate historical loss-breach evidence."""
+
+    issues: list[str] = []
+
+    if not isinstance(section, dict):
+        return ["historical_reverse_stress must be a JSON object"]
+
+    expected_scalars = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "analysis_type": ("historical_dynamic_loss_breach_analysis"),
+        "observations": 2211,
+    }
+
+    for field, expected in expected_scalars.items():
+        if section.get(field) != expected:
+            issues.append(f"historical_reverse_stress.{field} must equal {expected}")
+
+    if section.get("evaluation_period") != {
+        "start": "2020-05-14",
+        "end": "2026-06-02",
+    }:
+        issues.append("historical_reverse_stress evaluation period is invalid")
+
+    conventions = section.get("governing_conventions")
+
+    if (
+        not isinstance(conventions, list)
+        or not conventions
+        or not all(isinstance(item, str) and item for item in conventions)
+    ):
+        issues.append(
+            "historical_reverse_stress governing conventions must be a non-empty string list"
+        )
+
+    reconciliation = section.get("economic_reconciliation")
+
+    if not isinstance(reconciliation, dict):
+        issues.append("historical_reverse_stress economic reconciliation must be an object")
+    else:
+        if reconciliation.get("status") != "PASS":
+            issues.append("historical_reverse_stress economic reconciliation must pass")
+
+        if reconciliation.get("public_convention_name") != "row_aligned_effective_allocation":
+            issues.append("historical_reverse_stress public economic convention is invalid")
+
+        delta = reconciliation.get("maximum_absolute_delta")
+
+        if (
+            not isinstance(delta, int | float)
+            or isinstance(delta, bool)
+            or not 0.0 <= float(delta) <= 1e-12
+        ):
+            issues.append("historical_reverse_stress economic reconciliation delta is invalid")
+
+    global_results = section.get("global_results")
+
+    if not isinstance(global_results, dict):
+        issues.append("historical_reverse_stress global results must be an object")
+    else:
+        if global_results.get("drawdown_episode_count") != 104:
+            issues.append("historical_reverse_stress drawdown episode count must equal 104")
+
+        if global_results.get("loss_breach_record_count") != 40:
+            issues.append("historical_reverse_stress loss-breach record count must equal 40")
+
+        maximum_drawdown = global_results.get("maximum_model_drawdown")
+
+        if (
+            not isinstance(
+                maximum_drawdown,
+                int | float,
+            )
+            or isinstance(
+                maximum_drawdown,
+                bool,
+            )
+            or not math.isclose(
+                float(maximum_drawdown),
+                -0.2139050350373155,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            )
+        ):
+            issues.append("historical_reverse_stress maximum drawdown is invalid")
+
+    results = section.get("loss_level_results")
+
+    if not isinstance(results, list):
+        issues.append("historical_reverse_stress loss-level results must be a list")
+        results = []
+
+    expected_counts = {
+        0.05: 25,
+        0.10: 10,
+        0.15: 4,
+        0.20: 1,
+        0.25: 0,
+        0.30: 0,
+    }
+    actual_counts: dict[float, int] = {}
+
+    for index, record in enumerate(results):
+        if not isinstance(record, dict):
+            issues.append(f"historical_reverse_stress loss-level record {index} must be an object")
+            continue
+
+        raw_loss = record.get("target_nav_loss")
+        raw_count = record.get("breach_episode_count")
+
+        if (
+            not isinstance(raw_loss, int | float)
+            or isinstance(raw_loss, bool)
+            or not isinstance(raw_count, int)
+            or isinstance(raw_count, bool)
+        ):
+            issues.append(
+                f"historical_reverse_stress loss-level record {index} has invalid identifiers"
+            )
+            continue
+
+        loss = float(raw_loss)
+        count = raw_count
+        actual_counts[loss] = count
+
+        if loss not in expected_counts:
+            issues.append("historical_reverse_stress contains an unexpected loss level")
+            continue
+
+        if count != expected_counts[loss]:
+            issues.append(f"historical_reverse_stress loss-level count is invalid for {loss}")
+
+        breached = record.get("historically_breached")
+
+        if breached is not (count > 0):
+            issues.append("historical_reverse_stress historical breach flag is inconsistent")
+
+        if count == 0:
+            if record.get("observed_non_breach_is_not_a_bound") is not True:
+                issues.append("historical_reverse_stress non-breach limitation must be disclosed")
+            continue
+
+        reactions = record.get("allocation_reaction_counts")
+
+        if not isinstance(reactions, dict):
+            issues.append("historical_reverse_stress allocation reaction counts must be an object")
+            continue
+
+        reduced = reactions.get("reduced_at_breach")
+        increased = reactions.get("increased_at_breach")
+        unchanged = reactions.get("unchanged_at_breach")
+        reduced_early = reactions.get("reduced_by_at_least_25pct_before_breach")
+
+        reaction_values = (
+            reduced,
+            increased,
+            unchanged,
+            reduced_early,
+        )
+
+        if not all(
+            isinstance(value, int) and not isinstance(value, bool) and value >= 0
+            for value in reaction_values
+        ):
+            issues.append("historical_reverse_stress allocation reaction counts are invalid")
+        elif (
+            cast(int, reduced) + cast(int, increased) + cast(int, unchanged) != count
+            or cast(int, reduced_early) > count
+        ):
+            issues.append("historical_reverse_stress allocation reaction counts do not reconcile")
+
+        shares = record.get("allocation_reaction_shares")
+
+        if not isinstance(shares, dict):
+            issues.append("historical_reverse_stress allocation reaction shares must be an object")
+        else:
+            for name, value in shares.items():
+                if (
+                    not isinstance(
+                        value,
+                        int | float,
+                    )
+                    or isinstance(value, bool)
+                    or not 0.0 <= float(value) <= 1.0
+                ):
+                    issues.append(f"historical_reverse_stress allocation share {name} is invalid")
+
+    if actual_counts != expected_counts:
+        issues.append("historical_reverse_stress loss-level coverage is invalid")
+
+    governance = section.get("governance_decision")
+
+    if not isinstance(governance, dict):
+        issues.append("historical_reverse_stress governance decision must be an object")
+    elif governance.get("status") != "PASS_WITH_OBSERVATION":
+        issues.append("historical_reverse_stress governance status is invalid")
+
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item for item in limitations)
+    ):
+        issues.append("historical_reverse_stress limitations must be a non-empty string list")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if commitment != "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62":
+        issues.append("historical_reverse_stress evidence commitment is invalid")
+
+    return issues
 
 
 def _validate_var_es_backtesting(
@@ -1025,6 +1245,7 @@ def validate_public_quantitative_payload(
             if significant_count != 2:
                 issues.append("exactly two bootstrap records must be significant")
 
+    issues.extend(_validate_historical_reverse_stress(payload.get("historical_reverse_stress")))
     issues.extend(_validate_var_es_backtesting(payload.get("var_es_backtesting")))
     _validate_temporal_dependence_sharpe(
         payload,

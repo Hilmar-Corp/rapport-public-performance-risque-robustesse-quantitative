@@ -184,6 +184,154 @@ def valid_payload() -> dict[str, Any]:
         "limitation": ("Significance is benchmark-specific."),
     }
 
+    payload["historical_reverse_stress"] = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "analysis_type": ("historical_dynamic_loss_breach_analysis"),
+        "observations": 2211,
+        "evaluation_period": {
+            "start": "2020-05-14",
+            "end": "2026-06-02",
+        },
+        "governing_conventions": [
+            "Realized historical paths only.",
+            "Loss levels are measured from historical peaks.",
+        ],
+        "economic_reconciliation": {
+            "status": "PASS",
+            "maximum_absolute_delta": 1.0061396160665481e-16,
+            "public_convention_name": ("row_aligned_effective_allocation"),
+        },
+        "global_results": {
+            "drawdown_episode_count": 104,
+            "loss_breach_record_count": 40,
+            "maximum_model_drawdown": -0.2139050350373155,
+        },
+        "loss_level_results": [
+            {
+                "target_nav_loss": loss,
+                "historically_breached": count > 0,
+                "breach_episode_count": count,
+                **(
+                    {
+                        "observations_to_breach": {
+                            "minimum": 1,
+                            "median": 5.0,
+                            "maximum": 167,
+                        },
+                        "observed_btc_path_to_breach": {
+                            "minimum_cumulative_return_range": {
+                                "minimum": -0.50,
+                                "median": -0.20,
+                                "maximum": -0.06,
+                            },
+                            "compounded_return_range": {
+                                "minimum": -0.50,
+                                "median": -0.20,
+                                "maximum": -0.06,
+                            },
+                        },
+                        "allocation_reaction_counts": reactions,
+                        "allocation_reaction_shares": {
+                            "reduced_at_breach": (reactions["reduced_at_breach"] / count),
+                            "increased_at_breach": (reactions["increased_at_breach"] / count),
+                            "unchanged_at_breach": (reactions["unchanged_at_breach"] / count),
+                            ("reduced_by_at_least_25pct_before_breach"): (
+                                reactions["reduced_by_at_least_25pct_before_breach"] / count
+                            ),
+                        },
+                        "turnover_to_breach": {
+                            "minimum": 0.0,
+                            "median": 0.5,
+                            "maximum": 4.0,
+                        },
+                    }
+                    if count > 0
+                    else {
+                        "observed_non_breach_is_not_a_bound": True,
+                    }
+                ),
+            }
+            for loss, count, reactions in (
+                (
+                    0.05,
+                    25,
+                    {
+                        "reduced_at_breach": 13,
+                        "increased_at_breach": 10,
+                        "unchanged_at_breach": 2,
+                        "reduced_by_at_least_25pct_before_breach": 6,
+                    },
+                ),
+                (
+                    0.10,
+                    10,
+                    {
+                        "reduced_at_breach": 6,
+                        "increased_at_breach": 3,
+                        "unchanged_at_breach": 1,
+                        "reduced_by_at_least_25pct_before_breach": 4,
+                    },
+                ),
+                (
+                    0.15,
+                    4,
+                    {
+                        "reduced_at_breach": 1,
+                        "increased_at_breach": 2,
+                        "unchanged_at_breach": 1,
+                        "reduced_by_at_least_25pct_before_breach": 1,
+                    },
+                ),
+                (
+                    0.20,
+                    1,
+                    {
+                        "reduced_at_breach": 1,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 1,
+                    },
+                ),
+                (
+                    0.25,
+                    0,
+                    {
+                        "reduced_at_breach": 0,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 0,
+                    },
+                ),
+                (
+                    0.30,
+                    0,
+                    {
+                        "reduced_at_breach": 0,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 0,
+                    },
+                ),
+            )
+        ],
+        "governance_decision": {
+            "status": "PASS_WITH_OBSERVATION",
+            "principal_observations": [
+                "Allocation reduction was not universal.",
+            ],
+            "monitoring_requirement": ("Continue monitoring severe declines."),
+        },
+        "limitations": [
+            "The analysis covers realized historical paths only.",
+            "Observed non-breach is not a future loss bound.",
+        ],
+        "evidence_commitment_sha256": (
+            "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62"
+        ),
+    }
+
     payload["var_es_backtesting"] = {
         "verification_level": "artifact-verified",
         "methodological_status": "accepted_with_observations",
@@ -1111,3 +1259,271 @@ def test_temporal_dependence_sharpe_requires_object() -> None:
     issues = validate_public_quantitative_payload(payload)
 
     assert "temporal_dependence_sharpe must be an object" in issues
+
+
+def test_historical_reverse_stress_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    section["observations"] = 2200
+    section["global_results"]["loss_breach_record_count"] = 39
+    section["loss_level_results"][0]["breach_episode_count"] = 24
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("observations must equal 2211" in issue for issue in issues)
+    assert any("record count must equal 40" in issue for issue in issues)
+    assert any("count is invalid" in issue for issue in issues)
+    assert any("commitment is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_requires_object() -> None:
+    payload = valid_payload()
+    payload["historical_reverse_stress"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "historical_reverse_stress must be a JSON object" in issues
+
+
+def test_historical_reverse_stress_rejects_invalid_metadata() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["evaluation_period"] = {}
+    section["governing_conventions"] = []
+    section["economic_reconciliation"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("evaluation period is invalid" in issue for issue in issues)
+    assert any("governing conventions" in issue for issue in issues)
+    assert any("economic reconciliation must be an object" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reconciliation() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    reconciliation = section["economic_reconciliation"]
+
+    assert isinstance(reconciliation, dict)
+
+    reconciliation["status"] = "FAIL"
+    reconciliation["public_convention_name"] = "invalid"
+    reconciliation["maximum_absolute_delta"] = -1.0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reconciliation must pass" in issue for issue in issues)
+    assert any("economic convention is invalid" in issue for issue in issues)
+    assert any("reconciliation delta is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_global_results() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["global_results"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("global results must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    results = section["global_results"]
+
+    assert isinstance(results, dict)
+
+    results["drawdown_episode_count"] = 103
+    results["loss_breach_record_count"] = 39
+    results["maximum_model_drawdown"] = False
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("episode count must equal 104" in issue for issue in issues)
+    assert any("record count must equal 40" in issue for issue in issues)
+    assert any("maximum drawdown is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_loss_level_records() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["loss_level_results"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("loss-level coverage is invalid" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records.append("invalid")
+    records[0]["target_nav_loss"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("must be an object" in issue for issue in issues)
+    assert any("invalid identifiers" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_inconsistent_breach_records() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["target_nav_loss"] = 0.40
+    records[1]["historically_breached"] = False
+    records[4]["observed_non_breach_is_not_a_bound"] = False
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("unexpected loss level" in issue for issue in issues)
+    assert any("breach flag is inconsistent" in issue for issue in issues)
+    assert any("non-breach limitation must be disclosed" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reaction_counts() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["allocation_reaction_counts"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction counts must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    reactions = records[0]["allocation_reaction_counts"]
+
+    assert isinstance(reactions, dict)
+
+    reactions["reduced_at_breach"] = -1
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction counts are invalid" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    reactions = records[0]["allocation_reaction_counts"]
+
+    assert isinstance(reactions, dict)
+
+    reactions["reduced_at_breach"] = 12
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("counts do not reconcile" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reaction_shares() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["allocation_reaction_shares"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction shares must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    shares = records[0]["allocation_reaction_shares"]
+
+    assert isinstance(shares, dict)
+
+    shares["reduced_at_breach"] = 2.0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("allocation share" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_governance_and_limits() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["governance_decision"] = []
+    section["limitations"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("governance decision must be an object" in issue for issue in issues)
+    assert any("limitations must be a non-empty string list" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    governance = section["governance_decision"]
+
+    assert isinstance(governance, dict)
+
+    governance["status"] = "PASS"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("governance status is invalid" in issue for issue in issues)
