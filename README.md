@@ -29,6 +29,16 @@ Les coûts de transaction sont imputés sur les variations absolues de la positi
 
 L’exemple synthétique vérifie que chaque chemin d’exécution fonctionne et que les identités comptables sont respectées. Ses résultats numériques n’ont aucune signification empirique, comparative ou relative à la performance.
 
+## Coûts d’exécution et capacité
+
+Le package fournit également un moteur générique et calibrable séparant
+frais, demi-spread, slippage et impact de marché. Il permet de construire des
+surfaces synthétiques selon le notionnel, le volume, la volatilité et le taux
+de participation, ainsi que d’estimer un break-even économique.
+
+Ces calculs ne constituent pas une estimation de la capacité réelle de
+Nostra AI. Voir `docs/EXECUTION_COST_AND_CAPACITY.md`.
+
 ## Contrôles
 
     PYTHONPATH=src python -m pytest

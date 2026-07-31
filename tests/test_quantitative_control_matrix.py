@@ -29,9 +29,10 @@ COMMITMENT_FIELDS = {
     "control_id",
     "public_evidence_items",
     "public_evidence_commitment_sha256",
+    "public_commitment_scheme",
     "private_evidence_items",
     "private_evidence_commitment_sha256",
-    "commitment_scheme",
+    "private_commitment_scheme",
 }
 
 
@@ -74,25 +75,29 @@ def test_quantitative_evidence_commitments_contract() -> None:
 
     assert len(rows) == 23
     assert set(rows[0]) == COMMITMENT_FIELDS
-    assert all(row["commitment_scheme"] == "sha256-canonical-json-v1" for row in rows)
-
     for row in rows:
         public_count = int(row["public_evidence_items"])
         private_count = int(row["private_evidence_items"])
 
         public_commitment = row["public_evidence_commitment_sha256"]
+        public_scheme = row["public_commitment_scheme"]
         private_commitment = row["private_evidence_commitment_sha256"]
+        private_scheme = row["private_commitment_scheme"]
 
         assert public_count >= 0
         assert private_count >= 0
         assert bool(public_commitment) is (public_count > 0)
+        assert bool(public_scheme) is (public_count > 0)
         assert bool(private_commitment) is (private_count > 0)
+        assert bool(private_scheme) is (private_count > 0)
 
         if public_commitment:
             assert SHA256.fullmatch(public_commitment)
+            assert public_scheme == "sha256-canonical-public-evidence-v2"
 
         if private_commitment:
             assert SHA256.fullmatch(private_commitment)
+            assert private_scheme == "sha256-canonical-json-v1"
 
 
 def test_public_control_artifacts_do_not_expose_private_paths() -> None:
@@ -145,3 +150,25 @@ def test_quantitative_csvs_are_controlled_by_public_audit() -> None:
 def test_quantitative_csvs_use_lf_line_endings() -> None:
     for path in (MATRIX, COMMITMENTS):
         assert b"\r" not in path.read_bytes()
+
+
+def test_public_commitments_are_reproducible() -> None:
+    from tools.update_quantitative_public_commitments import (
+        expected_rows,
+    )
+
+    assert read_csv(COMMITMENTS) == expected_rows()
+
+
+def test_matrix_and_registry_private_commitments_match() -> None:
+    matrix = {row["control_id"]: row for row in read_csv(MATRIX)}
+
+    commitments = {row["control_id"]: row for row in read_csv(COMMITMENTS)}
+
+    assert set(matrix) == set(commitments)
+
+    for control_id, matrix_row in matrix.items():
+        assert (
+            matrix_row["private_evidence_commitment_sha256"]
+            == commitments[control_id]["private_evidence_commitment_sha256"]
+        )

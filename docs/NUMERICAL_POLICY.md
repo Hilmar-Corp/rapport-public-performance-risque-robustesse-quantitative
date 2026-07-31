@@ -89,6 +89,19 @@ methodology explicitly states otherwise.
 
 Costs must never be applied retrospectively using future positions.
 
+
+Advanced execution-cost models must:
+
+- separate fees, spread, slippage and market impact;
+- use only information available at the execution date;
+- state the notional, volume, volatility and participation conventions;
+- prevent double counting with fixed transaction costs;
+- identify assumptions that require broker or venue calibration;
+- label synthetic scenarios as illustrative rather than realised capacity.
+
+A generic market-impact or capacity model must not be presented as evidence
+of actual executable capacity without observed execution data.
+
 ## 8. Numerical regression
 
 Critical published artifacts must be checked using:
