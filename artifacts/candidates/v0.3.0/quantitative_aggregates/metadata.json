@@ -1,0 +1,9 @@
+{
+  "classification": "public_aggregated_candidate",
+  "limitations": [
+    "Results are retrospective aggregates and do not constitute independent validation.",
+    "No daily proprietary series, model inputs, exact tuning values or private identifiers are included."
+  ],
+  "release_target": "v0.3.0",
+  "schema_version": 2
+}

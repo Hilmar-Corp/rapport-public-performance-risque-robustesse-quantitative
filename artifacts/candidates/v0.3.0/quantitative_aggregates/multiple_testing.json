@@ -1,0 +1,24 @@
+{
+  "data": {
+    "benchmark": "zero daily return",
+    "block_size": 21,
+    "candidate_count": 15,
+    "finite_resampling_limitation": "Reported zero values are bounded by the resolution of the finite resampling procedure.",
+    "hansen_spa": {
+      "methodological_status": "accepted_with_disclosed_limitation",
+      "methodological_verdict": "Pertes correctement orientées, studentisation active et p-value consistent correctement sélectionnée.",
+      "reported_p_value": 0.0
+    },
+    "observations": 2211,
+    "private_matrix_disclosed": false,
+    "repetitions": 2000,
+    "verification_level": "artifact-verified",
+    "white_reality_check": {
+      "methodological_status": "requalified_non_studentized_test",
+      "methodological_verdict": "Transformation rendement-vers-perte correcte ; test non studentisé avec p-value upper conservatrice.",
+      "reported_p_value": 0.0
+    }
+  },
+  "schema_version": 1,
+  "section": "multiple_testing"
+}

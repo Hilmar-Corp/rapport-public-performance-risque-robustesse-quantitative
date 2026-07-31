@@ -1,0 +1,18 @@
+{
+  "data": {
+    "annualization": 365,
+    "expected_maximum_sharpe": 0.002105876458076,
+    "limitation": "The disclosed trial count is aggregated; the underlying candidate matrix is withheld.",
+    "methodological_status": "accepted_with_disclosed_limitation",
+    "methodological_verdict": "Formule et unités cohérentes ; expected maximum Sharpe dérivé de la dispersion des 15 trials documentés.",
+    "observations": 2211,
+    "pearson_kurtosis": 9.350703841283686,
+    "probability": 0.99996656687852,
+    "skewness": 0.68468633364267,
+    "test_statistic": 3.987169545411765,
+    "trial_count": 15,
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "deflated_sharpe_ratio"
+}

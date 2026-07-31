@@ -1,0 +1,17 @@
+{
+  "data": {
+    "calendar_days": 25,
+    "complete_month_claim": false,
+    "coverage_ratio": 0.92,
+    "first_observed_day": "2026-06-26",
+    "human_approval_required": true,
+    "last_observed_day": "2026-07-20",
+    "missing_day_count": 2,
+    "observed_days": 23,
+    "pilot_or_limited_production_approval": false,
+    "production_readiness_decision": "not_made",
+    "technical_collection_complete": true
+  },
+  "schema_version": 1,
+  "section": "shadow_monitoring"
+}

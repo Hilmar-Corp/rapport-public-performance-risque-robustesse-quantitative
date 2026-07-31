@@ -1,0 +1,57 @@
+{
+  "data": {
+    "configurations_executed": 34,
+    "configurations_failed": 0,
+    "decision_status": "descriptive_evidence_only",
+    "exact_configuration_values_disclosed": false,
+    "similarity_quantiles": {
+      "direction_agreement": {
+        "q00": 0.86160109,
+        "q05": 0.88643148,
+        "q100": 1.0,
+        "q25": 0.91123926,
+        "q50": 0.96698327,
+        "q75": 0.97478517,
+        "q95": 1.0
+      },
+      "pearson_similarity": {
+        "q00": 0.69906313,
+        "q05": 0.79337523,
+        "q100": 1.0,
+        "q25": 0.86257725,
+        "q50": 0.96544295,
+        "q75": 0.9843255,
+        "q95": 1.0
+      },
+      "prediction_path_mae": {
+        "q00": 0.0,
+        "q05": 0.0,
+        "q100": 0.07084328,
+        "q25": 0.00503484,
+        "q50": 0.00954751,
+        "q75": 0.01498262,
+        "q95": 0.0349987
+      },
+      "prediction_path_rmse": {
+        "q00": 0.0,
+        "q05": 0.0,
+        "q100": 0.10346195,
+        "q25": 0.01220161,
+        "q50": 0.01953634,
+        "q75": 0.03657184,
+        "q95": 0.06326459
+      },
+      "spearman_similarity": {
+        "q00": 0.80827628,
+        "q05": 0.82290737,
+        "q100": 1.0,
+        "q25": 0.88690967,
+        "q50": 0.94487811,
+        "q75": 0.9705423,
+        "q95": 1.0
+      }
+    }
+  },
+  "schema_version": 1,
+  "section": "configuration_sensitivity"
+}

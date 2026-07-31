@@ -1,0 +1,96 @@
+{
+  "data": {
+    "rolling_windows": {
+      "absolute_standardized_shift_at_least_0_50": 99,
+      "absolute_standardized_shift_at_least_1_00": 80,
+      "absolute_standardized_shift_quantiles": {
+        "q00": 0.02187922,
+        "q05": 0.07546632,
+        "q100": 4.6617008,
+        "q25": 0.47668372,
+        "q50": 1.1778023,
+        "q75": 2.08901803,
+        "q95": 3.8163421
+      },
+      "anonymous_series_count": 8,
+      "comparisons": 136,
+      "ks_reject_equal_distribution_5pct": 134,
+      "ks_statistic_quantiles": {
+        "q00": 0.09315068,
+        "q05": 0.13561644,
+        "q100": 0.98082192,
+        "q25": 0.24931507,
+        "q50": 0.46849315,
+        "q75": 0.66027397,
+        "q95": 0.93150685
+      },
+      "psi_at_least_0_10": 136,
+      "psi_at_least_0_25": 125,
+      "psi_quantiles": {
+        "q00": 0.10505749,
+        "q05": 0.21416886,
+        "q100": 12.40141872,
+        "q25": 0.56206471,
+        "q50": 1.68842399,
+        "q75": 4.53389656,
+        "q95": 10.58899158
+      },
+      "scaled_wasserstein_quantiles": {
+        "q00": 0.11290836,
+        "q05": 0.18157869,
+        "q100": 4.6617008,
+        "q25": 0.49088607,
+        "q50": 1.1778023,
+        "q75": 2.08901803,
+        "q95": 3.8163421
+      }
+    },
+    "train_test_folds": {
+      "absolute_standardized_shift_at_least_0_50": 85,
+      "absolute_standardized_shift_at_least_1_00": 37,
+      "absolute_standardized_shift_quantiles": {
+        "q00": 0.00780129,
+        "q05": 0.04751982,
+        "q100": 1.81209101,
+        "q25": 0.27850505,
+        "q50": 0.63245568,
+        "q75": 1.04382099,
+        "q95": 1.42085606
+      },
+      "anonymous_series_count": 8,
+      "comparisons": 136,
+      "ks_reject_equal_distribution_5pct": 131,
+      "ks_statistic_quantiles": {
+        "q00": 0.07496947,
+        "q05": 0.13970954,
+        "q100": 0.79046639,
+        "q25": 0.27862086,
+        "q50": 0.37435988,
+        "q75": 0.61396396,
+        "q95": 0.72966167
+      },
+      "psi_at_least_0_10": 136,
+      "psi_at_least_0_25": 130,
+      "psi_quantiles": {
+        "q00": 0.10291248,
+        "q05": 0.28049831,
+        "q100": 12.43275896,
+        "q25": 1.36266975,
+        "q50": 3.92748241,
+        "q75": 6.60573209,
+        "q95": 9.40761018
+      },
+      "scaled_wasserstein_quantiles": {
+        "q00": 0.12390367,
+        "q05": 0.200849,
+        "q100": 1.81209101,
+        "q25": 0.40668984,
+        "q50": 0.67996714,
+        "q75": 1.08339661,
+        "q95": 1.42085606
+      }
+    }
+  },
+  "schema_version": 1,
+  "section": "distribution_drift"
+}

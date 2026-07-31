@@ -1,0 +1,68 @@
+{
+  "data": {
+    "bootstrap_block_length": 30,
+    "bootstrap_runs": 300,
+    "cross_provider_comparison_completed": false,
+    "decision_status": "descriptive_evidence_only",
+    "metric_delta_quantiles": {
+      "annualized_volatility_delta": {
+        "q00": -0.00026251,
+        "q05": -0.00024451,
+        "q100": 7.209e-05,
+        "q25": -5.591e-05,
+        "q50": -8.05e-06,
+        "q75": 1.092e-05,
+        "q95": 4.331e-05
+      },
+      "cagr_delta": {
+        "q00": -0.00508653,
+        "q05": -0.00347246,
+        "q100": 0.0002273,
+        "q25": -0.00093882,
+        "q50": -4.448e-05,
+        "q75": 1.53e-06,
+        "q95": 8.739e-05
+      },
+      "final_equity_delta": {
+        "q00": -0.25779858,
+        "q05": -0.1764488,
+        "q100": 0.01162202,
+        "q25": -0.04790963,
+        "q50": -0.00227347,
+        "q75": 7.829e-05,
+        "q95": 0.00446749
+      },
+      "maximum_drawdown_delta": {
+        "q00": -0.00033807,
+        "q05": -0.00026035,
+        "q100": 0.00248054,
+        "q25": -5.75e-06,
+        "q50": 0.0,
+        "q75": 0.00021165,
+        "q95": 0.00221659
+      },
+      "prediction_coverage_delta": {
+        "q00": -145.0,
+        "q05": -67.2,
+        "q100": 0.0,
+        "q25": 0.0,
+        "q50": 0.0,
+        "q75": 0.0,
+        "q95": 0.0
+      },
+      "sharpe_delta": {
+        "q00": -0.01031262,
+        "q05": -0.00676163,
+        "q100": 0.00037728,
+        "q25": -0.00158549,
+        "q50": -8.513e-05,
+        "q75": 3.617e-05,
+        "q95": 0.00029108
+      }
+    },
+    "scenario_count_excluding_baseline": 23,
+    "scenario_family_count": 3
+  },
+  "schema_version": 1,
+  "section": "data_resilience"
+}

@@ -10,6 +10,9 @@ from hilmarbench.publication import (
     IGNORED_DIRECTORIES,
     scan_tree,
 )
+from hilmarbench.quantitative_exports import (
+    verify_public_quantitative_export,
+)
 
 ALLOWED_CSV_PATHS = {
     Path("artifacts/latest/baseline_daily_curves.csv"),
@@ -21,6 +24,9 @@ ALLOWED_CSV_PATHS = {
     Path("governance/quantitative_evidence_commitments.csv"),
     Path("governance/quantitative_validation_control_matrix.csv"),
 }
+
+QUANTITATIVE_AGGREGATE_CANDIDATE = Path("artifacts/candidates/v0.3.0/quantitative_aggregates")
+
 
 CONTROLLED_CSV_SCHEMAS = {
     Path("governance/quantitative_validation_control_matrix.csv"): (
@@ -124,10 +130,33 @@ def is_forbidden_repository_name(
     return any(pattern.search(name) is not None for pattern in FORBIDDEN_REPOSITORY_NAME_PATTERNS)
 
 
+def audit_quantitative_aggregate_candidate(
+    root: Path,
+) -> list[str]:
+    candidate = root / QUANTITATIVE_AGGREGATE_CANDIDATE
+
+    if not candidate.is_dir():
+        return [
+            (
+                f"{QUANTITATIVE_AGGREGATE_CANDIDATE}: "
+                "required quantitative aggregate "
+                "candidate missing"
+            )
+        ]
+
+    return [
+        (f"{QUANTITATIVE_AGGREGATE_CANDIDATE}: {issue}")
+        for issue in (verify_public_quantitative_export(candidate))
+    ]
+
+
 def audit_repository(
     root: Path,
 ) -> list[str]:
-    issues = list(scan_tree(root))
+    issues = [
+        *scan_tree(root),
+        *audit_quantitative_aggregate_candidate(root),
+    ]
 
     for path, relative in iter_repository_files(root):
         if is_forbidden_repository_name(path.name):

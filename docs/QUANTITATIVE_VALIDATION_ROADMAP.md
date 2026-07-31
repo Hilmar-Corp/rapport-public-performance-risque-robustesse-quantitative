@@ -42,20 +42,29 @@ chemin privé.
 
 Ces développements ne constituent pas une calibration réelle de Nostra.
 
-## Exports publics restant à produire
+## Exports publics agrégés produits dans PR 15
 
-Les résultats existants doivent être revus puis exportés sous forme agrégée
-pour les contrôles suivants :
+PR 15 produit un paquet candidat v0.3.0 couvrant 16 sections
+quantitatives publiques agrégées.
 
-- PSR, DSR, White Reality Check, Hansen SPA, CSCV/PBO et bootstrap ;
-- ADF, KPSS, CUSUM et drift ;
-- performance par régime ;
-- surface coûts × délais ;
-- placebos et permutations ;
-- VaR, Expected Shortfall et Monte Carlo ;
-- résilience des données, sensibilité et ablations ;
-- monitoring et outcomes.
+Les résultats sont :
 
+- artifact-verified et reproductibles ;
+- contrôlés par manifest et SHA-256 ;
+- intégrés à l’audit public et au workflow quality ;
+- liés à la matrice de validation et au registre des engagements ;
+- publiés sans série journalière Nostra, sans réglage propriétaire et
+  sans matrice privée de candidats.
+
+Le moving-block bootstrap constate des différentiels de CAGR positifs
+contre les 11 benchmarks publics. Deux comparaisons sont individuellement
+significatives au seuil de 5 %. La significativité n’est donc pas
+présentée comme universelle.
+
+Le shadow live constitue une validation interne de production en
+conditions réelles : données réelles, infrastructure de production,
+monitoring et fonctionnement opérationnel. Il reste distinct d’un usage
+contractuel chez un client et d’une validation externe indépendante.
 ## Frontière de propriété intellectuelle
 
 Ne doivent pas être publiés :
@@ -75,7 +84,7 @@ cryptographiques de preuves privées.
 
 - PR 13 — matrice de contrôle et engagements de preuves ;
 - PR 14 — slippage, impact de marché et capacité ;
-- PR 15 — exports quantitatifs publics agrégés ;
+- PR 15 — exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
 - PR 16 — rapport intégré et documentation ;
 - PR 17 — durcissement de release et v0.3.0.
 

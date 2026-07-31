@@ -3,6 +3,15 @@
 
 ## Unreleased
 
+- controlled public aggregate package covering 16 quantitative validation sections;
+- artifact-verified PSR, DSR, White Reality Check, Hansen SPA and CSCV/PBO results;
+- benchmark-level moving-block bootstrap with positive CAGR differences against 11 of 11 public benchmarks and 2 individually significant comparisons at the 5% level;
+- stationarity, drift, regimes, execution, placebo, tail-risk, Monte Carlo, data-resilience, sensitivity, ablation and shadow-live monitoring exports;
+- deterministic package manifest and SHA-256 verification;
+- integration of the candidate package into the public repository audit and quality workflow;
+- public quantitative evidence commitments regenerated without changing historical private commitments;
+- shadow live documented as internal production validation on real data and production infrastructure, distinct from contractual client deployment and independent external validation;
+
 ### Added
 
 - public quantitative validation matrix covering 23 controls;

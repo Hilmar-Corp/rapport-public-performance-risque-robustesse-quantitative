@@ -131,3 +131,43 @@ Chaque tag produit également une image GHCR, des SBOM CycloneDX et SPDX, un
 manifeste de provenance et des attestations GitHub OIDC.
 
 Voir `docs/RELEASE_EVIDENCE.md`.
+
+## Paquet quantitatif agrégé candidat v0.3.0
+
+Le répertoire
+`artifacts/candidates/v0.3.0/quantitative_aggregates`
+constitue le paquet candidat contrôlé des résultats quantitatifs publics agrégés.
+
+Il contient 16 sections vérifiées :
+
+- stationnarité et dérive de distribution ;
+- régimes de marché ;
+- stress de coûts et de délais d’exécution ;
+- placebo et risque de queue ;
+- Monte Carlo historique et résilience des données ;
+- sensibilité et ablation ;
+- monitoring en shadow live ;
+- Probabilistic Sharpe Ratio et Deflated Sharpe Ratio ;
+- White Reality Check et Hansen SPA ;
+- CSCV et Probability of Backtest Overfitting ;
+- moving-block bootstrap de la surperformance composée.
+
+Les différentiels de CAGR sont positifs contre les 11 benchmarks publics.
+La significativité individuelle au seuil de 5 % est établie pour
+2 comparaisons sur 11. Cette distinction ne doit pas être interprétée
+comme une significativité universelle.
+
+Nostra AI fonctionne en shadow live sur données réelles et sur
+l’infrastructure de production. Ce dispositif constitue une validation
+interne de production en conditions réelles. Il reste distinct d’un
+déploiement contractuel chez un client et d’une validation externe
+indépendante.
+
+Le paquet est rétrospectif, artifact-verified, reproductible et soumis à
+une frontière propriétaire stricte. Il ne publie aucune série journalière
+Nostra, aucun réglage propriétaire ni aucune matrice privée de candidats.
+
+Vérification :
+
+    PYTHONPATH=src python tools/package_public_quantitative_aggregates.py verify \
+      --output-dir artifacts/candidates/v0.3.0/quantitative_aggregates

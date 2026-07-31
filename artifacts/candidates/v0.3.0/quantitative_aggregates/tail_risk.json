@@ -1,0 +1,43 @@
+{
+  "data": {
+    "limitations": [
+      "Historical tail estimates are not maximum-loss bounds.",
+      "The estimates are retrospective."
+    ],
+    "method": "historical_var_and_expected_shortfall",
+    "records": [
+      {
+        "autocorrelation_lag_1": -0.01895162,
+        "autocorrelation_lag_21": 0.00886098,
+        "autocorrelation_lag_30": 0.01857769,
+        "autocorrelation_lag_5": 0.03208653,
+        "historical_es_95_daily": 0.03207062,
+        "historical_es_99_daily": 0.05297551,
+        "historical_var_95_daily": 0.02036101,
+        "historical_var_99_daily": 0.03876511,
+        "maximum_daily_return": 0.09565668,
+        "minimum_daily_return": -0.09361526,
+        "observations": 2211.0,
+        "portfolio": "nostra_ai",
+        "positive_day_share": 0.50746269
+      },
+      {
+        "autocorrelation_lag_1": -0.04609374,
+        "autocorrelation_lag_21": -0.02275656,
+        "autocorrelation_lag_30": 0.00066601,
+        "autocorrelation_lag_5": 0.01854584,
+        "historical_es_95_daily": 0.06872081,
+        "historical_es_99_daily": 0.10791114,
+        "historical_var_95_daily": 0.04629105,
+        "historical_var_99_daily": 0.08277503,
+        "maximum_daily_return": 0.19536139,
+        "minimum_daily_return": -0.15379839,
+        "observations": 2211.0,
+        "portfolio": "bitcoin_benchmark",
+        "positive_day_share": 0.50655812
+      }
+    ]
+  },
+  "schema_version": 1,
+  "section": "tail_risk"
+}
