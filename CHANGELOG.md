@@ -10,6 +10,11 @@
   private paths or contents;
 - quantitative validation roadmap for the future v0.3.0 release;
 - exact schemas and repository-audit controls for the two governance CSVs.
+- generic execution-cost decomposition for fees, spread, slippage and market impact;
+- execution-aware backtesting with notional, volume, volatility and participation inputs;
+- economic capacity and break-even estimation;
+- deterministic synthetic execution-cost scenario surfaces;
+- reproducible versioned public-evidence commitments.
 
 ### Unchanged
 

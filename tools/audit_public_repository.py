@@ -39,9 +39,10 @@ CONTROLLED_CSV_SCHEMAS = {
         "control_id",
         "public_evidence_items",
         "public_evidence_commitment_sha256",
+        "public_commitment_scheme",
         "private_evidence_items",
         "private_evidence_commitment_sha256",
-        "commitment_scheme",
+        "private_commitment_scheme",
     ),
 }
 

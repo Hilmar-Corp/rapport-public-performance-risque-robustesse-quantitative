@@ -27,10 +27,20 @@ chemin privé.
 
 ## Développements quantitatifs restant à réaliser
 
-1. Stress de slippage variable.
-2. Modèle générique d’impact de marché dépendant du notionnel.
-3. Analyse de capacité économique et break-even d’implémentation.
-4. Formalisation de l’outcome analysis backtest/shadow/live.
+1. Formalisation de l’outcome analysis backtest/shadow/live.
+
+## Développements génériques réalisés dans PR 14
+
+- stress paramétrable de slippage ;
+- décomposition frais, demi-spread, slippage et impact ;
+- loi d’impact générique dépendant du notionnel, de la participation et de
+  la volatilité ;
+- limite de participation ;
+- capacité économique et break-even ;
+- surface synthétique déterministe ;
+- intégration optionnelle au backtest sans modification du mode historique.
+
+Ces développements ne constituent pas une calibration réelle de Nostra.
 
 ## Exports publics restant à produire
 
