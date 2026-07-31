@@ -63,6 +63,25 @@ Un artefact séparé destiné au site internet peut afficher des observations qu
 
 Voir `FINAL_PUBLICATION_ARCHITECTURE.md`.
 
+## Matrice de validation quantitative
+
+Le dépôt publie une matrice de 23 contrôles couvrant notamment le backtest,
+l’absence de look-ahead, le risque de surajustement, la non-stationnarité,
+les régimes, les coûts d’exécution, les risques de queue, la sensibilité,
+la résilience des données et le monitoring.
+
+Les fichiers de référence sont :
+
+- `governance/quantitative_validation_control_matrix.csv` ;
+- `governance/quantitative_evidence_commitments.csv` ;
+- `docs/QUANTITATIVE_VALIDATION_ROADMAP.md`.
+
+La matrice distingue le code public, les résultats publics, les preuves
+privées engagées par SHA-256 et les développements restant à réaliser.
+Les engagements cryptographiques ne publient aucun chemin privé, aucune
+trace quotidienne, aucune caractéristique, aucun coefficient et aucun
+seuil propriétaire. Ils ne constituent pas une validation indépendante.
+
 ## Reproductibilité institutionnelle
 
 Les stratégies publiques de référence peuvent être réexécutées depuis un clone propre au moyen de la commande suivante :
