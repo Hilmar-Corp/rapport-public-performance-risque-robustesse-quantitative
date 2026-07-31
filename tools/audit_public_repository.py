@@ -18,7 +18,33 @@ ALLOWED_CSV_PATHS = {
     Path("artifacts/releases/v0.2.0/benchmark_metrics.csv"),
     Path("artifacts/releases/v0.2.1/baseline_daily_curves.csv"),
     Path("artifacts/releases/v0.2.1/benchmark_metrics.csv"),
+    Path("governance/quantitative_evidence_commitments.csv"),
+    Path("governance/quantitative_validation_control_matrix.csv"),
 }
+
+CONTROLLED_CSV_SCHEMAS = {
+    Path("governance/quantitative_validation_control_matrix.csv"): (
+        "control_id",
+        "domain",
+        "control_question",
+        "method",
+        "public_status",
+        "gap",
+        "public_evidence",
+        "private_evidence_commitment_sha256",
+        "ip_classification",
+        "limitation",
+    ),
+    Path("governance/quantitative_evidence_commitments.csv"): (
+        "control_id",
+        "public_evidence_items",
+        "public_evidence_commitment_sha256",
+        "private_evidence_items",
+        "private_evidence_commitment_sha256",
+        "commitment_scheme",
+    ),
+}
+
 
 FORBIDDEN_REPOSITORY_NAME_PATTERNS = (
     re.compile(
@@ -124,6 +150,12 @@ def audit_repository(
                 )
         except OSError as error:
             issues.append(f"{relative}: unreadable CSV: {error}")
+            continue
+
+        expected_header = CONTROLLED_CSV_SCHEMAS.get(relative)
+
+        if expected_header is not None and tuple(header) != expected_header:
+            issues.append(f"{relative}: invalid controlled CSV schema")
             continue
 
         if relative.name != ("baseline_daily_curves.csv"):

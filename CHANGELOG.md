@@ -1,6 +1,22 @@
 
 # Changelog
 
+## Unreleased
+
+### Added
+
+- public quantitative validation matrix covering 23 controls;
+- SHA-256 commitments to reconciled private evidence without publishing
+  private paths or contents;
+- quantitative validation roadmap for the future v0.3.0 release;
+- exact schemas and repository-audit controls for the two governance CSVs.
+
+### Unchanged
+
+- immutable v0.2.0 and v0.2.1 release artifacts;
+- `artifacts/latest`, which remains identical to v0.2.1;
+- aggregate Nostra AI metrics and the proprietary boundary.
+
 ## 0.2.1 — 2026-07-31
 
 ### Added
