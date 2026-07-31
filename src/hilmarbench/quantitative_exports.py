@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeGuard
 
 SCHEMA_VERSION = 2
 EXPORT_SCHEMA_VERSION = 1
@@ -26,6 +27,7 @@ REQUIRED_SECTIONS = (
     "shadow_monitoring",
     "probabilistic_sharpe_ratio",
     "deflated_sharpe_ratio",
+    "temporal_dependence_sharpe",
     "multiple_testing",
     "backtest_overfitting",
     "moving_block_bootstrap",
@@ -81,6 +83,7 @@ PAYLOAD_FILENAMES = {
     "shadow_monitoring": "shadow_monitoring.json",
     "probabilistic_sharpe_ratio": "probabilistic_sharpe_ratio.json",
     "deflated_sharpe_ratio": "deflated_sharpe_ratio.json",
+    "temporal_dependence_sharpe": "temporal_dependence_sharpe.json",
     "multiple_testing": "multiple_testing.json",
     "backtest_overfitting": "backtest_overfitting.json",
     "moving_block_bootstrap": "moving_block_bootstrap.json",
@@ -295,6 +298,309 @@ def _validate_var_es_backtesting(
         issues.append("var_es_backtesting limitations must be a non-empty string list")
 
     return issues
+
+
+def _validate_temporal_dependence_sharpe(
+    payload: Mapping[str, Any],
+    issues: list[str],
+) -> None:
+    section = payload.get("temporal_dependence_sharpe")
+
+    if not isinstance(section, dict):
+        issues.append("temporal_dependence_sharpe must be an object")
+        return
+
+    def finite_number(
+        value: object,
+    ) -> TypeGuard[int | float]:
+        return (
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and math.isfinite(float(value))
+        )
+
+    if section.get("verification_level") != "artifact-verified":
+        issues.append("temporal_dependence_sharpe must be artifact-verified")
+
+    if section.get("methodological_status") != "accepted_with_observations":
+        issues.append(
+            "temporal_dependence_sharpe methodological_status must equal accepted_with_observations"
+        )
+
+    if section.get("decision_status") != "PASS_WITH_OBSERVATION":
+        issues.append("temporal_dependence_sharpe decision_status must equal PASS_WITH_OBSERVATION")
+
+    if section.get("observations") != 2211:
+        issues.append("temporal_dependence_sharpe observations must equal 2211")
+
+    if section.get("annualization") != 365:
+        issues.append("temporal_dependence_sharpe annualization must equal 365")
+
+    conventional = section.get("conventional_annualized_sharpe")
+
+    if not finite_number(conventional) or abs(float(conventional) - 1.587687113383514) > 1e-12:
+        issues.append("temporal_dependence_sharpe conventional Sharpe is invalid")
+
+    if section.get("automatic_lag_rule") != "floor(4*(n/100)^(2/9))":
+        issues.append("temporal_dependence_sharpe automatic lag rule is invalid")
+
+    if section.get("automatic_lag_count") != 7:
+        issues.append("temporal_dependence_sharpe automatic lag count must equal 7")
+
+    if section.get("canonical_hac_lag_count") != 21:
+        issues.append("temporal_dependence_sharpe canonical HAC lag count must equal 21")
+
+    if section.get("canonical_block_size") != 21:
+        issues.append("temporal_dependence_sharpe canonical block size must equal 21")
+
+    canonical_hac = section.get("canonical_hac_adjusted_annualized_sharpe")
+    canonical_inflation = section.get("canonical_volatility_inflation_factor")
+
+    if (
+        not finite_number(canonical_hac)
+        or float(canonical_hac) <= 0.0
+        or (finite_number(conventional) and float(canonical_hac) >= float(conventional))
+    ):
+        issues.append("temporal_dependence_sharpe canonical HAC Sharpe is invalid")
+
+    if not finite_number(canonical_inflation) or float(canonical_inflation) <= 1.0:
+        issues.append("temporal_dependence_sharpe canonical volatility inflation is invalid")
+
+    autocorrelation_records = section.get("autocorrelation_records")
+    expected_acf_lags = {
+        1,
+        5,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_acf_lags: set[int] = set()
+
+    if not isinstance(
+        autocorrelation_records,
+        list,
+    ):
+        issues.append("temporal_dependence_sharpe autocorrelation_records must be a list")
+    else:
+        for record in autocorrelation_records:
+            if not isinstance(record, dict):
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid autocorrelation record"
+                )
+                continue
+
+            lag = record.get("lag_count")
+            correlation = record.get("autocorrelation")
+
+            if not isinstance(lag, int) or isinstance(lag, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid autocorrelation lag")
+            else:
+                observed_acf_lags.add(lag)
+
+            if not finite_number(correlation) or not -1.0 <= float(correlation) <= 1.0:
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid autocorrelation value"
+                )
+
+        if observed_acf_lags != expected_acf_lags:
+            issues.append("temporal_dependence_sharpe autocorrelation lag set is invalid")
+
+    ljung_box_records = section.get("ljung_box_records")
+    expected_ljung_box_pairs = {
+        ("periodic_returns", 5),
+        ("periodic_returns", 10),
+        ("periodic_returns", 21),
+        ("periodic_returns", 30),
+        (
+            "squared_centered_periodic_returns",
+            5,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            10,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            21,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            30,
+        ),
+    }
+    observed_ljung_box_pairs: set[tuple[str, int]] = set()
+
+    if not isinstance(ljung_box_records, list):
+        issues.append("temporal_dependence_sharpe ljung_box_records must be a list")
+    else:
+        for record in ljung_box_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box record")
+                continue
+
+            series = record.get("series")
+            lag = record.get("lag_count")
+            statistic = record.get("statistic")
+            p_value = record.get("p_value")
+            underflow = record.get("p_value_below_machine_precision")
+
+            if isinstance(series, str) and isinstance(lag, int) and not isinstance(lag, bool):
+                observed_ljung_box_pairs.add(
+                    (
+                        series,
+                        lag,
+                    )
+                )
+            else:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box identifier")
+
+            if not finite_number(statistic) or float(statistic) < 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box statistic")
+
+            if not finite_number(p_value) or not 0.0 <= float(p_value) <= 1.0:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box p-value")
+
+            if not isinstance(underflow, bool):
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid p-value underflow flag"
+                )
+
+        if observed_ljung_box_pairs != expected_ljung_box_pairs:
+            issues.append("temporal_dependence_sharpe Ljung-Box combinations are invalid")
+
+    hac_records = section.get("hac_sensitivity_records")
+    expected_hac_lags = {
+        5,
+        7,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_hac_lags: set[int] = set()
+
+    if not isinstance(hac_records, list):
+        issues.append("temporal_dependence_sharpe hac_sensitivity_records must be a list")
+    else:
+        for record in hac_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid HAC record")
+                continue
+
+            lag = record.get("lag_count")
+            sharpe = record.get("hac_adjusted_annualized_sharpe")
+            inflation = record.get("volatility_inflation_factor")
+
+            if not isinstance(lag, int) or isinstance(lag, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid HAC lag")
+            else:
+                observed_hac_lags.add(lag)
+
+            if not finite_number(sharpe) or float(sharpe) <= 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid HAC Sharpe")
+
+            if not finite_number(inflation) or float(inflation) <= 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid HAC inflation factor")
+
+        if observed_hac_lags != expected_hac_lags:
+            issues.append("temporal_dependence_sharpe HAC sensitivity lag set is invalid")
+
+    if section.get("bootstrap_repetitions") != 2000:
+        issues.append("temporal_dependence_sharpe bootstrap repetitions must equal 2000")
+
+    bootstrap_records = section.get("bootstrap_sensitivity_records")
+    expected_block_sizes = {
+        5,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_block_sizes: set[int] = set()
+
+    if not isinstance(bootstrap_records, list):
+        issues.append("temporal_dependence_sharpe bootstrap sensitivity records must be a list")
+    else:
+        for record in bootstrap_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap record")
+                continue
+
+            block_size = record.get("block_size")
+            lower = record.get("interval_lower")
+            upper = record.get("interval_upper")
+            median = record.get("bootstrap_median")
+            positive_share = record.get("bootstrap_positive_share")
+            confidence = record.get("confidence_level")
+
+            if not isinstance(block_size, int) or isinstance(block_size, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap block size")
+            else:
+                observed_block_sizes.add(block_size)
+
+            if not finite_number(lower) or not finite_number(upper) or float(lower) >= float(upper):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap interval")
+
+            if not finite_number(median) or (
+                finite_number(lower)
+                and finite_number(upper)
+                and not float(lower) <= float(median) <= float(upper)
+            ):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap median")
+
+            if not finite_number(positive_share) or not 0.0 <= float(positive_share) <= 1.0:
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid positive bootstrap share"
+                )
+
+            if confidence != 0.95:
+                issues.append(
+                    "temporal_dependence_sharpe bootstrap confidence level must equal 0.95"
+                )
+
+        if observed_block_sizes != expected_block_sizes:
+            issues.append("temporal_dependence_sharpe bootstrap block-size set is invalid")
+
+    diagnostics = section.get("diagnostics")
+
+    expected_diagnostics = {
+        "raw_serial_dependence_detected_at_5pct": True,
+        "volatility_dependence_detected_at_5pct": True,
+        "all_hac_sharpes_positive": True,
+        "all_bootstrap_lower_bounds_positive": True,
+    }
+
+    if diagnostics != expected_diagnostics:
+        issues.append("temporal_dependence_sharpe diagnostics are invalid")
+
+    formal_methods = section.get("formal_methods")
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(formal_methods, list)
+        or not formal_methods
+        or not all(isinstance(item, str) and item.strip() for item in formal_methods)
+    ):
+        issues.append("temporal_dependence_sharpe formal_methods must be a non-empty string list")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item.strip() for item in limitations)
+    ):
+        issues.append("temporal_dependence_sharpe limitations must be a non-empty string list")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if (
+        not isinstance(commitment, str)
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append(
+            "temporal_dependence_sharpe evidence commitment must be a lowercase SHA-256 digest"
+        )
 
 
 def validate_public_quantitative_payload(
@@ -720,6 +1026,11 @@ def validate_public_quantitative_payload(
                 issues.append("exactly two bootstrap records must be significant")
 
     issues.extend(_validate_var_es_backtesting(payload.get("var_es_backtesting")))
+    _validate_temporal_dependence_sharpe(
+        payload,
+        issues,
+    )
+
     return issues
 
 

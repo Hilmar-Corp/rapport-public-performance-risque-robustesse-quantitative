@@ -294,6 +294,187 @@ def valid_payload() -> dict[str, Any]:
         "limitations": ["Retrospective aggregate evidence."],
         "evidence_commitment_sha256": "a" * 64,
     }
+    payload["temporal_dependence_sharpe"] = {
+        "annualization": 365,
+        "autocorrelation_records": [
+            {"autocorrelation": -0.018947971484975727, "lag_count": 1},
+            {"autocorrelation": 0.032076421991579146, "lag_count": 5},
+            {"autocorrelation": -0.0066060936356148745, "lag_count": 10},
+            {"autocorrelation": 0.00882624379064061, "lag_count": 21},
+            {"autocorrelation": 0.01847963223659721, "lag_count": 30},
+            {"autocorrelation": -0.046740496288189715, "lag_count": 60},
+        ],
+        "automatic_lag_count": 7,
+        "automatic_lag_rule": "floor(4*(n/100)^(2/9))",
+        "bootstrap_method": "circular moving-block percentile interval for annualized arithmetic "
+        "Sharpe",
+        "bootstrap_repetitions": 2000,
+        "bootstrap_seed_base": 20260731,
+        "bootstrap_sensitivity_records": [
+            {
+                "block_size": 5,
+                "bootstrap_median": 1.5832757926564578,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7832200708866145,
+                "interval_upper": 2.341941700487583,
+            },
+            {
+                "block_size": 10,
+                "bootstrap_median": 1.590115660106567,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.8143331837768503,
+                "interval_upper": 2.373328381240761,
+            },
+            {
+                "block_size": 21,
+                "bootstrap_median": 1.5669386650446135,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7571871501731903,
+                "interval_upper": 2.3500727862679986,
+            },
+            {
+                "block_size": 30,
+                "bootstrap_median": 1.59640559068229,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7836849444600525,
+                "interval_upper": 2.4057367210870804,
+            },
+            {
+                "block_size": 60,
+                "bootstrap_median": 1.5767359668590792,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7608419436086805,
+                "interval_upper": 2.44657493185048,
+            },
+        ],
+        "canonical_block_size": 21,
+        "canonical_hac_adjusted_annualized_sharpe": 1.4931827873589063,
+        "canonical_hac_lag_count": 21,
+        "canonical_volatility_inflation_factor": 1.0632905273384274,
+        "conventional_annualized_sharpe": 1.5876871133835144,
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "diagnostics": {
+            "all_bootstrap_lower_bounds_positive": True,
+            "all_hac_sharpes_positive": True,
+            "raw_serial_dependence_detected_at_5pct": True,
+            "volatility_dependence_detected_at_5pct": True,
+        },
+        "evidence_commitment_sha256": (
+            "94a36288bcf86d6289056d1fa7cb2bf894c4af520312728f552982606edcd749"
+        ),
+        "formal_methods": [
+            "Bartlett-kernel Newey-West long-run variance",
+            "Ljung-Box portmanteau tests on periodic and squared centered periodic returns",
+            "deterministic circular moving-block bootstrap",
+        ],
+        "hac_sensitivity_records": [
+            {
+                "hac_adjusted_annualized_sharpe": 1.596359853071572,
+                "lag_count": 5,
+                "volatility_inflation_factor": 0.9945671775249356,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.5896187989510528,
+                "lag_count": 7,
+                "volatility_inflation_factor": 0.9987848120764468,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.5739824692187443,
+                "lag_count": 10,
+                "volatility_inflation_factor": 1.008706986534337,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.4931827873589063,
+                "lag_count": 21,
+                "volatility_inflation_factor": 1.0632905273384274,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.4409568241397386,
+                "lag_count": 30,
+                "volatility_inflation_factor": 1.1018283731931904,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.347218580252575,
+                "lag_count": 60,
+                "volatility_inflation_factor": 1.1784925895884368,
+            },
+        ],
+        "limitations": [
+            "The analysis is retrospective and does not constitute independent validation.",
+            "Newey-West adjustment addresses linear serial dependence but does not model "
+            "the full conditional distribution.",
+            "Ljung-Box p-values reported as zero indicate numerical underflow, not "
+            "mathematical zero.",
+            "Bootstrap conclusions remain conditional on the disclosed block-size sensitivity set.",
+        ],
+        "ljung_box_records": [
+            {
+                "lag_count": 5,
+                "p_value": 0.5494145562274486,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 4.000009689997235,
+            },
+            {
+                "lag_count": 10,
+                "p_value": 0.22926316945783223,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 12.90094130200967,
+            },
+            {
+                "lag_count": 21,
+                "p_value": 0.003263652508535611,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 42.87213245473431,
+            },
+            {
+                "lag_count": 30,
+                "p_value": 0.0002090612096298496,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 65.16294049497266,
+            },
+            {
+                "lag_count": 5,
+                "p_value": 1.0864331619492298e-28,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 141.01924144496283,
+            },
+            {
+                "lag_count": 10,
+                "p_value": 5.217545752547138e-44,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 231.0324649717583,
+            },
+            {
+                "lag_count": 21,
+                "p_value": 1.0665696131549399e-78,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 433.47749474341055,
+            },
+            {
+                "lag_count": 30,
+                "p_value": 3.5482733363605085e-84,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 487.9547070812303,
+            },
+        ],
+        "methodological_status": "accepted_with_observations",
+        "observations": 2211,
+        "verification_level": "artifact-verified",
+    }
+
     return payload
 
 
@@ -847,3 +1028,86 @@ def test_var_es_backtesting_rejects_invalid_section_contract() -> None:
     assert ("canonical result count must equal 4") in joined
     assert ("sensitivity traffic-light counts are invalid") in joined
     assert ("limitations must be a non-empty string list") in joined
+
+
+def test_temporal_dependence_sharpe_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["temporal_dependence_sharpe"]
+
+    section["verification_level"] = "unverified"
+    section["methodological_status"] = "accepted"
+    section["decision_status"] = "PASS"
+    section["observations"] = 2_210
+    section["annualization"] = 252
+    section["automatic_lag_count"] = 8
+    section["canonical_hac_lag_count"] = 30
+    section["canonical_block_size"] = 30
+    section["canonical_hac_adjusted_annualized_sharpe"] = -1.0
+    section["canonical_volatility_inflation_factor"] = 0.5
+    section["bootstrap_repetitions"] = 1_000
+    section["diagnostics"] = {}
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert "must be artifact-verified" in joined
+    assert ("methodological_status must equal accepted_with_observations") in joined
+    assert ("decision_status must equal PASS_WITH_OBSERVATION") in joined
+    assert "observations must equal 2211" in joined
+    assert "annualization must equal 365" in joined
+    assert "automatic lag count must equal 7" in joined
+    assert ("canonical HAC lag count must equal 21") in joined
+    assert ("canonical block size must equal 21") in joined
+    assert "canonical HAC Sharpe is invalid" in joined
+    assert ("canonical volatility inflation is invalid") in joined
+    assert ("bootstrap repetitions must equal 2000") in joined
+    assert "diagnostics are invalid" in joined
+    assert ("commitment must be a lowercase SHA-256 digest") in joined
+
+
+def test_temporal_dependence_sharpe_record_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["temporal_dependence_sharpe"]
+
+    section["autocorrelation_records"][0]["autocorrelation"] = 2.0
+    section["autocorrelation_records"][1]["lag_count"] = 1
+
+    section["ljung_box_records"][0]["p_value"] = 2.0
+    section["ljung_box_records"][1]["statistic"] = -1.0
+    section["ljung_box_records"][2]["series"] = "invalid"
+
+    section["hac_sensitivity_records"][0]["hac_adjusted_annualized_sharpe"] = 0.0
+    section["hac_sensitivity_records"][1]["volatility_inflation_factor"] = 0.0
+    section["hac_sensitivity_records"][2]["lag_count"] = 5
+
+    section["bootstrap_sensitivity_records"][0]["interval_lower"] = 3.0
+    section["bootstrap_sensitivity_records"][0]["interval_upper"] = 2.0
+    section["bootstrap_sensitivity_records"][1]["bootstrap_positive_share"] = 2.0
+    section["bootstrap_sensitivity_records"][2]["confidence_level"] = 0.90
+    section["bootstrap_sensitivity_records"][3]["block_size"] = 5
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert "invalid autocorrelation value" in joined
+    assert "autocorrelation lag set is invalid" in joined
+    assert "invalid Ljung-Box p-value" in joined
+    assert "invalid Ljung-Box statistic" in joined
+    assert "Ljung-Box combinations are invalid" in joined
+    assert "invalid HAC Sharpe" in joined
+    assert "invalid HAC inflation factor" in joined
+    assert "HAC sensitivity lag set is invalid" in joined
+    assert "invalid bootstrap interval" in joined
+    assert "invalid positive bootstrap share" in joined
+    assert ("bootstrap confidence level must equal 0.95") in joined
+    assert "bootstrap block-size set is invalid" in joined
+
+
+def test_temporal_dependence_sharpe_requires_object() -> None:
+    payload = valid_payload()
+    payload["temporal_dependence_sharpe"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "temporal_dependence_sharpe must be an object" in issues

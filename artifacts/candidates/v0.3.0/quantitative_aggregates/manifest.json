@@ -87,6 +87,11 @@
       "size_bytes": 1452
     },
     {
+      "path": "temporal_dependence_sharpe.json",
+      "sha256": "6cfc6c79242d5a06dbb56065f2ba06bb8f91852fb2e847dc759d59478c72be7b",
+      "size_bytes": 6479
+    },
+    {
       "path": "var_es_backtesting.json",
       "sha256": "c1d74d449a23c1de99a5a701d97457e263f3957b796f2d1b30142a8b877fba8b",
       "size_bytes": 5870
