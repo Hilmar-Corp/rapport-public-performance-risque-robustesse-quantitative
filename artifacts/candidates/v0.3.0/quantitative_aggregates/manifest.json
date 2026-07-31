@@ -85,6 +85,11 @@
       "path": "tail_risk.json",
       "sha256": "29b9d94ec87da8249ae32086084bf1956f6f36bd39f0ff3db624216a67b68c56",
       "size_bytes": 1452
+    },
+    {
+      "path": "var_es_backtesting.json",
+      "sha256": "c1d74d449a23c1de99a5a701d97457e263f3957b796f2d1b30142a8b877fba8b",
+      "size_bytes": 5870
     }
   ],
   "release_target": "v0.3.0",

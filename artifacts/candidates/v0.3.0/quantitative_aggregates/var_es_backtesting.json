@@ -1,0 +1,162 @@
+{
+  "data": {
+    "all_sensitivity_traffic_light_counts": {
+      "AMBER": 4,
+      "GREEN": 7,
+      "RED": 1
+    },
+    "canonical_calibration_window_days": 365,
+    "canonical_results": [
+      {
+        "christoffersen_conditional_coverage_p_value": 0.3343681811,
+        "christoffersen_independence_p_value": 0.139320316,
+        "confidence_level": 0.95,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.3853073463,
+        "exact_binomial_p_value": 0.9149522744,
+        "exception_cluster_count": 85,
+        "exception_count": 93,
+        "exception_rate": 0.0503791983,
+        "expected_exception_count": 92.3,
+        "kupiec_p_value": 0.9404813087,
+        "maximum_exception_cluster_length": 3,
+        "observations": 1846,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 1,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.6631275247,
+        "christoffersen_independence_p_value": 0.4868126994,
+        "confidence_level": 0.99,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.1764117941,
+        "exact_binomial_p_value": 0.5568683526,
+        "exception_cluster_count": 21,
+        "exception_count": 21,
+        "exception_rate": 0.011375948,
+        "expected_exception_count": 18.46,
+        "kupiec_p_value": 0.5609786336,
+        "maximum_exception_cluster_length": 1,
+        "observations": 1846,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 1,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.4152485196,
+        "christoffersen_independence_p_value": 0.2353990957,
+        "confidence_level": 0.95,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.2368815592,
+        "exact_binomial_p_value": 0.4976479836,
+        "exception_cluster_count": 11,
+        "exception_count": 11,
+        "exception_rate": 0.0597826087,
+        "expected_exception_count": 9.2,
+        "kupiec_p_value": 0.5542157357,
+        "maximum_exception_cluster_length": 1,
+        "observations": 184,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 10,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.3505102539,
+        "christoffersen_independence_p_value": 0.6724187609,
+        "confidence_level": 0.99,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.1064467766,
+        "exact_binomial_p_value": 0.1142554675,
+        "exception_cluster_count": 4,
+        "exception_count": 4,
+        "exception_rate": 0.0217391304,
+        "expected_exception_count": 1.84,
+        "kupiec_p_value": 0.166083401,
+        "maximum_exception_cluster_length": 1,
+        "observations": 184,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT",
+          "LOW_EXPECTED_EXCEPTION_COUNT"
+        ],
+        "risk_period_days": 10,
+        "traffic_light": "AMBER"
+      }
+    ],
+    "canonical_traffic_light_counts": {
+      "AMBER": 1,
+      "GREEN": 3,
+      "RED": 0
+    },
+    "confidence_levels": [
+      0.95,
+      0.99
+    ],
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "evaluation_period": {
+      "end": "2026-06-02",
+      "start": "2020-05-14"
+    },
+    "evidence_commitment_sha256": "9edb0c27d09958aebf9239680d6205107971532f36332376d95490d37bebe77b",
+    "forecast_design": "strictly trailing historical simulation without look-ahead",
+    "formal_tests": [
+      "Kupiec unconditional coverage",
+      "exact binomial coverage",
+      "Christoffersen exception independence",
+      "Christoffersen conditional coverage",
+      "one-sided normalized tail-loss calibration with deterministic moving-block bootstrap",
+      "exception clustering analysis"
+    ],
+    "governance_decision": {
+      "approved_specification": "365-day trailing historical simulation",
+      "monitoring_requirement": "Continue exception-frequency, clustering and tail-loss monitoring.",
+      "non_approved_specification": "250-day calibration for 99 percent tail-risk measures"
+    },
+    "limitations": [
+      "The 10-day 99 percent test has low power because fewer than five exceptions are expected in the available sample.",
+      "Sensitivity results demonstrate that the conclusion depends on the selected calibration window.",
+      "The results are retrospective and do not constitute independent external validation.",
+      "The Expected Shortfall p-value uses a deterministic moving-block bootstrap."
+    ],
+    "methodological_status": "accepted_with_observations",
+    "observations": 2211,
+    "return_basis": "canonical net daily strategy returns after the governed transaction-cost convention",
+    "risk_periods_days": [
+      1,
+      10
+    ],
+    "sensitivity_calibration_windows_days": [
+      250,
+      365,
+      500
+    ],
+    "sensitivity_findings": [
+      {
+        "calibration_window_days": 250,
+        "confidence_level": 0.99,
+        "finding": "Tail risk is materially underestimated under the short calibration window.",
+        "risk_period_days": 10,
+        "status": "RED"
+      },
+      {
+        "calibration_window_days": 250,
+        "confidence_level": 0.99,
+        "finding": "Coverage and Expected Shortfall calibration are rejected at the 5 percent level.",
+        "risk_period_days": 1,
+        "status": "AMBER"
+      },
+      {
+        "calibration_window_days": 500,
+        "confidence_level": 0.95,
+        "finding": "The exception frequency is broadly acceptable, but independence and conditional coverage indicate clustering.",
+        "risk_period_days": 1,
+        "status": "AMBER"
+      }
+    ],
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "var_es_backtesting"
+}

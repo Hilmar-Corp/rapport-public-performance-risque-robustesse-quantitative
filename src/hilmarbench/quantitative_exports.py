@@ -18,6 +18,7 @@ REQUIRED_SECTIONS = (
     "execution_cost_delay",
     "placebo_test",
     "tail_risk",
+    "var_es_backtesting",
     "historical_block_monte_carlo",
     "data_resilience",
     "configuration_sensitivity",
@@ -72,16 +73,17 @@ PAYLOAD_FILENAMES = {
     "execution_cost_delay": "execution_cost_delay.json",
     "placebo_test": "placebo_test.json",
     "tail_risk": "tail_risk.json",
+    "var_es_backtesting": "var_es_backtesting.json",
     "historical_block_monte_carlo": "historical_block_monte_carlo.json",
     "data_resilience": "data_resilience.json",
     "configuration_sensitivity": "configuration_sensitivity.json",
     "ablation": "ablation.json",
     "shadow_monitoring": "shadow_monitoring.json",
-    "probabilistic_sharpe_ratio": ("probabilistic_sharpe_ratio.json"),
-    "deflated_sharpe_ratio": ("deflated_sharpe_ratio.json"),
+    "probabilistic_sharpe_ratio": "probabilistic_sharpe_ratio.json",
+    "deflated_sharpe_ratio": "deflated_sharpe_ratio.json",
     "multiple_testing": "multiple_testing.json",
-    "backtest_overfitting": ("backtest_overfitting.json"),
-    "moving_block_bootstrap": ("moving_block_bootstrap.json"),
+    "backtest_overfitting": "backtest_overfitting.json",
+    "moving_block_bootstrap": "moving_block_bootstrap.json",
 }
 
 CONTROLLED_FILENAMES = {
@@ -115,6 +117,184 @@ def _sha256_file(path: Path) -> str:
             digest.update(block)
 
     return digest.hexdigest()
+
+
+def _validate_var_es_backtesting(
+    section: Any,
+) -> list[str]:
+    """Validate the controlled public VaR/ES backtesting section."""
+
+    issues: list[str] = []
+
+    if not isinstance(section, dict):
+        return ["var_es_backtesting must be a JSON object"]
+
+    expected_scalars = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "observations": 2211,
+        "canonical_calibration_window_days": 365,
+    }
+
+    for field, expected in expected_scalars.items():
+        if section.get(field) != expected:
+            issues.append(f"var_es_backtesting.{field} must equal {expected}")
+
+    if section.get("sensitivity_calibration_windows_days") != [250, 365, 500]:
+        issues.append("var_es_backtesting sensitivity windows must equal 250, 365 and 500 days")
+
+    if section.get("risk_periods_days") != [1, 10]:
+        issues.append("var_es_backtesting horizons must equal 1 and 10 days")
+
+    if section.get("confidence_levels") != [0.95, 0.99]:
+        issues.append("var_es_backtesting confidence levels must equal 0.95 and 0.99")
+
+    results = section.get("canonical_results")
+
+    if not isinstance(results, list):
+        issues.append("var_es_backtesting.canonical_results must be a list")
+        results = []
+
+    if len(results) != 4:
+        issues.append("var_es_backtesting canonical result count must equal 4")
+
+    required_p_values = (
+        "kupiec_p_value",
+        "exact_binomial_p_value",
+        "christoffersen_independence_p_value",
+        "christoffersen_conditional_coverage_p_value",
+        ("es_normalized_tail_loss_bootstrap_p_value"),
+    )
+
+    expected_combinations = {
+        (1, 0.95),
+        (1, 0.99),
+        (10, 0.95),
+        (10, 0.99),
+    }
+
+    combinations: set[tuple[int, float]] = set()
+    computed_counts = {
+        "GREEN": 0,
+        "AMBER": 0,
+        "RED": 0,
+    }
+
+    for index, record in enumerate(results):
+        if not isinstance(record, dict):
+            issues.append(f"var_es_backtesting canonical record {index} must be an object")
+            continue
+
+        horizon = record.get("risk_period_days")
+        confidence = record.get("confidence_level")
+
+        if (
+            isinstance(horizon, int)
+            and not isinstance(horizon, bool)
+            and isinstance(
+                confidence,
+                (int, float),
+            )
+            and not isinstance(confidence, bool)
+        ):
+            combinations.add(
+                (
+                    horizon,
+                    float(confidence),
+                )
+            )
+        else:
+            issues.append(
+                f"var_es_backtesting canonical record {index} has invalid horizon or confidence"
+            )
+
+        for field in required_p_values:
+            value = record.get(field)
+
+            if (
+                not isinstance(value, (int, float))
+                or isinstance(value, bool)
+                or not 0.0 <= float(value) <= 1.0
+            ):
+                issues.append(f"var_es_backtesting canonical record {index} has invalid {field}")
+
+        light = record.get("traffic_light")
+
+        if light not in computed_counts:
+            issues.append(f"var_es_backtesting canonical record {index} has invalid traffic_light")
+        else:
+            computed_counts[light] += 1
+
+        reasons = record.get("reason_codes")
+
+        if (
+            not isinstance(reasons, list)
+            or not reasons
+            or not all(isinstance(reason, str) and reason for reason in reasons)
+        ):
+            issues.append(f"var_es_backtesting canonical record {index} has invalid reason_codes")
+
+        for count_field in (
+            "observations",
+            "exception_count",
+            "expected_exception_count",
+            "exception_rate",
+            "exception_cluster_count",
+            "maximum_exception_cluster_length",
+        ):
+            value = record.get(count_field)
+
+            if not isinstance(value, (int, float)) or isinstance(value, bool) or float(value) < 0.0:
+                issues.append(
+                    f"var_es_backtesting canonical record {index} has invalid {count_field}"
+                )
+
+    if combinations != expected_combinations:
+        issues.append(
+            "var_es_backtesting canonical horizon and confidence combinations are invalid"
+        )
+
+    expected_canonical_counts = {
+        "GREEN": 3,
+        "AMBER": 1,
+        "RED": 0,
+    }
+
+    if section.get("canonical_traffic_light_counts") != expected_canonical_counts:
+        issues.append("var_es_backtesting canonical traffic-light counts are invalid")
+
+    if computed_counts != expected_canonical_counts:
+        issues.append(
+            "var_es_backtesting canonical records do not reconcile with traffic-light counts"
+        )
+
+    if section.get("all_sensitivity_traffic_light_counts") != {
+        "GREEN": 7,
+        "AMBER": 4,
+        "RED": 1,
+    }:
+        issues.append("var_es_backtesting sensitivity traffic-light counts are invalid")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if (
+        not isinstance(commitment, str)
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append("var_es_backtesting evidence commitment must be a lowercase SHA-256 digest")
+
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item for item in limitations)
+    ):
+        issues.append("var_es_backtesting limitations must be a non-empty string list")
+
+    return issues
 
 
 def validate_public_quantitative_payload(
@@ -539,6 +719,7 @@ def validate_public_quantitative_payload(
             if significant_count != 2:
                 issues.append("exactly two bootstrap records must be significant")
 
+    issues.extend(_validate_var_es_backtesting(payload.get("var_es_backtesting")))
     return issues
 
 

@@ -184,6 +184,116 @@ def valid_payload() -> dict[str, Any]:
         "limitation": ("Significance is benchmark-specific."),
     }
 
+    payload["var_es_backtesting"] = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "observations": 2211,
+        "canonical_calibration_window_days": 365,
+        "sensitivity_calibration_windows_days": [
+            250,
+            365,
+            500,
+        ],
+        "risk_periods_days": [1, 10],
+        "confidence_levels": [0.95, 0.99],
+        "canonical_results": [
+            {
+                "risk_period_days": horizon,
+                "confidence_level": confidence,
+                "observations": (1846 if horizon == 1 else 184),
+                "expected_exception_count": (
+                    92.3
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.95)
+                    else 18.46
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.99)
+                    else 9.2
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.95)
+                    else 1.84
+                ),
+                "exception_count": (
+                    93
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.95)
+                    else 21
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.99)
+                    else 11
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.95)
+                    else 4
+                ),
+                "exception_rate": 0.05,
+                "kupiec_p_value": 0.50,
+                "exact_binomial_p_value": 0.50,
+                "christoffersen_independence_p_value": 0.50,
+                "christoffersen_conditional_coverage_p_value": 0.50,
+                ("es_normalized_tail_loss_bootstrap_p_value"): 0.50,
+                "exception_cluster_count": 1,
+                "maximum_exception_cluster_length": 1,
+                "traffic_light": (
+                    "AMBER"
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.99)
+                    else "GREEN"
+                ),
+                "reason_codes": (
+                    [
+                        "NO_FORMAL_REJECTION_AT_5_PERCENT",
+                        "LOW_EXPECTED_EXCEPTION_COUNT",
+                    ]
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.99)
+                    else ["NO_FORMAL_REJECTION_AT_5_PERCENT"]
+                ),
+            }
+            for horizon, confidence in (
+                (1, 0.95),
+                (1, 0.99),
+                (10, 0.95),
+                (10, 0.99),
+            )
+        ],
+        "canonical_traffic_light_counts": {
+            "GREEN": 3,
+            "AMBER": 1,
+            "RED": 0,
+        },
+        "all_sensitivity_traffic_light_counts": {
+            "GREEN": 7,
+            "AMBER": 4,
+            "RED": 1,
+        },
+        "limitations": ["Retrospective aggregate evidence."],
+        "evidence_commitment_sha256": "a" * 64,
+    }
     return payload
 
 
@@ -666,3 +776,74 @@ def test_verify_checksum_failure_modes(
     assert "SHA256SUMS contains an invalid line" in joined
     assert "SHA256SUMS paths do not match" in joined
     assert "SHA256SUMS mismatch: metadata.json" in joined
+
+
+def test_var_es_backtesting_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["var_es_backtesting"]
+
+    section["decision_status"] = "PASS"
+    section["canonical_results"][0]["kupiec_p_value"] = 1.5
+    section["canonical_results"][1]["risk_period_days"] = 2
+    section["canonical_traffic_light_counts"] = {
+        "GREEN": 4,
+        "AMBER": 0,
+        "RED": 0,
+    }
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert ("decision_status must equal PASS_WITH_OBSERVATION") in joined
+    assert "invalid kupiec_p_value" in joined
+    assert ("canonical horizon and confidence combinations are invalid") in joined
+    assert ("canonical traffic-light counts are invalid") in joined
+    assert ("lowercase SHA-256 digest") in joined
+
+
+def test_var_es_backtesting_rejects_non_object() -> None:
+    payload = valid_payload()
+    payload["var_es_backtesting"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("var_es_backtesting must be a JSON object" in issue for issue in issues)
+
+
+def test_var_es_backtesting_rejects_invalid_section_contract() -> None:
+    payload = valid_payload()
+    section = payload["var_es_backtesting"]
+
+    section["verification_level"] = "unverified"
+    section["methodological_status"] = "rejected"
+    section["observations"] = 0
+    section["canonical_calibration_window_days"] = 250
+    section["sensitivity_calibration_windows_days"] = [
+        250,
+        500,
+    ]
+    section["risk_periods_days"] = [1]
+    section["confidence_levels"] = [0.95]
+    section["canonical_results"] = "invalid"
+    section["all_sensitivity_traffic_light_counts"] = {
+        "GREEN": 12,
+        "AMBER": 0,
+        "RED": 0,
+    }
+    section["limitations"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert ("verification_level must equal artifact-verified") in joined
+    assert ("methodological_status must equal accepted_with_observations") in joined
+    assert "observations must equal 2211" in joined
+    assert ("canonical_calibration_window_days must equal 365") in joined
+    assert ("sensitivity windows must equal 250, 365 and 500 days") in joined
+    assert ("horizons must equal 1 and 10 days") in joined
+    assert ("confidence levels must equal 0.95 and 0.99") in joined
+    assert ("canonical_results must be a list") in joined
+    assert ("canonical result count must equal 4") in joined
+    assert ("sensitivity traffic-light counts are invalid") in joined
+    assert ("limitations must be a non-empty string list") in joined

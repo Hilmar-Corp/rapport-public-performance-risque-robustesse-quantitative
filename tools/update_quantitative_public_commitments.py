@@ -5,7 +5,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
-from typing import Final
+from typing import Final, cast
 
 ROOT: Final = Path(__file__).resolve().parents[1]
 MATRIX: Final = ROOT / "governance" / "quantitative_validation_control_matrix.csv"
@@ -146,7 +146,7 @@ def public_commitment(
         key=lambda item: (
             str(item["type"]),
             str(item["sha256"]),
-            int(item.get("file_count", 0)),
+            cast(int, item.get("file_count", 0)),
         ),
     )
 
@@ -224,9 +224,11 @@ def render_csv(
     output = StringIO(
         newline="",
     )
+    fieldnames: list[str] = list(COMMITMENT_FIELDS)
+
     writer = csv.DictWriter(
         output,
-        fieldnames=COMMITMENT_FIELDS,
+        fieldnames=fieldnames,
         lineterminator="\n",
     )
     writer.writeheader()
