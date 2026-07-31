@@ -1,0 +1,39 @@
+{
+  "data": {
+    "adf_pvalue_quantiles": {
+      "q00": 2.96e-06,
+      "q05": 1.194e-05,
+      "q100": 0.56953747,
+      "q25": 0.07546554,
+      "q50": 0.13480976,
+      "q75": 0.19957629,
+      "q95": 0.49295306
+    },
+    "adf_reject_unit_root_5pct": 2,
+    "conflicting_tests_5pct": 1,
+    "consistent_stationarity_5pct": 1,
+    "cusum_break_candidate_count": 8,
+    "cusum_statistic_quantiles": {
+      "q00": 5.05352264,
+      "q05": 5.30449687,
+      "q100": 8.24652495,
+      "q25": 6.72365398,
+      "q50": 7.1783997,
+      "q75": 7.27612767,
+      "q95": 8.00782962
+    },
+    "kpss_pvalue_quantiles": {
+      "q00": 0.01,
+      "q05": 0.01,
+      "q100": 0.07948865,
+      "q25": 0.01,
+      "q50": 0.01399586,
+      "q75": 0.01703229,
+      "q95": 0.0598128
+    },
+    "kpss_reject_stationarity_5pct": 7,
+    "series_tested": 8
+  },
+  "schema_version": 1,
+  "section": "stationarity"
+}

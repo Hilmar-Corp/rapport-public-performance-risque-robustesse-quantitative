@@ -1,0 +1,92 @@
+{
+  "classification": "public_aggregated_candidate",
+  "files": [
+    {
+      "path": "ablation.json",
+      "sha256": "f4611a66e7cdad0c62cba1bb6f413083a810bb23eaf1d94b41b0a13b91145c2c",
+      "size_bytes": 2227
+    },
+    {
+      "path": "backtest_overfitting.json",
+      "sha256": "033ad1e50f70b0dd995e618a47f65d98756a794c9b68e5d3e75926abda0844e7",
+      "size_bytes": 719
+    },
+    {
+      "path": "configuration_sensitivity.json",
+      "sha256": "1b69daae92a5811c5657f39672661d956474d275b45e19091dea0e682a43acf0",
+      "size_bytes": 1362
+    },
+    {
+      "path": "data_resilience.json",
+      "sha256": "7c65c02584d68b0e5be9a8c7729651f5e3c7cf7c8670c52b348e26b817bdc74a",
+      "size_bytes": 1677
+    },
+    {
+      "path": "deflated_sharpe_ratio.json",
+      "sha256": "6ab226e0cdd0ecf7c90c72a3bfa6b2b969a369d1691d5ab0080ee3d53374c810",
+      "size_bytes": 724
+    },
+    {
+      "path": "distribution_drift.json",
+      "sha256": "c63529eb069230da89537131b264a69068519e26e7ce67527d0d840bdf7b3a6a",
+      "size_bytes": 2581
+    },
+    {
+      "path": "execution_cost_delay.json",
+      "sha256": "ae0485d907b9c3cb01fb26dbe05f95bbdc127491b31a458bfdb051fbc04ae38c",
+      "size_bytes": 14700
+    },
+    {
+      "path": "historical_block_monte_carlo.json",
+      "sha256": "ddae15816201f3524eb9d8914838fda2b9cae051d7a6aecca37338afb1c9afb3",
+      "size_bytes": 8282
+    },
+    {
+      "path": "market_regimes.json",
+      "sha256": "9edf14197bafae5de1375f329886d85f1f8418051b2825f36763ca5a83588b12",
+      "size_bytes": 5425
+    },
+    {
+      "path": "metadata.json",
+      "sha256": "1829cd7e3856f38571cdd245d35eb30412d494e21e78410f2625743b191fbb6a",
+      "size_bytes": 327
+    },
+    {
+      "path": "moving_block_bootstrap.json",
+      "sha256": "a76215334c29ecb35cb840c30f22e0e7298624096762786cf88ecb935ac8b94a",
+      "size_bytes": 5716
+    },
+    {
+      "path": "multiple_testing.json",
+      "sha256": "78f06233f1c24a5bc930cd1fd287323f4c2c05684dad7b187fd5f352f478504f",
+      "size_bytes": 961
+    },
+    {
+      "path": "placebo_test.json",
+      "sha256": "62a03185ddb83ea631fc4eb66fc835d3e54bf64d2f44a2d2898023361347f2f7",
+      "size_bytes": 1878
+    },
+    {
+      "path": "probabilistic_sharpe_ratio.json",
+      "sha256": "b6963cf16736d0bd147865061180daab3c6a7b4d63f28f8802d7e8cd49deb456",
+      "size_bytes": 699
+    },
+    {
+      "path": "shadow_monitoring.json",
+      "sha256": "6f7199b73f3423ab1eeb4c4cf7572939ddd0cb7f86b81fa3e5e2adb042e02d7d",
+      "size_bytes": 476
+    },
+    {
+      "path": "stationarity.json",
+      "sha256": "d9477db1d63d5e4cb8d94e0efe3f2a7eb5fa4420d12297f8332f90e5165b644b",
+      "size_bytes": 900
+    },
+    {
+      "path": "tail_risk.json",
+      "sha256": "29b9d94ec87da8249ae32086084bf1956f6f36bd39f0ff3db624216a67b68c56",
+      "size_bytes": 1452
+    }
+  ],
+  "release_target": "v0.3.0",
+  "schema_version": 1
+}

@@ -1,0 +1,137 @@
+{
+  "data": {
+    "benchmark_count": 11,
+    "excluded_analyses": "incremental component, predictive calibration, ablation and regime-specific resampling",
+    "limitation": "The complete resampled observations remain withheld. Statistical significance is benchmark-specific.",
+    "method": "benchmark-level retrospective moving-block bootstrap of compounded outperformance",
+    "positive_cagr_differences": 11,
+    "public_benchmark_set_reconciled": true,
+    "records": [
+      {
+        "annualized_log_outperformance": 0.095505331043628,
+        "benchmark": "BUY_AND_HOLD",
+        "benchmark_cagr": 0.385671982392979,
+        "cagr_difference": 0.138864684430847,
+        "ci95_lower_annualized_log": -0.210433874056634,
+        "ci95_upper_annualized_log": 0.395360053527882,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.245750849830034,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.217039007986898,
+        "benchmark": "FIXED_50",
+        "benchmark_cagr": 0.227097384898539,
+        "cagr_difference": 0.297439281925288,
+        "ci95_lower_annualized_log": 0.104918058748199,
+        "ci95_upper_annualized_log": 0.342296514076062,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.001399720055989,
+        "significant_compounded_outperformance": true
+      },
+      {
+        "annualized_log_outperformance": 0.388944675019972,
+        "benchmark": "HMM_3_STATE_WALKFORWARD",
+        "benchmark_cagr": 0.033287910051024,
+        "cagr_difference": 0.491248756772803,
+        "ci95_lower_annualized_log": 0.160316724170687,
+        "ci95_upper_annualized_log": 0.609065273247706,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.000799840031994,
+        "significant_compounded_outperformance": true
+      },
+      {
+        "annualized_log_outperformance": 0.230734130195851,
+        "benchmark": "MA_50_200",
+        "benchmark_cagr": 0.21040668768882,
+        "cagr_difference": 0.314129979135006,
+        "ci95_lower_annualized_log": -0.010443978321123,
+        "ci95_upper_annualized_log": 0.502868205263029,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.049190161967606,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.163098095110667,
+        "benchmark": "MOMENTUM_180",
+        "benchmark_cagr": 0.29510586876357,
+        "cagr_difference": 0.229430798060256,
+        "ci95_lower_annualized_log": -0.074563297266638,
+        "ci95_upper_annualized_log": 0.423495484628494,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.113177364527095,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.215800537076182,
+        "benchmark": "MOMENTUM_270",
+        "benchmark_cagr": 0.228618050770206,
+        "cagr_difference": 0.29591861605362,
+        "ci95_lower_annualized_log": -0.008272493454741,
+        "ci95_upper_annualized_log": 0.477503307715668,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.046590681863627,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.091242474675905,
+        "benchmark": "MOMENTUM_30",
+        "benchmark_cagr": 0.391591511112936,
+        "cagr_difference": 0.13294515571089,
+        "ci95_lower_annualized_log": -0.113266332563119,
+        "ci95_upper_annualized_log": 0.309938409173172,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.220155968806239,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.04138221264181,
+        "benchmark": "MOMENTUM_60",
+        "benchmark_cagr": 0.462735519627234,
+        "cagr_difference": 0.061801147196593,
+        "ci95_lower_annualized_log": -0.174191059947223,
+        "ci95_upper_annualized_log": 0.22474444486043,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.299540091981604,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.107045495764154,
+        "benchmark": "MOMENTUM_90",
+        "benchmark_cagr": 0.369773014268629,
+        "cagr_difference": 0.154763652555198,
+        "ci95_lower_annualized_log": -0.126920968666208,
+        "ci95_upper_annualized_log": 0.30972524843325,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.145970805838832,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.134625237678457,
+        "benchmark": "VOL_TARGET_14",
+        "benchmark_cagr": 0.332511225194276,
+        "cagr_difference": 0.192025441629551,
+        "ci95_lower_annualized_log": -0.088355588442781,
+        "ci95_upper_annualized_log": 0.348577246305337,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.097980403919216,
+        "significant_compounded_outperformance": false
+      },
+      {
+        "annualized_log_outperformance": 0.150495823431753,
+        "benchmark": "VOL_TARGET_30",
+        "benchmark_cagr": 0.311530420733141,
+        "cagr_difference": 0.213006246090685,
+        "ci95_lower_annualized_log": -0.080026927808008,
+        "ci95_upper_annualized_log": 0.374780980413716,
+        "nostra_cagr": 0.524536666823826,
+        "one_sided_p_value": 0.078384323135373,
+        "significant_compounded_outperformance": false
+      }
+    ],
+    "significant_at_5_percent": 2,
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "moving_block_bootstrap"
+}

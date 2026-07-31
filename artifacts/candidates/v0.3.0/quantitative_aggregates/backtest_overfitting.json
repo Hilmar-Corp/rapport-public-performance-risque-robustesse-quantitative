@@ -1,0 +1,21 @@
+{
+  "data": {
+    "all_combinations_completed": true,
+    "blocks": 8,
+    "candidate_count": 15,
+    "combinations_per_setting": 70,
+    "exact_sensitivity_settings_disclosed": false,
+    "limitation": "Only the aggregate sensitivity range is published; the underlying candidate matrix and exact settings remain withheld.",
+    "method": "CSCV and Probability of Backtest Overfitting",
+    "observations": 2211,
+    "pbo_maximum": 0.314285714285714,
+    "pbo_mean": 0.182142857142857,
+    "pbo_median": 0.157142857142857,
+    "pbo_minimum": 0.1,
+    "results_below_0_20": 3,
+    "tested_setting_count": 4,
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "backtest_overfitting"
+}

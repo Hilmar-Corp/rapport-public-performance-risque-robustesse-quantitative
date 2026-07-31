@@ -1,0 +1,140 @@
+{
+  "data": {
+    "aggregate_rows": 10,
+    "records": [
+      {
+        "annualized_active_log_return": 0.327212,
+        "btc_annualized_volatility": 0.57922158,
+        "btc_conditional_annualized_return": -0.08934276,
+        "btc_conditional_max_drawdown": -0.67517779,
+        "btc_sharpe": 0.12931086,
+        "nostra_annualized_volatility": 0.28164395,
+        "nostra_conditional_annualized_return": 0.26316857,
+        "nostra_conditional_max_drawdown": -0.19544072,
+        "nostra_sharpe": 0.97001409,
+        "observations": 741.0,
+        "regime": "regime_09"
+      },
+      {
+        "annualized_active_log_return": 0.04681759,
+        "btc_annualized_volatility": 0.58342506,
+        "btc_conditional_annualized_return": 0.53970573,
+        "btc_conditional_max_drawdown": -0.63468123,
+        "btc_sharpe": 1.03007286,
+        "nostra_annualized_volatility": 0.30107764,
+        "nostra_conditional_annualized_return": 0.61350512,
+        "nostra_conditional_max_drawdown": -0.1822169,
+        "nostra_sharpe": 1.73904226,
+        "observations": 1261.0,
+        "regime": "regime_07"
+      },
+      {
+        "annualized_active_log_return": -0.07498616,
+        "btc_annualized_volatility": 0.65086745,
+        "btc_conditional_annualized_return": 0.90548369,
+        "btc_conditional_max_drawdown": -0.49389547,
+        "btc_sharpe": 1.3157071,
+        "nostra_annualized_volatility": 0.31261407,
+        "nostra_conditional_annualized_return": 0.76782456,
+        "nostra_conditional_max_drawdown": -0.15099233,
+        "nostra_sharpe": 1.97891378,
+        "observations": 966.0,
+        "regime": "regime_02"
+      },
+      {
+        "annualized_active_log_return": 0.36094373,
+        "btc_annualized_volatility": 0.50854481,
+        "btc_conditional_annualized_return": -0.13306139,
+        "btc_conditional_max_drawdown": -0.76087471,
+        "btc_sharpe": -0.02640358,
+        "nostra_annualized_volatility": 0.27541493,
+        "nostra_conditional_annualized_return": 0.24378186,
+        "nostra_conditional_max_drawdown": -0.31626105,
+        "nostra_sharpe": 0.92903132,
+        "observations": 1036.0,
+        "regime": "regime_03"
+      },
+      {
+        "annualized_active_log_return": 0.22072,
+        "btc_annualized_volatility": 0.60543461,
+        "btc_conditional_annualized_return": 0.17036663,
+        "btc_conditional_max_drawdown": -0.37235557,
+        "btc_sharpe": 0.56365871,
+        "nostra_annualized_volatility": 0.26150394,
+        "nostra_conditional_annualized_return": 0.45941702,
+        "nostra_conditional_max_drawdown": -0.13217038,
+        "nostra_sharpe": 1.57581561,
+        "observations": 337.0,
+        "regime": "regime_08"
+      },
+      {
+        "annualized_active_log_return": 0.4160432,
+        "btc_annualized_volatility": 0.55690333,
+        "btc_conditional_annualized_return": -0.26131511,
+        "btc_conditional_max_drawdown": -0.55986529,
+        "btc_sharpe": -0.26447289,
+        "nostra_annualized_volatility": 0.2975894,
+        "nostra_conditional_annualized_return": 0.11981037,
+        "nostra_conditional_max_drawdown": -0.24011484,
+        "nostra_sharpe": 0.52874143,
+        "observations": 404.0,
+        "regime": "regime_05"
+      },
+      {
+        "annualized_active_log_return": -0.23341696,
+        "btc_annualized_volatility": 0.67397489,
+        "btc_conditional_annualized_return": 1.47411013,
+        "btc_conditional_max_drawdown": -0.46341573,
+        "btc_sharpe": 1.68006636,
+        "nostra_annualized_volatility": 0.33687745,
+        "nostra_conditional_annualized_return": 0.95905817,
+        "nostra_conditional_max_drawdown": -0.15073442,
+        "nostra_sharpe": 2.1648885,
+        "observations": 629.0,
+        "regime": "regime_06"
+      },
+      {
+        "annualized_active_log_return": 0.32572192,
+        "btc_annualized_volatility": 0.47546789,
+        "btc_conditional_annualized_return": -0.03963974,
+        "btc_conditional_max_drawdown": -0.63690065,
+        "btc_sharpe": 0.15172492,
+        "nostra_annualized_volatility": 0.26044331,
+        "nostra_conditional_annualized_return": 0.33012793,
+        "nostra_conditional_max_drawdown": -0.22106658,
+        "nostra_sharpe": 1.22425057,
+        "observations": 632.0,
+        "regime": "regime_01"
+      },
+      {
+        "annualized_active_log_return": 0.21484774,
+        "btc_annualized_volatility": 0.5856653,
+        "btc_conditional_annualized_return": 0.18190403,
+        "btc_conditional_max_drawdown": -0.70557872,
+        "btc_sharpe": 0.57858926,
+        "nostra_annualized_volatility": 0.27616651,
+        "nostra_conditional_annualized_return": 0.46517466,
+        "nostra_conditional_max_drawdown": -0.19544072,
+        "nostra_sharpe": 1.52084936,
+        "observations": 1232.0,
+        "regime": "regime_04"
+      },
+      {
+        "annualized_active_log_return": 0.04780346,
+        "btc_annualized_volatility": 0.57610571,
+        "btc_conditional_annualized_return": 0.41812299,
+        "btc_conditional_max_drawdown": -0.43146702,
+        "btc_sharpe": 0.89235318,
+        "nostra_annualized_volatility": 0.32073692,
+        "nostra_conditional_annualized_return": 0.48756063,
+        "nostra_conditional_max_drawdown": -0.2160686,
+        "nostra_sharpe": 1.39789123,
+        "observations": 770.0,
+        "regime": "regime_10"
+      }
+    ],
+    "regime_count": 10
+  },
+  "schema_version": 1,
+  "section": "market_regimes"
+}

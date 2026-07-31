@@ -1,0 +1,67 @@
+{
+  "data": {
+    "cost_bps": 25.0,
+    "delay_days": 0,
+    "metrics": {
+      "cagr": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 0.52453667,
+        "permutation_quantiles": {
+          "q00": 0.51287135,
+          "q05": 0.51590098,
+          "q100": 0.52680362,
+          "q25": 0.51815071,
+          "q50": 0.51948211,
+          "q75": 0.52095636,
+          "q95": 0.52290632
+        },
+        "upper_tail_empirical_pvalue": 0.01197605
+      },
+      "calmar": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 2.45219411,
+        "permutation_quantiles": {
+          "q00": 2.35632995,
+          "q05": 2.40629076,
+          "q100": 2.51668555,
+          "q25": 2.42925266,
+          "q50": 2.44513247,
+          "q75": 2.46003465,
+          "q95": 2.48544887
+        },
+        "upper_tail_empirical_pvalue": 0.37125749
+      },
+      "final_equity": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 12.86364198,
+        "permutation_quantiles": {
+          "q00": 12.27882359,
+          "q05": 12.42852995,
+          "q100": 12.97994691,
+          "q25": 12.54068164,
+          "q50": 12.60745032,
+          "q75": 12.68172901,
+          "q95": 12.78053695
+        },
+        "upper_tail_empirical_pvalue": 0.01197605
+      },
+      "sharpe": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 1.58768711,
+        "permutation_quantiles": {
+          "q00": 1.56391186,
+          "q05": 1.57140297,
+          "q100": 1.59480562,
+          "q25": 1.57599784,
+          "q50": 1.57924137,
+          "q75": 1.58215747,
+          "q95": 1.58677526
+        },
+        "upper_tail_empirical_pvalue": 0.03792415
+      }
+    },
+    "permutations": 500
+  },
+  "schema_version": 1,
+  "section": "placebo_test"
+}

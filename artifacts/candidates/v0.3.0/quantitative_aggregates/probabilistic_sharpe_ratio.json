@@ -1,0 +1,17 @@
+{
+  "data": {
+    "annualization": 365,
+    "limitation": "The statistic adjusts for empirical non-normality but does not explicitly correct serial dependence.",
+    "methodological_status": "accepted_with_disclosed_limitation",
+    "methodological_verdict": "Formule cohérente avec correction empirique de skewness et de kurtosis de Pearson.",
+    "observations": 2211,
+    "observed_annualized_sharpe": 1.587687113383514,
+    "pearson_kurtosis": 9.350703841283686,
+    "probability": 0.999967305016425,
+    "skewness": 0.68468633364267,
+    "test_statistic": 3.992465071294956,
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "probabilistic_sharpe_ratio"
+}
