@@ -204,6 +204,26 @@ y compris lors du mouvement initial depuis une position en liquidités.
 - contrôle des dépendances ;
 - sauvegarde et restauration du dépôt.
 
+## Intégrité méthodologique et frontière de propriété intellectuelle
+
+| Principe | Application institutionnelle |
+|---|---|
+| Divulgation minimale | Publication limitée aux informations nécessaires à l’inspection |
+| Qualification des preuves | Distinction entre `code-reproducible`, `artifact-verified` et preuve privée |
+| Présentation symétrique | Conservation des limites et résultats défavorables |
+| Prudence statistique | Aucune généralisation au-delà des tests disponibles |
+| Traçabilité | Méthodes, changements, manifestes et releases versionnés |
+| Protection de l’IP | Aucune série, variable, configuration ou trace privée reconstructible |
+| Correction | Toute erreur matérielle doit être corrigée, même si elle dégrade une conclusion |
+| Indépendance | Aucune validation indépendante n’est revendiquée sans preuve correspondante |
+
+La frontière de propriété intellectuelle est définie dans
+[`PROPRIETARY_BOUNDARY.md`](PROPRIETARY_BOUNDARY.md).
+
+Les règles de présentation, d’interprétation et de correction sont définies
+dans
+[`METHODOLOGICAL_INTEGRITY.md`](METHODOLOGICAL_INTEGRITY.md).
+
 ## Lecture des résultats
 
 Les différentiels historiques de CAGR publiés sont positifs contre les
@@ -291,8 +311,9 @@ L’environnement Python 3.13 contrôlé est consigné dans :
 | Document | Objet |
 |---|---|
 | [`METHODOLOGY.md`](METHODOLOGY.md) | Conventions quantitatives générales |
-| [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) | Reproduction des résultats publics |
-| [`PROPRIETARY_BOUNDARY.md`](PROPRIETARY_BOUNDARY.md) | Frontière de propriété intellectuelle |
+| [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) | Niveaux de reproductibilité et de vérification |
+| [`PROPRIETARY_BOUNDARY.md`](PROPRIETARY_BOUNDARY.md) | Politique de classification, de divulgation et de protection de l’IP |
+| [`METHODOLOGICAL_INTEGRITY.md`](METHODOLOGICAL_INTEGRITY.md) | Standard d’intégrité et d’honnêteté méthodologique |
 | [`FINAL_PUBLICATION_ARCHITECTURE.md`](FINAL_PUBLICATION_ARCHITECTURE.md) | Architecture de publication |
 | [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md) | Provenance et contrôle des données |
 | [`RELEASE_POLICY.md`](RELEASE_POLICY.md) | Politique de version et de release |

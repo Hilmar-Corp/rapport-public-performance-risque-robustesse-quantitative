@@ -2,9 +2,14 @@
 
 ## Objet
 
-Cette roadmap consolide les contrôles quantitatifs du paquet public de preuves
-HilmarCorp. Elle distingue le code public, les résultats publics, les preuves
-privées engagées par SHA-256 et les développements encore requis.
+Cette roadmap consolide le statut final des contrôles quantitatifs du paquet
+public de preuves HilmarCorp. Elle distingue le code public, les résultats
+publics, les preuves privées engagées par SHA-256, les développements réalisés
+et les conditions formelles de réouverture.
+
+Elle ne constitue plus une liste de développements historiques ouverts.
+
+La campagne quantitative v0.3.0 est close et figée.
 
 Elle ne constitue ni une validation indépendante, ni une certification
 réglementaire, ni une promesse de performance future.
