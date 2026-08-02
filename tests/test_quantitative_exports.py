@@ -332,6 +332,19 @@ def valid_payload() -> dict[str, Any]:
         ),
     }
 
+    payload["drawdown_duration_recovery"] = json.loads(
+        (
+            Path(__file__).resolve().parents[1]
+            / "artifacts"
+            / "candidates"
+            / "v0.3.0"
+            / "quantitative_aggregates"
+            / "drawdown_duration_recovery.json"
+        ).read_text(
+            encoding="utf-8",
+        )
+    )["data"]
+
     payload["counterfactual_reverse_stress"] = {
         "all_phase_offsets_tested": True,
         "baseline_reconciliation_max_abs_delta": 1.7763568394002505e-15,
@@ -1554,3 +1567,15 @@ def test_historical_reverse_stress_rejects_invalid_governance_and_limits() -> No
     issues = validate_public_quantitative_payload(payload)
 
     assert any("governance status is invalid" in issue for issue in issues)
+
+
+def test_drawdown_duration_recovery_controlled_aggregate_is_enforced() -> None:
+    payload = valid_payload()
+
+    assert validate_public_quantitative_payload(payload) == []
+
+    payload["drawdown_duration_recovery"]["observations"] = 0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "drawdown_duration_recovery does not match the controlled public aggregate" in issues

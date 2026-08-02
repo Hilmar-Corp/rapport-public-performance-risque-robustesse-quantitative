@@ -26,3 +26,4 @@ QNT-OUT-001,0,,,0,,
 QNT-PUB-001,1,2379b57a947f165cf3ca07d3be2cb8af82510641ae5ffd404f56d8abd07732dd,sha256-canonical-public-evidence-v2,1,9f80c0e5cb2eb2553dd3411a76e0bf7c413e0a2362fa0337f768f4d305289457,sha256-canonical-json-v1
 QNT-RST-001,2,211ed1c01e2c782b55ee94a2d998bd432850e19e057a5a8ea471a44667dbba75,sha256-canonical-public-evidence-v2,1,83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62,sha256-canonical-json-v1
 QNT-RST-002,1,67bb30ba52ac8a969ed14760e30bbfa42525b1acf0c9ca0939a68711e38b3172,sha256-canonical-public-evidence-v2,1,ba1ea95fdca6dfe6fcc28140294ecfcb173a5248c82a16ae17296ae66e9d9e26,sha256-canonical-json-v1
+QNT-DDR-001,2,c898d24c27ae8d922f32ba6a68ea39c922e9602a48582f93bcc974a718ee1bc5,sha256-canonical-public-evidence-v2,1,8942a1602bc31ef599628140c7a268dd4a2b19cdfc03185e330d0114466cac41,sha256-canonical-json-v1

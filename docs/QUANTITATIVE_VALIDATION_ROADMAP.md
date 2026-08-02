@@ -11,7 +11,7 @@ réglementaire, ni une promesse de performance future.
 
 ## Périmètre réconcilié
 
-La matrice publique couvre 23 contrôles :
+La matrice publique couvre 28 contrôles :
 
 - backtest, causalité et absence de look-ahead ;
 - overfitting, data snooping, PBO et bootstrap ;
@@ -44,7 +44,7 @@ Ces développements ne constituent pas une calibration réelle de Nostra.
 
 ## Exports publics agrégés produits dans PR 15
 
-PR 15 produit un paquet candidat v0.3.0 couvrant 16 sections
+PR 15 produit un paquet candidat v0.3.0 désormais étendu à 21 sections
 quantitatives publiques agrégées.
 
 Les résultats sont :
@@ -67,13 +67,17 @@ monitoring et fonctionnement opérationnel. Il reste distinct d’un usage
 contractuel chez un client et d’une validation externe indépendante.
 ## Analyses intégrées réalisées dans PR 16
 
-La branche PR 16 ajoute quatre contrôles quantitatifs :
+La branche PR 16 ajoute cinq contrôles quantitatifs :
 
 - backtesting formel de la VaR et de l’Expected Shortfall ;
 - estimation du Sharpe sous dépendance temporelle ;
 - reverse stress historique des épisodes de perte réalisés ;
 - reverse stress contrefactuel des entrées du modèle, du réentraînement
   séquentiel, des données, de la cible et du signal directionnel central.
+- analyse de la durée des drawdowns, de leur récupération et du temps
+  sous le précédent plus-haut, avec comparaison agrégée à Buy & Hold.
+
+L’analyse des durées recense 104 épisodes pour V5.246 contre 50 pour Buy & Hold. Le drawdown maximal est de −21,39 % contre −76,63 %. La durée extrême observée est de 239 observations contre 847, tandis que la part du temps sous le précédent plus-haut atteint 91,68 % contre 95,57 %. V5.246 présente donc davantage de petits épisodes, mais des épisodes extrêmes historiquement beaucoup moins profonds et moins persistants.
 
 La campagne contrefactuelle comprend 4 908 scénarios, 87 frontières
 raffinées et huit familles de frontières. Elle inclut les grilles fines,
@@ -107,7 +111,7 @@ cryptographiques de preuves privées.
 - PR 13 — matrice de contrôle et engagements de preuves ;
 - PR 14 — slippage, impact de marché et capacité ;
 - PR 15 — exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
-- PR 16 — rapport intégré, backtesting du risque, dépendance temporelle et reverse stress ;
+- PR 16 — rapport intégré, backtesting du risque, dépendance temporelle, reverse stress et persistance des drawdowns ;
 - PR 17 — durcissement de release et v0.3.0.
 
 Les releases v0.2.0 et v0.2.1 restent immuables.

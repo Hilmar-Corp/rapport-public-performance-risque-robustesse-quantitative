@@ -37,6 +37,11 @@
       "size_bytes": 2581
     },
     {
+      "path": "drawdown_duration_recovery.json",
+      "sha256": "aac55eeef0278cbf70ee1f7816c1822d657bdc0c7b2013e65a3b6020cbd16a2d",
+      "size_bytes": 11795
+    },
+    {
       "path": "execution_cost_delay.json",
       "sha256": "ae0485d907b9c3cb01fb26dbe05f95bbdc127491b31a458bfdb051fbc04ae38c",
       "size_bytes": 14700
