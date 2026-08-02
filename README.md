@@ -1,67 +1,99 @@
-# Rapport public de performance, de risque et de robustesse quantitative de Nostra AI
+<div align="center">
 
-Ce dépôt fournit des outils Python transparents permettant d’évaluer des stratégies quotidiennes d’allocation, avec un décalage d’exécution explicite et une comptabilisation des coûts de transaction.
+# HilmarCorp — Nostra AI
 
-Il contient l’infrastructure publique d’évaluation et de validation, les stratégies publiques de référence ainsi que les artefacts assainis associés. Il ne contient aucune logique propriétaire du modèle, aucun jeu de données privé, aucune configuration de production, aucun signal historique, aucune trace de positions et aucun artefact interne de recherche.
+## Preuves publiques de performance, de risque et de robustesse quantitative
 
-## Stratégies de référence incluses
+Cadre public contrôlé d’évaluation, de validation et de reproductibilité
+quantitative de Nostra AI.
 
-- Achat-conservation
-- Allocation constante de 50 %
-- Momentum en série temporelle sur 90 jours
-- Croisement de moyennes mobiles 50/200 jours
-- Ciblage de volatilité sur 30 jours
-- HMM gaussien à trois états évalué en marche en avant
+<p>
+  <a href="https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/releases/tag/v0.3.0">
+    <img alt="Release v0.3.0" src="https://img.shields.io/badge/release-v0.3.0-1f6feb">
+  </a>
+  <a href="https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/actions/workflows/quality.yml">
+    <img alt="Contrôles de qualité" src="https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/actions/workflows/quality.yml/badge.svg?branch=main">
+  </a>
+  <img alt="308 tests" src="https://img.shields.io/badge/tests-308%20réussis-2ea043">
+  <img alt="Couverture 100 %" src="https://img.shields.io/badge/couverture-100%25-2ea043">
+  <img alt="Python 3.11 à 3.13" src="https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB">
+  <img alt="Licence Apache 2.0" src="https://img.shields.io/badge/licence-Apache--2.0-blue">
+</p>
 
-## Convention fondamentale
+**Version quantitative historique v0.3.0 figée**
 
-Une stratégie dynamique calcule sa décision à partir des informations disponibles jusqu’à la date t. Cette décision est décalée d’une observation quotidienne avant d’être appliquée aux rendements.
+[Vue d’ensemble](#vue-densemble) ·
+[Périmètre](#périmètre-public) ·
+[Architecture](#architecture-de-publication) ·
+[Validation](#couverture-de-validation) ·
+[Vérification](#vérification-et-reproduction) ·
+[Documentation](#documentation-de-référence)
 
-Les coûts de transaction sont imputés sur les variations absolues de la position appliquée, y compris lors du mouvement initial depuis une position en liquidités.
+</div>
 
-## Installation
+---
 
-    python -m pip install -e ".[dev,hmm]"
+## Vue d’ensemble
 
-## Test synthétique de bon fonctionnement
+Ce dépôt constitue la surface publique de preuve quantitative de Nostra AI.
 
-    PYTHONPATH=src python examples/run_synthetic_example.py
+Il permet d’inspecter les méthodes d’évaluation, les stratégies publiques de
+référence, les contrôles statistiques, les résultats agrégés autorisés à la
+publication et les mécanismes de réconciliation avec les preuves privées.
 
-L’exemple synthétique vérifie que chaque chemin d’exécution fonctionne et que les identités comptables sont respectées. Ses résultats numériques n’ont aucune signification empirique, comparative ou relative à la performance.
+| Élément | Statut contrôlé |
+|---|---:|
+| Version publique | `v0.3.0` |
+| Modèle évalué | Nostra AI V5.246 |
+| Statut de recherche historique | Figé |
+| Période d’évaluation | 14 mai 2020 au 2 juin 2026 |
+| Observations quotidiennes | 2 211 |
+| Stratégies publiques comparées | 11 |
+| Contrôles quantitatifs | 28 |
+| Sections publiques de preuve | 21 |
+| Tests automatisés | 308 |
+| Instructions couvertes | 1 978 / 1 978 |
+| Branches couvertes | 892 / 892 |
+| Couverture totale | 100 % |
+| Audit de publication | Réussi |
+| Reproduction de référence | Réussie |
 
-## Coûts d’exécution et capacité
+La campagne historique ne peut être rouverte qu’en présence :
 
-Le package fournit également un moteur générique et calibrable séparant
-frais, demi-spread, slippage et impact de marché. Il permet de construire des
-surfaces synthétiques selon le notionnel, le volume, la volatilité et le taux
-de participation, ainsi que d’estimer un break-even économique.
+1. d’un défaut matériel de données ;
+2. d’un défaut matériel d’implémentation ;
+3. d’un changement de modèle approuvé par la gouvernance ;
+4. de nouvelles preuves live ou pilote nécessitant une outcome analysis formelle.
 
-Ces calculs ne constituent pas une estimation de la capacité réelle de
-Nostra AI. Voir `docs/EXECUTION_COST_AND_CAPACITY.md`.
+## Périmètre public
 
-## Contrôles
+### Ce que le dépôt publie
 
-    PYTHONPATH=src python -m pytest
-    python tools/audit_public_repository.py
-    python -m ruff check .
-    python -m ruff format --check .
+- le code générique de backtest, de risque et de validation ;
+- les stratégies publiques de référence ;
+- les méthodes statistiques génériques ;
+- les résultats agrégés assainis relatifs à Nostra AI ;
+- les manifestes et engagements SHA-256 ;
+- les tests, audits et procédures de reproduction ;
+- les limites méthodologiques et les conclusions défavorables ;
+- les preuves techniques de release et de provenance.
 
-## Périmètre
+### Ce que le dépôt ne publie pas
 
-Ce dépôt contient une infrastructure d’évaluation et de validation. Il ne reproduit aucun modèle propriétaire de HilmarCorp et ne constitue pas un conseil en investissement.
+- la logique propriétaire du modèle Nostra AI ;
+- les variables, transformations et paramètres internes ;
+- les coefficients et seuils propriétaires ;
+- les signaux, positions ou expositions quotidiennes ;
+- les rendements quotidiens de Nostra AI ;
+- les données privées ou configurations de production ;
+- les artefacts internes de recherche ;
+- les identifiants de fournisseurs privés.
 
-## Reproductibilité et frontière propriétaire
-
-Les stratégies publiques de référence sont reproductibles à partir de ce dépôt.
-
-Nostra AI n’est pas publiée en open source. Ses caractéristiques, paramètres, probabilités et séries de positions restent propriétaires.
-
-Les publications publiques distinguent :
-
-- les références publiques classées `code-reproducible` ;
-- les résultats agrégés de Nostra classés `artifact-verified`.
-
-Voir `METHODOLOGY.md`, `REPRODUCIBILITY.md` et `PROPRIETARY_BOUNDARY.md`.
+| Catégorie | Niveau de vérification |
+|---|---|
+| Stratégies publiques de référence | `code-reproducible` |
+| Résultats agrégés de Nostra AI | `artifact-verified` |
+| Preuves détaillées de Nostra AI | Privées, engagées par SHA-256 |
 
 ## Architecture de publication
 
@@ -97,110 +129,228 @@ paquet public unique, versionné et auditable.
 | Preuves privées | Calcul des engagements SHA-256 | Registre public |
 | Résultats et engagements | Packaging, manifeste et audit | Release GitHub v0.3.0 |
 
-Cette architecture permet d’exposer une preuve quantitative inspectable sans
-publier la propriété intellectuelle du modèle.
+Cette architecture expose une preuve quantitative inspectable sans publier la
+propriété intellectuelle du modèle.
 
-## Matrice de validation quantitative
+## Stratégies publiques de référence
 
-Le dépôt publie une matrice de 28 contrôles couvrant notamment le backtest,
-l’absence de look-ahead, le risque de surajustement, la non-stationnarité,
-les régimes, les coûts d’exécution, les risques de queue, la sensibilité,
-la résilience des données et le monitoring.
+| Stratégie | Description |
+|---|---|
+| Achat-conservation | Exposition passive continue |
+| Allocation constante de 50 % | Exposition statique intermédiaire |
+| Momentum 90 jours | Momentum en série temporelle |
+| Moyennes mobiles 50/200 | Croisement de tendances |
+| Ciblage de volatilité 30 jours | Exposition ajustée au risque |
+| HMM gaussien à trois états | Régimes estimés en marche en avant |
+
+Une stratégie dynamique calcule sa décision avec les informations disponibles
+jusqu’à la date `t`. La décision est décalée d’une observation quotidienne
+avant d’être appliquée aux rendements.
+
+Les coûts sont imputés sur les variations absolues de l’exposition appliquée,
+y compris lors du mouvement initial depuis une position en liquidités.
+
+## Couverture de validation
+
+### Construction et exécution du backtest
+
+- causalité et absence de fuite d’information future ;
+- décalage explicite des décisions dynamiques ;
+- contrôles d’intégrité comptable ;
+- frais, demi-spread, slippage et impact de marché ;
+- rotation, participation, capacité et break-even économique ;
+- stress de coûts et de délais ;
+- tests placebo.
+
+### Robustesse statistique
+
+- Probabilistic Sharpe Ratio ;
+- Deflated Sharpe Ratio ;
+- White Reality Check ;
+- Hansen Superior Predictive Ability ;
+- Combinatorially Symmetric Cross-Validation ;
+- Probability of Backtest Overfitting ;
+- moving-block bootstrap ;
+- dépendance temporelle du Sharpe ;
+- stationnarité et dérive de distribution ;
+- régimes de marché ;
+- sensibilité et ablations ;
+- résilience des données.
+
+### Risque et scénarios défavorables
+
+- volatilité et drawdown ;
+- Value at Risk et Expected Shortfall ;
+- backtesting formel de la VaR et de l’Expected Shortfall ;
+- risques de queue ;
+- Monte Carlo historique ;
+- reverse stress historique ;
+- reverse stress contrefactuel ;
+- profondeur des drawdowns ;
+- durée et récupération ;
+- temps sous le précédent plus-haut.
+
+### Gouvernance et chaîne logicielle
+
+- matrice publique de 28 contrôles ;
+- registre d’engagements cryptographiques ;
+- manifestes déterministes ;
+- contrôle automatisé de la frontière propriétaire ;
+- tests sous Python 3.11, 3.12 et 3.13 ;
+- reproduction OCI ;
+- SBOM CycloneDX et SPDX ;
+- provenance GitHub OIDC ;
+- CodeQL ;
+- contrôle des dépendances ;
+- sauvegarde et restauration du dépôt.
+
+## Lecture des résultats
+
+Les différentiels historiques de CAGR publiés sont positifs contre les
+11 stratégies publiques de référence.
+
+Deux comparaisons sur onze sont individuellement significatives au seuil de
+5 %. Les résultats ne sont donc pas présentés comme universellement
+significatifs.
+
+Le shadow live constitue une validation interne sur données réelles et
+infrastructure de production. Il reste distinct d’un déploiement contractuel
+chez un client et d’une validation externe indépendante.
+
+Les résultats sont historiques. Ils ne constituent ni une garantie, ni une
+prévision de performance future, ni un conseil en investissement.
+
+## Paquet quantitatif public v0.3.0
+
+Le paquet contrôlé est conservé dans :
+
+    artifacts/candidates/v0.3.0/quantitative_aggregates
+
+Il comprend 21 sections publiques agrégées, leurs métadonnées, leur manifeste
+et leurs empreintes SHA-256.
+
+Le nom historique `candidates` est conservé afin de préserver l’intégrité des
+manifestes et engagements déjà publiés. La release GitHub `v0.3.0` constitue
+le point officiel de distribution.
+
+## Vérification et reproduction
+
+### Installation
+
+    python -m pip install -e ".[dev,hmm]"
+
+### Contrôles locaux
+
+    python -m ruff check .
+    python -m ruff format --check .
+    PYTHONPATH=src python -m pytest
+    PYTHONPATH=src python tools/audit_public_repository.py
+
+### Vérification du paquet public
+
+    PYTHONPATH=src python \
+      tools/package_public_quantitative_aggregates.py \
+      verify \
+      --output-dir artifacts/candidates/v0.3.0/quantitative_aggregates
+
+### Reproduction de référence
+
+    make reproduce
+
+### Reproduction OCI
+
+    docker build \
+      --platform linux/amd64 \
+      -t hilmarbench-reproduction .
+
+    docker run \
+      --platform linux/amd64 \
+      --rm \
+      hilmarbench-reproduction
+
+L’environnement Python 3.13 contrôlé est consigné dans :
+
+    requirements/constraints-py313.txt
+
+## Organisation du dépôt
+
+| Répertoire | Fonction |
+|---|---|
+| `.github/workflows/` | Qualité, sécurité, reproduction et publication |
+| `artifacts/` | Releases et preuves publiques contrôlées |
+| `docs/` | Documentation quantitative et gouvernance |
+| `governance/` | Matrice de contrôle et engagements de preuves |
+| `requirements/` | Contraintes d’environnement reproductible |
+| `src/hilmarbench/` | Code public générique de validation |
+| `tests/` | Tests unitaires, contractuels et de couverture |
+| `tools/` | Audit, packaging, reproduction et publication |
+| `examples/` | Exemples synthétiques sans portée empirique |
+
+## Documentation de référence
+
+| Document | Objet |
+|---|---|
+| [`METHODOLOGY.md`](METHODOLOGY.md) | Conventions quantitatives générales |
+| [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) | Reproduction des résultats publics |
+| [`PROPRIETARY_BOUNDARY.md`](PROPRIETARY_BOUNDARY.md) | Frontière de propriété intellectuelle |
+| [`FINAL_PUBLICATION_ARCHITECTURE.md`](FINAL_PUBLICATION_ARCHITECTURE.md) | Architecture de publication |
+| [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md) | Provenance et contrôle des données |
+| [`RELEASE_POLICY.md`](RELEASE_POLICY.md) | Politique de version et de release |
+| [`CHANGE_CONTROL.md`](CHANGE_CONTROL.md) | Gouvernance des changements |
+| [`SUPPLY_CHAIN_SECURITY.md`](SUPPLY_CHAIN_SECURITY.md) | Sécurité de la chaîne logicielle |
+| [`SECURITY.md`](SECURITY.md) | Politique de sécurité du dépôt |
+| [`CHANGELOG.md`](CHANGELOG.md) | Historique des versions |
+| [`docs/EXECUTION_COST_AND_CAPACITY.md`](docs/EXECUTION_COST_AND_CAPACITY.md) | Coûts et capacité |
+| [`docs/COUNTERFACTUAL_REVERSE_STRESS.md`](docs/COUNTERFACTUAL_REVERSE_STRESS.md) | Reverse stress contrefactuel |
+| [`docs/QUANTITATIVE_VALIDATION_ROADMAP.md`](docs/QUANTITATIVE_VALIDATION_ROADMAP.md) | Périmètre réconcilié |
+| [`docs/QUANTITATIVE_RESEARCH_FREEZE_V0.3.0.md`](docs/QUANTITATIVE_RESEARCH_FREEZE_V0.3.0.md) | Décision de gel |
+| [`docs/RELEASE_EVIDENCE.md`](docs/RELEASE_EVIDENCE.md) | Preuves techniques de release |
+
+## Gouvernance quantitative
 
 Les fichiers de référence sont :
 
 - `governance/quantitative_validation_control_matrix.csv` ;
 - `governance/quantitative_evidence_commitments.csv` ;
-- `docs/QUANTITATIVE_VALIDATION_ROADMAP.md`.
+- `docs/QUANTITATIVE_VALIDATION_ROADMAP.md` ;
+- `docs/QUANTITATIVE_RESEARCH_FREEZE_V0.3.0.md`.
 
-La matrice distingue le code public, les résultats publics, les preuves
-privées engagées par SHA-256 et les conditions formelles de réouverture.
-Les engagements cryptographiques ne publient aucun chemin privé, aucune
-trace quotidienne, aucune caractéristique, aucun coefficient et aucun
-seuil propriétaire. Ils ne constituent pas une validation indépendante.
+Les engagements cryptographiques ne publient aucun chemin privé, aucune trace
+quotidienne, aucune caractéristique, aucun coefficient et aucun seuil
+propriétaire.
 
-## Reproductibilité institutionnelle
+## Release officielle
 
-Les stratégies publiques de référence peuvent être réexécutées depuis un clone propre au moyen de la commande suivante :
+La release contrôlée est disponible ici :
 
-    make reproduce
+**[v0.3.0 — Gel de la recherche quantitative](https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/releases/tag/v0.3.0)**
 
-L’environnement contrôlé de dépendances Python 3.13 est consigné dans :
+Elle comprend :
 
-`requirements/constraints-py313.txt`
+- le paquet de preuves quantitatives agrégées ;
+- son archive versionnée ;
+- son fichier d’empreinte SHA-256 ;
+- les notes formelles de gel de la campagne historique.
 
-Les stratégies publiques de référence utilisent une exposition comprise entre 0 % et 100 %. L’évaluation propriétaire de Nostra utilise une plage gouvernée comprise entre -10 % et +100 %.
+## Limites
 
-Les publications formelles comprennent des artefacts versionnés, des manifestes SHA-256, un audit des dépendances, une nomenclature CycloneDX des composants logiciels et des preuves produites par GitHub Actions.
+Ce dépôt :
 
-Voir `DATA_PROVENANCE.md`, `RELEASE_POLICY.md`, `CHANGE_CONTROL.md` et `SUPPLY_CHAIN_SECURITY.md`.
+- ne constitue pas une validation indépendante du modèle ;
+- ne constitue pas une certification réglementaire ;
+- ne fournit pas une estimation contractuelle de capacité d’exécution ;
+- ne contient pas la chaîne privée de production de Nostra AI ;
+- ne constitue pas un conseil en investissement ;
+- ne garantit aucune performance future.
 
-## Régime de licence
+## Licence et droits
 
-Le code source du logiciel, les tests et la documentation technique sont placés sous licence Apache-2.0.
+Le code public, les tests et la documentation technique sont placés sous
+licence Apache-2.0.
 
-Les fichiers de performance contrôlés situés dans `artifacts/latest` ne sont pas placés sous licence Apache-2.0. Ils restent © HilmarCorp, tous droits réservés, et sont publiés uniquement à des fins d’inspection et de vérification.
+Les artefacts de performance contrôlés restent © HilmarCorp, tous droits
+réservés, et sont publiés exclusivement à des fins d’inspection et de
+vérification.
 
-La logique du modèle Nostra AI et sa trace privée d’exécution ne sont pas incluses dans ce dépôt. Voir `NOTICE` et `artifacts/LICENSE.md`.
-
-
-## Reproduction OCI institutionnelle
-
-L’environnement canonique peut être construit et exécuté dans une image OCI
-référencée par digest :
-
-~~~text
-docker build --platform linux/amd64 -t hilmarbench-reproduction .
-docker run --platform linux/amd64 --rm hilmarbench-reproduction
-~~~
-
-Chaque tag produit également une image GHCR, des SBOM CycloneDX et SPDX, un
-manifeste de provenance et des attestations GitHub OIDC.
-
-Voir `docs/RELEASE_EVIDENCE.md`.
-
-## Paquet quantitatif agrégé figé v0.3.0
-
-Le répertoire
-`artifacts/candidates/v0.3.0/quantitative_aggregates`
-constitue le paquet final contrôlé des résultats quantitatifs publics agrégés.
-
-Il contient 21 sections vérifiées :
-
-- stationnarité et dérive de distribution ;
-- régimes de marché ;
-- stress de coûts et de délais d’exécution ;
-- placebo et risque de queue ;
-- Monte Carlo historique et résilience des données ;
-- sensibilité et ablation ;
-- monitoring en shadow live ;
-- Probabilistic Sharpe Ratio et Deflated Sharpe Ratio ;
-- White Reality Check et Hansen SPA ;
-- CSCV et Probability of Backtest Overfitting ;
-- moving-block bootstrap de la surperformance composée.
-
-- backtesting formel de la VaR et de l’Expected Shortfall ;
-- analyse du Sharpe sous dépendance temporelle ;
-- reverse stress historique des épisodes de perte réalisés ;
-- reverse stress contrefactuel du modèle, du réentraînement et de la chaîne directionnelle.
-- analyse de la profondeur, de la durée, de la récupération et du temps sous le précédent plus-haut des drawdowns.
-
-Les différentiels de CAGR sont positifs contre les 11 benchmarks publics.
-La significativité individuelle au seuil de 5 % est établie pour
-2 comparaisons sur 11. Cette distinction ne doit pas être interprétée
-comme une significativité universelle.
-
-Nostra AI fonctionne en shadow live sur données réelles et sur
-l’infrastructure de production. Ce dispositif constitue une validation
-interne de production en conditions réelles. Il reste distinct d’un
-déploiement contractuel chez un client et d’une validation externe
-indépendante.
-
-Le paquet est rétrospectif, artifact-verified, reproductible et soumis à
-une frontière propriétaire stricte. Il ne publie aucune série journalière
-Nostra, aucun réglage propriétaire ni aucune matrice privée de candidats.
-
-Vérification :
-
-    PYTHONPATH=src python tools/package_public_quantitative_aggregates.py verify \
-      --output-dir artifacts/candidates/v0.3.0/quantitative_aggregates
+La logique, les variables, les paramètres et la trace d’exécution de Nostra AI
+ne sont pas inclus dans ce dépôt.
