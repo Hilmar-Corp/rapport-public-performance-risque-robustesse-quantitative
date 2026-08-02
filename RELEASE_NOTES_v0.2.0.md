@@ -1,4 +1,4 @@
-# Rapport public de performance, de risque et de robustesse quantitative de Nostra AI — v0.2.0
+# Rapport public de performance, de risque et de robustesse quantitative de Nostra AI - v0.2.0
 
 Cette publication établit la première surface publique d’évaluation renforcée selon des exigences institutionnelles.
 

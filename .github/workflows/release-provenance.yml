@@ -332,7 +332,7 @@ jobs:
 
             gh release create \
               "$RELEASE_TAG" \
-              --title "Institutional quantitative evidence release — $RELEASE_TAG" \
+              --title "Institutional quantitative evidence release - $RELEASE_TAG" \
               --notes-file "$notes_file"
           fi
 

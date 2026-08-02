@@ -3,8 +3,12 @@
 ## Objet
 
 Le répertoire `artifacts/candidates/v0.3.0/quantitative_aggregates`
-contient un paquet candidat d’éléments quantitatifs agrégés destiné à la
-future release `v0.3.0`.
+contient le paquet quantitatif agrégé publié avec la release GitHub
+`v0.3.0`.
+
+Le nom historique `candidates` est conservé afin de préserver l’intégrité
+des manifestes, des empreintes et des engagements déjà publiés. Ce nom de
+répertoire ne qualifie plus le statut de la release.
 
 Ces éléments complètent les métriques agrégées déjà publiées sans inclure
 les séries quotidiennes, les entrées du modèle, les identifiants privés ni
@@ -19,19 +23,29 @@ Le paquet contient :
 - un manifeste déterministe ;
 - un registre `SHA256SUMS`.
 
-Les domaines couverts sont :
+Les 21 sections quantitatives couvertes sont :
 
+- Probabilistic Sharpe Ratio ;
+- Deflated Sharpe Ratio ;
+- White Reality Check et Hansen SPA ;
+- CSCV et Probability of Backtest Overfitting ;
+- moving-block bootstrap ;
 - stationnarité ;
 - dérive de distribution ;
 - régimes de marché ;
 - coûts et délais d’exécution ;
 - permutations placebo ;
 - risques de queue ;
+- backtesting de la VaR et de l’Expected Shortfall ;
+- Sharpe corrigé de la dépendance temporelle ;
 - Monte Carlo historique par blocs ;
+- reverse stress historique ;
+- reverse stress contrefactuel ;
 - résilience des données ;
 - sensibilité de configuration ;
 - ablations anonymisées ;
-- monitoring shadow.
+- monitoring shadow ;
+- profondeur, durée et récupération des drawdowns.
 
 ## Frontière propriétaire
 
@@ -50,11 +64,18 @@ Le validateur rejette notamment :
 
 ## Statut
 
-Le paquet est un candidat de release. Il ne doit pas être assimilé à
-`artifacts/latest` avant la création contrôlée de `v0.3.0`.
+Le paquet a été publié avec la release GitHub `v0.3.0`.
 
-Les résultats sont rétrospectifs, agrégés et non constitutifs d’une
-validation indépendante ou d’une promesse de performance future.
+Son emplacement historique sous `artifacts/candidates` est conservé pour
+ne pas modifier les contenus engagés par manifeste et SHA-256.
+
+`artifacts/latest` reste le paquet public de référence correspondant à
+`v0.2.1`. Il ne constitue pas un alias de la release quantitative agrégée
+`v0.3.0`. La release GitHub `v0.3.0` constitue le point officiel de
+distribution de ce paquet.
+
+Les résultats sont rétrospectifs, agrégés et ne constituent ni une
+validation indépendante ni une promesse de performance future.
 
 ## Construction
 
@@ -69,9 +90,9 @@ validation indépendante ou d’une promesse de performance future.
 
 ## Statut quantitatif du paquet
 
-Le paquet candidat couvre 16 sections quantitatives et comporte
-19 fichiers contrôlés, incluant les métadonnées, le manifest et
-`SHA256SUMS`.
+Le paquet couvre 21 sections quantitatives et comporte 24 fichiers
+contrôlés, incluant les 21 fichiers de résultats, les métadonnées, le
+manifeste et `SHA256SUMS`.
 
 Les résultats centraux publiés sont les suivants :
 
@@ -101,8 +122,8 @@ preuve restent séparées.
 ## Interprétation contrôlée
 
 Le dépôt constitue un paquet public de preuves quantitatives et
-techniques de niveau institutionnel, reproductible, attesté, signé et
-adapté à une due diligence, un sandbox ou un pilote contrôlé.
+techniques inspectable, manifesté, vérifiable et adapté à une due
+diligence, un sandbox ou un pilote contrôlé.
 
 Les résultats sont rétrospectifs et ne constituent pas une promesse de
 performance future. La significativité statistique est

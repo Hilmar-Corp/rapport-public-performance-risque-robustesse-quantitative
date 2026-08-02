@@ -1,4 +1,4 @@
-# Quantitative Research Freeze — v0.3.0
+# Quantitative Research Freeze - v0.3.0
 
 ## Status
 

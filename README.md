@@ -1,6 +1,6 @@
 <div align="center">
 
-# HilmarCorp — Nostra AI
+# HilmarCorp - Nostra AI
 
 ## Preuves publiques de performance, de risque et de robustesse quantitative
 
@@ -253,6 +253,9 @@ Le nom historique `candidates` est conservé afin de préserver l’intégrité 
 manifestes et engagements déjà publiés. La release GitHub `v0.3.0` constitue
 le point officiel de distribution.
 
+`artifacts/latest` reste le paquet de référence historique correspondant à
+`v0.2.1` et ne constitue pas un alias de la release agrégée `v0.3.0`.
+
 ## Vérification et reproduction
 
 ### Installation
@@ -344,7 +347,7 @@ propriétaire.
 
 La release contrôlée est disponible ici :
 
-**[v0.3.0 — Gel de la recherche quantitative](https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/releases/tag/v0.3.0)**
+**[v0.3.0 - Gel de la recherche quantitative](https://github.com/Hilmar-Corp/rapport-public-performance-risque-robustesse-quantitative/releases/tag/v0.3.0)**
 
 Elle comprend :
 

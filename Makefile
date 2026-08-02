@@ -1,6 +1,7 @@
 PYTHON ?= python3
 RELEASE ?= artifacts/latest
 VERSIONED_RELEASE ?= artifacts/releases/v0.2.1
+V030_AGGREGATES ?= artifacts/candidates/v0.3.0/quantitative_aggregates
 CONSTRAINTS ?= requirements/constraints-py313.txt
 
 .PHONY: install format lint test audit reproduce security institutional-check
@@ -21,6 +22,7 @@ test:
 
 audit:
 	PYTHONPATH=src $(PYTHON) tools/audit_public_repository.py
+	PYTHONPATH=src $(PYTHON) tools/package_public_quantitative_aggregates.py verify --output-dir $(V030_AGGREGATES)
 	PYTHONPATH=src $(PYTHON) tools/audit_public_release.py --root $(RELEASE) --release
 	PYTHONPATH=src $(PYTHON) tools/audit_public_release.py --root $(VERSIONED_RELEASE) --release
 	$(PYTHON) tools/finalize_publication_architecture.py audit-release --root $(RELEASE)

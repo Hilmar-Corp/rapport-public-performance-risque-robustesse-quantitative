@@ -3,13 +3,18 @@
 
 ## Unreleased
 
+- réconciliation du statut publié de `v0.3.0`, de son chemin historique et de `artifacts/latest` ;
+- mise à jour du paquet agrégé à 21 sections et 24 fichiers contrôlés ;
+- ajout de la vérification locale explicite du paquet agrégé `v0.3.0` ;
+- clarification de la portée de la reproduction des données publiques ;
+
 - institutionalisation de la frontière de propriété intellectuelle et de la politique de publication ;
 - ajout d’un standard formel d’intégrité et d’honnêteté méthodologique ;
 - clarification des niveaux `code-reproducible`, `artifact-verified` et `private-controlled` ;
 - réconciliation documentaire de la matrice finale de 28 contrôles ;
 - suppression des formulations laissant entendre des développements historiques encore ouverts dans v0.3.0.
 
-## 0.3.0 — 2026-08-02
+## 0.3.0 - 2026-08-02
 
 - formal VaR and Expected Shortfall backtesting evidence;
 - temporal-dependence-adjusted Sharpe analysis;
@@ -47,7 +52,7 @@
 - `artifacts/latest`, which remains identical to v0.2.1;
 - aggregate Nostra AI metrics and the proprietary boundary.
 
-## 0.2.1 — 2026-07-31
+## 0.2.1 - 2026-07-31
 
 ### Added
 
@@ -70,6 +75,6 @@
 - aggregate Nostra AI metrics;
 - proprietary boundary.
 
-## 0.2.0 — 2026-07-30
+## 0.2.0 - 2026-07-30
 
 Initial controlled public release.

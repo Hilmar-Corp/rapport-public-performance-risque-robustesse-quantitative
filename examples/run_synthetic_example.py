@@ -112,7 +112,7 @@ def main() -> None:
             }
         )
 
-    print("SYNTHETIC SMOKE TEST — NO EMPIRICAL OR PERFORMANCE SIGNIFICANCE")
+    print("SYNTHETIC SMOKE TEST - NO EMPIRICAL OR PERFORMANCE SIGNIFICANCE")
     print()
     print(pd.DataFrame(rows).to_string(index=False))
     print()
