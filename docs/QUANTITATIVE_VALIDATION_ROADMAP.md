@@ -119,10 +119,10 @@ cryptographiques de preuves privées.
 
 ## Séquence de livraison
 
-- PR 13 — matrice de contrôle et engagements de preuves ;
-- PR 14 — slippage, impact de marché et capacité ;
-- PR 15 — exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
-- PR 16 — rapport intégré, backtesting du risque, dépendance temporelle, reverse stress et persistance des drawdowns ;
-- finalisation v0.3.0 — gel de la recherche, durcissement de release et publication.
+- PR 13 - matrice de contrôle et engagements de preuves ;
+- PR 14 - slippage, impact de marché et capacité ;
+- PR 15 - exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
+- PR 16 - rapport intégré, backtesting du risque, dépendance temporelle, reverse stress et persistance des drawdowns ;
+- finalisation v0.3.0 - gel de la recherche, durcissement de release et publication.
 
 Les releases v0.2.0 et v0.2.1 restent immuables.

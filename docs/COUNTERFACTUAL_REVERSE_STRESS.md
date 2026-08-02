@@ -1,4 +1,4 @@
-# Reverse stress contrefactuel — preuve publique agrégée
+# Reverse stress contrefactuel - preuve publique agrégée
 
 ## Objet
 

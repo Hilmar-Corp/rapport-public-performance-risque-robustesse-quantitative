@@ -4,6 +4,8 @@
 
 Le processus déterministe de reproduction publique ne dépend d’aucun point d’accès mutable à des données de marché en direct.
 
+Il reproduit l’artefact public engagé et ses conventions de calcul. Il ne reconstruit pas une série brute indépendante depuis un fournisseur de données de marché et ne constitue pas une validation indépendante des données amont.
+
 Il reconstruit la série canonique des rendements quotidiens du BTC à partir de la courbe engagée `buy_and_hold_equity` contenue dans :
 
 `artifacts/latest/baseline_daily_curves.csv`
