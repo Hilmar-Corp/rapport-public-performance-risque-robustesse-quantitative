@@ -25,9 +25,15 @@ Les preuves privées ne sont pas publiées. Leur existence est engagée par des
 commitments SHA-256 calculés sur des manifestes canoniques ne contenant aucun
 chemin privé.
 
-## Développements quantitatifs restant à réaliser
+## Statut de clôture
 
-1. Formalisation de l’outcome analysis backtest/shadow/live.
+La campagne de recherche quantitative historique de v0.3.0 est close et
+figée. Aucune nouvelle optimisation historique n’est autorisée dans cette
+version.
+
+L’outcome analysis backtest/shadow/live relève désormais du suivi futur des
+preuves live et pilote. Elle ne constitue pas un développement historique
+restant à réaliser pour clôturer v0.3.0.
 
 ## Développements génériques réalisés dans PR 14
 
@@ -112,6 +118,6 @@ cryptographiques de preuves privées.
 - PR 14 — slippage, impact de marché et capacité ;
 - PR 15 — exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
 - PR 16 — rapport intégré, backtesting du risque, dépendance temporelle, reverse stress et persistance des drawdowns ;
-- PR 17 — durcissement de release et v0.3.0.
+- finalisation v0.3.0 — gel de la recherche, durcissement de release et publication.
 
 Les releases v0.2.0 et v0.2.1 restent immuables.
