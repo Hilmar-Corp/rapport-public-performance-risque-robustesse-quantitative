@@ -1,0 +1,219 @@
+{
+  "data": {
+    "analysis_type": "historical_dynamic_loss_breach_analysis",
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "economic_reconciliation": {
+      "maximum_absolute_delta": 1.0061396160665481e-16,
+      "public_convention_name": "row_aligned_effective_allocation",
+      "status": "PASS"
+    },
+    "evaluation_period": {
+      "end": "2026-06-02",
+      "start": "2020-05-14"
+    },
+    "evidence_commitment_sha256": "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62",
+    "global_results": {
+      "drawdown_episode_count": 104,
+      "loss_breach_record_count": 40,
+      "maximum_model_drawdown": -0.2139050350373155
+    },
+    "governance_decision": {
+      "monitoring_requirement": "Continue monitoring reaction speed, allocation persistence and turnover during severe and prolonged market declines.",
+      "principal_observations": [
+        "Historical drawdowns of 25 percent and 30 percent were not observed.",
+        "Allocation reduction was neither immediate nor universal before material loss level breaches.",
+        "At the 15 percent loss level, allocation was reduced at breach in one of four historical episodes.",
+        "The single 20 percent breach occurred during an extended and severe realized market decline."
+      ],
+      "status": "PASS_WITH_OBSERVATION"
+    },
+    "governing_conventions": [
+      "The analysis uses the allocation economically aligned with each observed daily return.",
+      "The governed transaction-cost charge equals 25 basis points multiplied by observed daily turnover.",
+      "Loss levels are measured from each historical equity peak to the first subsequent breach.",
+      "Allocation reactions are the decisions actually recorded during realized historical stress episodes."
+    ],
+    "limitations": [
+      "This analysis covers realized historical paths only.",
+      "It does not establish behavior under unseen counterfactual market or on-chain scenarios.",
+      "Historical non-breach of a loss level does not demonstrate that the loss level is unreachable.",
+      "The analysis does not independently validate upstream data generation or model construction.",
+      "Episode counts are not independent probability estimates."
+    ],
+    "loss_level_results": [
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 10,
+          "reduced_at_breach": 13,
+          "reduced_by_at_least_25pct_before_breach": 6,
+          "unchanged_at_breach": 2
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.4,
+          "reduced_at_breach": 0.52,
+          "reduced_by_at_least_25pct_before_breach": 0.24,
+          "unchanged_at_breach": 0.08
+        },
+        "breach_episode_count": 25,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 55,
+          "median": 6.0,
+          "minimum": 1
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.06175737417595728,
+            "median": -0.09533273853520163,
+            "minimum": -0.47223295320487524
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.06175737417595728,
+            "median": -0.09533273853520163,
+            "minimum": -0.47223295320487524
+          }
+        },
+        "target_nav_loss": 0.05,
+        "turnover_to_breach": {
+          "maximum": 1.3479321671359992,
+          "median": 0.09021299999999909,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 3,
+          "reduced_at_breach": 6,
+          "reduced_by_at_least_25pct_before_breach": 4,
+          "unchanged_at_breach": 1
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.3,
+          "reduced_at_breach": 0.6,
+          "reduced_by_at_least_25pct_before_breach": 0.4,
+          "unchanged_at_breach": 0.1
+        },
+        "breach_episode_count": 10,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 75,
+          "median": 13.5,
+          "minimum": 2
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.12561906733075212,
+            "median": -0.16446733670894753,
+            "minimum": -0.48062215599571223
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.12561906733075212,
+            "median": -0.16446733670894753,
+            "minimum": -0.48062215599571223
+          }
+        },
+        "target_nav_loss": 0.1,
+        "turnover_to_breach": {
+          "maximum": 2.20450175667295,
+          "median": 0.3484304233979265,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 2,
+          "reduced_at_breach": 1,
+          "reduced_by_at_least_25pct_before_breach": 1,
+          "unchanged_at_breach": 1
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.5,
+          "reduced_at_breach": 0.25,
+          "reduced_by_at_least_25pct_before_breach": 0.25,
+          "unchanged_at_breach": 0.25
+        },
+        "breach_episode_count": 4,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 110,
+          "median": 26.5,
+          "minimum": 14
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.18320481392376897,
+            "median": -0.20849747413513903,
+            "minimum": -0.26102670083989876
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.18320481392376897,
+            "median": -0.20849747413513903,
+            "minimum": -0.26102670083989876
+          }
+        },
+        "target_nav_loss": 0.15,
+        "turnover_to_breach": {
+          "maximum": 3.038818148324768,
+          "median": 0.17272940319992858,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 0,
+          "reduced_at_breach": 1,
+          "reduced_by_at_least_25pct_before_breach": 1,
+          "unchanged_at_breach": 0
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.0,
+          "reduced_at_breach": 1.0,
+          "reduced_by_at_least_25pct_before_breach": 1.0,
+          "unchanged_at_breach": 0.0
+        },
+        "breach_episode_count": 1,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 167,
+          "median": 167.0,
+          "minimum": 167
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.455640985366904,
+            "median": -0.455640985366904,
+            "minimum": -0.455640985366904
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.4953425573570789,
+            "median": -0.4953425573570789,
+            "minimum": -0.4953425573570789
+          }
+        },
+        "target_nav_loss": 0.2,
+        "turnover_to_breach": {
+          "maximum": 3.537205593130074,
+          "median": 3.537205593130074,
+          "minimum": 3.537205593130074
+        }
+      },
+      {
+        "breach_episode_count": 0,
+        "historically_breached": false,
+        "observed_non_breach_is_not_a_bound": true,
+        "target_nav_loss": 0.25
+      },
+      {
+        "breach_episode_count": 0,
+        "historically_breached": false,
+        "observed_non_breach_is_not_a_bound": true,
+        "target_nav_loss": 0.3
+      }
+    ],
+    "methodological_status": "accepted_with_observations",
+    "observations": 2211,
+    "verification_level": "artifact-verified"
+  },
+  "schema_version": 1,
+  "section": "historical_reverse_stress"
+}

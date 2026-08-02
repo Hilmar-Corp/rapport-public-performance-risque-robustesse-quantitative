@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeGuard, cast
 
 SCHEMA_VERSION = 2
 EXPORT_SCHEMA_VERSION = 1
@@ -18,6 +19,10 @@ REQUIRED_SECTIONS = (
     "execution_cost_delay",
     "placebo_test",
     "tail_risk",
+    "historical_reverse_stress",
+    "drawdown_duration_recovery",
+    "counterfactual_reverse_stress",
+    "var_es_backtesting",
     "historical_block_monte_carlo",
     "data_resilience",
     "configuration_sensitivity",
@@ -25,6 +30,7 @@ REQUIRED_SECTIONS = (
     "shadow_monitoring",
     "probabilistic_sharpe_ratio",
     "deflated_sharpe_ratio",
+    "temporal_dependence_sharpe",
     "multiple_testing",
     "backtest_overfitting",
     "moving_block_bootstrap",
@@ -72,16 +78,21 @@ PAYLOAD_FILENAMES = {
     "execution_cost_delay": "execution_cost_delay.json",
     "placebo_test": "placebo_test.json",
     "tail_risk": "tail_risk.json",
+    "historical_reverse_stress": "historical_reverse_stress.json",
+    "drawdown_duration_recovery": "drawdown_duration_recovery.json",
+    "counterfactual_reverse_stress": "counterfactual_reverse_stress.json",
+    "var_es_backtesting": "var_es_backtesting.json",
     "historical_block_monte_carlo": "historical_block_monte_carlo.json",
     "data_resilience": "data_resilience.json",
     "configuration_sensitivity": "configuration_sensitivity.json",
     "ablation": "ablation.json",
     "shadow_monitoring": "shadow_monitoring.json",
-    "probabilistic_sharpe_ratio": ("probabilistic_sharpe_ratio.json"),
-    "deflated_sharpe_ratio": ("deflated_sharpe_ratio.json"),
+    "probabilistic_sharpe_ratio": "probabilistic_sharpe_ratio.json",
+    "deflated_sharpe_ratio": "deflated_sharpe_ratio.json",
+    "temporal_dependence_sharpe": "temporal_dependence_sharpe.json",
     "multiple_testing": "multiple_testing.json",
-    "backtest_overfitting": ("backtest_overfitting.json"),
-    "moving_block_bootstrap": ("moving_block_bootstrap.json"),
+    "backtest_overfitting": "backtest_overfitting.json",
+    "moving_block_bootstrap": "moving_block_bootstrap.json",
 }
 
 CONTROLLED_FILENAMES = {
@@ -115,6 +126,1221 @@ def _sha256_file(path: Path) -> str:
             digest.update(block)
 
     return digest.hexdigest()
+
+
+EXPECTED_DRAWDOWN_DURATION_RECOVERY: dict[str, Any] = {
+    "analysis_type": "historical_drawdown_duration_recovery_and_time_under_water",
+    "comparison": {
+        "maximum_drawdown_difference_v5246_minus_buyhold": 0.5523875081272758,
+        "maximum_duration_difference_v5246_minus_buyhold": -608.0,
+        "median_duration_difference_v5246_minus_buyhold": -0.5,
+        "recovery_rate_difference_v5246_minus_buyhold": 0.010384615384615437,
+        "time_under_water_share_difference_v5246_minus_buyhold": -0.03889642695612838,
+    },
+    "daily_paths_disclosed": False,
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "historical_reverse_stress_episode_count_reconciled": True,
+    "historical_scope": "2020-05-14_to_2026-06-02",
+    "individual_episode_dates_disclosed": False,
+    "internal_variables_disclosed": False,
+    "limitations": [
+        "Historical realized sample only.",
+        "Unrecovered episodes are right-censored.",
+        "Duration statistics are not recovery forecasts.",
+        "No daily Nostra path or episode date is disclosed.",
+    ],
+    "methodological_status": "accepted_with_observations",
+    "observations": 2211,
+    "private_evidence_commitment_sha256": (
+        "8942a1602bc31ef599628140c7a268dd4a2b19cdfc03185e330d0114466cac41"
+    ),
+    "right_censoring_disclosed": True,
+    "source_reconciliation_max_abs_delta": 4.3021142204224816e-16,
+    "strategies": {
+        "BUY_AND_HOLD": {
+            "deepest_episode": {
+                "drawdown_depth": 0.7662925431645915,
+                "episode_number": 31,
+                "maximum_drawdown": -0.7662925431645915,
+                "observed_duration_observations": 847,
+                "peak_to_recovery_observations": 847,
+                "peak_to_trough_observations": 378,
+                "recovered_in_sample": True,
+                "right_censored": False,
+                "strategy": "BUY_AND_HOLD",
+                "trough_to_recovery_observations": 469,
+                "underwater_observations": 846,
+            },
+            "depth_duration_spearman_all": {
+                "observations": 50,
+                "p_value": 5.589619553883242e-20,
+                "rho": 0.9099771607200082,
+            },
+            "depth_duration_spearman_recovered": {
+                "observations": 49,
+                "p_value": 5.196997475741781e-19,
+                "rho": 0.9044450908090784,
+            },
+            "drawdown_depth_distribution": {
+                "count": 50,
+                "maximum": 0.7662925431645915,
+                "median": 0.0384283212075856,
+                "minimum": 4.19031937628489e-05,
+                "q25": 0.011115317705424427,
+                "q75": 0.11358523548865052,
+                "q90": 0.25272499082862465,
+                "q95": 0.3988671519976108,
+            },
+            "episode_count": 50,
+            "longest_observed_episode": {
+                "drawdown_depth": 0.7662925431645915,
+                "episode_number": 31,
+                "maximum_drawdown": -0.7662925431645915,
+                "observed_duration_observations": 847,
+                "peak_to_recovery_observations": 847,
+                "peak_to_trough_observations": 378,
+                "recovered_in_sample": True,
+                "right_censored": False,
+                "strategy": "BUY_AND_HOLD",
+                "trough_to_recovery_observations": 469,
+                "underwater_observations": 846,
+            },
+            "maximum_drawdown": -0.7662925431645915,
+            "observed_duration_distribution": {
+                "count": 50,
+                "maximum": 847.0,
+                "median": 4.5,
+                "minimum": 2.0,
+                "q25": 2.0,
+                "q75": 20.5,
+                "q90": 70.20000000000007,
+                "q95": 215.94999999999987,
+            },
+            "peak_to_recovery_duration_distribution": {
+                "count": 49,
+                "maximum": 847.0,
+                "median": 4.0,
+                "minimum": 2.0,
+                "q25": 2.0,
+                "q75": 19.0,
+                "q90": 57.800000000000026,
+                "q95": 160.1999999999996,
+            },
+            "peak_to_trough_duration_distribution": {
+                "count": 50,
+                "maximum": 378.0,
+                "median": 2.0,
+                "minimum": 1.0,
+                "q25": 1.0,
+                "q75": 11.0,
+                "q90": 35.600000000000065,
+                "q95": 111.19999999999993,
+            },
+            "recovered_episode_count": 49,
+            "recovery_rate": 0.98,
+            "severity_buckets": {
+                "10_to_below_20_percent": {
+                    "episode_count": 8,
+                    "observed_duration_distribution": {
+                        "count": 8,
+                        "maximum": 65.0,
+                        "median": 33.0,
+                        "minimum": 6.0,
+                        "q25": 18.75,
+                        "q75": 53.75,
+                        "q90": 58.699999999999996,
+                        "q95": 61.849999999999994,
+                    },
+                    "recovered_count": 8,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+                "20_percent_or_more": {
+                    "episode_count": 7,
+                    "observed_duration_distribution": {
+                        "count": 7,
+                        "maximum": 847.0,
+                        "median": 189.0,
+                        "minimum": 18.0,
+                        "q25": 74.0,
+                        "q75": 238.5,
+                        "q90": 482.2000000000002,
+                        "q95": 664.5999999999996,
+                    },
+                    "recovered_count": 6,
+                    "recovery_rate": 0.8571428571428571,
+                    "unrecovered_count": 1,
+                },
+                "5_to_below_10_percent": {
+                    "episode_count": 6,
+                    "observed_duration_distribution": {
+                        "count": 6,
+                        "maximum": 49.0,
+                        "median": 15.0,
+                        "minimum": 5.0,
+                        "q25": 10.25,
+                        "q75": 19.75,
+                        "q90": 35.0,
+                        "q95": 42.0,
+                    },
+                    "recovered_count": 6,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+                "below_5_percent": {
+                    "episode_count": 29,
+                    "observed_duration_distribution": {
+                        "count": 29,
+                        "maximum": 8.0,
+                        "median": 2.0,
+                        "minimum": 2.0,
+                        "q25": 2.0,
+                        "q75": 3.0,
+                        "q90": 6.0,
+                        "q95": 6.0,
+                    },
+                    "recovered_count": 29,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+            },
+            "time_under_water_observations": 2113,
+            "time_under_water_share": 0.9556761646313885,
+            "trough_to_recovery_duration_distribution": {
+                "count": 49,
+                "maximum": 469.0,
+                "median": 2.0,
+                "minimum": 1.0,
+                "q25": 1.0,
+                "q75": 11.0,
+                "q90": 36.000000000000014,
+                "q95": 53.7999999999999,
+            },
+            "unrecovered_episode_count": 1,
+        },
+        "V5246": {
+            "deepest_episode": {
+                "drawdown_depth": 0.21390503503731573,
+                "episode_number": 104,
+                "maximum_drawdown": -0.21390503503731573,
+                "observed_duration_observations": 239,
+                "peak_to_recovery_observations": None,
+                "peak_to_trough_observations": 174,
+                "recovered_in_sample": False,
+                "right_censored": True,
+                "strategy": "V5246",
+                "trough_to_recovery_observations": None,
+                "underwater_observations": 239,
+            },
+            "depth_duration_spearman_all": {
+                "observations": 104,
+                "p_value": 1.4972239588939076e-34,
+                "rho": 0.8788158504978025,
+            },
+            "depth_duration_spearman_recovered": {
+                "observations": 103,
+                "p_value": 1.2823290840745792e-33,
+                "rho": 0.8751699619505968,
+            },
+            "drawdown_depth_distribution": {
+                "count": 104,
+                "maximum": 0.21390503503731573,
+                "median": 0.016024999862521927,
+                "minimum": 4.8234557748827456e-05,
+                "q25": 0.006147809179979424,
+                "q75": 0.046840519795783936,
+                "q90": 0.0955243640014298,
+                "q95": 0.14075390915379585,
+            },
+            "episode_count": 104,
+            "longest_observed_episode": {
+                "drawdown_depth": 0.21390503503731573,
+                "episode_number": 104,
+                "maximum_drawdown": -0.21390503503731573,
+                "observed_duration_observations": 239,
+                "peak_to_recovery_observations": None,
+                "peak_to_trough_observations": 174,
+                "recovered_in_sample": False,
+                "right_censored": True,
+                "strategy": "V5246",
+                "trough_to_recovery_observations": None,
+                "underwater_observations": 239,
+            },
+            "maximum_drawdown": -0.21390503503731573,
+            "observed_duration_distribution": {
+                "count": 104,
+                "maximum": 239.0,
+                "median": 4.0,
+                "minimum": 2.0,
+                "q25": 2.0,
+                "q75": 11.5,
+                "q90": 54.500000000000014,
+                "q95": 118.14999999999989,
+            },
+            "peak_to_recovery_duration_distribution": {
+                "count": 103,
+                "maximum": 219.0,
+                "median": 4.0,
+                "minimum": 2.0,
+                "q25": 2.0,
+                "q75": 11.0,
+                "q90": 50.599999999999994,
+                "q95": 98.59999999999971,
+            },
+            "peak_to_trough_duration_distribution": {
+                "count": 104,
+                "maximum": 177.0,
+                "median": 2.0,
+                "minimum": 1.0,
+                "q25": 1.0,
+                "q75": 6.0,
+                "q90": 34.500000000000014,
+                "q95": 59.849999999999994,
+            },
+            "recovered_episode_count": 103,
+            "recovery_rate": 0.9903846153846154,
+            "severity_buckets": {
+                "10_to_below_20_percent": {
+                    "episode_count": 9,
+                    "observed_duration_distribution": {
+                        "count": 9,
+                        "maximum": 219.0,
+                        "median": 121.0,
+                        "minimum": 30.0,
+                        "q25": 44.0,
+                        "q75": 144.0,
+                        "q90": 196.6,
+                        "q95": 207.79999999999998,
+                    },
+                    "recovered_count": 9,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+                "20_percent_or_more": {
+                    "episode_count": 1,
+                    "observed_duration_distribution": {
+                        "count": 1,
+                        "maximum": 239.0,
+                        "median": 239.0,
+                        "minimum": 239.0,
+                        "q25": 239.0,
+                        "q75": 239.0,
+                        "q90": 239.0,
+                        "q95": 239.0,
+                    },
+                    "recovered_count": 0,
+                    "recovery_rate": 0.0,
+                    "unrecovered_count": 1,
+                },
+                "5_to_below_10_percent": {
+                    "episode_count": 15,
+                    "observed_duration_distribution": {
+                        "count": 15,
+                        "maximum": 68.0,
+                        "median": 22.0,
+                        "minimum": 5.0,
+                        "q25": 11.5,
+                        "q75": 53.5,
+                        "q90": 62.8,
+                        "q95": 65.19999999999999,
+                    },
+                    "recovered_count": 15,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+                "below_5_percent": {
+                    "episode_count": 79,
+                    "observed_duration_distribution": {
+                        "count": 79,
+                        "maximum": 31.0,
+                        "median": 3.0,
+                        "minimum": 2.0,
+                        "q25": 2.0,
+                        "q75": 6.0,
+                        "q90": 10.200000000000003,
+                        "q95": 13.499999999999972,
+                    },
+                    "recovered_count": 79,
+                    "recovery_rate": 1.0,
+                    "unrecovered_count": 0,
+                },
+            },
+            "time_under_water_observations": 2027,
+            "time_under_water_share": 0.9167797376752601,
+            "trough_to_recovery_duration_distribution": {
+                "count": 103,
+                "maximum": 103.0,
+                "median": 2.0,
+                "minimum": 1.0,
+                "q25": 1.0,
+                "q75": 6.0,
+                "q90": 20.599999999999994,
+                "q95": 32.89999999999999,
+            },
+            "unrecovered_episode_count": 1,
+        },
+    },
+    "verification_level": "artifact-verified",
+}
+
+
+def _validate_drawdown_duration_recovery(
+    section: Any,
+) -> list[str]:
+    """Validate the fixed public drawdown-duration aggregate."""
+
+    if section != EXPECTED_DRAWDOWN_DURATION_RECOVERY:
+        return [("drawdown_duration_recovery does not match the controlled public aggregate")]
+
+    return []
+
+
+def _validate_counterfactual_reverse_stress(
+    section: Any,
+) -> list[str]:
+    """Validate the public-safe counterfactual reverse-stress aggregate."""
+
+    if not isinstance(section, dict):
+        return ["counterfactual_reverse_stress must be a JSON object"]
+
+    issues: list[str] = []
+
+    exact_fields = {
+        "verification_level": "artifact-verified",
+        "observations": 2211,
+        "historical_scope": "2020-05-14_to_2026-06-02",
+        "total_scenarios": 4908,
+        "inference_stage_scenarios": 67,
+        "retraining_and_core_scenarios": 132,
+        "refinement_scenarios": 4709,
+        "refined_failure_frontiers": 87,
+        "refined_failure_families": 8,
+        "all_phase_offsets_tested": True,
+        "isolated_input_corruption_failure_found": False,
+        "dominant_vulnerability_class": "directional_core_freshness_and_integrity",
+        "daily_paths_disclosed": False,
+        "internal_variables_disclosed": False,
+        "exact_private_settings_disclosed": False,
+        "decision_status": "historical_research_evidence",
+    }
+
+    for field, expected in exact_fields.items():
+        if section.get(field) != expected:
+            issues.append(f"counterfactual_reverse_stress.{field} must equal {expected!r}")
+
+    total = section.get("total_scenarios")
+
+    inference_count = section.get("inference_stage_scenarios")
+
+    retraining_count = section.get("retraining_and_core_scenarios")
+
+    refinement_count = section.get("refinement_scenarios")
+
+    if (
+        not isinstance(
+            total,
+            int,
+        )
+        or isinstance(
+            total,
+            bool,
+        )
+        or not isinstance(
+            inference_count,
+            int,
+        )
+        or isinstance(
+            inference_count,
+            bool,
+        )
+        or not isinstance(
+            retraining_count,
+            int,
+        )
+        or isinstance(
+            retraining_count,
+            bool,
+        )
+        or not isinstance(
+            refinement_count,
+            int,
+        )
+        or isinstance(
+            refinement_count,
+            bool,
+        )
+        or total != (inference_count + retraining_count + refinement_count)
+    ):
+        issues.append("counterfactual_reverse_stress scenario counts do not reconcile")
+
+    reconciliation_delta = section.get("baseline_reconciliation_max_abs_delta")
+
+    if (
+        isinstance(
+            reconciliation_delta,
+            bool,
+        )
+        or not isinstance(
+            reconciliation_delta,
+            int | float,
+        )
+        or not (0.0 <= float(reconciliation_delta) <= 1e-12)
+    ):
+        issues.append("counterfactual_reverse_stress baseline reconciliation delta is invalid")
+
+    repetitions = section.get("randomized_repetitions")
+
+    if repetitions != {
+        "adverse_state_injection": 50,
+        "noise": 30,
+    }:
+        issues.append("counterfactual_reverse_stress randomized repetitions are invalid")
+
+    commitment = section.get("private_evidence_commitment_sha256")
+
+    if (
+        not isinstance(
+            commitment,
+            str,
+        )
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append("counterfactual_reverse_stress evidence commitment is invalid")
+
+    limitation = section.get("limitation")
+
+    if (
+        not isinstance(
+            limitation,
+            str,
+        )
+        or not limitation.strip()
+    ):
+        issues.append("counterfactual_reverse_stress limitation must be disclosed")
+
+    prohibited_public_fields = {
+        "scenario_id",
+        "severity",
+        "daily_trace",
+        "daily_returns",
+        "daily_positions",
+        "internal_inputs",
+        "model_coefficients",
+        "private_breakpoints",
+        "selected_inputs",
+        "source_path",
+        "source_ledger",
+    }
+
+    disclosed = prohibited_public_fields & set(section)
+
+    if disclosed:
+        issues.append(
+            "counterfactual_reverse_stress discloses "
+            "prohibited detailed fields: " + ", ".join(sorted(disclosed))
+        )
+
+    return issues
+
+
+def _validate_historical_reverse_stress(
+    section: Any,
+) -> list[str]:
+    """Validate historical loss-breach evidence."""
+
+    issues: list[str] = []
+
+    if not isinstance(section, dict):
+        return ["historical_reverse_stress must be a JSON object"]
+
+    expected_scalars = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "analysis_type": ("historical_dynamic_loss_breach_analysis"),
+        "observations": 2211,
+    }
+
+    for field, expected in expected_scalars.items():
+        if section.get(field) != expected:
+            issues.append(f"historical_reverse_stress.{field} must equal {expected}")
+
+    if section.get("evaluation_period") != {
+        "start": "2020-05-14",
+        "end": "2026-06-02",
+    }:
+        issues.append("historical_reverse_stress evaluation period is invalid")
+
+    conventions = section.get("governing_conventions")
+
+    if (
+        not isinstance(conventions, list)
+        or not conventions
+        or not all(isinstance(item, str) and item for item in conventions)
+    ):
+        issues.append(
+            "historical_reverse_stress governing conventions must be a non-empty string list"
+        )
+
+    reconciliation = section.get("economic_reconciliation")
+
+    if not isinstance(reconciliation, dict):
+        issues.append("historical_reverse_stress economic reconciliation must be an object")
+    else:
+        if reconciliation.get("status") != "PASS":
+            issues.append("historical_reverse_stress economic reconciliation must pass")
+
+        if reconciliation.get("public_convention_name") != "row_aligned_effective_allocation":
+            issues.append("historical_reverse_stress public economic convention is invalid")
+
+        delta = reconciliation.get("maximum_absolute_delta")
+
+        if (
+            not isinstance(delta, int | float)
+            or isinstance(delta, bool)
+            or not 0.0 <= float(delta) <= 1e-12
+        ):
+            issues.append("historical_reverse_stress economic reconciliation delta is invalid")
+
+    global_results = section.get("global_results")
+
+    if not isinstance(global_results, dict):
+        issues.append("historical_reverse_stress global results must be an object")
+    else:
+        if global_results.get("drawdown_episode_count") != 104:
+            issues.append("historical_reverse_stress drawdown episode count must equal 104")
+
+        if global_results.get("loss_breach_record_count") != 40:
+            issues.append("historical_reverse_stress loss-breach record count must equal 40")
+
+        maximum_drawdown = global_results.get("maximum_model_drawdown")
+
+        if (
+            not isinstance(
+                maximum_drawdown,
+                int | float,
+            )
+            or isinstance(
+                maximum_drawdown,
+                bool,
+            )
+            or not math.isclose(
+                float(maximum_drawdown),
+                -0.2139050350373155,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            )
+        ):
+            issues.append("historical_reverse_stress maximum drawdown is invalid")
+
+    results = section.get("loss_level_results")
+
+    if not isinstance(results, list):
+        issues.append("historical_reverse_stress loss-level results must be a list")
+        results = []
+
+    expected_counts = {
+        0.05: 25,
+        0.10: 10,
+        0.15: 4,
+        0.20: 1,
+        0.25: 0,
+        0.30: 0,
+    }
+    actual_counts: dict[float, int] = {}
+
+    for index, record in enumerate(results):
+        if not isinstance(record, dict):
+            issues.append(f"historical_reverse_stress loss-level record {index} must be an object")
+            continue
+
+        raw_loss = record.get("target_nav_loss")
+        raw_count = record.get("breach_episode_count")
+
+        if (
+            not isinstance(raw_loss, int | float)
+            or isinstance(raw_loss, bool)
+            or not isinstance(raw_count, int)
+            or isinstance(raw_count, bool)
+        ):
+            issues.append(
+                f"historical_reverse_stress loss-level record {index} has invalid identifiers"
+            )
+            continue
+
+        loss = float(raw_loss)
+        count = raw_count
+        actual_counts[loss] = count
+
+        if loss not in expected_counts:
+            issues.append("historical_reverse_stress contains an unexpected loss level")
+            continue
+
+        if count != expected_counts[loss]:
+            issues.append(f"historical_reverse_stress loss-level count is invalid for {loss}")
+
+        breached = record.get("historically_breached")
+
+        if breached is not (count > 0):
+            issues.append("historical_reverse_stress historical breach flag is inconsistent")
+
+        if count == 0:
+            if record.get("observed_non_breach_is_not_a_bound") is not True:
+                issues.append("historical_reverse_stress non-breach limitation must be disclosed")
+            continue
+
+        reactions = record.get("allocation_reaction_counts")
+
+        if not isinstance(reactions, dict):
+            issues.append("historical_reverse_stress allocation reaction counts must be an object")
+            continue
+
+        reduced = reactions.get("reduced_at_breach")
+        increased = reactions.get("increased_at_breach")
+        unchanged = reactions.get("unchanged_at_breach")
+        reduced_early = reactions.get("reduced_by_at_least_25pct_before_breach")
+
+        reaction_values = (
+            reduced,
+            increased,
+            unchanged,
+            reduced_early,
+        )
+
+        if not all(
+            isinstance(value, int) and not isinstance(value, bool) and value >= 0
+            for value in reaction_values
+        ):
+            issues.append("historical_reverse_stress allocation reaction counts are invalid")
+        elif (
+            cast(int, reduced) + cast(int, increased) + cast(int, unchanged) != count
+            or cast(int, reduced_early) > count
+        ):
+            issues.append("historical_reverse_stress allocation reaction counts do not reconcile")
+
+        shares = record.get("allocation_reaction_shares")
+
+        if not isinstance(shares, dict):
+            issues.append("historical_reverse_stress allocation reaction shares must be an object")
+        else:
+            for name, value in shares.items():
+                if (
+                    not isinstance(
+                        value,
+                        int | float,
+                    )
+                    or isinstance(value, bool)
+                    or not 0.0 <= float(value) <= 1.0
+                ):
+                    issues.append(f"historical_reverse_stress allocation share {name} is invalid")
+
+    if actual_counts != expected_counts:
+        issues.append("historical_reverse_stress loss-level coverage is invalid")
+
+    governance = section.get("governance_decision")
+
+    if not isinstance(governance, dict):
+        issues.append("historical_reverse_stress governance decision must be an object")
+    elif governance.get("status") != "PASS_WITH_OBSERVATION":
+        issues.append("historical_reverse_stress governance status is invalid")
+
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item for item in limitations)
+    ):
+        issues.append("historical_reverse_stress limitations must be a non-empty string list")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if commitment != "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62":
+        issues.append("historical_reverse_stress evidence commitment is invalid")
+
+    return issues
+
+
+def _validate_var_es_backtesting(
+    section: Any,
+) -> list[str]:
+    """Validate the controlled public VaR/ES backtesting section."""
+
+    issues: list[str] = []
+
+    if not isinstance(section, dict):
+        return ["var_es_backtesting must be a JSON object"]
+
+    expected_scalars = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "observations": 2211,
+        "canonical_calibration_window_days": 365,
+    }
+
+    for field, expected in expected_scalars.items():
+        if section.get(field) != expected:
+            issues.append(f"var_es_backtesting.{field} must equal {expected}")
+
+    if section.get("sensitivity_calibration_windows_days") != [250, 365, 500]:
+        issues.append("var_es_backtesting sensitivity windows must equal 250, 365 and 500 days")
+
+    if section.get("risk_periods_days") != [1, 10]:
+        issues.append("var_es_backtesting horizons must equal 1 and 10 days")
+
+    if section.get("confidence_levels") != [0.95, 0.99]:
+        issues.append("var_es_backtesting confidence levels must equal 0.95 and 0.99")
+
+    results = section.get("canonical_results")
+
+    if not isinstance(results, list):
+        issues.append("var_es_backtesting.canonical_results must be a list")
+        results = []
+
+    if len(results) != 4:
+        issues.append("var_es_backtesting canonical result count must equal 4")
+
+    required_p_values = (
+        "kupiec_p_value",
+        "exact_binomial_p_value",
+        "christoffersen_independence_p_value",
+        "christoffersen_conditional_coverage_p_value",
+        ("es_normalized_tail_loss_bootstrap_p_value"),
+    )
+
+    expected_combinations = {
+        (1, 0.95),
+        (1, 0.99),
+        (10, 0.95),
+        (10, 0.99),
+    }
+
+    combinations: set[tuple[int, float]] = set()
+    computed_counts = {
+        "GREEN": 0,
+        "AMBER": 0,
+        "RED": 0,
+    }
+
+    for index, record in enumerate(results):
+        if not isinstance(record, dict):
+            issues.append(f"var_es_backtesting canonical record {index} must be an object")
+            continue
+
+        horizon = record.get("risk_period_days")
+        confidence = record.get("confidence_level")
+
+        if (
+            isinstance(horizon, int)
+            and not isinstance(horizon, bool)
+            and isinstance(
+                confidence,
+                (int, float),
+            )
+            and not isinstance(confidence, bool)
+        ):
+            combinations.add(
+                (
+                    horizon,
+                    float(confidence),
+                )
+            )
+        else:
+            issues.append(
+                f"var_es_backtesting canonical record {index} has invalid horizon or confidence"
+            )
+
+        for field in required_p_values:
+            value = record.get(field)
+
+            if (
+                not isinstance(value, (int, float))
+                or isinstance(value, bool)
+                or not 0.0 <= float(value) <= 1.0
+            ):
+                issues.append(f"var_es_backtesting canonical record {index} has invalid {field}")
+
+        light = record.get("traffic_light")
+
+        if light not in computed_counts:
+            issues.append(f"var_es_backtesting canonical record {index} has invalid traffic_light")
+        else:
+            computed_counts[light] += 1
+
+        reasons = record.get("reason_codes")
+
+        if (
+            not isinstance(reasons, list)
+            or not reasons
+            or not all(isinstance(reason, str) and reason for reason in reasons)
+        ):
+            issues.append(f"var_es_backtesting canonical record {index} has invalid reason_codes")
+
+        for count_field in (
+            "observations",
+            "exception_count",
+            "expected_exception_count",
+            "exception_rate",
+            "exception_cluster_count",
+            "maximum_exception_cluster_length",
+        ):
+            value = record.get(count_field)
+
+            if not isinstance(value, (int, float)) or isinstance(value, bool) or float(value) < 0.0:
+                issues.append(
+                    f"var_es_backtesting canonical record {index} has invalid {count_field}"
+                )
+
+    if combinations != expected_combinations:
+        issues.append(
+            "var_es_backtesting canonical horizon and confidence combinations are invalid"
+        )
+
+    expected_canonical_counts = {
+        "GREEN": 3,
+        "AMBER": 1,
+        "RED": 0,
+    }
+
+    if section.get("canonical_traffic_light_counts") != expected_canonical_counts:
+        issues.append("var_es_backtesting canonical traffic-light counts are invalid")
+
+    if computed_counts != expected_canonical_counts:
+        issues.append(
+            "var_es_backtesting canonical records do not reconcile with traffic-light counts"
+        )
+
+    if section.get("all_sensitivity_traffic_light_counts") != {
+        "GREEN": 7,
+        "AMBER": 4,
+        "RED": 1,
+    }:
+        issues.append("var_es_backtesting sensitivity traffic-light counts are invalid")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if (
+        not isinstance(commitment, str)
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append("var_es_backtesting evidence commitment must be a lowercase SHA-256 digest")
+
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item for item in limitations)
+    ):
+        issues.append("var_es_backtesting limitations must be a non-empty string list")
+
+    return issues
+
+
+def _validate_temporal_dependence_sharpe(
+    payload: Mapping[str, Any],
+    issues: list[str],
+) -> None:
+    section = payload.get("temporal_dependence_sharpe")
+
+    if not isinstance(section, dict):
+        issues.append("temporal_dependence_sharpe must be an object")
+        return
+
+    def finite_number(
+        value: object,
+    ) -> TypeGuard[int | float]:
+        return (
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and math.isfinite(float(value))
+        )
+
+    if section.get("verification_level") != "artifact-verified":
+        issues.append("temporal_dependence_sharpe must be artifact-verified")
+
+    if section.get("methodological_status") != "accepted_with_observations":
+        issues.append(
+            "temporal_dependence_sharpe methodological_status must equal accepted_with_observations"
+        )
+
+    if section.get("decision_status") != "PASS_WITH_OBSERVATION":
+        issues.append("temporal_dependence_sharpe decision_status must equal PASS_WITH_OBSERVATION")
+
+    if section.get("observations") != 2211:
+        issues.append("temporal_dependence_sharpe observations must equal 2211")
+
+    if section.get("annualization") != 365:
+        issues.append("temporal_dependence_sharpe annualization must equal 365")
+
+    conventional = section.get("conventional_annualized_sharpe")
+
+    if not finite_number(conventional) or abs(float(conventional) - 1.587687113383514) > 1e-12:
+        issues.append("temporal_dependence_sharpe conventional Sharpe is invalid")
+
+    if section.get("automatic_lag_rule") != "floor(4*(n/100)^(2/9))":
+        issues.append("temporal_dependence_sharpe automatic lag rule is invalid")
+
+    if section.get("automatic_lag_count") != 7:
+        issues.append("temporal_dependence_sharpe automatic lag count must equal 7")
+
+    if section.get("canonical_hac_lag_count") != 21:
+        issues.append("temporal_dependence_sharpe canonical HAC lag count must equal 21")
+
+    if section.get("canonical_block_size") != 21:
+        issues.append("temporal_dependence_sharpe canonical block size must equal 21")
+
+    canonical_hac = section.get("canonical_hac_adjusted_annualized_sharpe")
+    canonical_inflation = section.get("canonical_volatility_inflation_factor")
+
+    if (
+        not finite_number(canonical_hac)
+        or float(canonical_hac) <= 0.0
+        or (finite_number(conventional) and float(canonical_hac) >= float(conventional))
+    ):
+        issues.append("temporal_dependence_sharpe canonical HAC Sharpe is invalid")
+
+    if not finite_number(canonical_inflation) or float(canonical_inflation) <= 1.0:
+        issues.append("temporal_dependence_sharpe canonical volatility inflation is invalid")
+
+    autocorrelation_records = section.get("autocorrelation_records")
+    expected_acf_lags = {
+        1,
+        5,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_acf_lags: set[int] = set()
+
+    if not isinstance(
+        autocorrelation_records,
+        list,
+    ):
+        issues.append("temporal_dependence_sharpe autocorrelation_records must be a list")
+    else:
+        for record in autocorrelation_records:
+            if not isinstance(record, dict):
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid autocorrelation record"
+                )
+                continue
+
+            lag = record.get("lag_count")
+            correlation = record.get("autocorrelation")
+
+            if not isinstance(lag, int) or isinstance(lag, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid autocorrelation lag")
+            else:
+                observed_acf_lags.add(lag)
+
+            if not finite_number(correlation) or not -1.0 <= float(correlation) <= 1.0:
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid autocorrelation value"
+                )
+
+        if observed_acf_lags != expected_acf_lags:
+            issues.append("temporal_dependence_sharpe autocorrelation lag set is invalid")
+
+    ljung_box_records = section.get("ljung_box_records")
+    expected_ljung_box_pairs = {
+        ("periodic_returns", 5),
+        ("periodic_returns", 10),
+        ("periodic_returns", 21),
+        ("periodic_returns", 30),
+        (
+            "squared_centered_periodic_returns",
+            5,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            10,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            21,
+        ),
+        (
+            "squared_centered_periodic_returns",
+            30,
+        ),
+    }
+    observed_ljung_box_pairs: set[tuple[str, int]] = set()
+
+    if not isinstance(ljung_box_records, list):
+        issues.append("temporal_dependence_sharpe ljung_box_records must be a list")
+    else:
+        for record in ljung_box_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box record")
+                continue
+
+            series = record.get("series")
+            lag = record.get("lag_count")
+            statistic = record.get("statistic")
+            p_value = record.get("p_value")
+            underflow = record.get("p_value_below_machine_precision")
+
+            if isinstance(series, str) and isinstance(lag, int) and not isinstance(lag, bool):
+                observed_ljung_box_pairs.add(
+                    (
+                        series,
+                        lag,
+                    )
+                )
+            else:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box identifier")
+
+            if not finite_number(statistic) or float(statistic) < 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box statistic")
+
+            if not finite_number(p_value) or not 0.0 <= float(p_value) <= 1.0:
+                issues.append("temporal_dependence_sharpe contains an invalid Ljung-Box p-value")
+
+            if not isinstance(underflow, bool):
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid p-value underflow flag"
+                )
+
+        if observed_ljung_box_pairs != expected_ljung_box_pairs:
+            issues.append("temporal_dependence_sharpe Ljung-Box combinations are invalid")
+
+    hac_records = section.get("hac_sensitivity_records")
+    expected_hac_lags = {
+        5,
+        7,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_hac_lags: set[int] = set()
+
+    if not isinstance(hac_records, list):
+        issues.append("temporal_dependence_sharpe hac_sensitivity_records must be a list")
+    else:
+        for record in hac_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid HAC record")
+                continue
+
+            lag = record.get("lag_count")
+            sharpe = record.get("hac_adjusted_annualized_sharpe")
+            inflation = record.get("volatility_inflation_factor")
+
+            if not isinstance(lag, int) or isinstance(lag, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid HAC lag")
+            else:
+                observed_hac_lags.add(lag)
+
+            if not finite_number(sharpe) or float(sharpe) <= 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid HAC Sharpe")
+
+            if not finite_number(inflation) or float(inflation) <= 0.0:
+                issues.append("temporal_dependence_sharpe contains an invalid HAC inflation factor")
+
+        if observed_hac_lags != expected_hac_lags:
+            issues.append("temporal_dependence_sharpe HAC sensitivity lag set is invalid")
+
+    if section.get("bootstrap_repetitions") != 2000:
+        issues.append("temporal_dependence_sharpe bootstrap repetitions must equal 2000")
+
+    bootstrap_records = section.get("bootstrap_sensitivity_records")
+    expected_block_sizes = {
+        5,
+        10,
+        21,
+        30,
+        60,
+    }
+    observed_block_sizes: set[int] = set()
+
+    if not isinstance(bootstrap_records, list):
+        issues.append("temporal_dependence_sharpe bootstrap sensitivity records must be a list")
+    else:
+        for record in bootstrap_records:
+            if not isinstance(record, dict):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap record")
+                continue
+
+            block_size = record.get("block_size")
+            lower = record.get("interval_lower")
+            upper = record.get("interval_upper")
+            median = record.get("bootstrap_median")
+            positive_share = record.get("bootstrap_positive_share")
+            confidence = record.get("confidence_level")
+
+            if not isinstance(block_size, int) or isinstance(block_size, bool):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap block size")
+            else:
+                observed_block_sizes.add(block_size)
+
+            if not finite_number(lower) or not finite_number(upper) or float(lower) >= float(upper):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap interval")
+
+            if not finite_number(median) or (
+                finite_number(lower)
+                and finite_number(upper)
+                and not float(lower) <= float(median) <= float(upper)
+            ):
+                issues.append("temporal_dependence_sharpe contains an invalid bootstrap median")
+
+            if not finite_number(positive_share) or not 0.0 <= float(positive_share) <= 1.0:
+                issues.append(
+                    "temporal_dependence_sharpe contains an invalid positive bootstrap share"
+                )
+
+            if confidence != 0.95:
+                issues.append(
+                    "temporal_dependence_sharpe bootstrap confidence level must equal 0.95"
+                )
+
+        if observed_block_sizes != expected_block_sizes:
+            issues.append("temporal_dependence_sharpe bootstrap block-size set is invalid")
+
+    diagnostics = section.get("diagnostics")
+
+    expected_diagnostics = {
+        "raw_serial_dependence_detected_at_5pct": True,
+        "volatility_dependence_detected_at_5pct": True,
+        "all_hac_sharpes_positive": True,
+        "all_bootstrap_lower_bounds_positive": True,
+    }
+
+    if diagnostics != expected_diagnostics:
+        issues.append("temporal_dependence_sharpe diagnostics are invalid")
+
+    formal_methods = section.get("formal_methods")
+    limitations = section.get("limitations")
+
+    if (
+        not isinstance(formal_methods, list)
+        or not formal_methods
+        or not all(isinstance(item, str) and item.strip() for item in formal_methods)
+    ):
+        issues.append("temporal_dependence_sharpe formal_methods must be a non-empty string list")
+
+    if (
+        not isinstance(limitations, list)
+        or not limitations
+        or not all(isinstance(item, str) and item.strip() for item in limitations)
+    ):
+        issues.append("temporal_dependence_sharpe limitations must be a non-empty string list")
+
+    commitment = section.get("evidence_commitment_sha256")
+
+    if (
+        not isinstance(commitment, str)
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append(
+            "temporal_dependence_sharpe evidence commitment must be a lowercase SHA-256 digest"
+        )
 
 
 def validate_public_quantitative_payload(
@@ -538,6 +1764,19 @@ def validate_public_quantitative_payload(
 
             if significant_count != 2:
                 issues.append("exactly two bootstrap records must be significant")
+
+    issues.extend(_validate_historical_reverse_stress(payload.get("historical_reverse_stress")))
+
+    issues.extend(_validate_drawdown_duration_recovery(payload.get("drawdown_duration_recovery")))
+
+    issues.extend(
+        _validate_counterfactual_reverse_stress(payload.get("counterfactual_reverse_stress"))
+    )
+    issues.extend(_validate_var_es_backtesting(payload.get("var_es_backtesting")))
+    _validate_temporal_dependence_sharpe(
+        payload,
+        issues,
+    )
 
     return issues
 

@@ -184,6 +184,485 @@ def valid_payload() -> dict[str, Any]:
         "limitation": ("Significance is benchmark-specific."),
     }
 
+    payload["historical_reverse_stress"] = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "analysis_type": ("historical_dynamic_loss_breach_analysis"),
+        "observations": 2211,
+        "evaluation_period": {
+            "start": "2020-05-14",
+            "end": "2026-06-02",
+        },
+        "governing_conventions": [
+            "Realized historical paths only.",
+            "Loss levels are measured from historical peaks.",
+        ],
+        "economic_reconciliation": {
+            "status": "PASS",
+            "maximum_absolute_delta": 1.0061396160665481e-16,
+            "public_convention_name": ("row_aligned_effective_allocation"),
+        },
+        "global_results": {
+            "drawdown_episode_count": 104,
+            "loss_breach_record_count": 40,
+            "maximum_model_drawdown": -0.2139050350373155,
+        },
+        "loss_level_results": [
+            {
+                "target_nav_loss": loss,
+                "historically_breached": count > 0,
+                "breach_episode_count": count,
+                **(
+                    {
+                        "observations_to_breach": {
+                            "minimum": 1,
+                            "median": 5.0,
+                            "maximum": 167,
+                        },
+                        "observed_btc_path_to_breach": {
+                            "minimum_cumulative_return_range": {
+                                "minimum": -0.50,
+                                "median": -0.20,
+                                "maximum": -0.06,
+                            },
+                            "compounded_return_range": {
+                                "minimum": -0.50,
+                                "median": -0.20,
+                                "maximum": -0.06,
+                            },
+                        },
+                        "allocation_reaction_counts": reactions,
+                        "allocation_reaction_shares": {
+                            "reduced_at_breach": (reactions["reduced_at_breach"] / count),
+                            "increased_at_breach": (reactions["increased_at_breach"] / count),
+                            "unchanged_at_breach": (reactions["unchanged_at_breach"] / count),
+                            ("reduced_by_at_least_25pct_before_breach"): (
+                                reactions["reduced_by_at_least_25pct_before_breach"] / count
+                            ),
+                        },
+                        "turnover_to_breach": {
+                            "minimum": 0.0,
+                            "median": 0.5,
+                            "maximum": 4.0,
+                        },
+                    }
+                    if count > 0
+                    else {
+                        "observed_non_breach_is_not_a_bound": True,
+                    }
+                ),
+            }
+            for loss, count, reactions in (
+                (
+                    0.05,
+                    25,
+                    {
+                        "reduced_at_breach": 13,
+                        "increased_at_breach": 10,
+                        "unchanged_at_breach": 2,
+                        "reduced_by_at_least_25pct_before_breach": 6,
+                    },
+                ),
+                (
+                    0.10,
+                    10,
+                    {
+                        "reduced_at_breach": 6,
+                        "increased_at_breach": 3,
+                        "unchanged_at_breach": 1,
+                        "reduced_by_at_least_25pct_before_breach": 4,
+                    },
+                ),
+                (
+                    0.15,
+                    4,
+                    {
+                        "reduced_at_breach": 1,
+                        "increased_at_breach": 2,
+                        "unchanged_at_breach": 1,
+                        "reduced_by_at_least_25pct_before_breach": 1,
+                    },
+                ),
+                (
+                    0.20,
+                    1,
+                    {
+                        "reduced_at_breach": 1,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 1,
+                    },
+                ),
+                (
+                    0.25,
+                    0,
+                    {
+                        "reduced_at_breach": 0,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 0,
+                    },
+                ),
+                (
+                    0.30,
+                    0,
+                    {
+                        "reduced_at_breach": 0,
+                        "increased_at_breach": 0,
+                        "unchanged_at_breach": 0,
+                        "reduced_by_at_least_25pct_before_breach": 0,
+                    },
+                ),
+            )
+        ],
+        "governance_decision": {
+            "status": "PASS_WITH_OBSERVATION",
+            "principal_observations": [
+                "Allocation reduction was not universal.",
+            ],
+            "monitoring_requirement": ("Continue monitoring severe declines."),
+        },
+        "limitations": [
+            "The analysis covers realized historical paths only.",
+            "Observed non-breach is not a future loss bound.",
+        ],
+        "evidence_commitment_sha256": (
+            "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62"
+        ),
+    }
+
+    payload["drawdown_duration_recovery"] = json.loads(
+        (
+            Path(__file__).resolve().parents[1]
+            / "artifacts"
+            / "candidates"
+            / "v0.3.0"
+            / "quantitative_aggregates"
+            / "drawdown_duration_recovery.json"
+        ).read_text(
+            encoding="utf-8",
+        )
+    )["data"]
+
+    payload["counterfactual_reverse_stress"] = {
+        "all_phase_offsets_tested": True,
+        "baseline_reconciliation_max_abs_delta": 1.7763568394002505e-15,
+        "daily_paths_disclosed": False,
+        "decision_status": "historical_research_evidence",
+        "dominant_vulnerability_class": "directional_core_freshness_and_integrity",
+        "exact_private_settings_disclosed": False,
+        "historical_scope": "2020-05-14_to_2026-06-02",
+        "inference_stage_scenarios": 67,
+        "internal_variables_disclosed": False,
+        "isolated_input_corruption_failure_found": False,
+        "limitation": "The public payload omits daily paths, internal variables, model "
+        "settings and exact breakpoints. Results are historical counterfactual "
+        "evidence and are not forecasts.",
+        "observations": 2211,
+        "private_evidence_commitment_sha256": (
+            "ba1ea95fdca6dfe6fcc28140294ecfcb173a5248c82a16ae17296ae66e9d9e26"
+        ),
+        "randomized_repetitions": {"adverse_state_injection": 50, "noise": 30},
+        "refined_failure_families": 8,
+        "refined_failure_frontiers": 87,
+        "refinement_scenarios": 4709,
+        "retraining_and_core_scenarios": 132,
+        "total_scenarios": 4908,
+        "verification_level": "artifact-verified",
+    }
+
+    payload["var_es_backtesting"] = {
+        "verification_level": "artifact-verified",
+        "methodological_status": "accepted_with_observations",
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "observations": 2211,
+        "canonical_calibration_window_days": 365,
+        "sensitivity_calibration_windows_days": [
+            250,
+            365,
+            500,
+        ],
+        "risk_periods_days": [1, 10],
+        "confidence_levels": [0.95, 0.99],
+        "canonical_results": [
+            {
+                "risk_period_days": horizon,
+                "confidence_level": confidence,
+                "observations": (1846 if horizon == 1 else 184),
+                "expected_exception_count": (
+                    92.3
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.95)
+                    else 18.46
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.99)
+                    else 9.2
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.95)
+                    else 1.84
+                ),
+                "exception_count": (
+                    93
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.95)
+                    else 21
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (1, 0.99)
+                    else 11
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.95)
+                    else 4
+                ),
+                "exception_rate": 0.05,
+                "kupiec_p_value": 0.50,
+                "exact_binomial_p_value": 0.50,
+                "christoffersen_independence_p_value": 0.50,
+                "christoffersen_conditional_coverage_p_value": 0.50,
+                ("es_normalized_tail_loss_bootstrap_p_value"): 0.50,
+                "exception_cluster_count": 1,
+                "maximum_exception_cluster_length": 1,
+                "traffic_light": (
+                    "AMBER"
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.99)
+                    else "GREEN"
+                ),
+                "reason_codes": (
+                    [
+                        "NO_FORMAL_REJECTION_AT_5_PERCENT",
+                        "LOW_EXPECTED_EXCEPTION_COUNT",
+                    ]
+                    if (
+                        horizon,
+                        confidence,
+                    )
+                    == (10, 0.99)
+                    else ["NO_FORMAL_REJECTION_AT_5_PERCENT"]
+                ),
+            }
+            for horizon, confidence in (
+                (1, 0.95),
+                (1, 0.99),
+                (10, 0.95),
+                (10, 0.99),
+            )
+        ],
+        "canonical_traffic_light_counts": {
+            "GREEN": 3,
+            "AMBER": 1,
+            "RED": 0,
+        },
+        "all_sensitivity_traffic_light_counts": {
+            "GREEN": 7,
+            "AMBER": 4,
+            "RED": 1,
+        },
+        "limitations": ["Retrospective aggregate evidence."],
+        "evidence_commitment_sha256": "a" * 64,
+    }
+    payload["temporal_dependence_sharpe"] = {
+        "annualization": 365,
+        "autocorrelation_records": [
+            {"autocorrelation": -0.018947971484975727, "lag_count": 1},
+            {"autocorrelation": 0.032076421991579146, "lag_count": 5},
+            {"autocorrelation": -0.0066060936356148745, "lag_count": 10},
+            {"autocorrelation": 0.00882624379064061, "lag_count": 21},
+            {"autocorrelation": 0.01847963223659721, "lag_count": 30},
+            {"autocorrelation": -0.046740496288189715, "lag_count": 60},
+        ],
+        "automatic_lag_count": 7,
+        "automatic_lag_rule": "floor(4*(n/100)^(2/9))",
+        "bootstrap_method": "circular moving-block percentile interval for annualized arithmetic "
+        "Sharpe",
+        "bootstrap_repetitions": 2000,
+        "bootstrap_seed_base": 20260731,
+        "bootstrap_sensitivity_records": [
+            {
+                "block_size": 5,
+                "bootstrap_median": 1.5832757926564578,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7832200708866145,
+                "interval_upper": 2.341941700487583,
+            },
+            {
+                "block_size": 10,
+                "bootstrap_median": 1.590115660106567,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.8143331837768503,
+                "interval_upper": 2.373328381240761,
+            },
+            {
+                "block_size": 21,
+                "bootstrap_median": 1.5669386650446135,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7571871501731903,
+                "interval_upper": 2.3500727862679986,
+            },
+            {
+                "block_size": 30,
+                "bootstrap_median": 1.59640559068229,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7836849444600525,
+                "interval_upper": 2.4057367210870804,
+            },
+            {
+                "block_size": 60,
+                "bootstrap_median": 1.5767359668590792,
+                "bootstrap_positive_share": 1.0,
+                "confidence_level": 0.95,
+                "interval_lower": 0.7608419436086805,
+                "interval_upper": 2.44657493185048,
+            },
+        ],
+        "canonical_block_size": 21,
+        "canonical_hac_adjusted_annualized_sharpe": 1.4931827873589063,
+        "canonical_hac_lag_count": 21,
+        "canonical_volatility_inflation_factor": 1.0632905273384274,
+        "conventional_annualized_sharpe": 1.5876871133835144,
+        "decision_status": "PASS_WITH_OBSERVATION",
+        "diagnostics": {
+            "all_bootstrap_lower_bounds_positive": True,
+            "all_hac_sharpes_positive": True,
+            "raw_serial_dependence_detected_at_5pct": True,
+            "volatility_dependence_detected_at_5pct": True,
+        },
+        "evidence_commitment_sha256": (
+            "94a36288bcf86d6289056d1fa7cb2bf894c4af520312728f552982606edcd749"
+        ),
+        "formal_methods": [
+            "Bartlett-kernel Newey-West long-run variance",
+            "Ljung-Box portmanteau tests on periodic and squared centered periodic returns",
+            "deterministic circular moving-block bootstrap",
+        ],
+        "hac_sensitivity_records": [
+            {
+                "hac_adjusted_annualized_sharpe": 1.596359853071572,
+                "lag_count": 5,
+                "volatility_inflation_factor": 0.9945671775249356,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.5896187989510528,
+                "lag_count": 7,
+                "volatility_inflation_factor": 0.9987848120764468,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.5739824692187443,
+                "lag_count": 10,
+                "volatility_inflation_factor": 1.008706986534337,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.4931827873589063,
+                "lag_count": 21,
+                "volatility_inflation_factor": 1.0632905273384274,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.4409568241397386,
+                "lag_count": 30,
+                "volatility_inflation_factor": 1.1018283731931904,
+            },
+            {
+                "hac_adjusted_annualized_sharpe": 1.347218580252575,
+                "lag_count": 60,
+                "volatility_inflation_factor": 1.1784925895884368,
+            },
+        ],
+        "limitations": [
+            "The analysis is retrospective and does not constitute independent validation.",
+            "Newey-West adjustment addresses linear serial dependence but does not model "
+            "the full conditional distribution.",
+            "Ljung-Box p-values reported as zero indicate numerical underflow, not "
+            "mathematical zero.",
+            "Bootstrap conclusions remain conditional on the disclosed block-size sensitivity set.",
+        ],
+        "ljung_box_records": [
+            {
+                "lag_count": 5,
+                "p_value": 0.5494145562274486,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 4.000009689997235,
+            },
+            {
+                "lag_count": 10,
+                "p_value": 0.22926316945783223,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 12.90094130200967,
+            },
+            {
+                "lag_count": 21,
+                "p_value": 0.003263652508535611,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 42.87213245473431,
+            },
+            {
+                "lag_count": 30,
+                "p_value": 0.0002090612096298496,
+                "p_value_below_machine_precision": False,
+                "series": "periodic_returns",
+                "statistic": 65.16294049497266,
+            },
+            {
+                "lag_count": 5,
+                "p_value": 1.0864331619492298e-28,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 141.01924144496283,
+            },
+            {
+                "lag_count": 10,
+                "p_value": 5.217545752547138e-44,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 231.0324649717583,
+            },
+            {
+                "lag_count": 21,
+                "p_value": 1.0665696131549399e-78,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 433.47749474341055,
+            },
+            {
+                "lag_count": 30,
+                "p_value": 3.5482733363605085e-84,
+                "p_value_below_machine_precision": False,
+                "series": "squared_centered_periodic_returns",
+                "statistic": 487.9547070812303,
+            },
+        ],
+        "methodological_status": "accepted_with_observations",
+        "observations": 2211,
+        "verification_level": "artifact-verified",
+    }
+
     return payload
 
 
@@ -666,3 +1145,437 @@ def test_verify_checksum_failure_modes(
     assert "SHA256SUMS contains an invalid line" in joined
     assert "SHA256SUMS paths do not match" in joined
     assert "SHA256SUMS mismatch: metadata.json" in joined
+
+
+def test_var_es_backtesting_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["var_es_backtesting"]
+
+    section["decision_status"] = "PASS"
+    section["canonical_results"][0]["kupiec_p_value"] = 1.5
+    section["canonical_results"][1]["risk_period_days"] = 2
+    section["canonical_traffic_light_counts"] = {
+        "GREEN": 4,
+        "AMBER": 0,
+        "RED": 0,
+    }
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert ("decision_status must equal PASS_WITH_OBSERVATION") in joined
+    assert "invalid kupiec_p_value" in joined
+    assert ("canonical horizon and confidence combinations are invalid") in joined
+    assert ("canonical traffic-light counts are invalid") in joined
+    assert ("lowercase SHA-256 digest") in joined
+
+
+def test_var_es_backtesting_rejects_non_object() -> None:
+    payload = valid_payload()
+    payload["var_es_backtesting"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("var_es_backtesting must be a JSON object" in issue for issue in issues)
+
+
+def test_var_es_backtesting_rejects_invalid_section_contract() -> None:
+    payload = valid_payload()
+    section = payload["var_es_backtesting"]
+
+    section["verification_level"] = "unverified"
+    section["methodological_status"] = "rejected"
+    section["observations"] = 0
+    section["canonical_calibration_window_days"] = 250
+    section["sensitivity_calibration_windows_days"] = [
+        250,
+        500,
+    ]
+    section["risk_periods_days"] = [1]
+    section["confidence_levels"] = [0.95]
+    section["canonical_results"] = "invalid"
+    section["all_sensitivity_traffic_light_counts"] = {
+        "GREEN": 12,
+        "AMBER": 0,
+        "RED": 0,
+    }
+    section["limitations"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert ("verification_level must equal artifact-verified") in joined
+    assert ("methodological_status must equal accepted_with_observations") in joined
+    assert "observations must equal 2211" in joined
+    assert ("canonical_calibration_window_days must equal 365") in joined
+    assert ("sensitivity windows must equal 250, 365 and 500 days") in joined
+    assert ("horizons must equal 1 and 10 days") in joined
+    assert ("confidence levels must equal 0.95 and 0.99") in joined
+    assert ("canonical_results must be a list") in joined
+    assert ("canonical result count must equal 4") in joined
+    assert ("sensitivity traffic-light counts are invalid") in joined
+    assert ("limitations must be a non-empty string list") in joined
+
+
+def test_temporal_dependence_sharpe_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["temporal_dependence_sharpe"]
+
+    section["verification_level"] = "unverified"
+    section["methodological_status"] = "accepted"
+    section["decision_status"] = "PASS"
+    section["observations"] = 2_210
+    section["annualization"] = 252
+    section["automatic_lag_count"] = 8
+    section["canonical_hac_lag_count"] = 30
+    section["canonical_block_size"] = 30
+    section["canonical_hac_adjusted_annualized_sharpe"] = -1.0
+    section["canonical_volatility_inflation_factor"] = 0.5
+    section["bootstrap_repetitions"] = 1_000
+    section["diagnostics"] = {}
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert "must be artifact-verified" in joined
+    assert ("methodological_status must equal accepted_with_observations") in joined
+    assert ("decision_status must equal PASS_WITH_OBSERVATION") in joined
+    assert "observations must equal 2211" in joined
+    assert "annualization must equal 365" in joined
+    assert "automatic lag count must equal 7" in joined
+    assert ("canonical HAC lag count must equal 21") in joined
+    assert ("canonical block size must equal 21") in joined
+    assert "canonical HAC Sharpe is invalid" in joined
+    assert ("canonical volatility inflation is invalid") in joined
+    assert ("bootstrap repetitions must equal 2000") in joined
+    assert "diagnostics are invalid" in joined
+    assert ("commitment must be a lowercase SHA-256 digest") in joined
+
+
+def test_temporal_dependence_sharpe_record_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["temporal_dependence_sharpe"]
+
+    section["autocorrelation_records"][0]["autocorrelation"] = 2.0
+    section["autocorrelation_records"][1]["lag_count"] = 1
+
+    section["ljung_box_records"][0]["p_value"] = 2.0
+    section["ljung_box_records"][1]["statistic"] = -1.0
+    section["ljung_box_records"][2]["series"] = "invalid"
+
+    section["hac_sensitivity_records"][0]["hac_adjusted_annualized_sharpe"] = 0.0
+    section["hac_sensitivity_records"][1]["volatility_inflation_factor"] = 0.0
+    section["hac_sensitivity_records"][2]["lag_count"] = 5
+
+    section["bootstrap_sensitivity_records"][0]["interval_lower"] = 3.0
+    section["bootstrap_sensitivity_records"][0]["interval_upper"] = 2.0
+    section["bootstrap_sensitivity_records"][1]["bootstrap_positive_share"] = 2.0
+    section["bootstrap_sensitivity_records"][2]["confidence_level"] = 0.90
+    section["bootstrap_sensitivity_records"][3]["block_size"] = 5
+
+    issues = validate_public_quantitative_payload(payload)
+    joined = "\n".join(issues)
+
+    assert "invalid autocorrelation value" in joined
+    assert "autocorrelation lag set is invalid" in joined
+    assert "invalid Ljung-Box p-value" in joined
+    assert "invalid Ljung-Box statistic" in joined
+    assert "Ljung-Box combinations are invalid" in joined
+    assert "invalid HAC Sharpe" in joined
+    assert "invalid HAC inflation factor" in joined
+    assert "HAC sensitivity lag set is invalid" in joined
+    assert "invalid bootstrap interval" in joined
+    assert "invalid positive bootstrap share" in joined
+    assert ("bootstrap confidence level must equal 0.95") in joined
+    assert "bootstrap block-size set is invalid" in joined
+
+
+def test_temporal_dependence_sharpe_requires_object() -> None:
+    payload = valid_payload()
+    payload["temporal_dependence_sharpe"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "temporal_dependence_sharpe must be an object" in issues
+
+
+def test_historical_reverse_stress_contract_failure_modes() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    section["observations"] = 2200
+    section["global_results"]["loss_breach_record_count"] = 39
+    section["loss_level_results"][0]["breach_episode_count"] = 24
+    section["evidence_commitment_sha256"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("observations must equal 2211" in issue for issue in issues)
+    assert any("record count must equal 40" in issue for issue in issues)
+    assert any("count is invalid" in issue for issue in issues)
+    assert any("commitment is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_requires_object() -> None:
+    payload = valid_payload()
+    payload["historical_reverse_stress"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "historical_reverse_stress must be a JSON object" in issues
+
+
+def test_historical_reverse_stress_rejects_invalid_metadata() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["evaluation_period"] = {}
+    section["governing_conventions"] = []
+    section["economic_reconciliation"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("evaluation period is invalid" in issue for issue in issues)
+    assert any("governing conventions" in issue for issue in issues)
+    assert any("economic reconciliation must be an object" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reconciliation() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    reconciliation = section["economic_reconciliation"]
+
+    assert isinstance(reconciliation, dict)
+
+    reconciliation["status"] = "FAIL"
+    reconciliation["public_convention_name"] = "invalid"
+    reconciliation["maximum_absolute_delta"] = -1.0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reconciliation must pass" in issue for issue in issues)
+    assert any("economic convention is invalid" in issue for issue in issues)
+    assert any("reconciliation delta is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_global_results() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["global_results"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("global results must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    results = section["global_results"]
+
+    assert isinstance(results, dict)
+
+    results["drawdown_episode_count"] = 103
+    results["loss_breach_record_count"] = 39
+    results["maximum_model_drawdown"] = False
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("episode count must equal 104" in issue for issue in issues)
+    assert any("record count must equal 40" in issue for issue in issues)
+    assert any("maximum drawdown is invalid" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_loss_level_records() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["loss_level_results"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("loss-level coverage is invalid" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records.append("invalid")
+    records[0]["target_nav_loss"] = "invalid"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("must be an object" in issue for issue in issues)
+    assert any("invalid identifiers" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_inconsistent_breach_records() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["target_nav_loss"] = 0.40
+    records[1]["historically_breached"] = False
+    records[4]["observed_non_breach_is_not_a_bound"] = False
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("unexpected loss level" in issue for issue in issues)
+    assert any("breach flag is inconsistent" in issue for issue in issues)
+    assert any("non-breach limitation must be disclosed" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reaction_counts() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["allocation_reaction_counts"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction counts must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    reactions = records[0]["allocation_reaction_counts"]
+
+    assert isinstance(reactions, dict)
+
+    reactions["reduced_at_breach"] = -1
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction counts are invalid" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    reactions = records[0]["allocation_reaction_counts"]
+
+    assert isinstance(reactions, dict)
+
+    reactions["reduced_at_breach"] = 12
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("counts do not reconcile" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_reaction_shares() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    records[0]["allocation_reaction_shares"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("reaction shares must be an object" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    records = section["loss_level_results"]
+
+    assert isinstance(records, list)
+
+    shares = records[0]["allocation_reaction_shares"]
+
+    assert isinstance(shares, dict)
+
+    shares["reduced_at_breach"] = 2.0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("allocation share" in issue for issue in issues)
+
+
+def test_historical_reverse_stress_rejects_invalid_governance_and_limits() -> None:
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    section["governance_decision"] = []
+    section["limitations"] = []
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("governance decision must be an object" in issue for issue in issues)
+    assert any("limitations must be a non-empty string list" in issue for issue in issues)
+
+    payload = valid_payload()
+    section = payload["historical_reverse_stress"]
+
+    assert isinstance(section, dict)
+
+    governance = section["governance_decision"]
+
+    assert isinstance(governance, dict)
+
+    governance["status"] = "PASS"
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert any("governance status is invalid" in issue for issue in issues)
+
+
+def test_drawdown_duration_recovery_controlled_aggregate_is_enforced() -> None:
+    payload = valid_payload()
+
+    assert validate_public_quantitative_payload(payload) == []
+
+    payload["drawdown_duration_recovery"]["observations"] = 0
+
+    issues = validate_public_quantitative_payload(payload)
+
+    assert "drawdown_duration_recovery does not match the controlled public aggregate" in issues

@@ -75,7 +75,7 @@ Voir `FINAL_PUBLICATION_ARCHITECTURE.md`.
 
 ## Matrice de validation quantitative
 
-Le dépôt publie une matrice de 23 contrôles couvrant notamment le backtest,
+Le dépôt publie une matrice de 28 contrôles couvrant notamment le backtest,
 l’absence de look-ahead, le risque de surajustement, la non-stationnarité,
 les régimes, les coûts d’exécution, les risques de queue, la sensibilité,
 la résilience des données et le monitoring.
@@ -87,7 +87,7 @@ Les fichiers de référence sont :
 - `docs/QUANTITATIVE_VALIDATION_ROADMAP.md`.
 
 La matrice distingue le code public, les résultats publics, les preuves
-privées engagées par SHA-256 et les développements restant à réaliser.
+privées engagées par SHA-256 et les conditions formelles de réouverture.
 Les engagements cryptographiques ne publient aucun chemin privé, aucune
 trace quotidienne, aucune caractéristique, aucun coefficient et aucun
 seuil propriétaire. Ils ne constituent pas une validation indépendante.
@@ -132,13 +132,13 @@ manifeste de provenance et des attestations GitHub OIDC.
 
 Voir `docs/RELEASE_EVIDENCE.md`.
 
-## Paquet quantitatif agrégé candidat v0.3.0
+## Paquet quantitatif agrégé figé v0.3.0
 
 Le répertoire
 `artifacts/candidates/v0.3.0/quantitative_aggregates`
-constitue le paquet candidat contrôlé des résultats quantitatifs publics agrégés.
+constitue le paquet final contrôlé des résultats quantitatifs publics agrégés.
 
-Il contient 16 sections vérifiées :
+Il contient 21 sections vérifiées :
 
 - stationnarité et dérive de distribution ;
 - régimes de marché ;
@@ -151,6 +151,12 @@ Il contient 16 sections vérifiées :
 - White Reality Check et Hansen SPA ;
 - CSCV et Probability of Backtest Overfitting ;
 - moving-block bootstrap de la surperformance composée.
+
+- backtesting formel de la VaR et de l’Expected Shortfall ;
+- analyse du Sharpe sous dépendance temporelle ;
+- reverse stress historique des épisodes de perte réalisés ;
+- reverse stress contrefactuel du modèle, du réentraînement et de la chaîne directionnelle.
+- analyse de la profondeur, de la durée, de la récupération et du temps sous le précédent plus-haut des drawdowns.
 
 Les différentiels de CAGR sont positifs contre les 11 benchmarks publics.
 La significativité individuelle au seuil de 5 % est établie pour

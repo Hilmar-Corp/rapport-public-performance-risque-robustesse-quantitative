@@ -17,6 +17,11 @@
       "size_bytes": 1362
     },
     {
+      "path": "counterfactual_reverse_stress.json",
+      "sha256": "8a5b35f8c9bd8da227802223c1018ac05a8e7b1ec5bd66a4e5a98b35d004aeb0",
+      "size_bytes": 1240
+    },
+    {
       "path": "data_resilience.json",
       "sha256": "7c65c02584d68b0e5be9a8c7729651f5e3c7cf7c8670c52b348e26b817bdc74a",
       "size_bytes": 1677
@@ -32,6 +37,11 @@
       "size_bytes": 2581
     },
     {
+      "path": "drawdown_duration_recovery.json",
+      "sha256": "aac55eeef0278cbf70ee1f7816c1822d657bdc0c7b2013e65a3b6020cbd16a2d",
+      "size_bytes": 11795
+    },
+    {
       "path": "execution_cost_delay.json",
       "sha256": "ae0485d907b9c3cb01fb26dbe05f95bbdc127491b31a458bfdb051fbc04ae38c",
       "size_bytes": 14700
@@ -40,6 +50,11 @@
       "path": "historical_block_monte_carlo.json",
       "sha256": "ddae15816201f3524eb9d8914838fda2b9cae051d7a6aecca37338afb1c9afb3",
       "size_bytes": 8282
+    },
+    {
+      "path": "historical_reverse_stress.json",
+      "sha256": "679ef9da38ccaacab70b83594e460093d5c26fe975488d2a30403cae1ca5cbf5",
+      "size_bytes": 7859
     },
     {
       "path": "market_regimes.json",
@@ -85,6 +100,16 @@
       "path": "tail_risk.json",
       "sha256": "29b9d94ec87da8249ae32086084bf1956f6f36bd39f0ff3db624216a67b68c56",
       "size_bytes": 1452
+    },
+    {
+      "path": "temporal_dependence_sharpe.json",
+      "sha256": "6cfc6c79242d5a06dbb56065f2ba06bb8f91852fb2e847dc759d59478c72be7b",
+      "size_bytes": 6479
+    },
+    {
+      "path": "var_es_backtesting.json",
+      "sha256": "c1d74d449a23c1de99a5a701d97457e263f3957b796f2d1b30142a8b877fba8b",
+      "size_bytes": 5870
     }
   ],
   "release_target": "v0.3.0",

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hilmarcorp-benchmark-suite"
-version = "0.2.1"
+version = "0.3.0"
 description = "Transparent benchmark and backtesting utilities for daily allocation strategies."
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -44,7 +44,7 @@ addopts = [
     "--cov=hilmarbench",
     "--cov-branch",
     "--cov-report=term-missing",
-    "--cov-fail-under=90",
+    "--cov-fail-under=100",
 ]
 markers = [
     "slow: computationally intensive integration tests",

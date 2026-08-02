@@ -3,7 +3,17 @@
 
 ## Unreleased
 
-- controlled public aggregate package covering 16 quantitative validation sections;
+## 0.3.0 — 2026-08-02
+
+- formal VaR and Expected Shortfall backtesting evidence;
+- temporal-dependence-adjusted Sharpe analysis;
+- historical realised-path reverse stress evidence;
+- artifact-verified counterfactual reverse stress covering 4,908 scenarios, 87 refined failure frontiers and eight frontier families;
+- strict IP-separation tests preventing publication of daily paths, internal variables, exact settings and private breakpoints;
+- artifact-verified drawdown depth, duration, recovery and time-under-water evidence;
+- formal quantitative research freeze for v0.3.0, with controlled reopening conditions;
+
+- controlled public aggregate package covering 21 quantitative validation sections;
 - artifact-verified PSR, DSR, White Reality Check, Hansen SPA and CSCV/PBO results;
 - benchmark-level moving-block bootstrap with positive CAGR differences against 11 of 11 public benchmarks and 2 individually significant comparisons at the 5% level;
 - stationarity, drift, regimes, execution, placebo, tail-risk, Monte Carlo, data-resilience, sensitivity, ablation and shadow-live monitoring exports;
@@ -14,7 +24,7 @@
 
 ### Added
 
-- public quantitative validation matrix covering 23 controls;
+- public quantitative validation matrix covering 28 controls;
 - SHA-256 commitments to reconciled private evidence without publishing
   private paths or contents;
 - quantitative validation roadmap for the future v0.3.0 release;
