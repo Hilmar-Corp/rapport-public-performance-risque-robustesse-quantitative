@@ -63,15 +63,42 @@ Les publications publiques distinguent :
 
 Voir `METHODOLOGY.md`, `REPRODUCIBILITY.md` et `PROPRIETARY_BOUNDARY.md`.
 
-## Architecture finale de publication
+## Architecture de publication
 
-Le dépôt public contient le cadre d’évaluation et les stratégies reproductibles de référence. Il ne contient ni le modèle Nostra, ni sa trace d’exécution, ni aucune série temporelle de Nostra.
+La publication repose sur deux chaînes distinctes qui convergent vers un
+paquet public unique, versionné et auditable.
 
-Les métriques agrégées de Nostra sont vérifiées au moyen d’un engagement SHA-256 portant sur un artefact privé.
+### Chaîne publique reproductible
 
-Un artefact séparé destiné au site internet peut afficher des observations quotidiennes de valeur liquidative avec un délai minimal de quatorze jours. Cet artefact n’est pas distribué dans ce dépôt et ne contient aucune position, aucun rendement quotidien explicite, aucune rotation, aucun coût, aucune probabilité et aucune caractéristique du modèle.
+| Étape | Fonction | Vérification |
+|---|---|---|
+| Données de marché publiques | Entrées communes et inspectables | Publique |
+| Stratégies de référence | Benchmarks recalculables | Code reproductible |
+| Cadre de backtest et de risque | Conventions homogènes d’évaluation | Testé |
+| Résultats publics | Résultats recalculables depuis le dépôt | Code reproductible |
 
-Voir `FINAL_PUBLICATION_ARCHITECTURE.md`.
+### Chaîne de preuve Nostra AI
+
+| Étape | Fonction | Publication |
+|---|---|---|
+| Artefact privé Nostra AI | Source propriétaire de l’évaluation | Privée |
+| Résultats agrégés assainis | Indicateurs autorisés à la publication | Publique agrégée |
+| Engagements SHA-256 | Réconciliation avec les preuves privées | Publique |
+| Paquet public contrôlé | Ensemble versionné et manifesté | Publique |
+| Audit de publication | Contrôle d’intégrité et de frontière propriétaire | Automatisé |
+| Release GitHub v0.3.0 | Point officiel de distribution | Publique |
+
+### Flux de contrôle
+
+| Origine | Traitement | Destination |
+|---|---|---|
+| Données publiques | Benchmarks et cadre commun | Résultats reproductibles |
+| Artefact privé Nostra AI | Assainissement et agrégation | Résultats publics Nostra |
+| Preuves privées | Calcul des engagements SHA-256 | Registre public |
+| Résultats et engagements | Packaging, manifeste et audit | Release GitHub v0.3.0 |
+
+Cette architecture permet d’exposer une preuve quantitative inspectable sans
+publier la propriété intellectuelle du modèle.
 
 ## Matrice de validation quantitative
 
