@@ -28,6 +28,20 @@ Le paquet public met en œuvre :
 
 Les stratégies publiques de référence sont reproductibles à partir de l’artefact de publication engagé et du code source public.
 
+## Intégrité méthodologique
+
+L’évaluation et la publication suivent un principe de présentation symétrique :
+
+- les conventions sont définies explicitement ;
+- les résultats favorables et défavorables sont conservés ;
+- la significativité n’est pas généralisée au-delà des tests disponibles ;
+- les résultats historiques ne sont pas présentés comme des prévisions ;
+- le shadow live n’est pas présenté comme un déploiement client ;
+- les résultats `artifact-verified` ne sont pas présentés comme entièrement
+  reproductibles publiquement.
+
+Les règles détaillées figurent dans `METHODOLOGICAL_INTEGRITY.md`.
+
 ## Nostra AI
 
 Nostra AI est évaluée selon les mêmes conventions quotidiennes de coûts, de rotation, de décalage d’exécution et d’annualisation.

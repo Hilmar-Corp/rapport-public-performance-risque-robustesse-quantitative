@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+- institutionalisation de la frontière de propriété intellectuelle et de la politique de publication ;
+- ajout d’un standard formel d’intégrité et d’honnêteté méthodologique ;
+- clarification des niveaux `code-reproducible`, `artifact-verified` et `private-controlled` ;
+- réconciliation documentaire de la matrice finale de 28 contrôles ;
+- suppression des formulations laissant entendre des développements historiques encore ouverts dans v0.3.0.
+
 ## 0.3.0 — 2026-08-02
 
 - formal VaR and Expected Shortfall backtesting evidence;
