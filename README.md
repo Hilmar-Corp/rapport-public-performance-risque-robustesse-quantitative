@@ -75,7 +75,7 @@ Voir `FINAL_PUBLICATION_ARCHITECTURE.md`.
 
 ## Matrice de validation quantitative
 
-Le dépôt publie une matrice de 23 contrôles couvrant notamment le backtest,
+Le dépôt publie une matrice de 27 contrôles couvrant notamment le backtest,
 l’absence de look-ahead, le risque de surajustement, la non-stationnarité,
 les régimes, les coûts d’exécution, les risques de queue, la sensibilité,
 la résilience des données et le monitoring.
@@ -138,7 +138,7 @@ Le répertoire
 `artifacts/candidates/v0.3.0/quantitative_aggregates`
 constitue le paquet candidat contrôlé des résultats quantitatifs publics agrégés.
 
-Il contient 16 sections vérifiées :
+Il contient 20 sections vérifiées :
 
 - stationnarité et dérive de distribution ;
 - régimes de marché ;
@@ -151,6 +151,11 @@ Il contient 16 sections vérifiées :
 - White Reality Check et Hansen SPA ;
 - CSCV et Probability of Backtest Overfitting ;
 - moving-block bootstrap de la surperformance composée.
+
+- backtesting formel de la VaR et de l’Expected Shortfall ;
+- analyse du Sharpe sous dépendance temporelle ;
+- reverse stress historique des épisodes de perte réalisés ;
+- reverse stress contrefactuel du modèle, du réentraînement et de la chaîne directionnelle.
 
 Les différentiels de CAGR sont positifs contre les 11 benchmarks publics.
 La significativité individuelle au seuil de 5 % est établie pour

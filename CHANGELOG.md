@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+- formal VaR and Expected Shortfall backtesting evidence;
+- temporal-dependence-adjusted Sharpe analysis;
+- historical realised-path reverse stress evidence;
+- artifact-verified counterfactual reverse stress covering 4,908 scenarios, 87 refined failure frontiers and eight frontier families;
+- strict IP-separation tests preventing publication of daily paths, internal variables, exact settings and private breakpoints;
+
 - controlled public aggregate package covering 16 quantitative validation sections;
 - artifact-verified PSR, DSR, White Reality Check, Hansen SPA and CSCV/PBO results;
 - benchmark-level moving-block bootstrap with positive CAGR differences against 11 of 11 public benchmarks and 2 individually significant comparisons at the 5% level;

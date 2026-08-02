@@ -20,6 +20,7 @@ REQUIRED_SECTIONS = (
     "placebo_test",
     "tail_risk",
     "historical_reverse_stress",
+    "counterfactual_reverse_stress",
     "var_es_backtesting",
     "historical_block_monte_carlo",
     "data_resilience",
@@ -77,6 +78,7 @@ PAYLOAD_FILENAMES = {
     "placebo_test": "placebo_test.json",
     "tail_risk": "tail_risk.json",
     "historical_reverse_stress": "historical_reverse_stress.json",
+    "counterfactual_reverse_stress": "counterfactual_reverse_stress.json",
     "var_es_backtesting": "var_es_backtesting.json",
     "historical_block_monte_carlo": "historical_block_monte_carlo.json",
     "data_resilience": "data_resilience.json",
@@ -122,6 +124,155 @@ def _sha256_file(path: Path) -> str:
             digest.update(block)
 
     return digest.hexdigest()
+
+
+def _validate_counterfactual_reverse_stress(
+    section: Any,
+) -> list[str]:
+    """Validate the public-safe counterfactual reverse-stress aggregate."""
+
+    if not isinstance(section, dict):
+        return ["counterfactual_reverse_stress must be a JSON object"]
+
+    issues: list[str] = []
+
+    exact_fields = {
+        "verification_level": "artifact-verified",
+        "observations": 2211,
+        "historical_scope": "2020-05-14_to_2026-06-02",
+        "total_scenarios": 4908,
+        "inference_stage_scenarios": 67,
+        "retraining_and_core_scenarios": 132,
+        "refinement_scenarios": 4709,
+        "refined_failure_frontiers": 87,
+        "refined_failure_families": 8,
+        "all_phase_offsets_tested": True,
+        "isolated_input_corruption_failure_found": False,
+        "dominant_vulnerability_class": "directional_core_freshness_and_integrity",
+        "daily_paths_disclosed": False,
+        "internal_variables_disclosed": False,
+        "exact_private_settings_disclosed": False,
+        "decision_status": "historical_research_evidence",
+    }
+
+    for field, expected in exact_fields.items():
+        if section.get(field) != expected:
+            issues.append(f"counterfactual_reverse_stress.{field} must equal {expected!r}")
+
+    total = section.get("total_scenarios")
+
+    inference_count = section.get("inference_stage_scenarios")
+
+    retraining_count = section.get("retraining_and_core_scenarios")
+
+    refinement_count = section.get("refinement_scenarios")
+
+    if (
+        not isinstance(
+            total,
+            int,
+        )
+        or isinstance(
+            total,
+            bool,
+        )
+        or not isinstance(
+            inference_count,
+            int,
+        )
+        or isinstance(
+            inference_count,
+            bool,
+        )
+        or not isinstance(
+            retraining_count,
+            int,
+        )
+        or isinstance(
+            retraining_count,
+            bool,
+        )
+        or not isinstance(
+            refinement_count,
+            int,
+        )
+        or isinstance(
+            refinement_count,
+            bool,
+        )
+        or total != (inference_count + retraining_count + refinement_count)
+    ):
+        issues.append("counterfactual_reverse_stress scenario counts do not reconcile")
+
+    reconciliation_delta = section.get("baseline_reconciliation_max_abs_delta")
+
+    if (
+        isinstance(
+            reconciliation_delta,
+            bool,
+        )
+        or not isinstance(
+            reconciliation_delta,
+            int | float,
+        )
+        or not (0.0 <= float(reconciliation_delta) <= 1e-12)
+    ):
+        issues.append("counterfactual_reverse_stress baseline reconciliation delta is invalid")
+
+    repetitions = section.get("randomized_repetitions")
+
+    if repetitions != {
+        "adverse_state_injection": 50,
+        "noise": 30,
+    }:
+        issues.append("counterfactual_reverse_stress randomized repetitions are invalid")
+
+    commitment = section.get("private_evidence_commitment_sha256")
+
+    if (
+        not isinstance(
+            commitment,
+            str,
+        )
+        or len(commitment) != 64
+        or any(character not in "0123456789abcdef" for character in commitment)
+    ):
+        issues.append("counterfactual_reverse_stress evidence commitment is invalid")
+
+    limitation = section.get("limitation")
+
+    if (
+        not isinstance(
+            limitation,
+            str,
+        )
+        or not limitation.strip()
+    ):
+        issues.append("counterfactual_reverse_stress limitation must be disclosed")
+
+    prohibited_public_fields = {
+        "scenario_id",
+        "severity",
+        "daily_trace",
+        "daily_returns",
+        "daily_positions",
+        "internal_inputs",
+        "model_coefficients",
+        "private_breakpoints",
+        "selected_inputs",
+        "source_path",
+        "source_ledger",
+    }
+
+    disclosed = prohibited_public_fields & set(section)
+
+    if disclosed:
+        issues.append(
+            "counterfactual_reverse_stress discloses "
+            "prohibited detailed fields: " + ", ".join(sorted(disclosed))
+        )
+
+    return issues
 
 
 def _validate_historical_reverse_stress(
@@ -1246,6 +1397,10 @@ def validate_public_quantitative_payload(
                 issues.append("exactly two bootstrap records must be significant")
 
     issues.extend(_validate_historical_reverse_stress(payload.get("historical_reverse_stress")))
+
+    issues.extend(
+        _validate_counterfactual_reverse_stress(payload.get("counterfactual_reverse_stress"))
+    )
     issues.extend(_validate_var_es_backtesting(payload.get("var_es_backtesting")))
     _validate_temporal_dependence_sharpe(
         payload,

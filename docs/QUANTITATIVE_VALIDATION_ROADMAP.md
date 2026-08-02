@@ -65,6 +65,28 @@ Le shadow live constitue une validation interne de production en
 conditions réelles : données réelles, infrastructure de production,
 monitoring et fonctionnement opérationnel. Il reste distinct d’un usage
 contractuel chez un client et d’une validation externe indépendante.
+## Analyses intégrées réalisées dans PR 16
+
+La branche PR 16 ajoute quatre contrôles quantitatifs :
+
+- backtesting formel de la VaR et de l’Expected Shortfall ;
+- estimation du Sharpe sous dépendance temporelle ;
+- reverse stress historique des épisodes de perte réalisés ;
+- reverse stress contrefactuel des entrées du modèle, du réentraînement
+  séquentiel, des données, de la cible et du signal directionnel central.
+
+La campagne contrefactuelle comprend 4 908 scénarios, 87 frontières
+raffinées et huit familles de frontières. Elle inclut les grilles fines,
+les analyses multi-graines et tous les offsets de mise à jour obsolète.
+
+Seuls les résultats agrégés et le commitment SHA-256 privé sont publiés.
+Les séries quotidiennes, variables internes, paramètres exacts, scénarios
+individuels et valeurs détaillées des points de rupture restent privés.
+
+Ces résultats constituent une preuve historique artifact-verified. Ils ne
+constituent ni une prévision, ni une validation indépendante, ni une
+décision d’aptitude à la production.
+
 ## Frontière de propriété intellectuelle
 
 Ne doivent pas être publiés :
@@ -85,7 +107,7 @@ cryptographiques de preuves privées.
 - PR 13 — matrice de contrôle et engagements de preuves ;
 - PR 14 — slippage, impact de marché et capacité ;
 - PR 15 — exports quantitatifs publics agrégés : paquet construit, vérifié et intégré ;
-- PR 16 — rapport intégré et documentation ;
+- PR 16 — rapport intégré, backtesting du risque, dépendance temporelle et reverse stress ;
 - PR 17 — durcissement de release et v0.3.0.
 
 Les releases v0.2.0 et v0.2.1 restent immuables.

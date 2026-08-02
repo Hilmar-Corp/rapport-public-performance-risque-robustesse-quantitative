@@ -17,6 +17,11 @@
       "size_bytes": 1362
     },
     {
+      "path": "counterfactual_reverse_stress.json",
+      "sha256": "8a5b35f8c9bd8da227802223c1018ac05a8e7b1ec5bd66a4e5a98b35d004aeb0",
+      "size_bytes": 1240
+    },
+    {
       "path": "data_resilience.json",
       "sha256": "7c65c02584d68b0e5be9a8c7729651f5e3c7cf7c8670c52b348e26b817bdc74a",
       "size_bytes": 1677

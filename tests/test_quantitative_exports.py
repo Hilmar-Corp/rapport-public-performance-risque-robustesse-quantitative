@@ -332,6 +332,33 @@ def valid_payload() -> dict[str, Any]:
         ),
     }
 
+    payload["counterfactual_reverse_stress"] = {
+        "all_phase_offsets_tested": True,
+        "baseline_reconciliation_max_abs_delta": 1.7763568394002505e-15,
+        "daily_paths_disclosed": False,
+        "decision_status": "historical_research_evidence",
+        "dominant_vulnerability_class": "directional_core_freshness_and_integrity",
+        "exact_private_settings_disclosed": False,
+        "historical_scope": "2020-05-14_to_2026-06-02",
+        "inference_stage_scenarios": 67,
+        "internal_variables_disclosed": False,
+        "isolated_input_corruption_failure_found": False,
+        "limitation": "The public payload omits daily paths, internal variables, model "
+        "settings and exact breakpoints. Results are historical counterfactual "
+        "evidence and are not forecasts.",
+        "observations": 2211,
+        "private_evidence_commitment_sha256": (
+            "ba1ea95fdca6dfe6fcc28140294ecfcb173a5248c82a16ae17296ae66e9d9e26"
+        ),
+        "randomized_repetitions": {"adverse_state_injection": 50, "noise": 30},
+        "refined_failure_families": 8,
+        "refined_failure_frontiers": 87,
+        "refinement_scenarios": 4709,
+        "retraining_and_core_scenarios": 132,
+        "total_scenarios": 4908,
+        "verification_level": "artifact-verified",
+    }
+
     payload["var_es_backtesting"] = {
         "verification_level": "artifact-verified",
         "methodological_status": "accepted_with_observations",
