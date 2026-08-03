@@ -309,14 +309,14 @@ jobs:
             release-assets
 
       - name: Attest OCI image provenance
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
         with:
           subject-name: ${{ steps.image.outputs.image_name }}
           subject-digest: ${{ steps.image.outputs.image_digest }}
           push-to-registry: true
 
       - name: Attest evidence archive
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
         with:
           subject-path: build/release-evidence.tar.gz
 
