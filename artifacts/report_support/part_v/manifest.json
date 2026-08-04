@@ -10,21 +10,6 @@
   "status": "Agrégats et figures dérivés pour le rapport à partir des entrées gelées de l’évaluation.",
   "files": [
     {
-      "path": "artifacts/report_support/part_v/part_v_annual_nostra_vs_bitcoin.csv",
-      "size_bytes": 3668,
-      "sha256": "0304106ff7b94d343727b42faffc9a980d294425b5b869edb42d3f73d755f894"
-    },
-    {
-      "path": "artifacts/report_support/part_v/part_v_annual_all_strategies.csv",
-      "size_bytes": 1849,
-      "sha256": "0d45a772dc7c9b2ada223bb8b7c406686e46858c9a3a54a05798e7fb7113f5e3"
-    },
-    {
-      "path": "artifacts/report_support/part_v/part_v_annual_all_strategies_long.csv",
-      "size_bytes": 3845,
-      "sha256": "666dec70c0e8b3587924c9267d524ae41fc0029e9b93cdd13243b39f02880065"
-    },
-    {
       "path": "artifacts/report_support/part_v/part_v_annual_summary.json",
       "size_bytes": 9888,
       "sha256": "b267b3d937a2880c45d46059ebf2a349eb3922a8eeecd8a90909a1dc58c881ca"
@@ -81,8 +66,8 @@
     },
     {
       "path": "tools/generate_part_v_annual_analysis.py",
-      "size_bytes": 28831,
-      "sha256": "93f7c4ebddad791a12b8829f5b8291aed03da4310d15f03232ec2574bf846860"
+      "size_bytes": 28287,
+      "sha256": "a413d2cb517481ac773172602e816e9a8d71d0505eb9bb4d1c2c14ed947f5a97"
     }
   ]
 }

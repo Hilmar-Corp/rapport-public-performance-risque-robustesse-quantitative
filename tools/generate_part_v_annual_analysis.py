@@ -1010,28 +1010,7 @@ def main() -> None:
         exist_ok=True,
     )
 
-    annual_core_path = output_dir / "part_v_annual_nostra_vs_bitcoin.csv"
-
-    annual_wide_path = output_dir / "part_v_annual_all_strategies.csv"
-
-    annual_long_path = output_dir / "part_v_annual_all_strategies_long.csv"
-
     summary_path = output_dir / "part_v_annual_summary.json"
-
-    annual_core.to_csv(
-        annual_core_path,
-        index=False,
-    )
-
-    annual_wide.to_csv(
-        annual_wide_path,
-        index=False,
-    )
-
-    annual_long.to_csv(
-        annual_long_path,
-        index=False,
-    )
 
     summary = {
         "schema_version": 1,
@@ -1142,10 +1121,7 @@ def main() -> None:
     print(f"Rotation cumulée : {combined['turnover'].sum():.12f}")
 
     print()
-    print("=== FICHIERS PRODUITS ===")
-    print(annual_core_path)
-    print(annual_wide_path)
-    print(annual_long_path)
+    print("=== FICHIER PRODUIT ===")
     print(summary_path)
 
     print()
