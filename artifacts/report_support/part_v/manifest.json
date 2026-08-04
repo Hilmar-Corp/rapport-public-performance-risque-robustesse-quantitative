@@ -7,7 +7,7 @@
     "end": "2026-06-02",
     "observations": 2211
   },
-  "status": "Agrégats et figures dérivés pour le rapport à partir des entrées gelées de l’évaluation.",
+  "status": "Figures et agrégats quantitatifs institutionnels dérivés à partir des entrées gelées de l'évaluation.",
   "files": [
     {
       "path": "artifacts/report_support/part_v/part_v_annual_summary.json",
@@ -15,59 +15,64 @@
       "sha256": "b267b3d937a2880c45d46059ebf2a349eb3922a8eeecd8a90909a1dc58c881ca"
     },
     {
+      "path": "artifacts/report_support/part_v/part_v_institutional_metrics.json",
+      "size_bytes": 3946,
+      "sha256": "60e821584c8183ecc8327601842a2b04f0eb32841b337e3acf5e809a4dc1158d"
+    },
+    {
       "path": "docs/figures/figure_5_2_nostra_vs_bitcoin_passif.png",
-      "size_bytes": 294000,
-      "sha256": "879def7fd7a4a0db4d49b346a1fe864ad26f3f70c36629b75a1cb62d66dbb155"
+      "size_bytes": 155568,
+      "sha256": "5eb27a9c4609851a6405c133aca5e2fb02683b2dbc8d173917c931e50f3c8afa"
     },
     {
       "path": "docs/figures/figure_5_3_nostra_vs_11_references.png",
-      "size_bytes": 693268,
-      "sha256": "5520d7ac816fce6050358dcc06e53fdaff747f2e10347af2ee4eec9c82d191c9"
+      "size_bytes": 417103,
+      "sha256": "a09db7c2ab0e6239f5d8d6406425ec4b9a319afd17f44706498c904e6375dc79"
     },
     {
       "path": "docs/figures/figure_5_3b_calendar_strategy_heatmap.png",
-      "size_bytes": 438561,
-      "sha256": "7c0a4c7225d9efc2d479acb7d49dcab8421ff8614a668ffc0421725b790a953f"
+      "size_bytes": 237594,
+      "sha256": "8a01e1d779027d30a0771f97d001d7ac035b6e503daedf5ad982477a064d5ab1"
     },
     {
       "path": "docs/figures/figure_5_4_exposition_absolue_rotation.png",
-      "size_bytes": 409653,
-      "sha256": "bcbcaf849254f18376900fad2710f912541ae273c8ca097301e602cc2044df37"
+      "size_bytes": 196677,
+      "sha256": "cde05363d91422afd12f64a48078acb8eddc4b7074b1a643bbf7ed4dd5d37d1b"
     },
     {
       "path": "docs/figures/figure_5_5_calendar_returns.png",
-      "size_bytes": 151781,
-      "sha256": "c32de68b3ac27848aaec1e0d464d53509e4537f1d676b4147f3cf75954a5d990"
+      "size_bytes": 54075,
+      "sha256": "847950689749f22528b41b12778dd11476cf2398f8bed1507a91327f89cd4ac3"
     },
     {
       "path": "docs/figures/figure_5_6_calendar_risk.png",
-      "size_bytes": 193983,
-      "sha256": "f7d89942c46e9d4dda980c94fc2d00050a25346c42def9d7a9e03e8088f4d10f"
+      "size_bytes": 94428,
+      "sha256": "cd74815db34275d3965a69ce491f9fe656918aad64d6295204122dbaa4fc9094"
+    },
+    {
+      "path": "docs/figures/figure_5_6b_rolling_36m_volatility.png",
+      "size_bytes": 92116,
+      "sha256": "858be13da2a59efa0c92bc7d4f48149eaf3e5a737abf40e4de2474fd15f8d16e"
     },
     {
       "path": "docs/figures/figure_5_7_annual_exposure_turnover.png",
-      "size_bytes": 161501,
-      "sha256": "ecef5b759b3d2acf3aa3c312aa7756b6375b701dfd972521161eb41608d843e6"
+      "size_bytes": 81427,
+      "sha256": "14edcbc4125ecc5ef12be6259b696db2707f8286abf2bb69727e49e1203d0fe4"
     },
     {
-      "path": "tools/generate_report_equity_figure.py",
-      "size_bytes": 12303,
-      "sha256": "aacd2663bff7062f60a769e79291541235c3791d99fccd10deb84b377af735fb"
+      "path": "docs/tables/part_v_institutional_metrics.md",
+      "size_bytes": 1874,
+      "sha256": "37aedf563f089000fe07f34e1e307b3f2cacbeee8abbd70b160b0e58ab36728e"
     },
     {
-      "path": "tools/generate_report_benchmark_equity_figure.py",
-      "size_bytes": 12505,
-      "sha256": "7627be214ba9f76e1dc03714a9675efaa3f727a74c9793f01633fd8f3d9630f5"
+      "path": "tools/generate_part_v_institutional_metrics.py",
+      "size_bytes": 22917,
+      "sha256": "0b91e481d6bdd38193a2a61bfb2d9a1c3cacfc1615fb8711a5211ecc1f9e9f10"
     },
     {
-      "path": "tools/generate_report_exposure_turnover_figure.py",
-      "size_bytes": 8853,
-      "sha256": "9d9e005aa285105feede4da106deb22e08e0af68bf70538893cd717624cf00aa"
-    },
-    {
-      "path": "tools/generate_part_v_annual_analysis.py",
-      "size_bytes": 28287,
-      "sha256": "a413d2cb517481ac773172602e816e9a8d71d0505eb9bb4d1c2c14ed947f5a97"
+      "path": "tools/regenerate_part_v_figures_quant.py",
+      "size_bytes": 24795,
+      "sha256": "88289b3230f43958aebc03e165e3c5ff49d0fc775858c4074ffa986ad5c08eaa"
     }
   ]
 }

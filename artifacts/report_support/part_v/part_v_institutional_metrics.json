@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "analysis": "part_v_institutional_completion",
+  "model": "Nostra AI V5.246",
+  "period": {
+    "start": "2020-05-14",
+    "end": "2026-06-02",
+    "observations": 2211
+  },
+  "sources": {
+    "private_input_sha256": "056e13af2b26b0e449e502bf814db1a6a396f90aa4cb2bae74b2771ce8285c2e",
+    "public_curves_sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d"
+  },
+  "performance_horizons": [
+    {
+      "horizon": "2026 YTD",
+      "requested_anchor": "2025-12-31",
+      "effective_anchor": "2025-12-31",
+      "as_of": "2026-06-02",
+      "elapsed_days": 153,
+      "annualized": false,
+      "nostra_return": -0.011301710194350556,
+      "bitcoin_return": -0.23206654966866014,
+      "active_return": 0.22076483947430958
+    },
+    {
+      "horizon": "1 an",
+      "requested_anchor": "2025-06-02",
+      "effective_anchor": "2025-06-02",
+      "as_of": "2026-06-02",
+      "elapsed_days": 365,
+      "annualized": false,
+      "nostra_return": -0.05713928784439537,
+      "bitcoin_return": -0.3641670316997264,
+      "active_return": 0.30702774385533105
+    },
+    {
+      "horizon": "3 ans annualisés",
+      "requested_anchor": "2023-06-02",
+      "effective_anchor": "2023-06-02",
+      "as_of": "2026-06-02",
+      "elapsed_days": 1096,
+      "annualized": true,
+      "nostra_return": 0.40763725118424143,
+      "bitcoin_return": 0.35179103843684545,
+      "active_return": 0.055846212747395985
+    },
+    {
+      "horizon": "5 ans annualisés",
+      "requested_anchor": "2021-06-02",
+      "effective_anchor": "2021-06-02",
+      "as_of": "2026-06-02",
+      "elapsed_days": 1826,
+      "annualized": true,
+      "nostra_return": 0.34821740471845564,
+      "bitcoin_return": 0.12371216978583233,
+      "active_return": 0.2245052349326233
+    },
+    {
+      "horizon": "Depuis l'origine annualisé",
+      "requested_anchor": null,
+      "effective_anchor": "2020-05-14",
+      "as_of": "2026-06-02",
+      "elapsed_days": 2210,
+      "annualized": true,
+      "nostra_return": 0.5252682693076194,
+      "bitcoin_return": 0.3861863155723617,
+      "active_return": 0.13908195373525767
+    },
+    {
+      "horizon": "Depuis l'origine cumulé",
+      "requested_anchor": null,
+      "effective_anchor": "2020-05-14",
+      "as_of": "2026-06-02",
+      "elapsed_days": 2210,
+      "annualized": false,
+      "nostra_return": 11.863641976380386,
+      "bitcoin_return": 6.212950328296465,
+      "active_return": 5.650691648083921
+    }
+  ],
+  "relative_to_bitcoin": {
+    "daily_observations": 2211,
+    "monthly_observations": 74,
+    "daily_correlation": 0.8527598303225171,
+    "daily_beta": 0.4322605819614285,
+    "tracking_error_annualized": 0.3614661632572361,
+    "information_ratio": -0.07779302895739623,
+    "upside_capture_ratio": 0.41923840022991893,
+    "downside_capture_ratio": 0.4411260674233696,
+    "capture_frequency": "monthly",
+    "tracking_error_annualization": 365
+  },
+  "rolling_36_month_volatility": {
+    "method": "Annualized standard deviation of 36 monthly net returns",
+    "window_months": 36,
+    "annualization_factor": 12,
+    "first_available_date": "2023-04-30",
+    "latest_date": "2026-06-02",
+    "latest_nostra_volatility": 0.30782302548607093,
+    "latest_bitcoin_volatility": 0.483950298007639,
+    "year_end_records": [
+      {
+        "date": "2023-12-31",
+        "nostra_volatility_36m": 0.29358183092906376,
+        "bitcoin_volatility_36m": 0.659909502775273
+      },
+      {
+        "date": "2024-12-31",
+        "nostra_volatility_36m": 0.32403627795570894,
+        "bitcoin_volatility_36m": 0.6000012873122859
+      },
+      {
+        "date": "2025-12-31",
+        "nostra_volatility_36m": 0.3197916434674299,
+        "bitcoin_volatility_36m": 0.5157252013752147
+      },
+      {
+        "date": "2026-06-02",
+        "nostra_volatility_36m": 0.30782302548607093,
+        "bitcoin_volatility_36m": 0.483950298007639
+      }
+    ]
+  }
+}
