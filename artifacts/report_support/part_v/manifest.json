@@ -31,8 +31,8 @@
     },
     {
       "path": "docs/figures/figure_5_2_nostra_vs_bitcoin_passif.png",
-      "size_bytes": 294045,
-      "sha256": "1204b85cb6904ccc7bb581d4b7318a242d3c8ece144e1801f9e1ec8ce6063158"
+      "size_bytes": 294000,
+      "sha256": "879def7fd7a4a0db4d49b346a1fe864ad26f3f70c36629b75a1cb62d66dbb155"
     },
     {
       "path": "docs/figures/figure_5_3_nostra_vs_11_references.png",
@@ -41,13 +41,13 @@
     },
     {
       "path": "docs/figures/figure_5_3b_calendar_strategy_heatmap.png",
-      "size_bytes": 438597,
-      "sha256": "5e8d482f63fe7947158ac402798a3ab4ddec3853e245f7e835c8e5446a964825"
+      "size_bytes": 438561,
+      "sha256": "7c0a4c7225d9efc2d479acb7d49dcab8421ff8614a668ffc0421725b790a953f"
     },
     {
       "path": "docs/figures/figure_5_4_exposition_absolue_rotation.png",
-      "size_bytes": 409772,
-      "sha256": "af19227683d7bdca6e11d7838b337733e79b2270cadf7e5d9be24ece1eda94e7"
+      "size_bytes": 409653,
+      "sha256": "bcbcaf849254f18376900fad2710f912541ae273c8ca097301e602cc2044df37"
     },
     {
       "path": "docs/figures/figure_5_5_calendar_returns.png",
@@ -61,28 +61,28 @@
     },
     {
       "path": "docs/figures/figure_5_7_annual_exposure_turnover.png",
-      "size_bytes": 161666,
-      "sha256": "1f1684db0ecba2461a67284472aefbd82f84a13e07316aeb827414c43699e91a"
+      "size_bytes": 161501,
+      "sha256": "ecef5b759b3d2acf3aa3c312aa7756b6375b701dfd972521161eb41608d843e6"
     },
     {
       "path": "tools/generate_report_equity_figure.py",
-      "size_bytes": 12773,
-      "sha256": "a1c2d9d636d674229ad02bd25b07f2f5d5dd49084e7a9066f10e2710951de694"
+      "size_bytes": 12303,
+      "sha256": "aacd2663bff7062f60a769e79291541235c3791d99fccd10deb84b377af735fb"
     },
     {
       "path": "tools/generate_report_benchmark_equity_figure.py",
-      "size_bytes": 12987,
-      "sha256": "20e267268bf94f15f2fbc934ea976c0ea7731f5ec3ca146b290992b8627d379f"
+      "size_bytes": 12505,
+      "sha256": "7627be214ba9f76e1dc03714a9675efaa3f727a74c9793f01633fd8f3d9630f5"
     },
     {
       "path": "tools/generate_report_exposure_turnover_figure.py",
-      "size_bytes": 9470,
-      "sha256": "9c7b7cae9f17fadf0fce5aeb3afa8c3fab7c2e2000fbe4dc399b7e14e1f28aad"
+      "size_bytes": 8853,
+      "sha256": "9d9e005aa285105feede4da106deb22e08e0af68bf70538893cd717624cf00aa"
     },
     {
       "path": "tools/generate_part_v_annual_analysis.py",
-      "size_bytes": 31448,
-      "sha256": "aaf908c576daf9631648ee4613799044896b0f5e3d116d2e1b324e6420170926"
+      "size_bytes": 28831,
+      "sha256": "93f7c4ebddad791a12b8829f5b8291aed03da4310d15f03232ec2574bf846860"
     }
   ]
 }

@@ -9,11 +9,10 @@ import math
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.colors import TwoSlopeNorm
-from matplotlib.ticker import PercentFormatter
 import numpy as np
 import pandas as pd
-
+from matplotlib.colors import TwoSlopeNorm
+from matplotlib.ticker import PercentFormatter
 
 EXPECTED_OBSERVATIONS = 2211
 EXPECTED_START = pd.Timestamp("2020-05-14", tz="UTC")
@@ -75,9 +74,7 @@ def calendar_max_drawdown(returns: pd.Series) -> float:
         )
     )[1:]
 
-    drawdown = (
-        local_equity.to_numpy(dtype=float) / running_max
-    ) - 1.0
+    drawdown = (local_equity.to_numpy(dtype=float) / running_max) - 1.0
 
     return float(np.min(drawdown))
 
@@ -88,32 +85,21 @@ def annual_sharpe(returns: pd.Series) -> float:
     if volatility <= 0:
         return float("nan")
 
-    return (
-        float(returns.mean())
-        / volatility
-        * math.sqrt(ANNUALIZATION_FACTOR)
-    )
+    return float(returns.mean()) / volatility * math.sqrt(ANNUALIZATION_FACTOR)
 
 
 def validate_dates(frame: pd.DataFrame) -> None:
     if len(frame) != EXPECTED_OBSERVATIONS:
-        raise ValueError(
-            f"{EXPECTED_OBSERVATIONS} observations attendues, "
-            f"{len(frame)} obtenues."
-        )
+        raise ValueError(f"{EXPECTED_OBSERVATIONS} observations attendues, {len(frame)} obtenues.")
 
     first_date = frame["timestamp"].iloc[0]
     last_date = frame["timestamp"].iloc[-1]
 
     if first_date != EXPECTED_START:
-        raise ValueError(
-            f"Date initiale incorrecte : {first_date}"
-        )
+        raise ValueError(f"Date initiale incorrecte : {first_date}")
 
     if last_date != EXPECTED_END:
-        raise ValueError(
-            f"Date finale incorrecte : {last_date}"
-        )
+        raise ValueError(f"Date finale incorrecte : {last_date}")
 
 
 def load_private(
@@ -130,16 +116,11 @@ def load_private(
         position_column,
     ]
 
-    missing = [
-        column
-        for column in required
-        if column not in frame.columns
-    ]
+    missing = [column for column in required if column not in frame.columns]
 
     if missing:
         raise ValueError(
-            f"Colonnes privées absentes : {missing}\n"
-            f"Colonnes disponibles : {list(frame.columns)}"
+            f"Colonnes privées absentes : {missing}\nColonnes disponibles : {list(frame.columns)}"
         )
 
     frame = frame[required].copy()
@@ -178,31 +159,21 @@ def load_private(
     final_equity = float(frame["nostra_equity"].iloc[-1])
 
     if abs(final_equity - EXPECTED_NOSTRA_FINAL) > 1e-10:
-        raise ValueError(
-            "Capital final Nostra non réconcilié : "
-            f"{final_equity:.15f}"
-        )
+        raise ValueError(f"Capital final Nostra non réconcilié : {final_equity:.15f}")
 
-    frame["nostra_return"] = returns_from_equity(
-        frame["nostra_equity"]
-    )
+    frame["nostra_return"] = returns_from_equity(frame["nostra_equity"])
 
     previous = frame["nostra_exposure"].shift(
         1,
         fill_value=0.0,
     )
 
-    frame["turnover"] = (
-        frame["nostra_exposure"] - previous
-    ).abs()
+    frame["turnover"] = (frame["nostra_exposure"] - previous).abs()
 
     turnover = float(frame["turnover"].sum())
 
     if abs(turnover - EXPECTED_TURNOVER) > 1e-6:
-        raise ValueError(
-            "Rotation cumulée non réconciliée : "
-            f"{turnover:.12f}"
-        )
+        raise ValueError(f"Rotation cumulée non réconciliée : {turnover:.12f}")
 
     return frame
 
@@ -211,21 +182,12 @@ def load_public(path: Path) -> pd.DataFrame:
     frame = pd.read_csv(path)
 
     if "timestamp" not in frame.columns:
-        raise ValueError(
-            "La colonne timestamp est absente du fichier public."
-        )
+        raise ValueError("La colonne timestamp est absente du fichier public.")
 
-    missing = [
-        column
-        for column in PUBLIC_LABELS
-        if column not in frame.columns
-    ]
+    missing = [column for column in PUBLIC_LABELS if column not in frame.columns]
 
     if missing:
-        raise ValueError(
-            "Courbes publiques absentes : "
-            + ", ".join(missing)
-        )
+        raise ValueError("Courbes publiques absentes : " + ", ".join(missing))
 
     frame["timestamp"] = pd.to_datetime(
         frame["timestamp"],
@@ -233,11 +195,7 @@ def load_public(path: Path) -> pd.DataFrame:
         errors="raise",
     )
 
-    frame = (
-        frame.sort_values("timestamp")
-        .drop_duplicates("timestamp")
-        .reset_index(drop=True)
-    )
+    frame = frame.sort_values("timestamp").drop_duplicates("timestamp").reset_index(drop=True)
 
     validate_dates(frame)
 
@@ -247,15 +205,10 @@ def load_public(path: Path) -> pd.DataFrame:
             errors="raise",
         )
 
-    final_bitcoin = float(
-        frame["buy_and_hold_equity"].iloc[-1]
-    )
+    final_bitcoin = float(frame["buy_and_hold_equity"].iloc[-1])
 
     if abs(final_bitcoin - EXPECTED_BITCOIN_FINAL) > 1e-10:
-        raise ValueError(
-            "Capital final du bitcoin passif non réconcilié : "
-            f"{final_bitcoin:.15f}"
-        )
+        raise ValueError(f"Capital final du bitcoin passif non réconcilié : {final_bitcoin:.15f}")
 
     return frame
 
@@ -280,25 +233,18 @@ def annual_metrics_for_returns(
     for year, group in working.groupby("year", sort=True):
         group_returns = group["return"].astype(float)
 
-        compounded_return = float(
-            (1.0 + group_returns).prod() - 1.0
-        )
+        compounded_return = float((1.0 + group_returns).prod() - 1.0)
 
-        volatility = float(
-            group_returns.std(ddof=1)
-            * math.sqrt(ANNUALIZATION_FACTOR)
-        )
+        volatility = float(group_returns.std(ddof=1) * math.sqrt(ANNUALIZATION_FACTOR))
 
         records.append(
             {
                 "year": int(year),
-                "observations": int(len(group)),
+                "observations": len(group),
                 "return": compounded_return,
                 "annualized_volatility": volatility,
                 "sharpe": annual_sharpe(group_returns),
-                "maximum_drawdown": calendar_max_drawdown(
-                    group_returns
-                ),
+                "maximum_drawdown": calendar_max_drawdown(group_returns),
                 "ending_equity": float(group["equity"].iloc[-1]),
             }
         )
@@ -348,24 +294,14 @@ def build_core_annual_table(
             {
                 "year": int(year),
                 "exposure_mean": float(exposure.mean()),
-                "absolute_exposure_mean": float(
-                    exposure.abs().mean()
-                ),
+                "absolute_exposure_mean": float(exposure.abs().mean()),
                 "exposure_minimum": float(exposure.min()),
                 "exposure_maximum": float(exposure.max()),
                 "turnover": float(turnover.sum()),
-                "modeled_cost_rate_sum": float(
-                    turnover.sum() * cost_bps / 10000.0
-                ),
-                "positive_exposure_share": float(
-                    (exposure > 0).mean()
-                ),
-                "negative_exposure_share": float(
-                    (exposure < 0).mean()
-                ),
-                "zero_exposure_share": float(
-                    np.isclose(exposure, 0.0).mean()
-                ),
+                "modeled_cost_rate_sum": float(turnover.sum() * cost_bps / 10000.0),
+                "positive_exposure_share": float((exposure > 0).mean()),
+                "negative_exposure_share": float((exposure < 0).mean()),
+                "zero_exposure_share": float(np.isclose(exposure, 0.0).mean()),
             }
         )
 
@@ -377,24 +313,17 @@ def build_core_annual_table(
         validate="one_to_one",
     )
 
-    annual["active_return"] = (
-        annual["nostra_return"]
-        - annual["bitcoin_return"]
-    )
+    annual["active_return"] = annual["nostra_return"] - annual["bitcoin_return"]
 
     annual["volatility_reduction"] = (
-        annual["bitcoin_annualized_volatility"]
-        - annual["nostra_annualized_volatility"]
+        annual["bitcoin_annualized_volatility"] - annual["nostra_annualized_volatility"]
     )
 
     annual["drawdown_reduction"] = (
-        annual["nostra_maximum_drawdown"]
-        - annual["bitcoin_maximum_drawdown"]
+        annual["nostra_maximum_drawdown"] - annual["bitcoin_maximum_drawdown"]
     )
 
-    annual["partial_period"] = annual["year"].isin(
-        [2020, 2026]
-    )
+    annual["partial_period"] = annual["year"].isin([2020, 2026])
 
     return annual
 
@@ -404,10 +333,7 @@ def build_all_strategy_annual_returns(
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     strategy_equity_columns = {
         "Nostra AI V5.246": "nostra_equity",
-        **{
-            label: column
-            for column, label in PUBLIC_LABELS.items()
-        },
+        **{label: column for column, label in PUBLIC_LABELS.items()},
     }
 
     wide_records: list[dict[str, float | int]] = []
@@ -421,13 +347,9 @@ def build_all_strategy_annual_returns(
         }
 
         for label, column in strategy_equity_columns.items():
-            returns = returns_from_equity(
-                combined[column]
-            ).loc[group.index]
+            returns = returns_from_equity(combined[column]).loc[group.index]
 
-            record[label] = float(
-                (1.0 + returns).prod() - 1.0
-            )
+            record[label] = float((1.0 + returns).prod() - 1.0)
 
         wide_records.append(record)
 
@@ -462,24 +384,15 @@ def plot_annual_returns(
     annual: pd.DataFrame,
     output: Path,
 ) -> None:
-    labels = [
-        format_year(int(year))
-        for year in annual["year"]
-    ]
+    labels = [format_year(int(year)) for year in annual["year"]]
 
     x = np.arange(len(labels))
     width = 0.36
 
-    figure, axis = plt.subplots(
-        figsize=(10.2, 5.7)
-    )
+    figure, axis = plt.subplots(figsize=(10.2, 5.7))
 
-    nostra_values = (
-        annual["nostra_return"].to_numpy() * 100
-    )
-    bitcoin_values = (
-        annual["bitcoin_return"].to_numpy() * 100
-    )
+    nostra_values = annual["nostra_return"].to_numpy() * 100
+    bitcoin_values = annual["bitcoin_return"].to_numpy() * 100
 
     bars_nostra = axis.bar(
         x - width / 2,
@@ -507,15 +420,13 @@ def plot_annual_returns(
     axis.set_xticklabels(labels)
 
     axis.set_ylabel("Rendement calendaire")
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.set_title(
         "Rendements calendaires",
         loc="left",
         fontsize=15,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.legend(
@@ -582,10 +493,7 @@ def plot_annual_risk(
     annual: pd.DataFrame,
     output: Path,
 ) -> None:
-    labels = [
-        format_year(int(year))
-        for year in annual["year"]
-    ]
+    labels = [format_year(int(year)) for year in annual["year"]]
 
     x = np.arange(len(labels))
     width = 0.36
@@ -619,15 +527,13 @@ def plot_annual_risk(
     )
 
     axis.set_ylabel("Volatilité annualisée")
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.set_title(
         "A. Volatilité par année calendaire",
         loc="left",
         fontsize=12,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.legend(
@@ -659,15 +565,13 @@ def plot_annual_risk(
     )
 
     axis.set_ylabel("Perte maximale calendaire")
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.set_title(
         "B. Perte maximale par année calendaire",
         loc="left",
         fontsize=12,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.set_xticks(x)
@@ -718,10 +622,7 @@ def plot_annual_exposure_turnover(
     annual: pd.DataFrame,
     output: Path,
 ) -> None:
-    labels = [
-        format_year(int(year))
-        for year in annual["year"]
-    ]
+    labels = [format_year(int(year)) for year in annual["year"]]
 
     x = np.arange(len(labels))
     width = 0.36
@@ -752,15 +653,13 @@ def plot_annual_exposure_turnover(
     )
 
     axis.set_ylabel("Exposition")
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.set_title(
         "A. Exposition moyenne par année",
         loc="left",
         fontsize=12,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.legend(
@@ -778,12 +677,12 @@ def plot_annual_exposure_turnover(
         color="#7D8992",
     )
 
-    axis.set_ylabel("Unités d’exposition")
+    axis.set_ylabel("Unités d'exposition")
     axis.set_title(
         "B. Rotation annuelle",
         loc="left",
         fontsize=12,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.set_xticks(x)
@@ -819,8 +718,7 @@ def plot_annual_exposure_turnover(
     figure.text(
         0.08,
         0.015,
-        "* Période partielle. La rotation inclut le "
-        "mouvement initial depuis une exposition nulle.",
+        "* Période partielle. La rotation inclut le mouvement initial depuis une exposition nulle.",
         fontsize=7.8,
         color="#626B72",
     )
@@ -850,35 +748,19 @@ def plot_strategy_heatmap(
     combined: pd.DataFrame,
     output: Path,
 ) -> None:
-    strategy_columns = [
-        column
-        for column in wide.columns
-        if column != "year"
-    ]
+    strategy_columns = [column for column in wide.columns if column != "year"]
 
     overall_cagrs: dict[str, float] = {}
 
     mapping = {
         "Nostra AI V5.246": "nostra_equity",
-        **{
-            label: column
-            for column, label in PUBLIC_LABELS.items()
-        },
+        **{label: column for column, label in PUBLIC_LABELS.items()},
     }
 
     for label, equity_column in mapping.items():
-        final_equity = float(
-            combined[equity_column].iloc[-1]
-        )
+        final_equity = float(combined[equity_column].iloc[-1])
 
-        overall_cagrs[label] = (
-            final_equity
-            ** (
-                ANNUALIZATION_FACTOR
-                / EXPECTED_OBSERVATIONS
-            )
-            - 1.0
-        )
+        overall_cagrs[label] = final_equity ** (ANNUALIZATION_FACTOR / EXPECTED_OBSERVATIONS) - 1.0
 
     ordered = sorted(
         strategy_columns,
@@ -886,17 +768,9 @@ def plot_strategy_heatmap(
         reverse=True,
     )
 
-    matrix = (
-        wide.set_index("year")[ordered]
-        .transpose()
-        .to_numpy(dtype=float)
-        * 100
-    )
+    matrix = wide.set_index("year")[ordered].transpose().to_numpy(dtype=float) * 100
 
-    years = [
-        format_year(int(year))
-        for year in wide["year"]
-    ]
+    years = [format_year(int(year)) for year in wide["year"]]
 
     max_abs = max(
         abs(float(np.nanmin(matrix))),
@@ -909,9 +783,7 @@ def plot_strategy_heatmap(
         vmax=max_abs,
     )
 
-    figure, axis = plt.subplots(
-        figsize=(10.5, 7.4)
-    )
+    figure, axis = plt.subplots(figsize=(10.5, 7.4))
 
     image = axis.imshow(
         matrix,
@@ -930,15 +802,13 @@ def plot_strategy_heatmap(
         "Rendements calendaires des douze stratégies",
         loc="left",
         fontsize=14,
-        fontweight="semibold",
+        fontweight="bold",
         pad=14,
     )
 
     for row_index in range(matrix.shape[0]):
         for column_index in range(matrix.shape[1]):
-            value = float(
-                matrix[row_index, column_index]
-            )
+            value = float(matrix[row_index, column_index])
 
             axis.text(
                 column_index,
@@ -947,11 +817,7 @@ def plot_strategy_heatmap(
                 ha="center",
                 va="center",
                 fontsize=7.2,
-                color=(
-                    "white"
-                    if abs(value) > max_abs * 0.48
-                    else "#20262B"
-                ),
+                color=("white" if abs(value) > max_abs * 0.48 else "#20262B"),
             )
 
     colorbar = figure.colorbar(
@@ -961,9 +827,7 @@ def plot_strategy_heatmap(
         pad=0.025,
     )
 
-    colorbar.ax.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    colorbar.ax.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.tick_params(
         axis="both",
@@ -980,7 +844,7 @@ def plot_strategy_heatmap(
         0.19,
         0.015,
         "* Période partielle. Classement des lignes selon "
-        "le CAGR obtenu sur l’ensemble de la période.",
+        "le CAGR obtenu sur l'ensemble de la période.",
         fontsize=7.8,
         color="#626B72",
     )
@@ -1002,8 +866,7 @@ def plot_strategy_heatmap(
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Produit les agrégats et figures annuels "
-            "nécessaires à la Partie V du rapport."
+            "Produit les agrégats et figures annuels nécessaires à la Partie V du rapport."
         )
     )
 
@@ -1016,10 +879,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--public-curves",
         type=Path,
-        default=Path(
-            "artifacts/releases/v0.2.1/"
-            "baseline_daily_curves.csv"
-        ),
+        default=Path("artifacts/releases/v0.2.1/baseline_daily_curves.csv"),
     )
 
     parser.add_argument(
@@ -1046,17 +906,13 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path(
-            "artifacts/report_support/part_v"
-        ),
+        default=Path("artifacts/report_support/part_v"),
     )
 
     parser.add_argument(
         "--figures-dir",
         type=Path,
-        default=Path(
-            "docs/figures"
-        ),
+        default=Path("docs/figures"),
     )
 
     return parser.parse_args()
@@ -1065,21 +921,13 @@ def parse_arguments() -> argparse.Namespace:
 def main() -> None:
     arguments = parse_arguments()
 
-    private_path = (
-        arguments.private_input.expanduser().resolve()
-    )
+    private_path = arguments.private_input.expanduser().resolve()
 
-    public_path = (
-        arguments.public_curves.expanduser().resolve()
-    )
+    public_path = arguments.public_curves.expanduser().resolve()
 
-    output_dir = (
-        arguments.output_dir.expanduser().resolve()
-    )
+    output_dir = arguments.output_dir.expanduser().resolve()
 
-    figures_dir = (
-        arguments.figures_dir.expanduser().resolve()
-    )
+    figures_dir = arguments.figures_dir.expanduser().resolve()
 
     private = load_private(
         private_path,
@@ -1099,22 +947,16 @@ def main() -> None:
 
     validate_dates(combined)
 
-    combined["bitcoin_return"] = returns_from_equity(
-        combined["buy_and_hold_equity"]
-    )
+    combined["bitcoin_return"] = returns_from_equity(combined["buy_and_hold_equity"])
 
     annual_core = build_core_annual_table(
         combined,
         arguments.cost_bps,
     )
 
-    annual_wide, annual_long = (
-        build_all_strategy_annual_returns(combined)
-    )
+    annual_wide, annual_long = build_all_strategy_annual_returns(combined)
 
-    annual_ranks = annual_long[
-        annual_long["strategy"] == "Nostra AI V5.246"
-    ][
+    annual_ranks = annual_long[annual_long["strategy"] == "Nostra AI V5.246"][
         [
             "year",
             "rank",
@@ -1137,9 +979,7 @@ def main() -> None:
         "year",
         sort=True,
     ):
-        public_group = group[
-            group["strategy"] != "Nostra AI V5.246"
-        ].sort_values(
+        public_group = group[group["strategy"] != "Nostra AI V5.246"].sort_values(
             "calendar_return",
             ascending=False,
         )
@@ -1149,12 +989,8 @@ def main() -> None:
         best_public_records.append(
             {
                 "year": int(year),
-                "best_public_strategy": str(
-                    best["strategy"]
-                ),
-                "best_public_return": float(
-                    best["calendar_return"]
-                ),
+                "best_public_strategy": str(best["strategy"]),
+                "best_public_return": float(best["calendar_return"]),
             }
         )
 
@@ -1174,25 +1010,13 @@ def main() -> None:
         exist_ok=True,
     )
 
-    annual_core_path = (
-        output_dir
-        / "part_v_annual_nostra_vs_bitcoin.csv"
-    )
+    annual_core_path = output_dir / "part_v_annual_nostra_vs_bitcoin.csv"
 
-    annual_wide_path = (
-        output_dir
-        / "part_v_annual_all_strategies.csv"
-    )
+    annual_wide_path = output_dir / "part_v_annual_all_strategies.csv"
 
-    annual_long_path = (
-        output_dir
-        / "part_v_annual_all_strategies_long.csv"
-    )
+    annual_long_path = output_dir / "part_v_annual_all_strategies_long.csv"
 
-    summary_path = (
-        output_dir
-        / "part_v_annual_summary.json"
-    )
+    summary_path = output_dir / "part_v_annual_summary.json"
 
     annual_core.to_csv(
         annual_core_path,
@@ -1218,43 +1042,19 @@ def main() -> None:
             "observations": EXPECTED_OBSERVATIONS,
         },
         "sources": {
-            "private_input_sha256": sha256_file(
-                private_path
-            ),
-            "public_curves_sha256": sha256_file(
-                public_path
-            ),
+            "private_input_sha256": sha256_file(private_path),
+            "public_curves_sha256": sha256_file(public_path),
         },
         "reconciliations": {
-            "nostra_final_equity": float(
-                combined["nostra_equity"].iloc[-1]
-            ),
-            "bitcoin_final_equity": float(
-                combined[
-                    "buy_and_hold_equity"
-                ].iloc[-1]
-            ),
-            "turnover_total": float(
-                combined["turnover"].sum()
-            ),
-            "exposure_mean": float(
-                combined["nostra_exposure"].mean()
-            ),
-            "absolute_exposure_mean": float(
-                combined[
-                    "nostra_exposure"
-                ].abs().mean()
-            ),
-            "exposure_minimum": float(
-                combined["nostra_exposure"].min()
-            ),
-            "exposure_maximum": float(
-                combined["nostra_exposure"].max()
-            ),
+            "nostra_final_equity": float(combined["nostra_equity"].iloc[-1]),
+            "bitcoin_final_equity": float(combined["buy_and_hold_equity"].iloc[-1]),
+            "turnover_total": float(combined["turnover"].sum()),
+            "exposure_mean": float(combined["nostra_exposure"].mean()),
+            "absolute_exposure_mean": float(combined["nostra_exposure"].abs().mean()),
+            "exposure_minimum": float(combined["nostra_exposure"].min()),
+            "exposure_maximum": float(combined["nostra_exposure"].max()),
         },
-        "annual_records": annual_core.to_dict(
-            orient="records"
-        ),
+        "annual_records": annual_core.to_dict(orient="records"),
     }
 
     summary_path.write_text(
@@ -1269,27 +1069,23 @@ def main() -> None:
 
     plot_annual_returns(
         annual_core,
-        figures_dir
-        / "figure_5_5_calendar_returns.png",
+        figures_dir / "figure_5_5_calendar_returns.png",
     )
 
     plot_annual_risk(
         annual_core,
-        figures_dir
-        / "figure_5_6_calendar_risk.png",
+        figures_dir / "figure_5_6_calendar_risk.png",
     )
 
     plot_annual_exposure_turnover(
         annual_core,
-        figures_dir
-        / "figure_5_7_annual_exposure_turnover.png",
+        figures_dir / "figure_5_7_annual_exposure_turnover.png",
     )
 
     plot_strategy_heatmap(
         annual_wide,
         combined,
-        figures_dir
-        / "figure_5_3b_calendar_strategy_heatmap.png",
+        figures_dir / "figure_5_3b_calendar_strategy_heatmap.png",
     )
 
     display_columns = [
@@ -1333,37 +1129,17 @@ def main() -> None:
     print(
         display.to_string(
             index=False,
-            formatters={
-                column: (
-                    lambda value: f"{value:.4f} %"
-                )
-                for column in percentage_columns
-            },
+            formatters={column: (lambda value: f"{value:.4f} %") for column in percentage_columns},
         )
     )
 
     print()
     print("=== RÉCONCILIATION GLOBALE ===")
-    print(
-        "Capital final Nostra : "
-        f"{combined['nostra_equity'].iloc[-1]:.12f}"
-    )
-    print(
-        "Capital final bitcoin : "
-        f"{combined['buy_and_hold_equity'].iloc[-1]:.12f}"
-    )
-    print(
-        "Exposition moyenne : "
-        f"{combined['nostra_exposure'].mean() * 100:.8f} %"
-    )
-    print(
-        "Exposition absolue moyenne : "
-        f"{combined['nostra_exposure'].abs().mean() * 100:.8f} %"
-    )
-    print(
-        "Rotation cumulée : "
-        f"{combined['turnover'].sum():.12f}"
-    )
+    print(f"Capital final Nostra : {combined['nostra_equity'].iloc[-1]:.12f}")
+    print(f"Capital final bitcoin : {combined['buy_and_hold_equity'].iloc[-1]:.12f}")
+    print(f"Exposition moyenne : {combined['nostra_exposure'].mean() * 100:.8f} %")
+    print(f"Exposition absolue moyenne : {combined['nostra_exposure'].abs().mean() * 100:.8f} %")
+    print(f"Rotation cumulée : {combined['turnover'].sum():.12f}")
 
     print()
     print("=== FICHIERS PRODUITS ===")
@@ -1374,33 +1150,15 @@ def main() -> None:
 
     print()
     print("=== FIGURES PRODUITES ===")
-    print(
-        figures_dir
-        / "figure_5_3b_calendar_strategy_heatmap.png"
-    )
-    print(
-        figures_dir
-        / "figure_5_5_calendar_returns.png"
-    )
-    print(
-        figures_dir
-        / "figure_5_6_calendar_risk.png"
-    )
-    print(
-        figures_dir
-        / "figure_5_7_annual_exposure_turnover.png"
-    )
+    print(figures_dir / "figure_5_3b_calendar_strategy_heatmap.png")
+    print(figures_dir / "figure_5_5_calendar_returns.png")
+    print(figures_dir / "figure_5_6_calendar_risk.png")
+    print(figures_dir / "figure_5_7_annual_exposure_turnover.png")
 
     print()
     print("=== EMPREINTES SOURCES ===")
-    print(
-        "Privé : "
-        f"{sha256_file(private_path)}"
-    )
-    print(
-        "Public : "
-        f"{sha256_file(public_path)}"
-    )
+    print(f"Privé : {sha256_file(private_path)}")
+    print(f"Public : {sha256_file(public_path)}")
 
 
 if __name__ == "__main__":

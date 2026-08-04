@@ -8,9 +8,8 @@ from pathlib import Path
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
-from matplotlib.ticker import PercentFormatter
 import pandas as pd
-
+from matplotlib.ticker import PercentFormatter
 
 EXPECTED_OBSERVATIONS = 2211
 EXPECTED_START = pd.Timestamp("2020-05-14", tz="UTC")
@@ -34,16 +33,11 @@ def load_data(
 ) -> pd.DataFrame:
     frame = pd.read_csv(path)
 
-    missing = [
-        column
-        for column in (date_column, position_column)
-        if column not in frame.columns
-    ]
+    missing = [column for column in (date_column, position_column) if column not in frame.columns]
 
     if missing:
         raise ValueError(
-            f"Colonnes absentes : {missing}\n"
-            f"Colonnes disponibles : {list(frame.columns)}"
+            f"Colonnes absentes : {missing}\nColonnes disponibles : {list(frame.columns)}"
         )
 
     frame = frame[[date_column, position_column]].copy()
@@ -72,25 +66,16 @@ def load_data(
     )
 
     if len(frame) != EXPECTED_OBSERVATIONS:
-        raise ValueError(
-            f"{EXPECTED_OBSERVATIONS} observations attendues, "
-            f"{len(frame)} obtenues."
-        )
+        raise ValueError(f"{EXPECTED_OBSERVATIONS} observations attendues, {len(frame)} obtenues.")
 
     if frame["timestamp"].iloc[0] != EXPECTED_START:
-        raise ValueError(
-            "Date initiale incorrecte : "
-            f"{frame['timestamp'].iloc[0]}"
-        )
+        raise ValueError(f"Date initiale incorrecte : {frame['timestamp'].iloc[0]}")
 
     if frame["timestamp"].iloc[-1] != EXPECTED_END:
-        raise ValueError(
-            "Date finale incorrecte : "
-            f"{frame['timestamp'].iloc[-1]}"
-        )
+        raise ValueError(f"Date finale incorrecte : {frame['timestamp'].iloc[-1]}")
 
     if frame["exposure"].isna().any():
-        raise ValueError("La série d’exposition contient des valeurs manquantes.")
+        raise ValueError("La série d'exposition contient des valeurs manquantes.")
 
     frame["absolute_exposure"] = frame["exposure"].abs()
 
@@ -99,28 +84,18 @@ def load_data(
         fill_value=0.0,
     )
 
-    frame["turnover"] = (
-        frame["exposure"] - previous_exposure
-    ).abs()
+    frame["turnover"] = (frame["exposure"] - previous_exposure).abs()
 
-    frame["month"] = (
-        frame["timestamp"]
-        .dt.tz_convert(None)
-        .dt.to_period("M")
-        .dt.to_timestamp()
-    )
+    frame["month"] = frame["timestamp"].dt.tz_convert(None).dt.to_period("M").dt.to_timestamp()
 
     return frame
 
 
 def aggregate_monthly(frame: pd.DataFrame) -> pd.DataFrame:
-    monthly = (
-        frame.groupby("month", as_index=False)
-        .agg(
-            exposure_mean=("exposure", "mean"),
-            absolute_exposure_mean=("absolute_exposure", "mean"),
-            turnover_sum=("turnover", "sum"),
-        )
+    monthly = frame.groupby("month", as_index=False).agg(
+        exposure_mean=("exposure", "mean"),
+        absolute_exposure_mean=("absolute_exposure", "mean"),
+        turnover_sum=("turnover", "sum"),
     )
 
     return monthly
@@ -171,10 +146,7 @@ def generate_figure(
         linewidth=0.9,
         linestyle="--",
         color=reference_color,
-        label=(
-            "Moyenne de période : "
-            f"{exposure_mean * 100:.2f} %"
-        ),
+        label=(f"Moyenne de période : {exposure_mean * 100:.2f} %"),
     )
 
     axis.set_ylim(-12, 102)
@@ -183,12 +155,10 @@ def generate_figure(
         "A. Exposition moyenne mensuelle",
         loc="left",
         fontsize=11,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.legend(
         loc="upper left",
@@ -211,10 +181,7 @@ def generate_figure(
         linewidth=0.9,
         linestyle="--",
         color=reference_color,
-        label=(
-            "Moyenne de période : "
-            f"{absolute_mean * 100:.2f} %"
-        ),
+        label=(f"Moyenne de période : {absolute_mean * 100:.2f} %"),
     )
 
     axis.set_ylim(0, 102)
@@ -223,12 +190,10 @@ def generate_figure(
         "B. Exposition absolue moyenne mensuelle",
         loc="left",
         fontsize=11,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
-    axis.yaxis.set_major_formatter(
-        PercentFormatter(xmax=100)
-    )
+    axis.yaxis.set_major_formatter(PercentFormatter(xmax=100))
 
     axis.legend(
         loc="upper left",
@@ -248,12 +213,12 @@ def generate_figure(
     )
 
     axis.set_ylim(bottom=0)
-    axis.set_ylabel("Unités d’exposition")
+    axis.set_ylabel("Unités d'exposition")
     axis.set_title(
         "C. Rotation mensuelle",
         loc="left",
         fontsize=11,
-        fontweight="semibold",
+        fontweight="bold",
     )
 
     axis.set_xlabel("Date")
@@ -281,13 +246,9 @@ def generate_figure(
             colors="#485159",
         )
 
-    axes[-1].xaxis.set_major_locator(
-        mdates.YearLocator()
-    )
+    axes[-1].xaxis.set_major_locator(mdates.YearLocator())
 
-    axes[-1].xaxis.set_major_formatter(
-        mdates.DateFormatter("%Y")
-    )
+    axes[-1].xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 
     figure.text(
         0.075,
@@ -323,7 +284,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Génère la figure publique agrégée présentant "
-            "l’exposition, l’exposition absolue et la rotation."
+            "l'exposition, l'exposition absolue et la rotation."
         )
     )
 
@@ -347,10 +308,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path(
-            "docs/figures/"
-            "figure_5_4_exposition_absolue_rotation.png"
-        ),
+        default=Path("docs/figures/figure_5_4_exposition_absolue_rotation.png"),
     )
 
     return parser.parse_args()
@@ -363,9 +321,7 @@ def main() -> None:
     output_path = arguments.output.expanduser().resolve()
 
     if not input_path.is_file():
-        raise FileNotFoundError(
-            f"Fichier privé introuvable : {input_path}"
-        )
+        raise FileNotFoundError(f"Fichier privé introuvable : {input_path}")
 
     daily = load_data(
         input_path,
@@ -387,35 +343,17 @@ def main() -> None:
 
     print()
     print("=== MÉTRIQUES CALCULÉES ===")
-    print(
-        "Exposition moyenne : "
-        f"{daily['exposure'].mean() * 100:.8f} %"
-    )
-    print(
-        "Exposition absolue moyenne : "
-        f"{daily['absolute_exposure'].mean() * 100:.8f} %"
-    )
-    print(
-        "Exposition minimale : "
-        f"{daily['exposure'].min() * 100:.8f} %"
-    )
-    print(
-        "Exposition maximale : "
-        f"{daily['exposure'].max() * 100:.8f} %"
-    )
-    print(
-        "Rotation cumulée : "
-        f"{daily['turnover'].sum():.12f}"
-    )
+    print(f"Exposition moyenne : {daily['exposure'].mean() * 100:.8f} %")
+    print(f"Exposition absolue moyenne : {daily['absolute_exposure'].mean() * 100:.8f} %")
+    print(f"Exposition minimale : {daily['exposure'].min() * 100:.8f} %")
+    print(f"Exposition maximale : {daily['exposure'].max() * 100:.8f} %")
+    print(f"Rotation cumulée : {daily['turnover'].sum():.12f}")
 
     print()
     print("=== PÉRIMÈTRE ===")
     print(f"Observations quotidiennes : {len(daily)}")
     print(f"Mois représentés : {len(monthly)}")
-    print(
-        f"Période : {daily['timestamp'].iloc[0]} "
-        f"au {daily['timestamp'].iloc[-1]}"
-    )
+    print(f"Période : {daily['timestamp'].iloc[0]} au {daily['timestamp'].iloc[-1]}")
 
     print()
     print("=== TRAÇABILITÉ ===")

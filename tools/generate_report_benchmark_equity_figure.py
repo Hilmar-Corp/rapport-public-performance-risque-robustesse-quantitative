@@ -11,7 +11,6 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
 EXPECTED_OBSERVATIONS = 2211
 EXPECTED_NOSTRA_FINAL = 12.863641976380386
 EXPECTED_PUBLIC_CURVES = 11
@@ -43,8 +42,7 @@ def detect_date_column(frame: pd.DataFrame) -> str:
             return lower_to_original[candidate]
 
     raise ValueError(
-        "Aucune colonne de date reconnue. "
-        f"Colonnes disponibles : {list(frame.columns)}"
+        f"Aucune colonne de date reconnue. Colonnes disponibles : {list(frame.columns)}"
     )
 
 
@@ -88,9 +86,7 @@ def load_public_curves(path: Path) -> pd.DataFrame:
     frame = frame.sort_values(date_column).drop_duplicates(date_column)
 
     equity_columns = [
-        column
-        for column in frame.columns
-        if column != date_column and "equity" in column.lower()
+        column for column in frame.columns if column != date_column and "equity" in column.lower()
     ]
 
     if len(equity_columns) != EXPECTED_PUBLIC_CURVES:
@@ -115,16 +111,11 @@ def load_nostra_curve(
 ) -> pd.DataFrame:
     frame = pd.read_csv(path)
 
-    missing = [
-        column
-        for column in (date_column, equity_column)
-        if column not in frame.columns
-    ]
+    missing = [column for column in (date_column, equity_column) if column not in frame.columns]
 
     if missing:
         raise ValueError(
-            f"Colonnes Nostra absentes : {missing}. "
-            f"Colonnes disponibles : {list(frame.columns)}"
+            f"Colonnes Nostra absentes : {missing}. Colonnes disponibles : {list(frame.columns)}"
         )
 
     result = frame[[date_column, equity_column]].copy()
@@ -161,10 +152,7 @@ def validate(frame: pd.DataFrame, public_columns: list[str]) -> None:
 
     if frame.isna().any().any():
         missing = frame.isna().sum()
-        raise ValueError(
-            "Valeurs manquantes après réconciliation :\n"
-            f"{missing[missing > 0]}"
-        )
+        raise ValueError(f"Valeurs manquantes après réconciliation :\n{missing[missing > 0]}")
 
     nostra_final = float(frame["nostra_equity"].iloc[-1])
 
@@ -176,9 +164,7 @@ def validate(frame: pd.DataFrame, public_columns: list[str]) -> None:
 
     for column in ["nostra_equity", *public_columns]:
         if (frame[column] <= 0).any():
-            raise ValueError(
-                f"La courbe {column} contient une valeur nulle ou négative."
-            )
+            raise ValueError(f"La courbe {column} contient une valeur nulle ou négative.")
 
 
 def plot_equity_curves(
@@ -200,21 +186,12 @@ def plot_equity_curves(
         "HMM gaussien 3 états",
     ]
 
-    columns_by_label = {
-        public_label(column): column
-        for column in public_columns
-    }
+    columns_by_label = {public_label(column): column for column in public_columns}
 
-    missing = [
-        label
-        for label in benchmark_order
-        if label not in columns_by_label
-    ]
+    missing = [label for label in benchmark_order if label not in columns_by_label]
 
     if missing:
-        raise ValueError(
-            "Courbes publiques absentes : " + ", ".join(missing)
-        )
+        raise ValueError("Courbes publiques absentes : " + ", ".join(missing))
 
     nostra_color = "#132B3F"
     benchmark_color = "#6F9CAF"
@@ -233,17 +210,13 @@ def plot_equity_curves(
 
     axes_flat = axes.ravel()
 
-    maximum = float(
-        frame[
-            ["nostra_equity", *public_columns]
-        ].max().max()
-    )
+    maximum = float(frame[["nostra_equity", *public_columns]].max().max())
 
     y_limit = max(16.0, maximum * 1.035)
     nostra_final = float(frame["nostra_equity"].iloc[-1])
 
     def format_multiple(value: float) -> str:
-        return f"{value:.2f}".replace(".", ",") + "×"
+        return f"{value:.2f}".replace(".", ",") + "\u00d7"
 
     for index, benchmark_label in enumerate(benchmark_order):
         axis = axes_flat[index]
@@ -288,7 +261,7 @@ def plot_equity_curves(
             benchmark_label,
             loc="left",
             fontsize=9.2,
-            fontweight="semibold",
+            fontweight="bold",
             color=text_color,
             pad=8,
         )
@@ -302,7 +275,7 @@ def plot_equity_curves(
             va="top",
             fontsize=7.6,
             color=benchmark_color,
-            fontweight="semibold",
+            fontweight="bold",
         )
 
         axis.set_ylim(0, y_limit)
@@ -334,13 +307,9 @@ def plot_equity_curves(
             colors="#59636C",
         )
 
-        axis.xaxis.set_major_locator(
-            mdates.YearLocator(2)
-        )
+        axis.xaxis.set_major_locator(mdates.YearLocator(2))
 
-        axis.xaxis.set_major_formatter(
-            mdates.DateFormatter("%Y")
-        )
+        axis.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 
     axes_flat[-1].axis("off")
 
@@ -352,7 +321,7 @@ def plot_equity_curves(
         )
 
     for column in range(3):
-        if not axes[3, column] is axes_flat[-1]:
+        if axes[3, column] is not axes_flat[-1]:
             axes[3, column].set_xlabel(
                 "Date",
                 fontsize=7.8,
@@ -365,10 +334,7 @@ def plot_equity_curves(
             [0],
             color=nostra_color,
             linewidth=1.7,
-            label=(
-                "Nostra AI V5.246  ·  "
-                + format_multiple(nostra_final)
-            ),
+            label=("Nostra AI V5.246  ·  " + format_multiple(nostra_final)),
         ),
         plt.Line2D(
             [0],
@@ -422,9 +388,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--public-curves",
         type=Path,
-        default=Path(
-            "artifacts/releases/v0.2.1/baseline_daily_curves.csv"
-        ),
+        default=Path("artifacts/releases/v0.2.1/baseline_daily_curves.csv"),
     )
     parser.add_argument(
         "--nostra-input",
@@ -442,9 +406,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path(
-            "docs/figures/figure_5_3_nostra_vs_11_references.png"
-        ),
+        default=Path("docs/figures/figure_5_3_nostra_vs_11_references.png"),
     )
 
     return parser.parse_args()
@@ -460,11 +422,7 @@ def main() -> None:
         arguments.nostra_equity_column,
     )
 
-    public_columns = [
-        column
-        for column in public.columns
-        if column != "timestamp"
-    ]
+    public_columns = [column for column in public.columns if column != "timestamp"]
 
     combined = public.merge(
         nostra,
@@ -488,20 +446,14 @@ def main() -> None:
 
     print()
     print("=== VALEURS FINALES ===")
-    print(
-        "Nostra AI V5.246 : "
-        f"{combined['nostra_equity'].iloc[-1]:.12f}"
-    )
+    print(f"Nostra AI V5.246 : {combined['nostra_equity'].iloc[-1]:.12f}")
 
     for column in sorted(
         public_columns,
         key=lambda item: combined[item].iloc[-1],
         reverse=True,
     ):
-        print(
-            f"{public_label(column)} : "
-            f"{combined[column].iloc[-1]:.12f}"
-        )
+        print(f"{public_label(column)} : {combined[column].iloc[-1]:.12f}")
 
     print()
     print("=== TRAÇABILITÉ ===")

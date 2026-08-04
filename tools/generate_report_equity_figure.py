@@ -32,27 +32,15 @@ try:
     from matplotlib.ticker import FuncFormatter
 except ImportError as exc:
     raise SystemExit(
-        "Matplotlib est requis. Exécuter : "
-        "python -m pip install -r requirements/figures.txt"
+        "Matplotlib est requis. Exécuter : python -m pip install -r requirements/figures.txt"
     ) from exc
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-DEFAULT_PUBLIC_INPUT = (
-    REPO_ROOT
-    / "artifacts"
-    / "releases"
-    / "v0.2.1"
-    / "baseline_daily_curves.csv"
-)
+DEFAULT_PUBLIC_INPUT = REPO_ROOT / "artifacts" / "releases" / "v0.2.1" / "baseline_daily_curves.csv"
 
-DEFAULT_OUTPUT = (
-    REPO_ROOT
-    / "docs"
-    / "figures"
-    / "figure_5_2_nostra_vs_bitcoin_passif.png"
-)
+DEFAULT_OUTPUT = REPO_ROOT / "docs" / "figures" / "figure_5_2_nostra_vs_bitcoin_passif.png"
 
 EXPECTED_START = pd.Timestamp("2020-05-14", tz="UTC")
 EXPECTED_END = pd.Timestamp("2026-06-02", tz="UTC")
@@ -223,15 +211,10 @@ def load_equity_series(
             "timestamp",
         ].astype(str)
 
-        raise ValueError(
-            "Dates dupliquées détectées : "
-            + ", ".join(duplicates.head(10).tolist())
-        )
+        raise ValueError("Dates dupliquées détectées : " + ", ".join(duplicates.head(10).tolist()))
 
     if (result[output_column] <= 0).any():
-        raise ValueError(
-            f"La série {output_column} contient un capital nul ou négatif."
-        )
+        raise ValueError(f"La série {output_column} contient un capital nul ou négatif.")
 
     return result.sort_values("timestamp").reset_index(drop=True)
 
@@ -257,11 +240,7 @@ def assert_close(
 def select_month_end_observations(data: pd.DataFrame) -> pd.DataFrame:
     month_keys = data["timestamp"].dt.strftime("%Y-%m")
 
-    month_ends = (
-        data.groupby(month_keys, sort=True, group_keys=False)
-        .tail(1)
-        .copy()
-    )
+    month_ends = data.groupby(month_keys, sort=True, group_keys=False).tail(1).copy()
 
     sampled = pd.concat(
         [
@@ -287,7 +266,7 @@ def format_factor(value: float, _position: int) -> str:
     else:
         text = f"{value:.2f}"
 
-    return text.replace(".", ",") + "×"
+    return text.replace(".", ",") + "\u00d7"
 
 
 def format_decimal(value: float, decimals: int = 2) -> str:
@@ -302,9 +281,7 @@ def generate_figure(
     output = output.resolve()
 
     if output.suffix.lower() != ".png":
-        raise ValueError(
-            "La figure publique doit être produite exclusivement au format PNG."
-        )
+        raise ValueError("La figure publique doit être produite exclusivement au format PNG.")
 
     output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -338,11 +315,7 @@ def generate_figure(
         axis.set_ylabel("Capital cumulé net, base 1")
         axis.set_ylim(
             bottom=0,
-            top=float(
-                data[
-                    ["nostra_equity", "buy_and_hold_equity"]
-                ].max().max()
-            ) * 1.06,
+            top=float(data[["nostra_equity", "buy_and_hold_equity"]].max().max()) * 1.06,
         )
     else:
         axis.set_yscale("log")
@@ -386,19 +359,15 @@ def generate_figure(
         handlelength=3.0,
     )
 
-    scale_note = (
-        "échelle linéaire"
-        if linear_scale
-        else "échelle logarithmique"
-    )
+    scale_note = "échelle linéaire" if linear_scale else "échelle logarithmique"
 
     figure.text(
         0.075,
         0.018,
         "2 211 observations quotidiennes | capital initial 1 | "
         "coûts de 25 pb par unité de rotation | "
-        "décalage causal d’une observation | "
-        f"{scale_note} | 14 mai 2020–2 juin 2026",
+        "décalage causal d'une observation | "
+        f"{scale_note} | 14 mai 2020-2 juin 2026",
         fontsize=7.8,
         color="#5F5F5F",
     )
@@ -411,14 +380,10 @@ def generate_figure(
         bbox_inches="tight",
         facecolor="white",
         metadata={
-            "Title": (
-                "Figure 5.2 - Capital quotidien de Nostra AI "
-                "et du bitcoin passif"
-            ),
+            "Title": ("Figure 5.2 - Capital quotidien de Nostra AI et du bitcoin passif"),
             "Author": "HilmarCorp SAS",
             "Description": (
-                "Comparaison sur les 2 211 observations quotidiennes "
-                "du protocole officiel."
+                "Comparaison sur les 2 211 observations quotidiennes du protocole officiel."
             ),
         },
     )
@@ -468,19 +433,14 @@ def main() -> int:
         raise ValueError("Aucune date commune entre les deux séries.")
 
     if combined["timestamp"].iloc[0] != EXPECTED_START:
-        raise ValueError(
-            "La première date commune n'est pas le 14 mai 2020."
-        )
+        raise ValueError("La première date commune n'est pas le 14 mai 2020.")
 
     if combined["timestamp"].iloc[-1] != EXPECTED_END:
-        raise ValueError(
-            "La dernière date commune n'est pas le 2 juin 2026."
-        )
+        raise ValueError("La dernière date commune n'est pas le 2 juin 2026.")
 
     if len(combined) != 2211:
         raise ValueError(
-            f"Nombre d'observations non réconcilié : "
-            f"{len(combined)} au lieu de 2 211."
+            f"Nombre d'observations non réconcilié : {len(combined)} au lieu de 2 211."
         )
 
     assert_close(
@@ -506,18 +466,9 @@ def main() -> int:
     print(f"Figure générée : {args.output.resolve()}")
     print(f"Observations quotidiennes réconciliées : {len(combined)}")
     print(f"Observations affichées : {len(plotted)}")
-    print(
-        "SHA-256 du fichier privé utilisé : "
-        f"{sha256_file(args.nostra_input)}"
-    )
-    print(
-        "Capital final Nostra AI : "
-        f"{combined['nostra_equity'].iloc[-1]:.12f}"
-    )
-    print(
-        "Capital final bitcoin passif : "
-        f"{combined['buy_and_hold_equity'].iloc[-1]:.12f}"
-    )
+    print(f"SHA-256 du fichier privé utilisé : {sha256_file(args.nostra_input)}")
+    print(f"Capital final Nostra AI : {combined['nostra_equity'].iloc[-1]:.12f}")
+    print(f"Capital final bitcoin passif : {combined['buy_and_hold_equity'].iloc[-1]:.12f}")
 
     return 0
 
