@@ -16,8 +16,8 @@
     },
     {
       "path": "artifacts/report_support/part_v/part_v_institutional_metrics.json",
-      "size_bytes": 3946,
-      "sha256": "60e821584c8183ecc8327601842a2b04f0eb32841b337e3acf5e809a4dc1158d"
+      "size_bytes": 3945,
+      "sha256": "fe0d83358f616c7fd750228d1941c3bbcd3036fc43791261ca84ecefe8f9fdfb"
     },
     {
       "path": "docs/figures/figure_5_2_nostra_vs_bitcoin_passif.png",
@@ -62,12 +62,12 @@
     {
       "path": "docs/tables/part_v_institutional_metrics.md",
       "size_bytes": 1874,
-      "sha256": "37aedf563f089000fe07f34e1e307b3f2cacbeee8abbd70b160b0e58ab36728e"
+      "sha256": "f24fc8a85d5877657cdf3d7a77c6659b59bf68bd6ef3587f48787714336a43ad"
     },
     {
       "path": "tools/generate_part_v_institutional_metrics.py",
-      "size_bytes": 22917,
-      "sha256": "0b91e481d6bdd38193a2a61bfb2d9a1c3cacfc1615fb8711a5211ecc1f9e9f10"
+      "size_bytes": 23031,
+      "sha256": "c248bd55c81ab26098d34a1b5fd48cfb429f10ac3a22c1e01f020b5697d3adc1"
     },
     {
       "path": "tools/regenerate_part_v_figures_quant.py",

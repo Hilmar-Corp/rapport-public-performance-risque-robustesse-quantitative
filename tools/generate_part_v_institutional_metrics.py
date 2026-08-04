@@ -330,10 +330,12 @@ def horizon_record(
     elapsed_days = int((AS_OF - anchor_timestamp).days)
 
     if annualized:
-        if elapsed_days <= 0:
-            raise ValueError("Durée non positive pour annualisation.")
+        annualization_denominator = len(data) if inception_base else elapsed_days
 
-        exponent = 365.25 / elapsed_days
+        if annualization_denominator <= 0:
+            raise ValueError("Dénominateur non positif pour annualisation.")
+
+        exponent = 365.0 / annualization_denominator
 
         nostra_return = nostra_growth**exponent - 1.0
 
