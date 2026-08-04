@@ -7,7 +7,7 @@
     "end": "2026-06-02",
     "observations": 2211
   },
-  "status": "Agrégats et figures dérivés pour le rapport à partir des entrées gelées de l’évaluation.",
+  "status": "Figures quantitatives harmonisees a partir des entrees gelees de l'evaluation.",
   "files": [
     {
       "path": "artifacts/report_support/part_v/part_v_annual_summary.json",
@@ -16,58 +16,43 @@
     },
     {
       "path": "docs/figures/figure_5_2_nostra_vs_bitcoin_passif.png",
-      "size_bytes": 294000,
-      "sha256": "879def7fd7a4a0db4d49b346a1fe864ad26f3f70c36629b75a1cb62d66dbb155"
+      "size_bytes": 155568,
+      "sha256": "5eb27a9c4609851a6405c133aca5e2fb02683b2dbc8d173917c931e50f3c8afa"
     },
     {
       "path": "docs/figures/figure_5_3_nostra_vs_11_references.png",
-      "size_bytes": 693268,
-      "sha256": "5520d7ac816fce6050358dcc06e53fdaff747f2e10347af2ee4eec9c82d191c9"
+      "size_bytes": 417103,
+      "sha256": "a09db7c2ab0e6239f5d8d6406425ec4b9a319afd17f44706498c904e6375dc79"
     },
     {
       "path": "docs/figures/figure_5_3b_calendar_strategy_heatmap.png",
-      "size_bytes": 438561,
-      "sha256": "7c0a4c7225d9efc2d479acb7d49dcab8421ff8614a668ffc0421725b790a953f"
+      "size_bytes": 239597,
+      "sha256": "a35b6e2df246e2d29c43a9c50bfa352c177be82009656b2b4f96b87f474879ce"
     },
     {
       "path": "docs/figures/figure_5_4_exposition_absolue_rotation.png",
-      "size_bytes": 409653,
-      "sha256": "bcbcaf849254f18376900fad2710f912541ae273c8ca097301e602cc2044df37"
+      "size_bytes": 197056,
+      "sha256": "1bd0d7b75dee83b6057762cfbd9b5eb4f69a952896b4fe88370dd7b863539b31"
     },
     {
       "path": "docs/figures/figure_5_5_calendar_returns.png",
-      "size_bytes": 151781,
-      "sha256": "c32de68b3ac27848aaec1e0d464d53509e4537f1d676b4147f3cf75954a5d990"
+      "size_bytes": 54075,
+      "sha256": "847950689749f22528b41b12778dd11476cf2398f8bed1507a91327f89cd4ac3"
     },
     {
       "path": "docs/figures/figure_5_6_calendar_risk.png",
-      "size_bytes": 193983,
-      "sha256": "f7d89942c46e9d4dda980c94fc2d00050a25346c42def9d7a9e03e8088f4d10f"
+      "size_bytes": 94428,
+      "sha256": "cd74815db34275d3965a69ce491f9fe656918aad64d6295204122dbaa4fc9094"
     },
     {
       "path": "docs/figures/figure_5_7_annual_exposure_turnover.png",
-      "size_bytes": 161501,
-      "sha256": "ecef5b759b3d2acf3aa3c312aa7756b6375b701dfd972521161eb41608d843e6"
+      "size_bytes": 82137,
+      "sha256": "edfe9d47a00d982746fd896aab490584b9603ce29a95f34f6cd7693c68dc9c05"
     },
     {
-      "path": "tools/generate_report_equity_figure.py",
-      "size_bytes": 12303,
-      "sha256": "aacd2663bff7062f60a769e79291541235c3791d99fccd10deb84b377af735fb"
-    },
-    {
-      "path": "tools/generate_report_benchmark_equity_figure.py",
-      "size_bytes": 12505,
-      "sha256": "7627be214ba9f76e1dc03714a9675efaa3f727a74c9793f01633fd8f3d9630f5"
-    },
-    {
-      "path": "tools/generate_report_exposure_turnover_figure.py",
-      "size_bytes": 8853,
-      "sha256": "9d9e005aa285105feede4da106deb22e08e0af68bf70538893cd717624cf00aa"
-    },
-    {
-      "path": "tools/generate_part_v_annual_analysis.py",
-      "size_bytes": 28287,
-      "sha256": "a413d2cb517481ac773172602e816e9a8d71d0505eb9bb4d1c2c14ed947f5a97"
+      "path": "tools/regenerate_part_v_figures_quant.py",
+      "size_bytes": 24760,
+      "sha256": "b6e0f642327cd8802a4cc78a8a75c5f987c5bb340da00ad1a9910de7eedb4119"
     }
   ]
 }
