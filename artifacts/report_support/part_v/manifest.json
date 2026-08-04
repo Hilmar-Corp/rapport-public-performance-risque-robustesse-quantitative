@@ -7,12 +7,17 @@
     "end": "2026-06-02",
     "observations": 2211
   },
-  "status": "Figures quantitatives harmonisees a partir des entrees gelees de l'evaluation.",
+  "status": "Figures et agrégats quantitatifs institutionnels dérivés à partir des entrées gelées de l'évaluation.",
   "files": [
     {
       "path": "artifacts/report_support/part_v/part_v_annual_summary.json",
       "size_bytes": 9888,
       "sha256": "b267b3d937a2880c45d46059ebf2a349eb3922a8eeecd8a90909a1dc58c881ca"
+    },
+    {
+      "path": "artifacts/report_support/part_v/part_v_institutional_metrics.json",
+      "size_bytes": 3946,
+      "sha256": "60e821584c8183ecc8327601842a2b04f0eb32841b337e3acf5e809a4dc1158d"
     },
     {
       "path": "docs/figures/figure_5_2_nostra_vs_bitcoin_passif.png",
@@ -26,13 +31,13 @@
     },
     {
       "path": "docs/figures/figure_5_3b_calendar_strategy_heatmap.png",
-      "size_bytes": 239597,
-      "sha256": "a35b6e2df246e2d29c43a9c50bfa352c177be82009656b2b4f96b87f474879ce"
+      "size_bytes": 237594,
+      "sha256": "8a01e1d779027d30a0771f97d001d7ac035b6e503daedf5ad982477a064d5ab1"
     },
     {
       "path": "docs/figures/figure_5_4_exposition_absolue_rotation.png",
-      "size_bytes": 197056,
-      "sha256": "1bd0d7b75dee83b6057762cfbd9b5eb4f69a952896b4fe88370dd7b863539b31"
+      "size_bytes": 196677,
+      "sha256": "cde05363d91422afd12f64a48078acb8eddc4b7074b1a643bbf7ed4dd5d37d1b"
     },
     {
       "path": "docs/figures/figure_5_5_calendar_returns.png",
@@ -45,14 +50,29 @@
       "sha256": "cd74815db34275d3965a69ce491f9fe656918aad64d6295204122dbaa4fc9094"
     },
     {
+      "path": "docs/figures/figure_5_6b_rolling_36m_volatility.png",
+      "size_bytes": 92116,
+      "sha256": "858be13da2a59efa0c92bc7d4f48149eaf3e5a737abf40e4de2474fd15f8d16e"
+    },
+    {
       "path": "docs/figures/figure_5_7_annual_exposure_turnover.png",
-      "size_bytes": 82137,
-      "sha256": "edfe9d47a00d982746fd896aab490584b9603ce29a95f34f6cd7693c68dc9c05"
+      "size_bytes": 81427,
+      "sha256": "14edcbc4125ecc5ef12be6259b696db2707f8286abf2bb69727e49e1203d0fe4"
+    },
+    {
+      "path": "docs/tables/part_v_institutional_metrics.md",
+      "size_bytes": 1874,
+      "sha256": "37aedf563f089000fe07f34e1e307b3f2cacbeee8abbd70b160b0e58ab36728e"
+    },
+    {
+      "path": "tools/generate_part_v_institutional_metrics.py",
+      "size_bytes": 22917,
+      "sha256": "0b91e481d6bdd38193a2a61bfb2d9a1c3cacfc1615fb8711a5211ecc1f9e9f10"
     },
     {
       "path": "tools/regenerate_part_v_figures_quant.py",
-      "size_bytes": 24760,
-      "sha256": "b6e0f642327cd8802a4cc78a8a75c5f987c5bb340da00ad1a9910de7eedb4119"
+      "size_bytes": 24795,
+      "sha256": "88289b3230f43958aebc03e165e3c5ff49d0fc775858c4074ffa986ad5c08eaa"
     }
   ]
 }

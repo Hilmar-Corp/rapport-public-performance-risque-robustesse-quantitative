@@ -33,7 +33,7 @@ EXPECTED_PUBLIC_SHA256 = "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c
 
 NOSTRA_COLOR = "#1f77b4"
 BITCOIN_COLOR = "#ff7f0e"
-THIRD_COLOR = "#2ca02c"
+THIRD_COLOR = "#7f7f7f"
 REFERENCE_COLOR = "#7f7f7f"
 GRID_COLOR = "#d9d9d9"
 AXIS_COLOR = "#777777"
@@ -530,7 +530,7 @@ def generate_figure_53b(
     image = axis.imshow(
         matrix,
         aspect="auto",
-        cmap="RdYlGn",
+        cmap="RdBu",
         vmin=-maximum,
         vmax=maximum,
     )
@@ -974,8 +974,9 @@ def generate_figure_57(
     exposure_axis.legend(
         frameon=False,
         fontsize=8.5,
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1.10),
+        ncols=2,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.12),
     )
 
     turnover_axis.bar(
@@ -997,7 +998,7 @@ def generate_figure_57(
 
     turnover_axis.yaxis.set_major_locator(MaxNLocator(integer=False))
 
-    figure.tight_layout()
+    figure.tight_layout(rect=(0, 0, 1, 0.94))
 
     return save_figure(
         figure,
