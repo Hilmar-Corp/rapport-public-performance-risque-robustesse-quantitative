@@ -1554,6 +1554,16 @@ def main() -> None:
 
     update_manifest()
 
+    from generate_part_vi_bitcoin_hac import (
+        main as generate_bitcoin_hac,
+    )
+    from integrate_part_vi_bitcoin_hac import (
+        integrate as integrate_bitcoin_hac,
+    )
+
+    generate_bitcoin_hac()
+    integrate_bitcoin_hac()
+
     print("PASS_PART_VI_STATISTICAL_ANALYSIS")
 
     for path in [

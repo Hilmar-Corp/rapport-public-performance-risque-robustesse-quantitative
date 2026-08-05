@@ -14,12 +14,15 @@ SOURCE_DIR = ROOT / "artifacts" / "candidates" / "v0.3.0" / "quantitative_aggreg
 SUPPORT_DIR = ROOT / "artifacts" / "report_support" / "part_vi"
 
 SUMMARY_PATH = SUPPORT_DIR / "part_vi_statistical_summary.json"
+BITCOIN_HAC_PATH = SUPPORT_DIR / "bitcoin_passive_hac_sharpe.json"
 MANIFEST_PATH = SUPPORT_DIR / "manifest.json"
 CHECKSUMS_PATH = SUPPORT_DIR / "SHA256SUMS"
 
 MARKDOWN_PATH = ROOT / "docs" / "tables" / "part_vi_statistical_results.md"
 
 GENERATOR_PATH = ROOT / "tools" / "generate_part_vi_statistical_analysis.py"
+BITCOIN_GENERATOR_PATH = ROOT / "tools" / "generate_part_vi_bitcoin_hac.py"
+INTEGRATOR_PATH = ROOT / "tools" / "integrate_part_vi_bitcoin_hac.py"
 
 FIGURE_PATHS = [
     ROOT / "docs" / "figures" / "figure_6_1_pbo_aggregate_sensitivity.png",
@@ -239,7 +242,8 @@ def test_markdown_structure_and_typography() -> None:
         assert fragment not in markdown
 
     assert ("Deux comparaisons sur onze satisfont la règle complète") in markdown
-    assert ("Aucun calcul HAC équivalent du bitcoin passif") in markdown
+    assert "0,8184" in markdown
+    assert "Aucun calcul HAC équivalent" not in markdown
 
 
 def test_five_controlled_figures_are_valid_pngs() -> None:
@@ -262,8 +266,11 @@ def test_part_vi_manifest_and_checksums_reconcile() -> None:
 
     expected_paths = {
         SUMMARY_PATH.relative_to(ROOT).as_posix(),
+        BITCOIN_HAC_PATH.relative_to(ROOT).as_posix(),
         MARKDOWN_PATH.relative_to(ROOT).as_posix(),
         GENERATOR_PATH.relative_to(ROOT).as_posix(),
+        BITCOIN_GENERATOR_PATH.relative_to(ROOT).as_posix(),
+        INTEGRATOR_PATH.relative_to(ROOT).as_posix(),
         *[path.relative_to(ROOT).as_posix() for path in FIGURE_PATHS],
     }
 

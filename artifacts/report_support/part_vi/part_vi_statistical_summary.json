@@ -9,7 +9,7 @@
     "observations": 2211,
     "annualization": 365
   },
-  "status": "Transformation contrôlée des six agrégats statistiques publics gelés de la release v0.3.0.",
+  "status": "Transformation contrôlée des six agrégats statistiques publics gelés de la release v0.3.0, complétée par le calcul Newey-West du bitcoin passif à partir de sa courbe quotidienne publique gelée.",
   "source_files": [
     {
       "section": "probabilistic_sharpe_ratio",
@@ -462,6 +462,120 @@
     "canonical_hac_adjusted_sharpe": 1.4931827873589063,
     "canonical_hac_lag_count": 21,
     "all_circular_bootstrap_lower_bounds_positive": true,
-    "decision_status": "PASS_WITH_OBSERVATION"
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "bitcoin_conventional_annualized_sharpe": 0.8535246890964329,
+    "bitcoin_canonical_hac_adjusted_sharpe": 0.8183668937097701,
+    "bitcoin_canonical_volatility_inflation_factor": 1.0429609208985564,
+    "canonical_hac_sharpe_advantage": 0.6748158936491362
+  },
+  "bitcoin_passive_hac_sharpe": {
+    "schema_version": 1,
+    "analysis": "bitcoin_passive_hac_sharpe",
+    "method": "Newey-West long-run variance with Bartlett kernel",
+    "source": {
+      "path": "artifacts/releases/v0.2.1/baseline_daily_curves.csv",
+      "sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d",
+      "equity_column": "buy_and_hold_equity",
+      "verification_level": "public-curve-verified"
+    },
+    "period": {
+      "start": "2020-05-14",
+      "end": "2026-06-02",
+      "observations": 2211,
+      "annualization": 365
+    },
+    "reconciliation": {
+      "final_equity": 7.212950328296465
+    },
+    "canonical": {
+      "observations": 2211,
+      "annualization": 365,
+      "lag_count": 21,
+      "mean_periodic_return": 0.0013493169010059048,
+      "conventional_periodic_volatility": 0.030202598152099278,
+      "long_run_periodic_volatility": 0.0315001295822425,
+      "conventional_annualized_sharpe": 0.8535246890964329,
+      "hac_adjusted_annualized_sharpe": 0.8183668937097701,
+      "volatility_inflation_factor": 1.0429609208985564
+    },
+    "sensitivity_records": [
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 5,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.029857778508309812,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.8633818216080775,
+        "volatility_inflation_factor": 0.9885831132125467
+      },
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 7,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.030143082114379622,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.8552099317467419,
+        "volatility_inflation_factor": 0.9980294398044852
+      },
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 10,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.030355234460166622,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.8492328804609579,
+        "volatility_inflation_factor": 1.005053747604715
+      },
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 21,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.0315001295822425,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.8183668937097701,
+        "volatility_inflation_factor": 1.0429609208985564
+      },
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 30,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.03215716230763393,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.8016460827936712,
+        "volatility_inflation_factor": 1.064715099862983
+      },
+      {
+        "observations": 2211,
+        "annualization": 365,
+        "lag_count": 60,
+        "mean_periodic_return": 0.0013493169010059048,
+        "conventional_periodic_volatility": 0.030202598152099278,
+        "long_run_periodic_volatility": 0.0350749995591265,
+        "conventional_annualized_sharpe": 0.8535246890964329,
+        "hac_adjusted_annualized_sharpe": 0.7349583327640395,
+        "volatility_inflation_factor": 1.1613239159919277
+      }
+    ],
+    "limitations": [
+      "The calculation is retrospective and derived from the frozen public daily bitcoin curve.",
+      "The difference between two HAC-adjusted Sharpe ratios is descriptive and is not itself a formal test of equality."
+    ]
+  },
+  "supplementary_public_source": {
+    "purpose": "Calculation of the bitcoin passive Newey-West-adjusted Sharpe ratio",
+    "path": "artifacts/releases/v0.2.1/baseline_daily_curves.csv",
+    "sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d",
+    "equity_column": "buy_and_hold_equity",
+    "verification_level": "public-curve-verified"
   }
 }
