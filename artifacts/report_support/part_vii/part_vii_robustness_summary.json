@@ -1,0 +1,615 @@
+{
+  "ablation": {
+    "anonymous_ablation_count": 15,
+    "comparisons_with_interval_including_zero": 14,
+    "comparisons_with_negative_95pct_interval": 0,
+    "comparisons_with_positive_95pct_interval": 0,
+    "daily_return_difference_quantiles": {
+      "lower_95_bound": {
+        "q00": -6.51e-06,
+        "q05": -4.49e-06,
+        "q100": -3.9e-07,
+        "q25": -2.45e-06,
+        "q50": -1.42e-06,
+        "q75": -8.6e-07,
+        "q95": -4e-07
+      },
+      "mean": {
+        "q00": -3.13e-06,
+        "q05": -2.01e-06,
+        "q100": 9.6e-07,
+        "q25": -7.9e-07,
+        "q50": -1.2e-07,
+        "q75": 4.5e-07,
+        "q95": 6.7e-07
+      },
+      "upper_95_bound": {
+        "q00": 1.3e-07,
+        "q05": 1.3e-07,
+        "q100": 3.45e-06,
+        "q25": 4.6e-07,
+        "q50": 1.27e-06,
+        "q75": 2.22e-06,
+        "q95": 2.83e-06
+      }
+    },
+    "decision_status": "descriptive_evidence_only",
+    "economic_delta_quantiles": {
+      "cagr_delta": {
+        "q00": -0.00049118,
+        "q05": -0.00032116,
+        "q100": 0.00175408,
+        "q25": -0.00021241,
+        "q50": 6.866e-05,
+        "q75": 0.00038934,
+        "q95": 0.00103746
+      },
+      "final_equity_delta": {
+        "q00": -0.02508482,
+        "q05": -0.01640554,
+        "q100": 0.08991577,
+        "q25": -0.01085278,
+        "q50": 0.00350954,
+        "q75": 0.01991382,
+        "q95": 0.05313657
+      },
+      "maximum_drawdown_delta": {
+        "q00": -0.00017959,
+        "q05": -0.00016339,
+        "q100": 0.00153131,
+        "q25": -5.618e-05,
+        "q50": 0.00013196,
+        "q75": 0.00050051,
+        "q95": 0.00124351
+      },
+      "sharpe_delta": {
+        "q00": -0.00089486,
+        "q05": -0.00064058,
+        "q100": 0.00412123,
+        "q25": -5.876e-05,
+        "q50": 0.00012047,
+        "q75": 0.00089789,
+        "q95": 0.0021978
+      },
+      "sortino_delta": {
+        "q00": -0.00289374,
+        "q05": -0.00243299,
+        "q100": 0.00845223,
+        "q25": -0.00041366,
+        "q50": 0.00024058,
+        "q75": 0.00146737,
+        "q95": 0.00464001
+      }
+    },
+    "identities_disclosed": false,
+    "paired_bootstrap_comparisons": 14
+  },
+  "configuration_sensitivity": {
+    "configurations_executed": 34,
+    "configurations_failed": 0,
+    "decision_status": "descriptive_evidence_only",
+    "exact_configuration_values_disclosed": false,
+    "similarity_quantiles": {
+      "direction_agreement": {
+        "q00": 0.86160109,
+        "q05": 0.88643148,
+        "q100": 1.0,
+        "q25": 0.91123926,
+        "q50": 0.96698327,
+        "q75": 0.97478517,
+        "q95": 1.0
+      },
+      "pearson_similarity": {
+        "q00": 0.69906313,
+        "q05": 0.79337523,
+        "q100": 1.0,
+        "q25": 0.86257725,
+        "q50": 0.96544295,
+        "q75": 0.9843255,
+        "q95": 1.0
+      },
+      "prediction_path_mae": {
+        "q00": 0.0,
+        "q05": 0.0,
+        "q100": 0.07084328,
+        "q25": 0.00503484,
+        "q50": 0.00954751,
+        "q75": 0.01498262,
+        "q95": 0.0349987
+      },
+      "prediction_path_rmse": {
+        "q00": 0.0,
+        "q05": 0.0,
+        "q100": 0.10346195,
+        "q25": 0.01220161,
+        "q50": 0.01953634,
+        "q75": 0.03657184,
+        "q95": 0.06326459
+      },
+      "spearman_similarity": {
+        "q00": 0.80827628,
+        "q05": 0.82290737,
+        "q100": 1.0,
+        "q25": 0.88690967,
+        "q50": 0.94487811,
+        "q75": 0.9705423,
+        "q95": 1.0
+      }
+    }
+  },
+  "consolidated_reading": {
+    "ablation_intervals_including_zero": 14,
+    "ablation_paired_comparisons": 14,
+    "configuration_count": 34,
+    "configuration_failures": 0,
+    "cross_provider_comparison_completed": false,
+    "data_resilience_scenarios": 23,
+    "pervasive_distribution_drift_detected": true,
+    "placebo_metrics_below_5_percent": [
+      "cagr",
+      "final_equity",
+      "sharpe"
+    ],
+    "placebo_metrics_not_below_5_percent": [
+      "calmar"
+    ],
+    "reading_status": "favorable_with_material_observations",
+    "regime_count": 10,
+    "regimes_with_higher_nostra_sharpe": 10,
+    "regimes_with_less_severe_nostra_drawdown": 10,
+    "regimes_with_lower_nostra_volatility": 10,
+    "regimes_with_positive_active_log_return": 8,
+    "stationarity_can_be_assumed": false
+  },
+  "data_resilience": {
+    "bootstrap_block_length": 30,
+    "bootstrap_runs": 300,
+    "cross_provider_comparison_completed": false,
+    "decision_status": "descriptive_evidence_only",
+    "metric_delta_quantiles": {
+      "annualized_volatility_delta": {
+        "q00": -0.00026251,
+        "q05": -0.00024451,
+        "q100": 7.209e-05,
+        "q25": -5.591e-05,
+        "q50": -8.05e-06,
+        "q75": 1.092e-05,
+        "q95": 4.331e-05
+      },
+      "cagr_delta": {
+        "q00": -0.00508653,
+        "q05": -0.00347246,
+        "q100": 0.0002273,
+        "q25": -0.00093882,
+        "q50": -4.448e-05,
+        "q75": 1.53e-06,
+        "q95": 8.739e-05
+      },
+      "final_equity_delta": {
+        "q00": -0.25779858,
+        "q05": -0.1764488,
+        "q100": 0.01162202,
+        "q25": -0.04790963,
+        "q50": -0.00227347,
+        "q75": 7.829e-05,
+        "q95": 0.00446749
+      },
+      "maximum_drawdown_delta": {
+        "q00": -0.00033807,
+        "q05": -0.00026035,
+        "q100": 0.00248054,
+        "q25": -5.75e-06,
+        "q50": 0.0,
+        "q75": 0.00021165,
+        "q95": 0.00221659
+      },
+      "prediction_coverage_delta": {
+        "q00": -145.0,
+        "q05": -67.2,
+        "q100": 0.0,
+        "q25": 0.0,
+        "q50": 0.0,
+        "q75": 0.0,
+        "q95": 0.0
+      },
+      "sharpe_delta": {
+        "q00": -0.01031262,
+        "q05": -0.00676163,
+        "q100": 0.00037728,
+        "q25": -0.00158549,
+        "q50": -8.513e-05,
+        "q75": 3.617e-05,
+        "q95": 0.00029108
+      }
+    },
+    "scenario_count_excluding_baseline": 23,
+    "scenario_family_count": 3
+  },
+  "distribution_drift": {
+    "rolling_windows": {
+      "absolute_standardized_shift_at_least_0_50": 99,
+      "absolute_standardized_shift_at_least_1_00": 80,
+      "absolute_standardized_shift_quantiles": {
+        "q00": 0.02187922,
+        "q05": 0.07546632,
+        "q100": 4.6617008,
+        "q25": 0.47668372,
+        "q50": 1.1778023,
+        "q75": 2.08901803,
+        "q95": 3.8163421
+      },
+      "anonymous_series_count": 8,
+      "comparisons": 136,
+      "ks_reject_equal_distribution_5pct": 134,
+      "ks_statistic_quantiles": {
+        "q00": 0.09315068,
+        "q05": 0.13561644,
+        "q100": 0.98082192,
+        "q25": 0.24931507,
+        "q50": 0.46849315,
+        "q75": 0.66027397,
+        "q95": 0.93150685
+      },
+      "psi_at_least_0_10": 136,
+      "psi_at_least_0_25": 125,
+      "psi_quantiles": {
+        "q00": 0.10505749,
+        "q05": 0.21416886,
+        "q100": 12.40141872,
+        "q25": 0.56206471,
+        "q50": 1.68842399,
+        "q75": 4.53389656,
+        "q95": 10.58899158
+      },
+      "scaled_wasserstein_quantiles": {
+        "q00": 0.11290836,
+        "q05": 0.18157869,
+        "q100": 4.6617008,
+        "q25": 0.49088607,
+        "q50": 1.1778023,
+        "q75": 2.08901803,
+        "q95": 3.8163421
+      }
+    },
+    "train_test_folds": {
+      "absolute_standardized_shift_at_least_0_50": 85,
+      "absolute_standardized_shift_at_least_1_00": 37,
+      "absolute_standardized_shift_quantiles": {
+        "q00": 0.00780129,
+        "q05": 0.04751982,
+        "q100": 1.81209101,
+        "q25": 0.27850505,
+        "q50": 0.63245568,
+        "q75": 1.04382099,
+        "q95": 1.42085606
+      },
+      "anonymous_series_count": 8,
+      "comparisons": 136,
+      "ks_reject_equal_distribution_5pct": 131,
+      "ks_statistic_quantiles": {
+        "q00": 0.07496947,
+        "q05": 0.13970954,
+        "q100": 0.79046639,
+        "q25": 0.27862086,
+        "q50": 0.37435988,
+        "q75": 0.61396396,
+        "q95": 0.72966167
+      },
+      "psi_at_least_0_10": 136,
+      "psi_at_least_0_25": 130,
+      "psi_quantiles": {
+        "q00": 0.10291248,
+        "q05": 0.28049831,
+        "q100": 12.43275896,
+        "q25": 1.36266975,
+        "q50": 3.92748241,
+        "q75": 6.60573209,
+        "q95": 9.40761018
+      },
+      "scaled_wasserstein_quantiles": {
+        "q00": 0.12390367,
+        "q05": 0.200849,
+        "q100": 1.81209101,
+        "q25": 0.40668984,
+        "q50": 0.67996714,
+        "q75": 1.08339661,
+        "q95": 1.42085606
+      }
+    }
+  },
+  "mandatory_limitations": [
+    "Les séries, régimes, configurations et ablations sont publiés sous une forme anonymisée.",
+    "Les contrôles de configuration, d'ablation et de résilience des données constituent des preuves descriptives.",
+    "La non-stationnarité et la dérive observées empêchent de supposer une distribution stable sur l'ensemble de la période.",
+    "Aucune comparaison croisée entre plusieurs fournisseurs de données n'est déclarée achevée.",
+    "Les résultats sont rétrospectifs et ne démontrent ni invariance future ni relation causale."
+  ],
+  "market_regimes": {
+    "aggregate_rows": 10,
+    "records": [
+      {
+        "annualized_active_log_return": 0.327212,
+        "btc_annualized_volatility": 0.57922158,
+        "btc_conditional_annualized_return": -0.08934276,
+        "btc_conditional_max_drawdown": -0.67517779,
+        "btc_sharpe": 0.12931086,
+        "nostra_annualized_volatility": 0.28164395,
+        "nostra_conditional_annualized_return": 0.26316857,
+        "nostra_conditional_max_drawdown": -0.19544072,
+        "nostra_sharpe": 0.97001409,
+        "observations": 741.0,
+        "regime": "regime_09"
+      },
+      {
+        "annualized_active_log_return": 0.04681759,
+        "btc_annualized_volatility": 0.58342506,
+        "btc_conditional_annualized_return": 0.53970573,
+        "btc_conditional_max_drawdown": -0.63468123,
+        "btc_sharpe": 1.03007286,
+        "nostra_annualized_volatility": 0.30107764,
+        "nostra_conditional_annualized_return": 0.61350512,
+        "nostra_conditional_max_drawdown": -0.1822169,
+        "nostra_sharpe": 1.73904226,
+        "observations": 1261.0,
+        "regime": "regime_07"
+      },
+      {
+        "annualized_active_log_return": -0.07498616,
+        "btc_annualized_volatility": 0.65086745,
+        "btc_conditional_annualized_return": 0.90548369,
+        "btc_conditional_max_drawdown": -0.49389547,
+        "btc_sharpe": 1.3157071,
+        "nostra_annualized_volatility": 0.31261407,
+        "nostra_conditional_annualized_return": 0.76782456,
+        "nostra_conditional_max_drawdown": -0.15099233,
+        "nostra_sharpe": 1.97891378,
+        "observations": 966.0,
+        "regime": "regime_02"
+      },
+      {
+        "annualized_active_log_return": 0.36094373,
+        "btc_annualized_volatility": 0.50854481,
+        "btc_conditional_annualized_return": -0.13306139,
+        "btc_conditional_max_drawdown": -0.76087471,
+        "btc_sharpe": -0.02640358,
+        "nostra_annualized_volatility": 0.27541493,
+        "nostra_conditional_annualized_return": 0.24378186,
+        "nostra_conditional_max_drawdown": -0.31626105,
+        "nostra_sharpe": 0.92903132,
+        "observations": 1036.0,
+        "regime": "regime_03"
+      },
+      {
+        "annualized_active_log_return": 0.22072,
+        "btc_annualized_volatility": 0.60543461,
+        "btc_conditional_annualized_return": 0.17036663,
+        "btc_conditional_max_drawdown": -0.37235557,
+        "btc_sharpe": 0.56365871,
+        "nostra_annualized_volatility": 0.26150394,
+        "nostra_conditional_annualized_return": 0.45941702,
+        "nostra_conditional_max_drawdown": -0.13217038,
+        "nostra_sharpe": 1.57581561,
+        "observations": 337.0,
+        "regime": "regime_08"
+      },
+      {
+        "annualized_active_log_return": 0.4160432,
+        "btc_annualized_volatility": 0.55690333,
+        "btc_conditional_annualized_return": -0.26131511,
+        "btc_conditional_max_drawdown": -0.55986529,
+        "btc_sharpe": -0.26447289,
+        "nostra_annualized_volatility": 0.2975894,
+        "nostra_conditional_annualized_return": 0.11981037,
+        "nostra_conditional_max_drawdown": -0.24011484,
+        "nostra_sharpe": 0.52874143,
+        "observations": 404.0,
+        "regime": "regime_05"
+      },
+      {
+        "annualized_active_log_return": -0.23341696,
+        "btc_annualized_volatility": 0.67397489,
+        "btc_conditional_annualized_return": 1.47411013,
+        "btc_conditional_max_drawdown": -0.46341573,
+        "btc_sharpe": 1.68006636,
+        "nostra_annualized_volatility": 0.33687745,
+        "nostra_conditional_annualized_return": 0.95905817,
+        "nostra_conditional_max_drawdown": -0.15073442,
+        "nostra_sharpe": 2.1648885,
+        "observations": 629.0,
+        "regime": "regime_06"
+      },
+      {
+        "annualized_active_log_return": 0.32572192,
+        "btc_annualized_volatility": 0.47546789,
+        "btc_conditional_annualized_return": -0.03963974,
+        "btc_conditional_max_drawdown": -0.63690065,
+        "btc_sharpe": 0.15172492,
+        "nostra_annualized_volatility": 0.26044331,
+        "nostra_conditional_annualized_return": 0.33012793,
+        "nostra_conditional_max_drawdown": -0.22106658,
+        "nostra_sharpe": 1.22425057,
+        "observations": 632.0,
+        "regime": "regime_01"
+      },
+      {
+        "annualized_active_log_return": 0.21484774,
+        "btc_annualized_volatility": 0.5856653,
+        "btc_conditional_annualized_return": 0.18190403,
+        "btc_conditional_max_drawdown": -0.70557872,
+        "btc_sharpe": 0.57858926,
+        "nostra_annualized_volatility": 0.27616651,
+        "nostra_conditional_annualized_return": 0.46517466,
+        "nostra_conditional_max_drawdown": -0.19544072,
+        "nostra_sharpe": 1.52084936,
+        "observations": 1232.0,
+        "regime": "regime_04"
+      },
+      {
+        "annualized_active_log_return": 0.04780346,
+        "btc_annualized_volatility": 0.57610571,
+        "btc_conditional_annualized_return": 0.41812299,
+        "btc_conditional_max_drawdown": -0.43146702,
+        "btc_sharpe": 0.89235318,
+        "nostra_annualized_volatility": 0.32073692,
+        "nostra_conditional_annualized_return": 0.48756063,
+        "nostra_conditional_max_drawdown": -0.2160686,
+        "nostra_sharpe": 1.39789123,
+        "observations": 770.0,
+        "regime": "regime_10"
+      }
+    ],
+    "regime_count": 10
+  },
+  "model": "Nostra AI V5.246",
+  "package": "part_vii_robustness_report_support",
+  "period": {
+    "annualization": 365,
+    "end": "2026-06-02",
+    "observations": 2211,
+    "start": "2020-05-14"
+  },
+  "placebo_test": {
+    "cost_bps": 25.0,
+    "delay_days": 0,
+    "metrics": {
+      "cagr": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 0.52453667,
+        "permutation_quantiles": {
+          "q00": 0.51287135,
+          "q05": 0.51590098,
+          "q100": 0.52680362,
+          "q25": 0.51815071,
+          "q50": 0.51948211,
+          "q75": 0.52095636,
+          "q95": 0.52290632
+        },
+        "upper_tail_empirical_pvalue": 0.01197605
+      },
+      "calmar": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 2.45219411,
+        "permutation_quantiles": {
+          "q00": 2.35632995,
+          "q05": 2.40629076,
+          "q100": 2.51668555,
+          "q25": 2.42925266,
+          "q50": 2.44513247,
+          "q75": 2.46003465,
+          "q95": 2.48544887
+        },
+        "upper_tail_empirical_pvalue": 0.37125749
+      },
+      "final_equity": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 12.86364198,
+        "permutation_quantiles": {
+          "q00": 12.27882359,
+          "q05": 12.42852995,
+          "q100": 12.97994691,
+          "q25": 12.54068164,
+          "q50": 12.60745032,
+          "q75": 12.68172901,
+          "q95": 12.78053695
+        },
+        "upper_tail_empirical_pvalue": 0.01197605
+      },
+      "sharpe": {
+        "observation_source": "public_artifact_verified_aggregate",
+        "observed": 1.58768711,
+        "permutation_quantiles": {
+          "q00": 1.56391186,
+          "q05": 1.57140297,
+          "q100": 1.59480562,
+          "q25": 1.57599784,
+          "q50": 1.57924137,
+          "q75": 1.58215747,
+          "q95": 1.58677526
+        },
+        "upper_tail_empirical_pvalue": 0.03792415
+      }
+    },
+    "permutations": 500
+  },
+  "schema_version": 1,
+  "source_files": [
+    {
+      "name": "stationarity",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/stationarity.json",
+      "sha256": "d9477db1d63d5e4cb8d94e0efe3f2a7eb5fa4420d12297f8332f90e5165b644b",
+      "size_bytes": 900
+    },
+    {
+      "name": "distribution_drift",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/distribution_drift.json",
+      "sha256": "c63529eb069230da89537131b264a69068519e26e7ce67527d0d840bdf7b3a6a",
+      "size_bytes": 2581
+    },
+    {
+      "name": "market_regimes",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/market_regimes.json",
+      "sha256": "9edf14197bafae5de1375f329886d85f1f8418051b2825f36763ca5a83588b12",
+      "size_bytes": 5425
+    },
+    {
+      "name": "configuration_sensitivity",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/configuration_sensitivity.json",
+      "sha256": "1b69daae92a5811c5657f39672661d956474d275b45e19091dea0e682a43acf0",
+      "size_bytes": 1362
+    },
+    {
+      "name": "placebo_test",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/placebo_test.json",
+      "sha256": "62a03185ddb83ea631fc4eb66fc835d3e54bf64d2f44a2d2898023361347f2f7",
+      "size_bytes": 1878
+    },
+    {
+      "name": "ablation",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/ablation.json",
+      "sha256": "f4611a66e7cdad0c62cba1bb6f413083a810bb23eaf1d94b41b0a13b91145c2c",
+      "size_bytes": 2227
+    },
+    {
+      "name": "data_resilience",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/data_resilience.json",
+      "sha256": "7c65c02584d68b0e5be9a8c7729651f5e3c7cf7c8670c52b348e26b817bdc74a",
+      "size_bytes": 1677
+    }
+  ],
+  "source_release": "v0.3.0",
+  "stationarity": {
+    "adf_pvalue_quantiles": {
+      "q00": 2.96e-06,
+      "q05": 1.194e-05,
+      "q100": 0.56953747,
+      "q25": 0.07546554,
+      "q50": 0.13480976,
+      "q75": 0.19957629,
+      "q95": 0.49295306
+    },
+    "adf_reject_unit_root_5pct": 2,
+    "conflicting_tests_5pct": 1,
+    "consistent_stationarity_5pct": 1,
+    "cusum_break_candidate_count": 8,
+    "cusum_statistic_quantiles": {
+      "q00": 5.05352264,
+      "q05": 5.30449687,
+      "q100": 8.24652495,
+      "q25": 6.72365398,
+      "q50": 7.1783997,
+      "q75": 7.27612767,
+      "q95": 8.00782962
+    },
+    "kpss_pvalue_quantiles": {
+      "q00": 0.01,
+      "q05": 0.01,
+      "q100": 0.07948865,
+      "q25": 0.01,
+      "q50": 0.01399586,
+      "q75": 0.01703229,
+      "q95": 0.0598128
+    },
+    "kpss_reject_stationarity_5pct": 7,
+    "series_tested": 8
+  }
+}

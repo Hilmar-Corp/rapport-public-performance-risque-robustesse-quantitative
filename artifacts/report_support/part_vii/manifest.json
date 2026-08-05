@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_vii/part_vii_robustness_summary.json",
+      "sha256": "be221c8a2803e71bd7a6334908977fca5479bf36512785c8feac4333daa577ca",
+      "size_bytes": 19114
+    },
+    {
+      "path": "docs/figures/figure_7_1_stationarity_diagnostics.png",
+      "sha256": "cac8b26c86828c557dfdd77325a002143587636c7b50aaa3a631a88dc4f1de9d",
+      "size_bytes": 117618
+    },
+    {
+      "path": "docs/figures/figure_7_2_distribution_drift_rates.png",
+      "sha256": "1976feca98057988fa571faf72312ae3326e294f815a49527b4e87746995bba7",
+      "size_bytes": 127102
+    },
+    {
+      "path": "docs/figures/figure_7_3_regime_active_log_return.png",
+      "sha256": "dbc6e621416e1d37f6c5c036984f0fd3a1f3045c832c697fc83da6cc337f30ab",
+      "size_bytes": 141268
+    },
+    {
+      "path": "docs/figures/figure_7_4_regime_sharpe_comparison.png",
+      "sha256": "47a0cbe6a9c32d4ca90797cced723a92f21d68f568e440c2abf7da4a379589e7",
+      "size_bytes": 144122
+    },
+    {
+      "path": "docs/figures/figure_7_5_configuration_similarity.png",
+      "sha256": "f327a2d1798995debff3070a5a79664714636b20a38ecb33a0f8d7cb07666ea3",
+      "size_bytes": 133720
+    },
+    {
+      "path": "docs/figures/figure_7_6_placebo_empirical_pvalues.png",
+      "sha256": "9eb3f771620e425a9722aa8bf9d30036816eabd3a1769a509d559ed218bad96a",
+      "size_bytes": 102648
+    },
+    {
+      "path": "docs/tables/part_vii_robustness_results.md",
+      "sha256": "f4c84c842c8d3addf16e8ad770ab6673388297c86af6a7df33dc31367bbfe86b",
+      "size_bytes": 6743
+    },
+    {
+      "path": "tools/generate_part_vii_robustness_analysis.py",
+      "sha256": "b81f0ebdda5965d28b73c7076aeec2034113c6468f37616791968521fb3acf53",
+      "size_bytes": 45955
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_vii_robustness_report_support",
+  "period": {
+    "annualization": 365,
+    "end": "2026-06-02",
+    "observations": 2211,
+    "start": "2020-05-14"
+  },
+  "schema_version": 1,
+  "source_release": "v0.3.0",
+  "status": "Paquet institutionnel de support de la Partie VII consacré à la non-stationnarité, à la dérive et à la robustesse."
+}
