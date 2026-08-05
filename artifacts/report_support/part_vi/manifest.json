@@ -8,12 +8,17 @@
     "end": "2026-06-02",
     "observations": 2211
   },
-  "status": "Tableaux, figures et agrégats institutionnels de validité statistique dérivés exclusivement des six exports publics gelés de la release v0.3.0.",
+  "status": "Paquet statistique institutionnel de la Partie VI, complété par le calcul HAC du bitcoin passif à partir de sa courbe quotidienne publique gelée.",
   "files": [
     {
+      "path": "artifacts/report_support/part_vi/bitcoin_passive_hac_sharpe.json",
+      "size_bytes": 3950,
+      "sha256": "cc7c427e54c8c80d17dac5c5cf336b166a14f308e4b53161273010b7735a8e4e"
+    },
+    {
       "path": "artifacts/report_support/part_vi/part_vi_statistical_summary.json",
-      "size_bytes": 17807,
-      "sha256": "835b000dacc52595a676d524588ed0f52f866146c2d8bb074bea975880fa5872"
+      "size_bytes": 22732,
+      "sha256": "0fbd338e4c763e8a53ecdd21e53d641cde1d9b4fe79a4e95f43c127a7e6c3cb6"
     },
     {
       "path": "docs/figures/figure_6_1_pbo_aggregate_sensitivity.png",
@@ -32,8 +37,8 @@
     },
     {
       "path": "docs/figures/figure_6_4_hac_sharpe_sensitivity.png",
-      "size_bytes": 144253,
-      "sha256": "769d6d54d24c229baae684173104d3b609df507215b078fd22ece473180217ee"
+      "size_bytes": 151036,
+      "sha256": "e8557a33b3305c96870db7de234712905f7fd19f96302fd7aeb79d3c24303e0b"
     },
     {
       "path": "docs/figures/figure_6_5_circular_bootstrap_intervals.png",
@@ -42,13 +47,23 @@
     },
     {
       "path": "docs/tables/part_vi_statistical_results.md",
-      "size_bytes": 6400,
-      "sha256": "34b894e9ca5019784336c806717aae32190fadc6703b4fea0fecfed7acd5978d"
+      "size_bytes": 6753,
+      "sha256": "bdc327f02c7977d2ef93056f1556a5a022b6a2914c86e398173e4eddc4d01578"
+    },
+    {
+      "path": "tools/generate_part_vi_bitcoin_hac.py",
+      "size_bytes": 5612,
+      "sha256": "0831f6b85ed5c7e1718ac5eb5c85f89f4e240f19005d6a93b8ad95413cf82226"
     },
     {
       "path": "tools/generate_part_vi_statistical_analysis.py",
-      "size_bytes": 43513,
-      "sha256": "66aaec8fcb3cb22bc91a314a6b30877615f7295f140a4fb4cf3e6dd9384be55c"
+      "size_bytes": 43759,
+      "sha256": "293e524b64934113ee16a9e00a9cba9c5d366ffeb10fadd1bdbe8f99b9d44094"
+    },
+    {
+      "path": "tools/integrate_part_vi_bitcoin_hac.py",
+      "size_bytes": 14110,
+      "sha256": "20e42d42f682f33e97cce973b30610cd757803782666752c5370f823fd98cb22"
     }
   ]
 }

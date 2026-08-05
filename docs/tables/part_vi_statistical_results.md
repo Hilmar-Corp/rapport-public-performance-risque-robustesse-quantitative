@@ -71,19 +71,18 @@ Les onze écarts de CAGR sont positifs. Deux comparaisons sur onze satisfont la 
 
 ## Tableau 6.5A - Sensibilité Newey-West du Sharpe
 
-| Retards | Sharpe HAC | Inflation de volatilité |
-|---:|---:|---:|
-| 5 | 1,5964 | 0,9946 |
-| 7 | 1,5896 | 0,9988 |
-| 10 | 1,5740 | 1,0087 |
-| 21 | 1,4932 | 1,0633 |
-| 30 | 1,4410 | 1,1018 |
-| 60 | 1,3472 | 1,1785 |
+| Retards | Nostra HAC | Bitcoin passif HAC | Inflation Nostra | Inflation bitcoin |
+|---:|---:|---:|---:|---:|
+| 5 | 1,5964 | 0,8634 | 0,9946 | 0,9886 |
+| 7 | 1,5896 | 0,8552 | 0,9988 | 0,9980 |
+| 10 | 1,5740 | 0,8492 | 1,0087 | 1,0051 |
+| 21 | 1,4932 | 0,8184 | 1,0633 | 1,0430 |
+| 30 | 1,4410 | 0,8016 | 1,1018 | 1,0647 |
+| 60 | 1,3472 | 0,7350 | 1,1785 | 1,1613 |
 
-Le choix canonique de vingt et un retards réduit le Sharpe annualisé de 1,5877 à 1,4932.
+À vingt et un retards, le Sharpe annualisé de Nostra AI passe de 1,5877 à 1,4932, tandis que celui du bitcoin passif passe de 0,8535 à 0,8184.
 
-Aucun calcul HAC équivalent du bitcoin passif n'est présent dans l'artefact applicable.
-
+L'écart descriptif entre les deux Sharpes corrigés de Newey-West est de +0,6748 en faveur de Nostra AI. Cet écart ne constitue pas, à lui seul, un test statistique formel d'égalité entre les deux ratios.
 ## Tableau 6.5B - Bootstrap circulaire du Sharpe
 
 | Taille de bloc | Médiane | Borne basse 95 % | Borne haute 95 % | Part positive |
@@ -116,7 +115,7 @@ Aucun calcul HAC équivalent du bitcoin passif n'est présent dans l'artefact ap
 | Tests multiples | P-values publiées à zéro | Résultat favorable, borné par la résolution des 2 000 répétitions |
 | PBO | Médiane 15,71 % | Risque de surapprentissage réduit mais non annulé |
 | Bootstrap contre les références | 11 écarts positifs, 2 significatifs | La surperformance historique n'est pas universellement significative |
-| Dépendance temporelle | Sharpe HAC 21 = 1,4932 | Le résultat reste positif après correction linéaire de la dépendance temporelle |
+| Dépendance temporelle | Sharpe HAC 21 : Nostra 1,4932 ; bitcoin passif 0,8184 | Les deux ratios restent positifs après correction ; l'écart demeure descriptif |
 | Bootstrap circulaire | Toutes les bornes basses positives | Robustesse favorable sur les tailles de bloc publiées, conditionnelle au jeu de sensibilité |
 
 ## Limites obligatoires
