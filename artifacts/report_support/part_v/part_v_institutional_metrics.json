@@ -41,9 +41,9 @@
       "as_of": "2026-06-02",
       "elapsed_days": 1096,
       "annualized": true,
-      "nostra_return": 0.40763725118424143,
-      "bitcoin_return": 0.35179103843684545,
-      "active_return": 0.055846212747395985
+      "nostra_return": 0.4073078654305191,
+      "bitcoin_return": 0.35151216855780043,
+      "active_return": 0.05579569687271868
     },
     {
       "horizon": "5 ans annualisés",
@@ -52,9 +52,9 @@
       "as_of": "2026-06-02",
       "elapsed_days": 1826,
       "annualized": true,
-      "nostra_return": 0.34821740471845564,
-      "bitcoin_return": 0.12371216978583233,
-      "active_return": 0.2245052349326233
+      "nostra_return": 0.3479417143490646,
+      "bitcoin_return": 0.12362246280015965,
+      "active_return": 0.22431925154890497
     },
     {
       "horizon": "Depuis l'origine annualisé",
@@ -63,9 +63,9 @@
       "as_of": "2026-06-02",
       "elapsed_days": 2210,
       "annualized": true,
-      "nostra_return": 0.5252682693076194,
-      "bitcoin_return": 0.3861863155723617,
-      "active_return": 0.13908195373525767
+      "nostra_return": 0.5245366668238287,
+      "bitcoin_return": 0.38567198239297795,
+      "active_return": 0.13886468443085076
     },
     {
       "horizon": "Depuis l'origine cumulé",

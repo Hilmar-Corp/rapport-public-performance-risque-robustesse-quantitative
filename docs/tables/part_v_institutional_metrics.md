@@ -6,9 +6,9 @@
 |---|---:|---:|---:|
 | 2026 YTD | -1,13 % | -23,21 % | +22,08 pts |
 | 1 an | -5,71 % | -36,42 % | +30,70 pts |
-| 3 ans annualisés | 40,76 % | 35,18 % | +5,58 pts |
-| 5 ans annualisés | 34,82 % | 12,37 % | +22,45 pts |
-| Depuis l'origine annualisé | 52,53 % | 38,62 % | +13,91 pts |
+| 3 ans annualisés | 40,73 % | 35,15 % | +5,58 pts |
+| 5 ans annualisés | 34,79 % | 12,36 % | +22,43 pts |
+| Depuis l'origine annualisé | 52,45 % | 38,57 % | +13,89 pts |
 | Depuis l'origine cumulé | 1186,36 % | 621,30 % | +565,07 pts |
 
 ## Tableau 5.3 - Mesures relatives au bitcoin
