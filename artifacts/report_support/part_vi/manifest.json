@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "package": "part_vi_statistical_report_support",
+  "model": "Nostra AI V5.246",
+  "source_release": "v0.3.0",
+  "period": {
+    "start": "2020-05-14",
+    "end": "2026-06-02",
+    "observations": 2211
+  },
+  "status": "Tableaux, figures et agrégats institutionnels de validité statistique dérivés exclusivement des six exports publics gelés de la release v0.3.0.",
+  "files": [
+    {
+      "path": "artifacts/report_support/part_vi/part_vi_statistical_summary.json",
+      "size_bytes": 17807,
+      "sha256": "835b000dacc52595a676d524588ed0f52f866146c2d8bb074bea975880fa5872"
+    },
+    {
+      "path": "docs/figures/figure_6_1_pbo_aggregate_sensitivity.png",
+      "size_bytes": 111923,
+      "sha256": "99d11f38bd287aeee0280963d9bd2e41456ab6159d85b45b715e6ab8af727d8d"
+    },
+    {
+      "path": "docs/figures/figure_6_2_benchmark_bootstrap_pvalues.png",
+      "size_bytes": 214389,
+      "sha256": "7e329f67118a05284da4c0ead8b0c346ebf67a180807a5b17e7e347e7bef38af"
+    },
+    {
+      "path": "docs/figures/figure_6_3_benchmark_bootstrap_intervals.png",
+      "size_bytes": 174189,
+      "sha256": "de6926fa7dc0faf6031a1f8d72db292a0dca32198dc4a8f557459d8a95d282db"
+    },
+    {
+      "path": "docs/figures/figure_6_4_hac_sharpe_sensitivity.png",
+      "size_bytes": 144253,
+      "sha256": "769d6d54d24c229baae684173104d3b609df507215b078fd22ece473180217ee"
+    },
+    {
+      "path": "docs/figures/figure_6_5_circular_bootstrap_intervals.png",
+      "size_bytes": 111660,
+      "sha256": "ffd3928a1645e85256036d0f8dc8e0bf4bca5a3756ec1a6d0e62df8fa424ae0e"
+    },
+    {
+      "path": "docs/tables/part_vi_statistical_results.md",
+      "size_bytes": 6400,
+      "sha256": "34b894e9ca5019784336c806717aae32190fadc6703b4fea0fecfed7acd5978d"
+    },
+    {
+      "path": "tools/generate_part_vi_statistical_analysis.py",
+      "size_bytes": 43513,
+      "sha256": "66aaec8fcb3cb22bc91a314a6b30877615f7295f140a4fb4cf3e6dd9384be55c"
+    }
+  ]
+}
