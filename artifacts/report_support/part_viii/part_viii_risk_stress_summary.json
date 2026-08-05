@@ -1,0 +1,1088 @@
+{
+  "consolidated_assessment": {
+    "findings": [
+      "Les mesures historiques de VaR, d'Expected Shortfall et de perte quotidienne sont inférieures à celles du bitcoin passif.",
+      "La spécification canonique de backtesting VaR/ES à 365 jours ne présente aucune réjection formelle au seuil de 5 %.",
+      "Le test à dix jours au seuil de 99 % demeure de faible puissance.",
+      "La fenêtre de calibration de 250 jours n'est pas approuvée pour les mesures de risque de queue à 99 %.",
+      "Les drawdowns de Nostra AI sont moins profonds et leur épisode maximal observé est plus court que pour le bitcoin passif.",
+      "Le dernier drawdown de Nostra AI est non récupéré à la clôture et censuré à droite.",
+      "Dans les simulations historiques par blocs, Nostra AI présente un drawdown inférieur au bitcoin dans 99,99 % à 100 % des trajectoires.",
+      "Nostra AI termine devant le bitcoin dans 54,82 % à 58,07 % des trajectoires simulées.",
+      "La réduction d'allocation avant ou au franchissement d'une perte n'est ni immédiate ni universelle dans l'historique.",
+      "Le reverse stress contrefactuel couvre 4 908 scénarios, 87 frontières raffinées et huit familles de rupture.",
+      "La vulnérabilité dominante concerne la fraîcheur et l'intégrité du cœur directionnel."
+    ],
+    "limitations": [
+      "Toutes les analyses sont historiques, rétrospectives et non prédictives.",
+      "Les mesures de queue historiques ne constituent pas des bornes de perte.",
+      "Les trajectoires Monte-Carlo sont des recombinaisons de séquences historiques.",
+      "Les durées de drawdown observées ne constituent pas des prévisions de récupération.",
+      "Les non-franchissements historiques de 25 % et 30 % ne démontrent pas que ces pertes sont impossibles.",
+      "Les trajectoires quotidiennes, variables internes, réglages exacts et frontières privées ne sont pas publiés.",
+      "Aucune validation externe indépendante n'est revendiquée."
+    ],
+    "status": "FAVORABLE_WITH_MATERIAL_OBSERVATIONS"
+  },
+  "counterfactual_reverse_stress": {
+    "all_phase_offsets_tested": true,
+    "baseline_reconciliation_max_abs_delta": 1.7763568394002505e-15,
+    "daily_paths_disclosed": false,
+    "decision_status": "historical_research_evidence",
+    "dominant_vulnerability_class": "directional_core_freshness_and_integrity",
+    "exact_private_settings_disclosed": false,
+    "historical_scope": "2020-05-14_to_2026-06-02",
+    "inference_stage_scenarios": 67,
+    "internal_variables_disclosed": false,
+    "isolated_input_corruption_failure_found": false,
+    "limitation": "The public payload omits daily paths, internal variables, model settings and exact breakpoints. Results are historical counterfactual evidence and are not forecasts.",
+    "observations": 2211,
+    "private_evidence_commitment_sha256": "ba1ea95fdca6dfe6fcc28140294ecfcb173a5248c82a16ae17296ae66e9d9e26",
+    "randomized_repetitions": {
+      "adverse_state_injection": 50,
+      "noise": 30
+    },
+    "refined_failure_families": 8,
+    "refined_failure_frontiers": 87,
+    "refinement_scenarios": 4709,
+    "retraining_and_core_scenarios": 132,
+    "total_scenarios": 4908,
+    "verification_level": "artifact-verified"
+  },
+  "drawdown_duration_recovery": {
+    "analysis_type": "historical_drawdown_duration_recovery_and_time_under_water",
+    "comparisons": {
+      "longest_episode_reduction_observations": 608,
+      "maximum_drawdown_reduction_points": 0.5523875081272758,
+      "recovery_rate_difference": 0.010384615384615437,
+      "time_under_water_share_difference": -0.03889642695612838
+    },
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "limitations": [
+      "Historical realized sample only.",
+      "Unrecovered episodes are right-censored.",
+      "Duration statistics are not recovery forecasts.",
+      "No daily Nostra path or episode date is disclosed."
+    ],
+    "right_censoring_disclosed": true,
+    "strategies": {
+      "bitcoin_benchmark": {
+        "deepest_episode": {
+          "drawdown_depth": 0.7662925431645915,
+          "episode_number": 31,
+          "maximum_drawdown": -0.7662925431645915,
+          "observed_duration_observations": 847,
+          "peak_to_recovery_observations": 847,
+          "peak_to_trough_observations": 378,
+          "recovered_in_sample": true,
+          "right_censored": false,
+          "strategy": "BUY_AND_HOLD",
+          "trough_to_recovery_observations": 469,
+          "underwater_observations": 846
+        },
+        "depth_duration_spearman_all": {
+          "observations": 50,
+          "p_value": 5.589619553883242e-20,
+          "rho": 0.9099771607200082
+        },
+        "depth_duration_spearman_recovered": {
+          "observations": 49,
+          "p_value": 5.196997475741781e-19,
+          "rho": 0.9044450908090784
+        },
+        "drawdown_depth_distribution": {
+          "count": 50,
+          "maximum": 0.7662925431645915,
+          "median": 0.0384283212075856,
+          "minimum": 4.19031937628489e-05,
+          "q25": 0.011115317705424427,
+          "q75": 0.11358523548865052,
+          "q90": 0.25272499082862465,
+          "q95": 0.3988671519976108
+        },
+        "episode_count": 50,
+        "longest_observed_episode": {
+          "drawdown_depth": 0.7662925431645915,
+          "episode_number": 31,
+          "maximum_drawdown": -0.7662925431645915,
+          "observed_duration_observations": 847,
+          "peak_to_recovery_observations": 847,
+          "peak_to_trough_observations": 378,
+          "recovered_in_sample": true,
+          "right_censored": false,
+          "strategy": "BUY_AND_HOLD",
+          "trough_to_recovery_observations": 469,
+          "underwater_observations": 846
+        },
+        "maximum_drawdown": -0.7662925431645915,
+        "observed_duration_distribution": {
+          "count": 50,
+          "maximum": 847.0,
+          "median": 4.5,
+          "minimum": 2.0,
+          "q25": 2.0,
+          "q75": 20.5,
+          "q90": 70.20000000000007,
+          "q95": 215.94999999999987
+        },
+        "peak_to_recovery_duration_distribution": {
+          "count": 49,
+          "maximum": 847.0,
+          "median": 4.0,
+          "minimum": 2.0,
+          "q25": 2.0,
+          "q75": 19.0,
+          "q90": 57.800000000000026,
+          "q95": 160.1999999999996
+        },
+        "peak_to_trough_duration_distribution": {
+          "count": 50,
+          "maximum": 378.0,
+          "median": 2.0,
+          "minimum": 1.0,
+          "q25": 1.0,
+          "q75": 11.0,
+          "q90": 35.600000000000065,
+          "q95": 111.19999999999993
+        },
+        "recovered_episode_count": 49,
+        "recovery_rate": 0.98,
+        "severity_buckets": {
+          "10_to_below_20_percent": {
+            "episode_count": 8,
+            "observed_duration_distribution": {
+              "count": 8,
+              "maximum": 65.0,
+              "median": 33.0,
+              "minimum": 6.0,
+              "q25": 18.75,
+              "q75": 53.75,
+              "q90": 58.699999999999996,
+              "q95": 61.849999999999994
+            },
+            "recovered_count": 8,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          },
+          "20_percent_or_more": {
+            "episode_count": 7,
+            "observed_duration_distribution": {
+              "count": 7,
+              "maximum": 847.0,
+              "median": 189.0,
+              "minimum": 18.0,
+              "q25": 74.0,
+              "q75": 238.5,
+              "q90": 482.2000000000002,
+              "q95": 664.5999999999996
+            },
+            "recovered_count": 6,
+            "recovery_rate": 0.8571428571428571,
+            "unrecovered_count": 1
+          },
+          "5_to_below_10_percent": {
+            "episode_count": 6,
+            "observed_duration_distribution": {
+              "count": 6,
+              "maximum": 49.0,
+              "median": 15.0,
+              "minimum": 5.0,
+              "q25": 10.25,
+              "q75": 19.75,
+              "q90": 35.0,
+              "q95": 42.0
+            },
+            "recovered_count": 6,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          },
+          "below_5_percent": {
+            "episode_count": 29,
+            "observed_duration_distribution": {
+              "count": 29,
+              "maximum": 8.0,
+              "median": 2.0,
+              "minimum": 2.0,
+              "q25": 2.0,
+              "q75": 3.0,
+              "q90": 6.0,
+              "q95": 6.0
+            },
+            "recovered_count": 29,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          }
+        },
+        "time_under_water_observations": 2113,
+        "time_under_water_share": 0.9556761646313885,
+        "trough_to_recovery_duration_distribution": {
+          "count": 49,
+          "maximum": 469.0,
+          "median": 2.0,
+          "minimum": 1.0,
+          "q25": 1.0,
+          "q75": 11.0,
+          "q90": 36.000000000000014,
+          "q95": 53.7999999999999
+        },
+        "unrecovered_episode_count": 1
+      },
+      "nostra_ai": {
+        "deepest_episode": {
+          "drawdown_depth": 0.21390503503731573,
+          "episode_number": 104,
+          "maximum_drawdown": -0.21390503503731573,
+          "observed_duration_observations": 239,
+          "peak_to_recovery_observations": null,
+          "peak_to_trough_observations": 174,
+          "recovered_in_sample": false,
+          "right_censored": true,
+          "strategy": "V5246",
+          "trough_to_recovery_observations": null,
+          "underwater_observations": 239
+        },
+        "depth_duration_spearman_all": {
+          "observations": 104,
+          "p_value": 1.4972239588939076e-34,
+          "rho": 0.8788158504978025
+        },
+        "depth_duration_spearman_recovered": {
+          "observations": 103,
+          "p_value": 1.2823290840745792e-33,
+          "rho": 0.8751699619505968
+        },
+        "drawdown_depth_distribution": {
+          "count": 104,
+          "maximum": 0.21390503503731573,
+          "median": 0.016024999862521927,
+          "minimum": 4.8234557748827456e-05,
+          "q25": 0.006147809179979424,
+          "q75": 0.046840519795783936,
+          "q90": 0.0955243640014298,
+          "q95": 0.14075390915379585
+        },
+        "episode_count": 104,
+        "longest_observed_episode": {
+          "drawdown_depth": 0.21390503503731573,
+          "episode_number": 104,
+          "maximum_drawdown": -0.21390503503731573,
+          "observed_duration_observations": 239,
+          "peak_to_recovery_observations": null,
+          "peak_to_trough_observations": 174,
+          "recovered_in_sample": false,
+          "right_censored": true,
+          "strategy": "V5246",
+          "trough_to_recovery_observations": null,
+          "underwater_observations": 239
+        },
+        "maximum_drawdown": -0.21390503503731573,
+        "observed_duration_distribution": {
+          "count": 104,
+          "maximum": 239.0,
+          "median": 4.0,
+          "minimum": 2.0,
+          "q25": 2.0,
+          "q75": 11.5,
+          "q90": 54.500000000000014,
+          "q95": 118.14999999999989
+        },
+        "peak_to_recovery_duration_distribution": {
+          "count": 103,
+          "maximum": 219.0,
+          "median": 4.0,
+          "minimum": 2.0,
+          "q25": 2.0,
+          "q75": 11.0,
+          "q90": 50.599999999999994,
+          "q95": 98.59999999999971
+        },
+        "peak_to_trough_duration_distribution": {
+          "count": 104,
+          "maximum": 177.0,
+          "median": 2.0,
+          "minimum": 1.0,
+          "q25": 1.0,
+          "q75": 6.0,
+          "q90": 34.500000000000014,
+          "q95": 59.849999999999994
+        },
+        "recovered_episode_count": 103,
+        "recovery_rate": 0.9903846153846154,
+        "severity_buckets": {
+          "10_to_below_20_percent": {
+            "episode_count": 9,
+            "observed_duration_distribution": {
+              "count": 9,
+              "maximum": 219.0,
+              "median": 121.0,
+              "minimum": 30.0,
+              "q25": 44.0,
+              "q75": 144.0,
+              "q90": 196.6,
+              "q95": 207.79999999999998
+            },
+            "recovered_count": 9,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          },
+          "20_percent_or_more": {
+            "episode_count": 1,
+            "observed_duration_distribution": {
+              "count": 1,
+              "maximum": 239.0,
+              "median": 239.0,
+              "minimum": 239.0,
+              "q25": 239.0,
+              "q75": 239.0,
+              "q90": 239.0,
+              "q95": 239.0
+            },
+            "recovered_count": 0,
+            "recovery_rate": 0.0,
+            "unrecovered_count": 1
+          },
+          "5_to_below_10_percent": {
+            "episode_count": 15,
+            "observed_duration_distribution": {
+              "count": 15,
+              "maximum": 68.0,
+              "median": 22.0,
+              "minimum": 5.0,
+              "q25": 11.5,
+              "q75": 53.5,
+              "q90": 62.8,
+              "q95": 65.19999999999999
+            },
+            "recovered_count": 15,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          },
+          "below_5_percent": {
+            "episode_count": 79,
+            "observed_duration_distribution": {
+              "count": 79,
+              "maximum": 31.0,
+              "median": 3.0,
+              "minimum": 2.0,
+              "q25": 2.0,
+              "q75": 6.0,
+              "q90": 10.200000000000003,
+              "q95": 13.499999999999972
+            },
+            "recovered_count": 79,
+            "recovery_rate": 1.0,
+            "unrecovered_count": 0
+          }
+        },
+        "time_under_water_observations": 2027,
+        "time_under_water_share": 0.9167797376752601,
+        "trough_to_recovery_duration_distribution": {
+          "count": 103,
+          "maximum": 103.0,
+          "median": 2.0,
+          "minimum": 1.0,
+          "q25": 1.0,
+          "q75": 6.0,
+          "q90": 20.599999999999994,
+          "q95": 32.89999999999999
+        },
+        "unrecovered_episode_count": 1
+      }
+    }
+  },
+  "historical_block_monte_carlo": {
+    "comparative_ranges": {
+      "probability_nostra_beats_btc_terminal": {
+        "maximum": 0.5807,
+        "minimum": 0.5482
+      },
+      "probability_nostra_has_lower_drawdown": {
+        "maximum": 1.0,
+        "minimum": 0.9999
+      }
+    },
+    "limitations": [
+      "The simulation is empirical and retrospective, not a forecast.",
+      "The two return series are resampled jointly."
+    ],
+    "method": "joint_moving_block_historical_resampling",
+    "records": [
+      {
+        "block_size": 7.0,
+        "maximum_drawdown_median": -0.39183498,
+        "maximum_drawdown_q01": -0.73748458,
+        "maximum_drawdown_q05": -0.64177033,
+        "portfolio": "bitcoin_benchmark",
+        "probability_drawdown_below_minus_10pct": 1.0,
+        "probability_drawdown_below_minus_20pct": 0.9785,
+        "probability_drawdown_below_minus_30pct": 0.7824,
+        "probability_nostra_beats_btc_terminal": 0.5807,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.8063,
+        "probability_terminal_loss": 0.2835,
+        "repetitions": 10000.0,
+        "sharpe_median": 0.86605914,
+        "sharpe_q025": -1.0549305,
+        "sharpe_q975": 2.88152439,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.39242929,
+        "terminal_return_q01": -0.63676806,
+        "terminal_return_q05": -0.45693786,
+        "terminal_return_q95": 2.66438645,
+        "terminal_return_q99": 4.50684844
+      },
+      {
+        "block_size": 21.0,
+        "maximum_drawdown_median": -0.39499397,
+        "maximum_drawdown_q01": -0.75362843,
+        "maximum_drawdown_q05": -0.65213495,
+        "portfolio": "bitcoin_benchmark",
+        "probability_drawdown_below_minus_10pct": 1.0,
+        "probability_drawdown_below_minus_20pct": 0.9773,
+        "probability_drawdown_below_minus_30pct": 0.7752,
+        "probability_nostra_beats_btc_terminal": 0.559,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.8095,
+        "probability_terminal_loss": 0.2793,
+        "repetitions": 10000.0,
+        "sharpe_median": 0.89228283,
+        "sharpe_q025": -1.10575315,
+        "sharpe_q975": 3.07917399,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.41414022,
+        "terminal_return_q01": -0.66482419,
+        "terminal_return_q05": -0.46953382,
+        "terminal_return_q95": 2.92194383,
+        "terminal_return_q99": 5.15939338
+      },
+      {
+        "block_size": 30.0,
+        "maximum_drawdown_median": -0.40345379,
+        "maximum_drawdown_q01": -0.74421007,
+        "maximum_drawdown_q05": -0.65096028,
+        "portfolio": "bitcoin_benchmark",
+        "probability_drawdown_below_minus_10pct": 1.0,
+        "probability_drawdown_below_minus_20pct": 0.9802,
+        "probability_drawdown_below_minus_30pct": 0.771,
+        "probability_nostra_beats_btc_terminal": 0.5631,
+        "probability_nostra_has_lower_drawdown": 0.9999,
+        "probability_sharpe_positive": 0.8004,
+        "probability_terminal_loss": 0.2838,
+        "repetitions": 10000.0,
+        "sharpe_median": 0.89969872,
+        "sharpe_q025": -1.10248371,
+        "sharpe_q975": 3.07323498,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.41588031,
+        "terminal_return_q01": -0.64768525,
+        "terminal_return_q05": -0.47934664,
+        "terminal_return_q95": 2.97804389,
+        "terminal_return_q99": 5.18048929
+      },
+      {
+        "block_size": 60.0,
+        "maximum_drawdown_median": -0.40345379,
+        "maximum_drawdown_q01": -0.77236911,
+        "maximum_drawdown_q05": -0.67710203,
+        "portfolio": "bitcoin_benchmark",
+        "probability_drawdown_below_minus_10pct": 1.0,
+        "probability_drawdown_below_minus_20pct": 0.9777,
+        "probability_drawdown_below_minus_30pct": 0.763,
+        "probability_nostra_beats_btc_terminal": 0.5482,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.78,
+        "probability_terminal_loss": 0.3008,
+        "repetitions": 10000.0,
+        "sharpe_median": 0.91662293,
+        "sharpe_q025": -1.25860059,
+        "sharpe_q975": 3.21078407,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.42364433,
+        "terminal_return_q01": -0.69998918,
+        "terminal_return_q05": -0.520626,
+        "terminal_return_q95": 3.34537102,
+        "terminal_return_q99": 6.18079448
+      },
+      {
+        "block_size": 7.0,
+        "maximum_drawdown_median": -0.16821941,
+        "maximum_drawdown_q01": -0.36281616,
+        "maximum_drawdown_q05": -0.29277467,
+        "portfolio": "nostra_ai",
+        "probability_drawdown_below_minus_10pct": 0.9437,
+        "probability_drawdown_below_minus_20pct": 0.2975,
+        "probability_drawdown_below_minus_30pct": 0.0426,
+        "probability_nostra_beats_btc_terminal": 0.5807,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.9528,
+        "probability_terminal_loss": 0.0653,
+        "repetitions": 10000.0,
+        "sharpe_median": 1.57862306,
+        "sharpe_q025": -0.24602676,
+        "sharpe_q975": 3.48138646,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.51337551,
+        "terminal_return_q01": -0.18711591,
+        "terminal_return_q05": -0.03418343,
+        "terminal_return_q95": 1.49220097,
+        "terminal_return_q99": 2.09099342
+      },
+      {
+        "block_size": 21.0,
+        "maximum_drawdown_median": -0.16188718,
+        "maximum_drawdown_q01": -0.34796026,
+        "maximum_drawdown_q05": -0.27701216,
+        "portfolio": "nostra_ai",
+        "probability_drawdown_below_minus_10pct": 0.9457,
+        "probability_drawdown_below_minus_20pct": 0.2587,
+        "probability_drawdown_below_minus_30pct": 0.0302,
+        "probability_nostra_beats_btc_terminal": 0.559,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.9459,
+        "probability_terminal_loss": 0.0702,
+        "repetitions": 10000.0,
+        "sharpe_median": 1.59216376,
+        "sharpe_q025": -0.30048842,
+        "sharpe_q975": 3.55108659,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.51570705,
+        "terminal_return_q01": -0.19806536,
+        "terminal_return_q05": -0.04659912,
+        "terminal_return_q95": 1.60991609,
+        "terminal_return_q99": 2.35027738
+      },
+      {
+        "block_size": 30.0,
+        "maximum_drawdown_median": -0.16113785,
+        "maximum_drawdown_q01": -0.34576313,
+        "maximum_drawdown_q05": -0.276964,
+        "portfolio": "nostra_ai",
+        "probability_drawdown_below_minus_10pct": 0.9443,
+        "probability_drawdown_below_minus_20pct": 0.2541,
+        "probability_drawdown_below_minus_30pct": 0.0296,
+        "probability_nostra_beats_btc_terminal": 0.5631,
+        "probability_nostra_has_lower_drawdown": 0.9999,
+        "probability_sharpe_positive": 0.9415,
+        "probability_terminal_loss": 0.076,
+        "repetitions": 10000.0,
+        "sharpe_median": 1.61779682,
+        "sharpe_q025": -0.38370543,
+        "sharpe_q975": 3.60678825,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.52420916,
+        "terminal_return_q01": -0.20572445,
+        "terminal_return_q05": -0.05034213,
+        "terminal_return_q95": 1.68854293,
+        "terminal_return_q99": 2.44473231
+      },
+      {
+        "block_size": 60.0,
+        "maximum_drawdown_median": -0.1642073,
+        "maximum_drawdown_q01": -0.33160379,
+        "maximum_drawdown_q05": -0.27229317,
+        "portfolio": "nostra_ai",
+        "probability_drawdown_below_minus_10pct": 0.9467,
+        "probability_drawdown_below_minus_20pct": 0.2408,
+        "probability_drawdown_below_minus_30pct": 0.0226,
+        "probability_nostra_beats_btc_terminal": 0.5482,
+        "probability_nostra_has_lower_drawdown": 1.0,
+        "probability_sharpe_positive": 0.931,
+        "probability_terminal_loss": 0.0857,
+        "repetitions": 10000.0,
+        "sharpe_median": 1.58732924,
+        "sharpe_q025": -0.50568797,
+        "sharpe_q975": 3.6560155,
+        "simulation_length_days": 365.0,
+        "terminal_return_median": 0.51512937,
+        "terminal_return_q01": -0.21565477,
+        "terminal_return_q05": -0.06980965,
+        "terminal_return_q95": 1.80299652,
+        "terminal_return_q99": 2.72563094
+      }
+    ],
+    "scope": {
+      "block_sizes": [
+        7,
+        21,
+        30,
+        60
+      ],
+      "joint_resampling": true,
+      "repetitions_per_configuration": 10000,
+      "simulation_length_days": 365
+    }
+  },
+  "historical_reverse_stress": {
+    "analysis_type": "historical_dynamic_loss_breach_analysis",
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "economic_reconciliation": {
+      "maximum_absolute_delta": 1.0061396160665481e-16,
+      "public_convention_name": "row_aligned_effective_allocation",
+      "status": "PASS"
+    },
+    "evaluation_period": {
+      "end": "2026-06-02",
+      "start": "2020-05-14"
+    },
+    "evidence_commitment_sha256": "83b47296d8eee4da8629cd2ef65a8a9f906fbc77a5b0b7aba3b254ec66710f62",
+    "global_results": {
+      "drawdown_episode_count": 104,
+      "loss_breach_record_count": 40,
+      "maximum_model_drawdown": -0.2139050350373155
+    },
+    "governance_decision": {
+      "monitoring_requirement": "Continue monitoring reaction speed, allocation persistence and turnover during severe and prolonged market declines.",
+      "principal_observations": [
+        "Historical drawdowns of 25 percent and 30 percent were not observed.",
+        "Allocation reduction was neither immediate nor universal before material loss level breaches.",
+        "At the 15 percent loss level, allocation was reduced at breach in one of four historical episodes.",
+        "The single 20 percent breach occurred during an extended and severe realized market decline."
+      ],
+      "status": "PASS_WITH_OBSERVATION"
+    },
+    "governing_conventions": [
+      "The analysis uses the allocation economically aligned with each observed daily return.",
+      "The governed transaction-cost charge equals 25 basis points multiplied by observed daily turnover.",
+      "Loss levels are measured from each historical equity peak to the first subsequent breach.",
+      "Allocation reactions are the decisions actually recorded during realized historical stress episodes."
+    ],
+    "limitations": [
+      "This analysis covers realized historical paths only.",
+      "It does not establish behavior under unseen counterfactual market or on-chain scenarios.",
+      "Historical non-breach of a loss level does not demonstrate that the loss level is unreachable.",
+      "The analysis does not independently validate upstream data generation or model construction.",
+      "Episode counts are not independent probability estimates."
+    ],
+    "loss_level_results": [
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 10,
+          "reduced_at_breach": 13,
+          "reduced_by_at_least_25pct_before_breach": 6,
+          "unchanged_at_breach": 2
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.4,
+          "reduced_at_breach": 0.52,
+          "reduced_by_at_least_25pct_before_breach": 0.24,
+          "unchanged_at_breach": 0.08
+        },
+        "breach_episode_count": 25,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 55,
+          "median": 6.0,
+          "minimum": 1
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.06175737417595728,
+            "median": -0.09533273853520163,
+            "minimum": -0.47223295320487524
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.06175737417595728,
+            "median": -0.09533273853520163,
+            "minimum": -0.47223295320487524
+          }
+        },
+        "target_nav_loss": 0.05,
+        "turnover_to_breach": {
+          "maximum": 1.3479321671359992,
+          "median": 0.09021299999999909,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 3,
+          "reduced_at_breach": 6,
+          "reduced_by_at_least_25pct_before_breach": 4,
+          "unchanged_at_breach": 1
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.3,
+          "reduced_at_breach": 0.6,
+          "reduced_by_at_least_25pct_before_breach": 0.4,
+          "unchanged_at_breach": 0.1
+        },
+        "breach_episode_count": 10,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 75,
+          "median": 13.5,
+          "minimum": 2
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.12561906733075212,
+            "median": -0.16446733670894753,
+            "minimum": -0.48062215599571223
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.12561906733075212,
+            "median": -0.16446733670894753,
+            "minimum": -0.48062215599571223
+          }
+        },
+        "target_nav_loss": 0.1,
+        "turnover_to_breach": {
+          "maximum": 2.20450175667295,
+          "median": 0.3484304233979265,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 2,
+          "reduced_at_breach": 1,
+          "reduced_by_at_least_25pct_before_breach": 1,
+          "unchanged_at_breach": 1
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.5,
+          "reduced_at_breach": 0.25,
+          "reduced_by_at_least_25pct_before_breach": 0.25,
+          "unchanged_at_breach": 0.25
+        },
+        "breach_episode_count": 4,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 110,
+          "median": 26.5,
+          "minimum": 14
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.18320481392376897,
+            "median": -0.20849747413513903,
+            "minimum": -0.26102670083989876
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.18320481392376897,
+            "median": -0.20849747413513903,
+            "minimum": -0.26102670083989876
+          }
+        },
+        "target_nav_loss": 0.15,
+        "turnover_to_breach": {
+          "maximum": 3.038818148324768,
+          "median": 0.17272940319992858,
+          "minimum": 0.0
+        }
+      },
+      {
+        "allocation_reaction_counts": {
+          "increased_at_breach": 0,
+          "reduced_at_breach": 1,
+          "reduced_by_at_least_25pct_before_breach": 1,
+          "unchanged_at_breach": 0
+        },
+        "allocation_reaction_shares": {
+          "increased_at_breach": 0.0,
+          "reduced_at_breach": 1.0,
+          "reduced_by_at_least_25pct_before_breach": 1.0,
+          "unchanged_at_breach": 0.0
+        },
+        "breach_episode_count": 1,
+        "historically_breached": true,
+        "observations_to_breach": {
+          "maximum": 167,
+          "median": 167.0,
+          "minimum": 167
+        },
+        "observed_btc_path_to_breach": {
+          "compounded_return_range": {
+            "maximum": -0.455640985366904,
+            "median": -0.455640985366904,
+            "minimum": -0.455640985366904
+          },
+          "minimum_cumulative_return_range": {
+            "maximum": -0.4953425573570789,
+            "median": -0.4953425573570789,
+            "minimum": -0.4953425573570789
+          }
+        },
+        "target_nav_loss": 0.2,
+        "turnover_to_breach": {
+          "maximum": 3.537205593130074,
+          "median": 3.537205593130074,
+          "minimum": 3.537205593130074
+        }
+      },
+      {
+        "breach_episode_count": 0,
+        "historically_breached": false,
+        "observed_non_breach_is_not_a_bound": true,
+        "target_nav_loss": 0.25
+      },
+      {
+        "breach_episode_count": 0,
+        "historically_breached": false,
+        "observed_non_breach_is_not_a_bound": true,
+        "target_nav_loss": 0.3
+      }
+    ],
+    "methodological_status": "accepted_with_observations",
+    "observations": 2211,
+    "verification_level": "artifact-verified"
+  },
+  "model": "Nostra AI V5.246",
+  "period": {
+    "annualization": 365,
+    "end": "2026-06-02",
+    "observations": 2211,
+    "start": "2020-05-14"
+  },
+  "schema_version": 1,
+  "section": "part_viii_risk_stress",
+  "source_release": "v0.3.0",
+  "sources": [
+    {
+      "name": "tail_risk",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/tail_risk.json",
+      "schema_version": 1,
+      "section": "tail_risk",
+      "sha256": "29b9d94ec87da8249ae32086084bf1956f6f36bd39f0ff3db624216a67b68c56"
+    },
+    {
+      "name": "var_es_backtesting",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/var_es_backtesting.json",
+      "schema_version": 1,
+      "section": "var_es_backtesting",
+      "sha256": "c1d74d449a23c1de99a5a701d97457e263f3957b796f2d1b30142a8b877fba8b"
+    },
+    {
+      "name": "drawdown_duration_recovery",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/drawdown_duration_recovery.json",
+      "schema_version": 1,
+      "section": "drawdown_duration_recovery",
+      "sha256": "aac55eeef0278cbf70ee1f7816c1822d657bdc0c7b2013e65a3b6020cbd16a2d"
+    },
+    {
+      "name": "historical_block_monte_carlo",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/historical_block_monte_carlo.json",
+      "schema_version": 1,
+      "section": "historical_block_monte_carlo",
+      "sha256": "ddae15816201f3524eb9d8914838fda2b9cae051d7a6aecca37338afb1c9afb3"
+    },
+    {
+      "name": "historical_reverse_stress",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/historical_reverse_stress.json",
+      "schema_version": 1,
+      "section": "historical_reverse_stress",
+      "sha256": "679ef9da38ccaacab70b83594e460093d5c26fe975488d2a30403cae1ca5cbf5"
+    },
+    {
+      "name": "counterfactual_reverse_stress",
+      "path": "artifacts/candidates/v0.3.0/quantitative_aggregates/counterfactual_reverse_stress.json",
+      "schema_version": 1,
+      "section": "counterfactual_reverse_stress",
+      "sha256": "8a5b35f8c9bd8da227802223c1018ac05a8e7b1ec5bd66a4e5a98b35d004aeb0"
+    }
+  ],
+  "tail_risk": {
+    "comparisons": {
+      "es_95_reduction_ratio": 0.5333201107495676,
+      "es_99_reduction_ratio": 0.50908210218148,
+      "var_95_reduction_ratio": 0.5601523404632214,
+      "var_99_reduction_ratio": 0.5316811120455045,
+      "worst_daily_loss_difference": 0.06018313
+    },
+    "limitations": [
+      "Historical tail estimates are not maximum-loss bounds.",
+      "The estimates are retrospective."
+    ],
+    "method": "historical_var_and_expected_shortfall",
+    "records": [
+      {
+        "autocorrelation_lag_1": -0.01895162,
+        "autocorrelation_lag_21": 0.00886098,
+        "autocorrelation_lag_30": 0.01857769,
+        "autocorrelation_lag_5": 0.03208653,
+        "historical_es_95_daily": 0.03207062,
+        "historical_es_99_daily": 0.05297551,
+        "historical_var_95_daily": 0.02036101,
+        "historical_var_99_daily": 0.03876511,
+        "maximum_daily_return": 0.09565668,
+        "minimum_daily_return": -0.09361526,
+        "observations": 2211.0,
+        "portfolio": "nostra_ai",
+        "positive_day_share": 0.50746269
+      },
+      {
+        "autocorrelation_lag_1": -0.04609374,
+        "autocorrelation_lag_21": -0.02275656,
+        "autocorrelation_lag_30": 0.00066601,
+        "autocorrelation_lag_5": 0.01854584,
+        "historical_es_95_daily": 0.06872081,
+        "historical_es_99_daily": 0.10791114,
+        "historical_var_95_daily": 0.04629105,
+        "historical_var_99_daily": 0.08277503,
+        "maximum_daily_return": 0.19536139,
+        "minimum_daily_return": -0.15379839,
+        "observations": 2211.0,
+        "portfolio": "bitcoin_benchmark",
+        "positive_day_share": 0.50655812
+      }
+    ]
+  },
+  "var_es_backtesting": {
+    "all_sensitivity_traffic_light_counts": {
+      "AMBER": 4,
+      "GREEN": 7,
+      "RED": 1
+    },
+    "canonical_calibration_window_days": 365,
+    "canonical_results": [
+      {
+        "christoffersen_conditional_coverage_p_value": 0.3343681811,
+        "christoffersen_independence_p_value": 0.139320316,
+        "confidence_level": 0.95,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.3853073463,
+        "exact_binomial_p_value": 0.9149522744,
+        "exception_cluster_count": 85,
+        "exception_count": 93,
+        "exception_rate": 0.0503791983,
+        "expected_exception_count": 92.3,
+        "kupiec_p_value": 0.9404813087,
+        "maximum_exception_cluster_length": 3,
+        "observations": 1846,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 1,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.6631275247,
+        "christoffersen_independence_p_value": 0.4868126994,
+        "confidence_level": 0.99,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.1764117941,
+        "exact_binomial_p_value": 0.5568683526,
+        "exception_cluster_count": 21,
+        "exception_count": 21,
+        "exception_rate": 0.011375948,
+        "expected_exception_count": 18.46,
+        "kupiec_p_value": 0.5609786336,
+        "maximum_exception_cluster_length": 1,
+        "observations": 1846,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 1,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.4152485196,
+        "christoffersen_independence_p_value": 0.2353990957,
+        "confidence_level": 0.95,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.2368815592,
+        "exact_binomial_p_value": 0.4976479836,
+        "exception_cluster_count": 11,
+        "exception_count": 11,
+        "exception_rate": 0.0597826087,
+        "expected_exception_count": 9.2,
+        "kupiec_p_value": 0.5542157357,
+        "maximum_exception_cluster_length": 1,
+        "observations": 184,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT"
+        ],
+        "risk_period_days": 10,
+        "traffic_light": "GREEN"
+      },
+      {
+        "christoffersen_conditional_coverage_p_value": 0.3505102539,
+        "christoffersen_independence_p_value": 0.6724187609,
+        "confidence_level": 0.99,
+        "es_normalized_tail_loss_bootstrap_p_value": 0.1064467766,
+        "exact_binomial_p_value": 0.1142554675,
+        "exception_cluster_count": 4,
+        "exception_count": 4,
+        "exception_rate": 0.0217391304,
+        "expected_exception_count": 1.84,
+        "kupiec_p_value": 0.166083401,
+        "maximum_exception_cluster_length": 1,
+        "observations": 184,
+        "reason_codes": [
+          "NO_FORMAL_REJECTION_AT_5_PERCENT",
+          "LOW_EXPECTED_EXCEPTION_COUNT"
+        ],
+        "risk_period_days": 10,
+        "traffic_light": "AMBER"
+      }
+    ],
+    "canonical_traffic_light_counts": {
+      "AMBER": 1,
+      "GREEN": 3,
+      "RED": 0
+    },
+    "confidence_levels": [
+      0.95,
+      0.99
+    ],
+    "decision_status": "PASS_WITH_OBSERVATION",
+    "evaluation_period": {
+      "end": "2026-06-02",
+      "start": "2020-05-14"
+    },
+    "evidence_commitment_sha256": "9edb0c27d09958aebf9239680d6205107971532f36332376d95490d37bebe77b",
+    "forecast_design": "strictly trailing historical simulation without look-ahead",
+    "formal_tests": [
+      "Kupiec unconditional coverage",
+      "exact binomial coverage",
+      "Christoffersen exception independence",
+      "Christoffersen conditional coverage",
+      "one-sided normalized tail-loss calibration with deterministic moving-block bootstrap",
+      "exception clustering analysis"
+    ],
+    "governance_decision": {
+      "approved_specification": "365-day trailing historical simulation",
+      "monitoring_requirement": "Continue exception-frequency, clustering and tail-loss monitoring.",
+      "non_approved_specification": "250-day calibration for 99 percent tail-risk measures"
+    },
+    "limitations": [
+      "The 10-day 99 percent test has low power because fewer than five exceptions are expected in the available sample.",
+      "Sensitivity results demonstrate that the conclusion depends on the selected calibration window.",
+      "The results are retrospective and do not constitute independent external validation.",
+      "The Expected Shortfall p-value uses a deterministic moving-block bootstrap."
+    ],
+    "methodological_status": "accepted_with_observations",
+    "observations": 2211,
+    "return_basis": "canonical net daily strategy returns after the governed transaction-cost convention",
+    "risk_periods_days": [
+      1,
+      10
+    ],
+    "sensitivity_calibration_windows_days": [
+      250,
+      365,
+      500
+    ],
+    "sensitivity_findings": [
+      {
+        "calibration_window_days": 250,
+        "confidence_level": 0.99,
+        "finding": "Tail risk is materially underestimated under the short calibration window.",
+        "risk_period_days": 10,
+        "status": "RED"
+      },
+      {
+        "calibration_window_days": 250,
+        "confidence_level": 0.99,
+        "finding": "Coverage and Expected Shortfall calibration are rejected at the 5 percent level.",
+        "risk_period_days": 1,
+        "status": "AMBER"
+      },
+      {
+        "calibration_window_days": 500,
+        "confidence_level": 0.95,
+        "finding": "The exception frequency is broadly acceptable, but independence and conditional coverage indicate clustering.",
+        "risk_period_days": 1,
+        "status": "AMBER"
+      }
+    ],
+    "verification_level": "artifact-verified"
+  }
+}
