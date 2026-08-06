@@ -1,0 +1,277 @@
+{
+  "analysis": "independent_accounting_core_recalculation",
+  "implementation_boundary": "Implémentation autonome ne dépendant d'aucune fonction de src/hilmarbench.",
+  "model": "Nostra AI V5.246",
+  "reconciliation": {
+    "execution_export_sha256": "ae0485d907b9c3cb01fb26dbe05f95bbdc127491b31a458bfdb051fbc04ae38c",
+    "maximum_aggregate_absolute_differences": {
+      "annualized_volatility": 4.7752961029878804e-09,
+      "cagr": 3.2227950308438835e-09,
+      "final_equity": 4.4594319348334466e-09,
+      "maximum_drawdown": 4.962685040688086e-09,
+      "sharpe": 4.8184150003294235e-09,
+      "turnover_total": 6.735731972185022e-10
+    },
+    "official_equity_maximum_absolute_difference": 3.4283687000424834e-13,
+    "official_return_maximum_absolute_difference": 4.961309141293668e-16,
+    "position_alignment": "as_provided",
+    "private_sha256": "056e13af2b26b0e449e502bf814db1a6a396f90aa4cb2bae74b2771ce8285c2e",
+    "public_sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d"
+  },
+  "release": "v0.3.0",
+  "scenario_records": [
+    {
+      "absolute_differences": {
+        "annualized_volatility": 1.6765263066709224e-09,
+        "cagr": 3.2227950308438835e-09,
+        "final_equity": 2.9750193419886273e-09,
+        "maximum_drawdown": 2.54119214559978e-09,
+        "sharpe": 1.32990662926602e-09,
+        "turnover_total": 6.735731972185022e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.2924974716765263,
+        "cagr": 0.554227716777205,
+        "final_equity": 14.45794433297502,
+        "maximum_drawdown": -0.20686472254119215,
+        "sharpe": 1.6536649113299067,
+        "turnover_total": 46.792475850673576
+      },
+      "cost_bps": 0.0,
+      "delay_days": 0,
+      "published": {
+        "annualized_volatility": 0.29249747,
+        "cagr": 0.55422772,
+        "final_equity": 14.45794433,
+        "maximum_drawdown": -0.20686472,
+        "sharpe": 1.65366491,
+        "turnover_total": 46.79247585
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 4.547465626281166e-09,
+        "cagr": 2.499633278141289e-09,
+        "final_equity": 3.973731566020433e-09,
+        "maximum_drawdown": 9.394761912862037e-10,
+        "sharpe": 3.2291549434404487e-09,
+        "turnover_total": 5.3937299071549205e-11
+      },
+      "calculated": {
+        "annualized_volatility": 0.29196606454746565,
+        "cagr": 0.5473013075003668,
+        "final_equity": 14.072018706026268,
+        "maximum_drawdown": -0.2234130190605238,
+        "sharpe": 1.640800453229155,
+        "turnover_total": 46.792158119946066
+      },
+      "cost_bps": 0.0,
+      "delay_days": 1,
+      "published": {
+        "annualized_volatility": 0.29196606,
+        "cagr": 0.54730131,
+        "final_equity": 14.07201871,
+        "maximum_drawdown": -0.22341302,
+        "sharpe": 1.64080045,
+        "turnover_total": 46.79215812
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 1.1626433149558579e-10,
+        "cagr": 2.6819046983206363e-10,
+        "final_equity": 5.943263658991782e-10,
+        "maximum_drawdown": 1.766891105647872e-09,
+        "sharpe": 3.4692009265313573e-09,
+        "turnover_total": 2.815667698996549e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.29136981011626434,
+        "cagr": 0.5251537102681905,
+        "final_equity": 12.895212530594327,
+        "maximum_drawdown": -0.2275598117668911,
+        "sharpe": 1.5940406965307992,
+        "turnover_total": 46.791606990281565
+      },
+      "cost_bps": 0.0,
+      "delay_days": 2,
+      "published": {
+        "annualized_volatility": 0.29136981,
+        "cagr": 0.52515371,
+        "final_equity": 12.89521253,
+        "maximum_drawdown": -0.22755981,
+        "sharpe": 1.5940407,
+        "turnover_total": 46.79160699
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 3.8312102379478574e-09,
+        "cagr": 3.1761653307427196e-09,
+        "final_equity": 3.619307520352777e-09,
+        "maximum_drawdown": 4.962685040688086e-09,
+        "sharpe": 3.383528124345503e-09,
+        "turnover_total": 6.735731972185022e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.2924890661687898,
+        "cagr": 0.5245366668238347,
+        "final_equity": 12.863641976380693,
+        "maximum_drawdown": -0.21390503503731495,
+        "sharpe": 1.5876871133835282,
+        "turnover_total": 46.792475850673576
+      },
+      "cost_bps": 25.0,
+      "delay_days": 0,
+      "published": {
+        "annualized_volatility": 0.29248907,
+        "cagr": 0.52453667,
+        "final_equity": 12.86364198,
+        "maximum_drawdown": -0.21390504,
+        "sharpe": 1.58768711,
+        "turnover_total": 46.79247585
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 1.3391033837351074e-09,
+        "cagr": 3.0144853280233974e-10,
+        "final_equity": 4.4594319348334466e-09,
+        "maximum_drawdown": 2.55182339148341e-09,
+        "sharpe": 4.8184150003294235e-09,
+        "turnover_total": 5.3937299071549205e-11
+      },
+      "calculated": {
+        "annualized_volatility": 0.29194242133910336,
+        "cagr": 0.5177491703014485,
+        "final_equity": 12.520602574459431,
+        "maximum_drawdown": -0.2303157825518234,
+        "sharpe": 1.574784834818415,
+        "turnover_total": 46.792158119946066
+      },
+      "cost_bps": 25.0,
+      "delay_days": 1,
+      "published": {
+        "annualized_volatility": 0.29194242,
+        "cagr": 0.51774917,
+        "final_equity": 12.52060257,
+        "maximum_drawdown": -0.23031578,
+        "sharpe": 1.57478483,
+        "turnover_total": 46.79215812
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 4.082077176281729e-09,
+        "cagr": 2.3269802196246303e-09,
+        "final_equity": 2.670780929747707e-09,
+        "maximum_drawdown": 4.545805870614927e-09,
+        "sharpe": 1.7343573244232857e-09,
+        "turnover_total": 2.815667698996549e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.29135512591792284,
+        "cagr": 0.4960201623269802,
+        "final_equity": 11.47333235732922,
+        "maximum_drawdown": -0.23442839545419414,
+        "sharpe": 1.5278399782656427,
+        "turnover_total": 46.791606990281565
+      },
+      "cost_bps": 25.0,
+      "delay_days": 2,
+      "published": {
+        "annualized_volatility": 0.29135513,
+        "cagr": 0.49602016,
+        "final_equity": 11.47333236,
+        "maximum_drawdown": -0.2344284,
+        "sharpe": 1.52783998,
+        "turnover_total": 46.79160699
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 1.863302123705779e-09,
+        "cagr": 4.4042020030943263e-10,
+        "final_equity": 1.826318651865222e-09,
+        "maximum_drawdown": 2.0708900705379563e-09,
+        "sharpe": 4.485742444160223e-09,
+        "turnover_total": 6.735731972185022e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.29249971186330215,
+        "cagr": 0.4387997104404202,
+        "final_equity": 9.059254931826318,
+        "maximum_drawdown": -0.23465869207089007,
+        "sharpe": 1.3895605755142575,
+        "turnover_total": 46.792475850673576
+      },
+      "cost_bps": 100.0,
+      "delay_days": 0,
+      "published": {
+        "annualized_volatility": 0.29249971,
+        "cagr": 0.43879971,
+        "final_equity": 9.05925493,
+        "maximum_drawdown": -0.23465869,
+        "sharpe": 1.38956058,
+        "turnover_total": 46.79247585
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 3.0488077062962304e-09,
+        "cagr": 2.509798813221664e-09,
+        "final_equity": 2.2138557653761382e-10,
+        "maximum_drawdown": 1.7333976476407997e-09,
+        "sharpe": 1.3324230607736354e-10,
+        "turnover_total": 5.3937299071549205e-11
+      },
+      "calculated": {
+        "annualized_volatility": 0.29190741695119227,
+        "cagr": 0.4324126174902012,
+        "final_equity": 8.818365390221386,
+        "maximum_drawdown": -0.25066347173339765,
+        "sharpe": 1.3765043798667578,
+        "turnover_total": 46.792158119946066
+      },
+      "cost_bps": 100.0,
+      "delay_days": 1,
+      "published": {
+        "annualized_volatility": 0.29190742,
+        "cagr": 0.43241262,
+        "final_equity": 8.81836539,
+        "maximum_drawdown": -0.25066347,
+        "sharpe": 1.37650438,
+        "turnover_total": 46.79215812
+      }
+    },
+    {
+      "absolute_differences": {
+        "annualized_volatility": 4.7752961029878804e-09,
+        "cagr": 2.0159019453735993e-09,
+        "final_equity": 7.910987420700621e-10,
+        "maximum_drawdown": 6.600676116796933e-10,
+        "sharpe": 1.314679476394076e-10,
+        "turnover_total": 2.815667698996549e-10
+      },
+      "calculated": {
+        "annualized_volatility": 0.2913470752247039,
+        "cagr": 0.41189283798409804,
+        "final_equity": 8.080330810791098,
+        "maximum_drawdown": -0.2546751906600676,
+        "sharpe": 1.329033529868532,
+        "turnover_total": 46.791606990281565
+      },
+      "cost_bps": 100.0,
+      "delay_days": 2,
+      "published": {
+        "annualized_volatility": 0.29134708,
+        "cagr": 0.41189284,
+        "final_equity": 8.08033081,
+        "maximum_drawdown": -0.25467519,
+        "sharpe": 1.32903353,
+        "turnover_total": 46.79160699
+      }
+    }
+  ],
+  "schema_version": 1
+}

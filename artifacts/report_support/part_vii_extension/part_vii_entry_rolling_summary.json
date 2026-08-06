@@ -1,0 +1,196 @@
+{
+  "analysis": "part_vii_entry_date_and_rolling_horizon_extension",
+  "model": "Nostra AI V5.246",
+  "period": {
+    "end": "2026-06-02T00:00:00+00:00",
+    "observations": 2211,
+    "start": "2020-05-14T00:00:00+00:00"
+  },
+  "publication_boundary": "Les résultats par date de départ et par fenêtre individuelle ne sont pas exportés; seuls les agrégats de distribution sont publiés.",
+  "reconciliation": {
+    "fixed_50_maximum_equity_difference": 2.1316282072803006e-13,
+    "maximum_return_difference": 4.961309141293668e-16,
+    "position_alignment": "as_provided",
+    "private_sha256": "056e13af2b26b0e449e502bf814db1a6a396f90aa4cb2bae74b2771ce8285c2e",
+    "public_sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d",
+    "turnover_total": 46.792475850673576
+  },
+  "release": "v0.3.0",
+  "rolling_horizons": [
+    {
+      "horizon_observations": 30,
+      "nostra_maximum_drawdown": {
+        "maximum": -0.005795706418082913,
+        "median": -0.05095668404538184,
+        "minimum": -0.19637697980792512,
+        "p05": -0.12736080694616603,
+        "p25": -0.07457712185873694,
+        "p75": -0.03368103964891189,
+        "p95": -0.013854198572093468
+      },
+      "nostra_total_return": {
+        "maximum": 0.5178663369846139,
+        "median": 0.008820103101535137,
+        "minimum": -0.15815127543469065,
+        "p05": -0.07312657710799873,
+        "p25": -0.0247893251333543,
+        "p75": 0.08107091442502129,
+        "p95": 0.2566635139745871
+      },
+      "outperformance_frequency_vs_bitcoin": 0.46700274977085243,
+      "outperformance_frequency_vs_exposure_matched": 0.6136571952337305,
+      "overlapping_windows": true,
+      "positive_window_frequency": 0.5623281393217232,
+      "window_count": 2182
+    },
+    {
+      "horizon_observations": 90,
+      "nostra_maximum_drawdown": {
+        "maximum": -0.018673719164839286,
+        "median": -0.09280389167829317,
+        "minimum": -0.19673560407536084,
+        "p05": -0.18764675611308734,
+        "p25": -0.1267292164224416,
+        "p75": -0.06558969048873076,
+        "p95": -0.04590582857318526
+      },
+      "nostra_total_return": {
+        "maximum": 1.1106670864062638,
+        "median": 0.06700522178093438,
+        "minimum": -0.1855195927580745,
+        "p05": -0.09665937751475125,
+        "p25": -0.027480409374789766,
+        "p75": 0.22478914473933514,
+        "p95": 0.5532682327681496
+      },
+      "outperformance_frequency_vs_bitcoin": 0.47926484448633366,
+      "outperformance_frequency_vs_exposure_matched": 0.8067860508953817,
+      "overlapping_windows": true,
+      "positive_window_frequency": 0.6705937794533459,
+      "window_count": 2122
+    },
+    {
+      "horizon_observations": 365,
+      "nostra_maximum_drawdown": {
+        "maximum": -0.09820176736500674,
+        "median": -0.1630370585445997,
+        "minimum": -0.21390503503731606,
+        "p05": -0.1983669169380885,
+        "p25": -0.19448847495084198,
+        "p75": -0.13956439516264085,
+        "p95": -0.12153175179080566
+      },
+      "nostra_total_return": {
+        "maximum": 2.6705050433501243,
+        "median": 0.49558355930316456,
+        "minimum": -0.15923081794790261,
+        "p05": -0.05950879106986192,
+        "p25": 0.15856738210189558,
+        "p75": 0.8465399491508276,
+        "p95": 1.9596414828867377
+      },
+      "outperformance_frequency_vs_bitcoin": 0.43854899837574446,
+      "outperformance_frequency_vs_exposure_matched": 0.9962100703844071,
+      "overlapping_windows": true,
+      "positive_window_frequency": 0.916080129940444,
+      "window_count": 1847
+    },
+    {
+      "horizon_observations": 730,
+      "nostra_maximum_drawdown": {
+        "maximum": -0.1395643951626402,
+        "median": -0.19544072026335213,
+        "minimum": -0.21390503503731562,
+        "p05": -0.19836691693808928,
+        "p25": -0.1954407202633529,
+        "p75": -0.16303705854459952,
+        "p95": -0.13956439516264152
+      },
+      "nostra_total_return": {
+        "maximum": 3.273557229591285,
+        "median": 1.2005712520050147,
+        "minimum": 0.15032174001242904,
+        "p05": 0.37112427892526983,
+        "p25": 0.636760288051466,
+        "p75": 1.9667255945926903,
+        "p95": 2.7765041466402005
+      },
+      "outperformance_frequency_vs_bitcoin": 0.5958164642375169,
+      "outperformance_frequency_vs_exposure_matched": 1.0,
+      "overlapping_windows": true,
+      "positive_window_frequency": 1.0,
+      "window_count": 1482
+    },
+    {
+      "horizon_observations": 1095,
+      "nostra_maximum_drawdown": {
+        "maximum": -0.1630370585445986,
+        "median": -0.1954407202633528,
+        "minimum": -0.21390503503731573,
+        "p05": -0.21390503503731417,
+        "p25": -0.19544072026335302,
+        "p75": -0.19544072026335235,
+        "p95": -0.1630370585445997
+      },
+      "nostra_total_return": {
+        "maximum": 4.208728163949149,
+        "median": 2.2013850090423834,
+        "minimum": 1.1234523257243603,
+        "p05": 1.3924111742843561,
+        "p25": 1.9191262706082908,
+        "p75": 2.7475068977936905,
+        "p95": 3.600726237916691
+      },
+      "outperformance_frequency_vs_bitcoin": 0.7681289167412713,
+      "outperformance_frequency_vs_exposure_matched": 1.0,
+      "overlapping_windows": true,
+      "positive_window_frequency": 1.0,
+      "window_count": 1117
+    }
+  ],
+  "schema_version": 1,
+  "start_date_sensitivity": {
+    "maximum_remaining_observations": 2211,
+    "minimum_remaining_observations": 367,
+    "monthly_start_count_with_at_least_365_observations": 62,
+    "nostra_cagr": {
+      "maximum": 0.5485296088580143,
+      "median": 0.3444737740396123,
+      "minimum": -0.050770991430006074,
+      "p05": 0.029446885687177193,
+      "p25": 0.2737907708199926,
+      "p75": 0.4068062841195567,
+      "p95": 0.5285682321226028
+    },
+    "nostra_final_equity": {
+      "maximum": 13.08890297559407,
+      "median": 3.131947583328239,
+      "minimum": 0.9489580348628065,
+      "p05": 1.0326653407059114,
+      "p25": 1.70471196394478,
+      "p75": 4.050172840077567,
+      "p95": 11.94388088027018
+    },
+    "nostra_maximum_drawdown": {
+      "maximum": -0.2139050350373135,
+      "median": -0.21390503503731462,
+      "minimum": -0.21390503503731606,
+      "p05": -0.2139050350373154,
+      "p25": -0.21390503503731495,
+      "p75": -0.2139050350373143,
+      "p95": -0.21390503503731384
+    },
+    "nostra_sharpe": {
+      "maximum": 1.6242439352136286,
+      "median": 1.201469777875435,
+      "minimum": -0.16495245767978428,
+      "p05": 0.24387256506784502,
+      "p25": 1.071922092237368,
+      "p75": 1.3815907921736077,
+      "p95": 1.5874693098789319
+    },
+    "outperformance_frequency_vs_bitcoin": 0.9354838709677419,
+    "outperformance_frequency_vs_exposure_matched": 1.0,
+    "publication_boundary": "Seuls des agrégats de distribution sont publiés; les résultats par date de départ ne sont pas exportés."
+  }
+}
