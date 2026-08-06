@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_x/independent_accounting_recalculation_summary.json",
+      "sha256": "e4603de0bf3349df408523ed4fd25123b9406810df94c14762c84aa040aac57e",
+      "size_bytes": 9463
+    },
+    {
+      "path": "docs/tables/part_x_independent_recalculation_results.md",
+      "sha256": "eafc87a075c02c6319d5e71d4d4f78e8429e6a14cff4d2ec034f35ab6ae25f23",
+      "size_bytes": 1094
+    },
+    {
+      "path": "tools/independently_recalculate_accounting_core.py",
+      "sha256": "a5a01bcb98314b02aedf303b3319f06bbe41a9eb03b99323bca9c0bb7f2f1464",
+      "size_bytes": 14562
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_x_independent_accounting_recalculation",
+  "schema_version": 1,
+  "source_release": "v0.3.0"
+}

@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_vii_extension/part_vii_entry_rolling_summary.json",
+      "sha256": "c726c70a65964beb42a628bb994002f1659aef948ae91ebe519fda793b22534d",
+      "size_bytes": 6946
+    },
+    {
+      "path": "docs/figures/figure_7_7_start_date_sensitivity.png",
+      "sha256": "4e3c75758df6ddf84d681454046f2d4a29e5db9f1089b4fe451c20451c828baa",
+      "size_bytes": 188030
+    },
+    {
+      "path": "docs/figures/figure_7_8_rolling_horizon_performance.png",
+      "sha256": "7c76aa893c665e1511d444366adbb73205e81df213d94f5781c806c228622de0",
+      "size_bytes": 259757
+    },
+    {
+      "path": "docs/tables/part_vii_entry_rolling_results.md",
+      "sha256": "812b2170cd3f3a52c97dba3ec433bd2fce5e28b45874f612b28b09cf23210b96",
+      "size_bytes": 996
+    },
+    {
+      "path": "tools/generate_final_quantitative_extensions.py",
+      "sha256": "6ed5632006002ac3a99730fa7e7d7d1798d7c068e88dcfdb8db68ddc55c8eb49",
+      "size_bytes": 47320
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_vii_entry_date_and_rolling_horizon_extension",
+  "schema_version": 1,
+  "source_release": "v0.3.0"
+}

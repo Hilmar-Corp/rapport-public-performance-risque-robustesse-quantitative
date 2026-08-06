@@ -1,0 +1,274 @@
+{
+  "analysis": "part_v_final_quantitative_extension",
+  "attribution": {
+    "bitcoin_direction_groups": [
+      {
+        "market_group": "Jours de hausse du bitcoin",
+        "matched_comparator_log_return_contribution": 11.60697066856699,
+        "nostra_log_return_contribution": 11.779377269523696,
+        "observations": 1120,
+        "relative_log_wealth_contribution": 0.17240660095670535
+      },
+      {
+        "market_group": "Jours de baisse du bitcoin",
+        "matched_comparator_log_return_contribution": -10.40776301485004,
+        "nostra_log_return_contribution": -9.22497238891248,
+        "observations": 1091,
+        "relative_log_wealth_contribution": 1.1827906259375602
+      }
+    ],
+    "compounded_cost_drag_log_wealth": 0.11683916370182823,
+    "dynamic_allocation_relative_log_wealth": 1.3551972268942787,
+    "exposure_buckets": [
+      {
+        "average_exposure": -0.09999999999999998,
+        "bucket": "Exposition négative",
+        "compounded_subsequence_return": 0.0482585736759642,
+        "log_return_contribution": 0.04713028607269604,
+        "observation_share": 0.0407055630936228,
+        "observations": 90,
+        "share_of_total_log_return": 0.01845059349456721
+      },
+      {
+        "average_exposure": 0.16025951378173392,
+        "bucket": "De 0 % à 25 %",
+        "compounded_subsequence_return": -0.20875801147832385,
+        "log_return_contribution": -0.2341514306660988,
+        "observation_share": 0.16824966078697423,
+        "observations": 372,
+        "share_of_total_log_return": -0.0916657466650593
+      },
+      {
+        "average_exposure": 0.5198361391249592,
+        "bucket": "De 25 % à 75 %",
+        "compounded_subsequence_return": 5.302853925884657,
+        "log_return_contribution": 1.8410025349307784,
+        "observation_share": 0.6481230212573497,
+        "observations": 1433,
+        "share_of_total_log_return": 0.7207168091889429
+      },
+      {
+        "average_exposure": 0.8390252398135059,
+        "bucket": "75 % et plus",
+        "compounded_subsequence_return": 1.4606449497407152,
+        "log_return_contribution": 0.9004234902738405,
+        "observation_share": 0.14292175486205336,
+        "observations": 316,
+        "share_of_total_log_return": 0.35249834398154917
+      }
+    ],
+    "exposure_matched_final_equity": 3.3174872823639725,
+    "gross_final_equity_before_modeled_costs": 14.45794433297502,
+    "modeled_cost_rate_sum": 0.11698118962668394,
+    "net_final_equity": 12.863641976380467
+  },
+  "comparators": [
+    {
+      "annualized_volatility": 0.29248906616878967,
+      "cagr": 0.5245366668238303,
+      "constant_exposure": null,
+      "final_equity": 12.863641976380467,
+      "maximum_drawdown": -0.2139050350373144,
+      "observations": 2211,
+      "sharpe": 1.5876871133835164,
+      "strategy": "Nostra AI V5.246",
+      "total_return": 11.863641976380467
+    },
+    {
+      "annualized_volatility": 0.5770198274973526,
+      "cagr": 0.38567198239297906,
+      "constant_exposure": null,
+      "final_equity": 7.212950328296502,
+      "maximum_drawdown": -0.7662925431645913,
+      "observations": 2211,
+      "sharpe": 0.8535246890964329,
+      "strategy": "Bitcoin passif",
+      "total_return": 6.212950328296502
+    },
+    {
+      "annualized_volatility": 0.27681128752468875,
+      "cagr": 0.21892534234221217,
+      "constant_exposure": 0.4797257812184258,
+      "final_equity": 3.3174872823639725,
+      "maximum_drawdown": -0.4723196555500634,
+      "observations": 2211,
+      "sharpe": 0.8535246890964325,
+      "strategy": "Bitcoin ajusté à l'exposition",
+      "total_return": 2.3174872823639725
+    },
+    {
+      "annualized_volatility": 0.2924890661687897,
+      "cagr": 0.2298512025563446,
+      "constant_exposure": 0.5068960410552472,
+      "final_equity": 3.501749059419502,
+      "maximum_drawdown": -0.49269607661847237,
+      "observations": 2211,
+      "sharpe": 0.8535246890964328,
+      "strategy": "Bitcoin ajusté au risque",
+      "total_return": 2.501749059419502
+    }
+  ],
+  "concentration": [
+    {
+      "bottom_log_contribution": -0.3938737433098096,
+      "bottom_share_of_total_log_return": -0.1541939362469288,
+      "count": 5,
+      "final_equity_without_bottom": 19.07309348704856,
+      "final_equity_without_top": 8.491569558811799,
+      "final_equity_without_top_and_bottom": 12.590563414651736,
+      "strategy": "Nostra AI V5.246",
+      "top_log_contribution": 0.41533102590087545,
+      "top_share_of_total_log_return": 0.16259404648549503,
+      "total_log_return": 2.5544048806112163
+    },
+    {
+      "bottom_log_contribution": -0.6870285774183887,
+      "bottom_share_of_total_log_return": -0.2689583717260973,
+      "count": 10,
+      "final_equity_without_bottom": 25.570349511725542,
+      "final_equity_without_top": 5.9511235933911575,
+      "final_equity_without_top_and_bottom": 11.82964440007734,
+      "strategy": "Nostra AI V5.246",
+      "top_log_contribution": 0.7708248396561556,
+      "top_share_of_total_log_return": 0.30176298421091063,
+      "total_log_return": 2.5544048806112163
+    },
+    {
+      "bottom_log_contribution": -1.1352733658356782,
+      "bottom_share_of_total_log_return": -0.4444375182856802,
+      "count": 20,
+      "final_equity_without_bottom": 40.03196445810074,
+      "final_equity_without_top": 3.267377149302846,
+      "final_equity_without_top_and_bottom": 10.168156588334005,
+      "strategy": "Nostra AI V5.246",
+      "top_log_contribution": 1.370417312566795,
+      "top_share_of_total_log_return": 0.5364918157527488,
+      "total_log_return": 2.5544048806112163
+    },
+    {
+      "bottom_log_contribution": -0.7652812425621096,
+      "bottom_share_of_total_log_return": -0.3873119780572,
+      "count": 5,
+      "final_equity_without_bottom": 15.504949718818049,
+      "final_equity_without_top": 3.746634064105321,
+      "final_equity_without_top_and_bottom": 8.05376026934092,
+      "strategy": "Bitcoin passif",
+      "top_log_contribution": 0.6550202130755928,
+      "top_share_of_total_log_return": 0.33150841845331996,
+      "total_log_return": 1.9758780670839189
+    },
+    {
+      "bottom_log_contribution": -1.3732883647790493,
+      "bottom_share_of_total_log_return": -0.695026878255602,
+      "count": 10,
+      "final_equity_without_bottom": 28.478984572793088,
+      "final_equity_without_top": 2.214189877055089,
+      "final_equity_without_top_and_bottom": 8.742314376200488,
+      "strategy": "Bitcoin passif",
+      "top_log_contribution": 1.1809914744806547,
+      "top_share_of_total_log_return": 0.5977046327679572,
+      "total_log_return": 1.9758780670839189
+    },
+    {
+      "bottom_log_contribution": -2.371020355348799,
+      "bottom_share_of_total_log_return": -1.199983134003834,
+      "count": 20,
+      "final_equity_without_bottom": 77.2385297407378,
+      "final_equity_without_top": 0.8498990931483005,
+      "final_equity_without_top_and_bottom": 9.100985504535513,
+      "strategy": "Bitcoin passif",
+      "top_log_contribution": 2.1385157175719276,
+      "top_share_of_total_log_return": 1.0823115824793965,
+      "total_log_return": 1.9758780670839189
+    },
+    {
+      "bottom_log_contribution": -0.3525044383035664,
+      "bottom_share_of_total_log_return": -0.2939477889512944,
+      "count": 5,
+      "final_equity_without_bottom": 4.719543562307646,
+      "final_equity_without_top": 2.396148209726851,
+      "final_equity_without_top_and_bottom": 3.4088226706005487,
+      "strategy": "Bitcoin ajusté à l'exposition",
+      "top_log_contribution": 0.3253451182287181,
+      "top_share_of_total_log_return": 0.27130006819111757,
+      "total_log_return": 1.199207653716948
+    },
+    {
+      "bottom_log_contribution": -0.6349519869711151,
+      "bottom_share_of_total_log_return": -0.5294762629333455,
+      "count": 10,
+      "final_equity_without_bottom": 6.259871393227191,
+      "final_equity_without_top": 1.8489460183688458,
+      "final_equity_without_top_and_bottom": 3.488834561488027,
+      "strategy": "Bitcoin ajusté à l'exposition",
+      "top_log_contribution": 0.5845918967793304,
+      "top_share_of_total_log_return": 0.48748179263815233,
+      "total_log_return": 1.199207653716948
+    },
+    {
+      "bottom_log_contribution": -1.1011331883798348,
+      "bottom_share_of_total_log_return": -0.9182172786896988,
+      "count": 20,
+      "final_equity_without_bottom": 9.977582655509163,
+      "final_equity_without_top": 1.1546634682391472,
+      "final_equity_without_top_and_bottom": 3.4727337931024365,
+      "strategy": "Bitcoin ajusté à l'exposition",
+      "top_log_contribution": 1.055398721689444,
+      "top_share_of_total_log_return": 0.8800800415326172,
+      "total_log_return": 1.199207653716948
+    },
+    {
+      "bottom_log_contribution": -0.37323521002462395,
+      "bottom_share_of_total_log_return": -0.29781086381222377,
+      "count": 5,
+      "final_equity_without_bottom": 5.08603111603307,
+      "final_equity_without_top": 2.484652093951832,
+      "final_equity_without_top_and_bottom": 3.6087731153558793,
+      "strategy": "Bitcoin ajusté au risque",
+      "top_log_contribution": 0.34312992762052563,
+      "top_share_of_total_log_return": 0.27378933551781676,
+      "total_log_return": 1.2532625749339918
+    },
+    {
+      "bottom_log_contribution": -0.6721685748711226,
+      "bottom_share_of_total_log_return": -0.5363349934123143,
+      "count": 10,
+      "final_equity_without_bottom": 6.858104899154412,
+      "final_equity_without_top": 1.8900405046315059,
+      "final_equity_without_top_and_bottom": 3.7016062043470592,
+      "strategy": "Bitcoin ajusté au risque",
+      "top_log_contribution": 0.6166643150701211,
+      "top_share_of_total_log_return": 0.4920471794209607,
+      "total_log_return": 1.2532625749339918
+    },
+    {
+      "bottom_log_contribution": -1.1654175324848624,
+      "bottom_share_of_total_log_return": -0.9299069131991305,
+      "count": 20,
+      "final_equity_without_bottom": 11.231025780093265,
+      "final_equity_without_top": 1.1500190060494726,
+      "final_equity_without_top_and_bottom": 3.688411957960251,
+      "strategy": "Bitcoin ajusté au risque",
+      "top_log_contribution": 1.113484105695861,
+      "top_share_of_total_log_return": 0.8884683289569285,
+      "total_log_return": 1.2532625749339918
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "period": {
+    "end": "2026-06-02T00:00:00+00:00",
+    "observations": 2211,
+    "start": "2020-05-14T00:00:00+00:00"
+  },
+  "publication_boundary": "Aucune date quotidienne, exposition quotidienne ou série quotidienne Nostra n'est exportée.",
+  "reconciliation": {
+    "fixed_50_maximum_equity_difference": 2.1316282072803006e-13,
+    "maximum_return_difference": 4.961309141293668e-16,
+    "position_alignment": "as_provided",
+    "private_sha256": "056e13af2b26b0e449e502bf814db1a6a396f90aa4cb2bae74b2771ce8285c2e",
+    "public_sha256": "4cdd65f8b27c97c42ebc30fb7974024bf11af3cd1e5eea85e39b4c3fa7310d0d",
+    "turnover_total": 46.792475850673576
+  },
+  "release": "v0.3.0",
+  "schema_version": 1
+}

@@ -1,0 +1,38 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_v_extension/part_v_final_extension_summary.json",
+      "sha256": "dfd517e5abc9b833d374adcf3e0d7d99390c91f0f1c590d578676fa3226cab82",
+      "size_bytes": 11041
+    },
+    {
+      "path": "docs/figures/figure_5_10_economic_attribution.png",
+      "sha256": "3b9e4a47917b01d4e7f0e42aec9ebd8edb59265cef794d51be64284a4cc44d08",
+      "size_bytes": 164258
+    },
+    {
+      "path": "docs/figures/figure_5_8_matched_bitcoin_comparators.png",
+      "sha256": "843f3c4ac9d4ee5ca2f622032f752d826c43d3d956c9ed2f09fa93dd438d5332",
+      "size_bytes": 301507
+    },
+    {
+      "path": "docs/figures/figure_5_9_return_concentration.png",
+      "sha256": "d913ef48f695d63a6c1199720bc10c70d58f00b56e30584dcdc74b66f6e2d080",
+      "size_bytes": 168705
+    },
+    {
+      "path": "docs/tables/part_v_final_extension_results.md",
+      "sha256": "9a81269b6a138e49aeacbb835d72e590855a5bfff94038a322cd14077baedbdd",
+      "size_bytes": 1583
+    },
+    {
+      "path": "tools/generate_final_quantitative_extensions.py",
+      "sha256": "6ed5632006002ac3a99730fa7e7d7d1798d7c068e88dcfdb8db68ddc55c8eb49",
+      "size_bytes": 47320
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_v_final_quantitative_extension",
+  "schema_version": 1,
+  "source_release": "v0.3.0"
+}
