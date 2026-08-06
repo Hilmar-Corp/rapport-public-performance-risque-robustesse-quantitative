@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_viii/part_viii_risk_stress_summary.json",
+      "sha256": "55433309f61d98843d71c94244d7e821457d36e230f484d720b025fa70c369ff",
+      "size_bytes": 40464
+    },
+    {
+      "path": "docs/figures/figure_8_1_tail_risk_comparison.png",
+      "sha256": "b00fb8d9d79c6806fee5ec07378b17beb076b02738df6ccce0e67ae85ea1264e",
+      "size_bytes": 88263
+    },
+    {
+      "path": "docs/figures/figure_8_2_var_es_canonical_backtesting.png",
+      "sha256": "89695d6a7dbdde512c729687b67ec2d9c402c95b83428f080ab89737e9f9da79",
+      "size_bytes": 98179
+    },
+    {
+      "path": "docs/figures/figure_8_3_drawdown_depth_distribution.png",
+      "sha256": "8a474066e805b586e3f9d4798827256c2224b108ec7ad45443720a7ba61b970c",
+      "size_bytes": 100702
+    },
+    {
+      "path": "docs/figures/figure_8_4_monte_carlo_risk_probabilities.png",
+      "sha256": "8130307b3ae15c625effd73bc1d7fc6dcb1fd105cfbfb3c44d2928b268a97820",
+      "size_bytes": 112535
+    },
+    {
+      "path": "docs/figures/figure_8_5_historical_reverse_stress.png",
+      "sha256": "8fe7512338566d59ca47cf0fb562fce16257de2b3a1eb2be77203883ffe9f843",
+      "size_bytes": 132306
+    },
+    {
+      "path": "docs/figures/figure_8_6_counterfactual_reverse_stress_scope.png",
+      "sha256": "11718564c4cd9c371900ae2910c2efd44e023287bd629af3d3a071550a499bf4",
+      "size_bytes": 75183
+    },
+    {
+      "path": "docs/tables/part_viii_risk_stress_results.md",
+      "sha256": "abf0087b2fc36df6f12fc769b9c746ac6def352c239fb237b886bcd1914d4431",
+      "size_bytes": 6908
+    },
+    {
+      "path": "tools/generate_part_viii_risk_stress_analysis.py",
+      "sha256": "a732a85cc45e97cac55ae1bfcbdf22150c47e5b035f3fac55c0f81d746fafc23",
+      "size_bytes": 57388
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_viii_risk_stress_report_support",
+  "period": {
+    "annualization": 365,
+    "end": "2026-06-02",
+    "observations": 2211,
+    "start": "2020-05-14"
+  },
+  "schema_version": 1,
+  "source_release": "v0.3.0",
+  "status": "Paquet institutionnel de support de la Partie VIII consacré au risque de queue, aux drawdowns, à la VaR/ES, au Monte-Carlo historique et aux reverse stress tests."
+}
