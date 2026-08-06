@@ -1,0 +1,43 @@
+{
+  "files": [
+    {
+      "path": "artifacts/report_support/part_ix/part_ix_execution_capacity_shadow_summary.json",
+      "sha256": "8b9f9d0e3e58c58033c4e710d34d6aabcd5eb3a2160cb72922c0f42eaa29a48c",
+      "size_bytes": 49426
+    },
+    {
+      "path": "docs/figures/figure_9_1_cost_delay_cagr.png",
+      "sha256": "e3d5d46c9279b5a3d82f904cd231b45aa91c9821d46b56c5b0688b0a395fe33a",
+      "size_bytes": 180624
+    },
+    {
+      "path": "docs/figures/figure_9_2_cost_delay_risk_adjusted_performance.png",
+      "sha256": "6fb57df31f43f7a94ec53f9cc978adcfe19a49f896d7b80ea62d4dab7871d37e",
+      "size_bytes": 155714
+    },
+    {
+      "path": "docs/figures/figure_9_3_synthetic_execution_cost_surface.png",
+      "sha256": "5bfc7524ec58951e0f7aeef3757f7b5d583e5e9fa1d3cb62d04a6a155503dfe8",
+      "size_bytes": 163082
+    },
+    {
+      "path": "docs/figures/figure_9_4_synthetic_capacity_constraints.png",
+      "sha256": "fa684aa1d5acb058ae1c82d8f0a01e45e716267e23a1f4f1eda353ccd7dba0d4",
+      "size_bytes": 168140
+    },
+    {
+      "path": "docs/tables/part_ix_execution_capacity_shadow_results.md",
+      "sha256": "3816b389239b8b8a0a7717e53a963a44ed438d7637053aad94a3549af0cbb7f7",
+      "size_bytes": 4339
+    },
+    {
+      "path": "tools/generate_part_ix_execution_capacity_shadow_analysis.py",
+      "sha256": "c85aa9bb77935c33157a83e38c54ce4f03ea89f4849c2f2a8a71398296564148",
+      "size_bytes": 41882
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_ix_execution_capacity_shadow_report_support",
+  "schema_version": 1,
+  "source_release": "v0.3.0"
+}
