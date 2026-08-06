@@ -3,19 +3,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib
 import json
 import math
 from pathlib import Path
 from typing import Any
 
-import matplotlib
-
-matplotlib.use("Agg")
-
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib.ticker import PercentFormatter
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_CURVES = ROOT / "artifacts" / "releases" / "v0.2.1" / "baseline_daily_curves.csv"
@@ -609,7 +604,17 @@ def format_number(value: float, decimals: int = 3) -> str:
     return f"{value:.{decimals}f}".replace(".", ",")
 
 
+def load_plotting() -> tuple[Any, Any]:
+    """Charge Matplotlib uniquement lors de la génération graphique."""
+    matplotlib = importlib.import_module("matplotlib")
+    matplotlib.use("Agg")
+    pyplot = importlib.import_module("matplotlib.pyplot")
+    ticker = importlib.import_module("matplotlib.ticker")
+    return pyplot, ticker.PercentFormatter
+
+
 def plot_matched_comparators(records: list[dict[str, Any]]) -> None:
+    plt, PercentFormatter = load_plotting()
     short_labels = ["Nostra", "Bitcoin", "Ajusté\nexposition", "Ajusté\nrisque"]
     colors = [NOSTRA_COLOR, BITCOIN_COLOR, MATCHED_COLOR, RISK_MATCHED_COLOR]
     metrics_to_plot = [
@@ -664,6 +669,7 @@ def plot_matched_comparators(records: list[dict[str, Any]]) -> None:
 
 
 def plot_concentration(records: list[dict[str, Any]]) -> None:
+    plt, _ = load_plotting()
     selected = {
         strategy: [record for record in records if record["strategy"] == strategy]
         for strategy in ("Nostra AI V5.246", "Bitcoin passif")
@@ -732,6 +738,7 @@ def plot_concentration(records: list[dict[str, Any]]) -> None:
 
 
 def plot_attribution(attribution: dict[str, Any]) -> None:
+    plt, _ = load_plotting()
     exposure_records = attribution["exposure_buckets"]
     market_records = attribution["bitcoin_direction_groups"]
 
@@ -799,6 +806,7 @@ def plot_attribution(attribution: dict[str, Any]) -> None:
 
 
 def plot_start_date_sensitivity(distributions: dict[str, list[float]]) -> None:
+    plt, PercentFormatter = load_plotting()
     figure, axes = plt.subplots(1, 3, figsize=(11.0, 4.5))
     fields = [
         ("cagr", "Taux de croissance annuel composé", True),
@@ -847,6 +855,7 @@ def plot_start_date_sensitivity(distributions: dict[str, list[float]]) -> None:
 
 
 def plot_rolling_horizons(records: list[dict[str, Any]]) -> None:
+    plt, PercentFormatter = load_plotting()
     horizons = [int(record["horizon_observations"]) for record in records]
     positive = [float(record["positive_window_frequency"]) for record in records]
     versus_bitcoin = [float(record["outperformance_frequency_vs_bitcoin"]) for record in records]
