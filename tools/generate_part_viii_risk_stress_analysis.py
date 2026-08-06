@@ -1491,18 +1491,18 @@ def plot_drawdowns(
     ]
 
     nostra_values = [
-        nostra["drawdown_depth_distribution"]["median"],
-        nostra["drawdown_depth_distribution"]["q95"],
-        nostra["drawdown_depth_distribution"]["maximum"],
+        float(nostra["drawdown_depth_distribution"]["median"]),
+        float(nostra["drawdown_depth_distribution"]["q95"]),
+        float(nostra["drawdown_depth_distribution"]["maximum"]),
     ]
     bitcoin_values = [
-        bitcoin["drawdown_depth_distribution"]["median"],
-        bitcoin["drawdown_depth_distribution"]["q95"],
-        bitcoin["drawdown_depth_distribution"]["maximum"],
+        float(bitcoin["drawdown_depth_distribution"]["median"]),
+        float(bitcoin["drawdown_depth_distribution"]["q95"]),
+        float(bitcoin["drawdown_depth_distribution"]["maximum"]),
     ]
 
     positions = np.arange(len(labels))
-    width = 0.36
+    width = 0.34
 
     figure, axis = plt.subplots(figsize=(16, 9))
 
@@ -1512,6 +1512,9 @@ def plot_drawdowns(
         width,
         label="Nostra AI",
         color=NOSTRA_COLOR,
+        edgecolor="white",
+        linewidth=1.2,
+        zorder=3,
     )
     bitcoin_bars = axis.bar(
         positions + width / 2,
@@ -1519,51 +1522,42 @@ def plot_drawdowns(
         width,
         label="Bitcoin passif",
         color=BTC_COLOR,
+        edgecolor="white",
+        linewidth=1.2,
+        zorder=3,
     )
 
     axis.set_title(
-        "Distribution historique de la profondeur des drawdowns",
-        pad=20,
+        "Distribution historique de la profondeur des épisodes de repli",
+        pad=24,
     )
-    axis.set_ylabel("Profondeur du drawdown")
+    axis.set_ylabel("Profondeur de l'episode")
     axis.set_xticks(positions)
     axis.set_xticklabels(labels)
     axis.yaxis.set_major_formatter(PercentFormatter(1.0))
     axis.set_ylim(
         0,
-        max(bitcoin_values) * 1.18,
+        max(bitcoin_values) * 1.12,
     )
 
     axis.bar_label(
         nostra_bars,
         labels=[format_percent(value, 2) for value in nostra_values],
-        padding=5,
+        padding=6,
         fontsize=11,
     )
     axis.bar_label(
         bitcoin_bars,
         labels=[format_percent(value, 2) for value in bitcoin_values],
-        padding=5,
+        padding=6,
         fontsize=11,
-    )
-
-    axis.text(
-        0.01,
-        0.96,
-        (
-            "Durée maximale observée : "
-            "239 jours pour Nostra AI contre "
-            "847 jours pour le bitcoin passif."
-        ),
-        transform=axis.transAxes,
-        va="top",
-        fontsize=11,
-        color=TEXT_COLOR,
     )
 
     style_axis(axis)
+
     axis.legend(
         loc="upper left",
+        ncol=2,
         frameon=False,
     )
 
@@ -1592,90 +1586,157 @@ def plot_monte_carlo(
     block_sizes = [7, 21, 30, 60]
 
     nostra_loss = [
-        monte_carlo_record(
-            records,
-            "nostra_ai",
-            block_size,
-        )["probability_terminal_loss"]
+        float(
+            monte_carlo_record(
+                records,
+                "nostra_ai",
+                block_size,
+            )["probability_terminal_loss"]
+        )
         for block_size in block_sizes
     ]
     bitcoin_loss = [
-        monte_carlo_record(
-            records,
-            "bitcoin_benchmark",
-            block_size,
-        )["probability_terminal_loss"]
+        float(
+            monte_carlo_record(
+                records,
+                "bitcoin_benchmark",
+                block_size,
+            )["probability_terminal_loss"]
+        )
         for block_size in block_sizes
     ]
     nostra_drawdown = [
-        monte_carlo_record(
-            records,
-            "nostra_ai",
-            block_size,
-        )["probability_drawdown_below_minus_30pct"]
+        float(
+            monte_carlo_record(
+                records,
+                "nostra_ai",
+                block_size,
+            )["probability_drawdown_below_minus_30pct"]
+        )
         for block_size in block_sizes
     ]
     bitcoin_drawdown = [
-        monte_carlo_record(
-            records,
-            "bitcoin_benchmark",
-            block_size,
-        )["probability_drawdown_below_minus_30pct"]
+        float(
+            monte_carlo_record(
+                records,
+                "bitcoin_benchmark",
+                block_size,
+            )["probability_drawdown_below_minus_30pct"]
+        )
         for block_size in block_sizes
     ]
 
     figure, axis = plt.subplots(figsize=(16, 9))
 
-    axis.plot(
+    nostra_loss_line = axis.plot(
         block_sizes,
         nostra_loss,
         marker="o",
-        linewidth=2.4,
+        markersize=7,
+        linewidth=2.6,
         label="Nostra AI — perte terminale",
         color=NOSTRA_COLOR,
-    )
-    axis.plot(
+        zorder=4,
+    )[0]
+
+    bitcoin_loss_line = axis.plot(
         block_sizes,
         bitcoin_loss,
         marker="o",
-        linewidth=2.4,
-        label="Bitcoin — perte terminale",
+        markersize=7,
+        linewidth=2.6,
+        label="Bitcoin passif — perte terminale",
         color=BTC_COLOR,
-    )
-    axis.plot(
+        zorder=4,
+    )[0]
+
+    nostra_drawdown_line = axis.plot(
         block_sizes,
         nostra_drawdown,
         marker="s",
-        linewidth=2.4,
+        markersize=7,
+        linewidth=2.6,
         linestyle="--",
-        label="Nostra AI — drawdown < -30 %",
+        label="Nostra AI — repli supérieur à 30 %",
         color=NOSTRA_COLOR,
-    )
-    axis.plot(
+        zorder=4,
+    )[0]
+
+    bitcoin_drawdown_line = axis.plot(
         block_sizes,
         bitcoin_drawdown,
         marker="s",
-        linewidth=2.4,
+        markersize=7,
+        linewidth=2.6,
         linestyle="--",
-        label="Bitcoin — drawdown < -30 %",
+        label="Bitcoin passif — repli supérieur à 30 %",
         color=CONDITIONAL_COLOR,
-    )
+        zorder=4,
+    )[0]
 
     axis.set_title(
         "Probabilités de risque dans les simulations historiques par blocs",
-        pad=20,
+        pad=24,
     )
     axis.set_xlabel("Longueur du bloc historique")
-    axis.set_ylabel("Probabilité empirique")
+    axis.set_ylabel("Fréquence empirique")
     axis.set_xticks(block_sizes)
-    axis.set_ylim(0, 0.86)
+    axis.set_xlim(
+        4,
+        76,
+    )
+    axis.set_ylim(
+        0,
+        0.86,
+    )
     axis.yaxis.set_major_formatter(PercentFormatter(1.0))
 
+    direct_labels = [
+        (
+            nostra_loss_line,
+            nostra_loss[-1],
+            "Nostra AI — perte terminale",
+            8,
+        ),
+        (
+            bitcoin_loss_line,
+            bitcoin_loss[-1],
+            "Bitcoin — perte terminale",
+            8,
+        ),
+        (
+            nostra_drawdown_line,
+            nostra_drawdown[-1],
+            "Nostra AI — repli > 30 %",
+            -10,
+        ),
+        (
+            bitcoin_drawdown_line,
+            bitcoin_drawdown[-1],
+            "Bitcoin — repli > 30 %",
+            8,
+        ),
+    ]
+
+    for line, value, label, vertical_offset in direct_labels:
+        axis.annotate(
+            (f"{label} : {format_percent(value, 1)}"),
+            xy=(
+                block_sizes[-1],
+                value,
+            ),
+            xytext=(
+                12,
+                vertical_offset,
+            ),
+            textcoords="offset points",
+            ha="left",
+            va="center",
+            fontsize=10,
+            color=line.get_color(),
+        )
+
     style_axis(axis)
-    axis.legend(
-        loc="center left",
-        frameon=False,
-    )
 
     save_figure(
         figure,
@@ -1692,66 +1753,105 @@ def plot_historical_reverse_stress(
 
     labels = [
         format_percent(
-            record["target_nav_loss"],
+            float(record["target_nav_loss"]),
             0,
         )
         for record in breached
     ]
-    counts = [record["breach_episode_count"] for record in breached]
-    medians = [record["observations_to_breach"]["median"] for record in breached]
+    counts = [int(record["breach_episode_count"]) for record in breached]
+    medians = [float(record["observations_to_breach"]["median"]) for record in breached]
 
     positions = np.arange(len(labels))
 
+    bubble_sizes = [320 + count * 38 for count in counts]
+
     figure, axis = plt.subplots(figsize=(16, 9))
 
-    bars = axis.bar(
+    axis.plot(
         positions,
-        counts,
+        medians,
+        linewidth=2.4,
+        color=CONDITIONAL_COLOR,
+        alpha=0.82,
+        zorder=2,
+    )
+
+    axis.scatter(
+        positions,
+        medians,
+        s=bubble_sizes,
         color=NOSTRA_COLOR,
-        width=0.62,
-        label="Épisodes de franchissement",
+        edgecolors="white",
+        linewidths=1.8,
+        alpha=0.94,
+        zorder=3,
     )
 
     axis.set_title(
-        "Reverse stress historique par niveau de perte",
-        pad=20,
+        (
+            "Franchissements historiques des seuils de perte\n"
+            "La taille des bulles represente le nombre d'episodes"
+        ),
+        pad=24,
     )
-    axis.set_xlabel("Perte sur la NAV depuis le précédent sommet")
-    axis.set_ylabel("Nombre d'épisodes")
+    axis.set_xlabel("Seuil de perte depuis le précédent sommet")
+    axis.set_ylabel("Observations medianes jusqu'au franchissement")
     axis.set_xticks(positions)
     axis.set_xticklabels(labels)
 
-    axis.bar_label(
-        bars,
-        labels=[str(value) for value in counts],
-        padding=5,
-        fontsize=11,
+    axis.set_yscale("log")
+    axis.set_ylim(
+        4,
+        240,
     )
+    axis.set_yticks(
+        [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+        ]
+    )
+    axis.yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
 
-    secondary = axis.twinx()
-
-    secondary.plot(
+    for position, count, median in zip(
         positions,
+        counts,
         medians,
-        marker="o",
-        linewidth=2.4,
-        color=CONDITIONAL_COLOR,
-        label="Observations médianes jusqu'au franchissement",
-    )
-    secondary.set_ylabel("Observations médianes jusqu'au franchissement")
-    secondary.spines["top"].set_visible(False)
+        strict=True,
+    ):
+        axis.text(
+            position,
+            median,
+            str(count),
+            ha="center",
+            va="center",
+            fontsize=11,
+            fontweight="bold",
+            color="white",
+            zorder=4,
+        )
+
+        axis.annotate(
+            f"{format_number(median, 1)} observations",
+            xy=(
+                position,
+                median,
+            ),
+            xytext=(
+                0,
+                -34,
+            ),
+            textcoords="offset points",
+            ha="center",
+            va="top",
+            fontsize=10,
+            color=TEXT_COLOR,
+        )
 
     style_axis(axis)
-
-    handles_1, labels_1 = axis.get_legend_handles_labels()
-    handles_2, labels_2 = secondary.get_legend_handles_labels()
-
-    axis.legend(
-        handles_1 + handles_2,
-        labels_1 + labels_2,
-        loc="upper right",
-        frameon=False,
-    )
 
     save_figure(
         figure,
