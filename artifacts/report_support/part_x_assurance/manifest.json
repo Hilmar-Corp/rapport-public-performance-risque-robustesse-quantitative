@@ -1,0 +1,123 @@
+{
+  "files": [
+    {
+      "path": ".github/workflows/codeql.yml",
+      "sha256": "dc07bfc2f0742751a83510e808fd560281867eb6944c438699b42da8b8c12277",
+      "size_bytes": 646
+    },
+    {
+      "path": ".github/workflows/dependency-review.yml",
+      "sha256": "3ba82abb01203c9e3410d3a544965c4c0cca13761daa09344568dc91b048fc9e",
+      "size_bytes": 562
+    },
+    {
+      "path": ".github/workflows/oci-reproduction.yml",
+      "sha256": "58a8a4fc9f3a17f95a46827fc08acda8ce6bd20d28838ed3f57c2a21b8bed3b4",
+      "size_bytes": 750
+    },
+    {
+      "path": ".github/workflows/quality.yml",
+      "sha256": "333f041b3e2ab1c022bc44574b6c5a708cb117846cc03072832e142d47b6336f",
+      "size_bytes": 2990
+    },
+    {
+      "path": ".github/workflows/quant-hardening.yml",
+      "sha256": "dc35527376c13ea4638109aaf1b610fd172e4ab871ee31f3cc04661ed85ca009",
+      "size_bytes": 1999
+    },
+    {
+      "path": ".github/workflows/release-provenance.yml",
+      "sha256": "b50628d87d18bed32456d66d288efd11aabe666655128d56a2c25ddba163d174",
+      "size_bytes": 10176
+    },
+    {
+      "path": ".github/workflows/repository-resilience.yml",
+      "sha256": "5e2deaf6771261a81ed42fffd3fa8607bf95fc882886f37fe68caeaea8614d27",
+      "size_bytes": 742
+    },
+    {
+      "path": ".github/workflows/security.yml",
+      "sha256": "ff211886176b59d703920d3fe67b30ed709521d483d41e336dafde2e529678fc",
+      "size_bytes": 1440
+    },
+    {
+      "path": "CHANGE_CONTROL.md",
+      "sha256": "7adebe2c90a49cc3585e466d25390115e6dff4df4aef556ad54ea4e88031d31f",
+      "size_bytes": 1492
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "e08d2fff64aa74289cfcb924b135d34ccfc5682556810e3d9e84a1a861d81681",
+      "size_bytes": 1046
+    },
+    {
+      "path": "Makefile",
+      "sha256": "efcbb2cba43cc0143272bd50e5342ecb6301a8fbefc12041c42d59b6c76c5171",
+      "size_bytes": 1284
+    },
+    {
+      "path": "PROPRIETARY_BOUNDARY.md",
+      "sha256": "894c121b73c34ca72c882b14aec3d96d1e18e4a03aa92c769e6cf591ea05db1b",
+      "size_bytes": 6970
+    },
+    {
+      "path": "REPRODUCIBILITY.md",
+      "sha256": "34980eee13dc12a23f08208dab0f78c2fd14fb2203291cf74220c47dd0293fd4",
+      "size_bytes": 3121
+    },
+    {
+      "path": "artifacts/report_support/part_x/independent_accounting_recalculation_summary.json",
+      "sha256": "e4603de0bf3349df408523ed4fd25123b9406810df94c14762c84aa040aac57e",
+      "size_bytes": 9463
+    },
+    {
+      "path": "artifacts/report_support/part_x_assurance/part_x_computational_assurance_summary.json",
+      "sha256": "63974b4d395cccb328955227448ec30bd617b2f8b48cc0924a46ae4d74fbe723",
+      "size_bytes": 5922
+    },
+    {
+      "path": "docs/RELEASE_EVIDENCE.md",
+      "sha256": "ddadc0b6d5551b712e7dfad42275792db3bacac19141c5553a697fe740e0b57c",
+      "size_bytes": 2842
+    },
+    {
+      "path": "docs/tables/part_x_computational_assurance_results.md",
+      "sha256": "b149da5421a6391b9b2b17926a2cc7a049fad3ad4e2acd2ccd1d1f97ce529bc9",
+      "size_bytes": 2901
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "9f1bec13f513462bf4dc5748b4e34bbb5ce50502bb3edcc114d5744611520666",
+      "size_bytes": 2293
+    },
+    {
+      "path": "requirements/constraints-py313.txt",
+      "sha256": "93d45312b96a1223654f0f1f2059d12494a160d790d59caf3eff9870d0de501e",
+      "size_bytes": 1234
+    },
+    {
+      "path": "scripts/backup_repository.sh",
+      "sha256": "3e1a44f6f6c6bb018687dec9128938867359e09f482d187f14b402d7f896e410",
+      "size_bytes": 889
+    },
+    {
+      "path": "scripts/verify_repository_backup.sh",
+      "sha256": "73945038af956ac5a1d575cefc3cf350a709fa23a1da189491659eb5411f9018",
+      "size_bytes": 1349
+    },
+    {
+      "path": "tests/test_part_x_computational_assurance.py",
+      "sha256": "74215db82e0b86025a88864459ea1557431cf30a76b7037d15eb223f9c46f69a",
+      "size_bytes": 2735
+    },
+    {
+      "path": "tools/generate_part_x_computational_assurance.py",
+      "sha256": "bf2e274ed53ec03575bf80fa233f440f339660d6982d84dbaf6edd88259fe40e",
+      "size_bytes": 17212
+    }
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_x_computational_assurance_report_support",
+  "schema_version": 1,
+  "source_release": "v0.3.0"
+}

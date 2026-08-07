@@ -1,0 +1,129 @@
+{
+  "architecture": {
+    "public_modules": [
+      "__init__.py",
+      "backtest.py",
+      "execution.py",
+      "historical_reverse_stress.py",
+      "hmm.py",
+      "metrics.py",
+      "publication.py",
+      "quantitative_exports.py",
+      "risk_backtesting.py",
+      "statistical_tests.py",
+      "strategies.py",
+      "temporal_statistics.py"
+    ],
+    "public_package": "src/hilmarbench",
+    "python_requirement": ">=3.11"
+  },
+  "automated_quality": {
+    "branch_coverage_required": true,
+    "coverage_fail_under_percent": 100,
+    "pyright_mode": "strict",
+    "pytest_items_collected": 393,
+    "ruff_configured": true,
+    "ruff_target_version": "py311",
+    "warnings_as_errors": true
+  },
+  "controlled_evidence_sha256": {
+    ".github/workflows/codeql.yml": "dc07bfc2f0742751a83510e808fd560281867eb6944c438699b42da8b8c12277",
+    ".github/workflows/dependency-review.yml": "3ba82abb01203c9e3410d3a544965c4c0cca13761daa09344568dc91b048fc9e",
+    ".github/workflows/oci-reproduction.yml": "58a8a4fc9f3a17f95a46827fc08acda8ce6bd20d28838ed3f57c2a21b8bed3b4",
+    ".github/workflows/quality.yml": "333f041b3e2ab1c022bc44574b6c5a708cb117846cc03072832e142d47b6336f",
+    ".github/workflows/quant-hardening.yml": "dc35527376c13ea4638109aaf1b610fd172e4ab871ee31f3cc04661ed85ca009",
+    ".github/workflows/release-provenance.yml": "b50628d87d18bed32456d66d288efd11aabe666655128d56a2c25ddba163d174",
+    ".github/workflows/repository-resilience.yml": "5e2deaf6771261a81ed42fffd3fa8607bf95fc882886f37fe68caeaea8614d27",
+    ".github/workflows/security.yml": "ff211886176b59d703920d3fe67b30ed709521d483d41e336dafde2e529678fc",
+    "CHANGE_CONTROL.md": "7adebe2c90a49cc3585e466d25390115e6dff4df4aef556ad54ea4e88031d31f",
+    "Dockerfile": "e08d2fff64aa74289cfcb924b135d34ccfc5682556810e3d9e84a1a861d81681",
+    "Makefile": "efcbb2cba43cc0143272bd50e5342ecb6301a8fbefc12041c42d59b6c76c5171",
+    "PROPRIETARY_BOUNDARY.md": "894c121b73c34ca72c882b14aec3d96d1e18e4a03aa92c769e6cf591ea05db1b",
+    "REPRODUCIBILITY.md": "34980eee13dc12a23f08208dab0f78c2fd14fb2203291cf74220c47dd0293fd4",
+    "artifacts/report_support/part_x/independent_accounting_recalculation_summary.json": "e4603de0bf3349df408523ed4fd25123b9406810df94c14762c84aa040aac57e",
+    "docs/RELEASE_EVIDENCE.md": "ddadc0b6d5551b712e7dfad42275792db3bacac19141c5553a697fe740e0b57c",
+    "pyproject.toml": "9f1bec13f513462bf4dc5748b4e34bbb5ce50502bb3edcc114d5744611520666",
+    "requirements/constraints-py313.txt": "93d45312b96a1223654f0f1f2059d12494a160d790d59caf3eff9870d0de501e",
+    "scripts/backup_repository.sh": "3e1a44f6f6c6bb018687dec9128938867359e09f482d187f14b402d7f896e410",
+    "scripts/verify_repository_backup.sh": "73945038af956ac5a1d575cefc3cf350a709fa23a1da189491659eb5411f9018"
+  },
+  "deterministic_environment": {
+    "mkl_num_threads": "1",
+    "numexpr_num_threads": "1",
+    "omp_num_threads": "1",
+    "openblas_num_threads": "1",
+    "python_hash_seed": "0",
+    "timezone": "UTC"
+  },
+  "environment_matrix": {
+    "canonical_python": "3.13",
+    "operating_systems": [
+      "macos-latest",
+      "ubuntu-latest"
+    ],
+    "python_versions": [
+      "3.11",
+      "3.12",
+      "3.13"
+    ]
+  },
+  "evidence_classes": {
+    "external_independent_validation": "not_claimed",
+    "nostra_aggregated_results": "artifact-verified",
+    "private_detailed_evidence": "private-controlled",
+    "public_benchmarks": "code-reproducible"
+  },
+  "governance": {
+    "change_control_documented": true,
+    "proprietary_boundary_documented": true,
+    "release_evidence_architecture_documented": true
+  },
+  "independent_accounting_recalculation": {
+    "implementation_boundary": "Implémentation autonome ne dépendant d'aucune fonction de src/hilmarbench.",
+    "maximum_aggregate_absolute_differences": {
+      "annualized_volatility": 4.7752961029878804e-09,
+      "cagr": 3.2227950308438835e-09,
+      "final_equity": 4.4594319348334466e-09,
+      "maximum_drawdown": 4.962685040688086e-09,
+      "sharpe": 4.8184150003294235e-09,
+      "turnover_total": 6.735731972185022e-10
+    },
+    "official_equity_maximum_absolute_difference": 3.4283687000424834e-13,
+    "official_return_maximum_absolute_difference": 4.961309141293668e-16,
+    "position_alignment": "as_provided",
+    "source_release": "v0.3.0"
+  },
+  "limitations": [
+    "Le recalcul autonome porte sur le noyau comptable et ne constitue pas une reproduction publique de la logique propriétaire de Nostra AI.",
+    "L'indépendance d'implémentation du recalcul comptable ne constitue pas une validation externe indépendante.",
+    "Une couverture de code complète démontre l'exécution des chemins mesurés, non l'exhaustivité des hypothèses économiques.",
+    "Les SBOM, manifestes, empreintes et attestations établissent la provenance et l'intégrité des artefacts ; ils ne démontrent pas la validité économique future du modèle.",
+    "La reproductibilité publique de Nostra AI reste limitée par la frontière propriétaire explicitement documentée."
+  ],
+  "model": "Nostra AI V5.246",
+  "package": "part_x_computational_assurance_report_support",
+  "release_assurance": {
+    "codeql": true,
+    "cyclonedx_sbom": true,
+    "dependency_audit": true,
+    "dependency_review": true,
+    "digest_addressed_oci_image": true,
+    "exact_constraints": "requirements/constraints-py313.txt",
+    "github_oidc_attestation": true,
+    "oci_reproduction": true,
+    "repository_backup_restore": true,
+    "spdx_sbom": true
+  },
+  "schema_version": 1,
+  "source_release": "v0.3.0",
+  "workflow_inventory": [
+    ".github/workflows/quality.yml",
+    ".github/workflows/quant-hardening.yml",
+    ".github/workflows/oci-reproduction.yml",
+    ".github/workflows/codeql.yml",
+    ".github/workflows/dependency-review.yml",
+    ".github/workflows/security.yml",
+    ".github/workflows/release-provenance.yml",
+    ".github/workflows/repository-resilience.yml"
+  ]
+}
