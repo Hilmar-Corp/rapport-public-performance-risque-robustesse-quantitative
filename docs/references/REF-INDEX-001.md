@@ -7,7 +7,7 @@
 | R-STAT-03 | Bailey & López de Prado (2014) | Deflated Sharpe Ratio |
 | R-STAT-04 | White (2000) | Reality Check / tests multiples |
 | R-STAT-05 | Hansen (2005) | Superior Predictive Ability |
-| R-STAT-06 | Bailey et al. (2015) | CSCV / Probability of Backtest Overfitting |
+| R-STAT-06 | Bailey et al. (2017) | CSCV / Probability of Backtest Overfitting |
 | R-STAT-07 | Künsch (1989) | Rééchantillonnage par blocs pour séries dépendantes |
 | R-STAT-08 | Politis & Romano (1992) | Rééchantillonnage circulaire par blocs |
 | R-STAT-09 | Newey & West (1987) | Variance HAC / dépendance temporelle |
