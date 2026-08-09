@@ -10,6 +10,7 @@ Les références externes ne constituent pas une validation indépendante de Nos
 
 - `REF-INDEX-001.md` — registre maître des références et correspondance avec les sections du rapport.
 - `REF-METH-001.md` — références méthodologiques et statistiques.
+- `REF-EXEC-001.md` — références d’exécution, de liquidité et de capacité.
 - `REF-DATA-001.md` — sources de données de marché et provenance documentaire.
 - `REF-TECH-001.md` — standards et documentation technique.
 - `references.bib` — bibliographie BibTeX pour archivage et réutilisation.
