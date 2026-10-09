@@ -45,7 +45,7 @@ sortedcontainers==2.4.0
 threadpoolctl==3.6.0
 tomli==2.4.1
 tomli_w==1.2.0
-urllib3==2.7.0
+urllib3==2.8.0
 wheel==0.47.0
 arch==8.0.0
 patsy==1.0.2
